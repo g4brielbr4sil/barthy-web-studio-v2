@@ -22,5 +22,9 @@ export const navigation: NavigationItem[] = [
 
 export const observedSectionIds: SectionId[] = [
   'inicio',
-  ...navigation.map((item) => item.id),
+  'estudio',
+  'projetos',
+  'solucoes',
+  'processo',
+  'contato',
 ]

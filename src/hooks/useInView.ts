@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
+import { observeIntersection } from '../lib/intersectionObserver'
 
 export function useInView<T extends Element>(
   options: IntersectionObserverInit = {},
@@ -16,13 +17,14 @@ export function useInView<T extends Element>(
       return
     }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(Boolean(entry?.isIntersecting)),
-      { root, rootMargin, threshold },
-    )
-
-    observer.observe(node)
-    return () => observer.disconnect()
+    return observeIntersection(node, (entry) => {
+      const minimumRatio = Array.isArray(threshold)
+        ? Math.min(...threshold)
+        : threshold
+      setIsInView(
+        entry.isIntersecting && entry.intersectionRatio >= minimumRatio,
+      )
+    })
   }, [root, rootMargin, threshold])
 
   return { ref, isInView }
