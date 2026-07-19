@@ -1,14 +1,22 @@
+import type { MouseEventHandler } from 'react'
+
 interface BrandProps {
   compact?: boolean
   inverse?: boolean
+  onClick?: MouseEventHandler<HTMLAnchorElement>
 }
 
-export function Brand({ compact = false, inverse = false }: BrandProps) {
+export function Brand({
+  compact = false,
+  inverse = false,
+  onClick,
+}: BrandProps) {
   return (
     <a
       className={`brand ${inverse ? 'brand--inverse' : ''}`}
       href="#inicio"
       aria-label="Barthy Web Studio, voltar ao início"
+      onClick={onClick}
     >
       <img
         className="brand__mark"

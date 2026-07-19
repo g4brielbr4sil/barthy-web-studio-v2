@@ -128,11 +128,11 @@ Não foi instalado pacote alternativo.
 ## Navegação e temas
 
 A barra fixa oferece links diretos para Projetos, Estúdio, Soluções, Processo
-e Contato no desktop, com indicação da seção ativa e estado mais compacto
-durante a rolagem. Abaixo de 1024 px, uma barra inferior fixa oferece acesso
-direto a Início, Projetos, Soluções, Processo e Contato. O menu móvel completo
-continua disponível, com diálogo, bloqueio de rolagem, foco contido, fechamento
-por Escape e retorno de foco quando o menu é dispensado.
+e Contato no desktop, com indicação da seção ativa e glassmorphism adaptado ao
+tema e ao estado de rolagem. A altura real do Header alimenta o alinhamento das
+âncoras. Abaixo de 1024 px, permanecem apenas a navbar superior e o menu móvel
+completo, com diálogo, conteúdo externo inerte, bloqueio de rolagem, foco
+contido, fechamento por Escape e retorno de foco quando o menu é dispensado.
 
 O tema padrão é claro. A preferência escolhida é persistida no navegador com a
 chave `barthy-v2-theme` e aplicada por um script anterior à inicialização do

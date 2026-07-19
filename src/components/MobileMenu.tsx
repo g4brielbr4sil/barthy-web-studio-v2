@@ -1,5 +1,11 @@
 import { Clock3, Mail, X } from 'lucide-react'
-import { useCallback, useEffect, useRef, type RefObject } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  type MouseEvent,
+  type RefObject,
+} from 'react'
 import { navigation, type SectionId } from '../data/navigation'
 import { CONTACT_EMAIL, getEmailHref } from '../lib/contact'
 import { Brand } from './Brand'
@@ -48,9 +54,22 @@ export function MobileMenu({
     if (!open) return
 
     const previousOverflow = document.body.style.overflow
+    const externalElements = [
+      document.querySelector<HTMLElement>('.site-header'),
+      document.querySelector<HTMLElement>('.skip-link'),
+      document.querySelector<HTMLElement>('main'),
+      document.querySelector<HTMLElement>('footer'),
+    ].filter((element): element is HTMLElement => Boolean(element))
+    const previousInert = externalElements.map(
+      (element) => [element, element.inert] as const,
+    )
+
     restoreFocusRef.current = true
     document.body.style.overflow = 'hidden'
     closeButtonRef.current?.focus()
+    externalElements.forEach((element) => {
+      element.inert = true
+    })
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -82,6 +101,9 @@ export function MobileMenu({
     document.addEventListener('keydown', onKeyDown)
     return () => {
       document.body.style.overflow = previousOverflow
+      previousInert.forEach(([element, inert]) => {
+        element.inert = inert
+      })
       document.removeEventListener('keydown', onKeyDown)
       if (restoreFocusRef.current) {
         window.requestAnimationFrame(() => triggerRef.current?.focus())
@@ -91,10 +113,14 @@ export function MobileMenu({
 
   if (!open) return null
 
-  const closeForNavigation = (section: SectionId) => {
+  const closeForNavigation = (
+    event: MouseEvent<HTMLAnchorElement>,
+    section: SectionId,
+  ) => {
+    event.preventDefault()
     restoreFocusRef.current = false
     onClose()
-    onNavigate(section)
+    window.requestAnimationFrame(() => onNavigate(section))
   }
 
   return (
@@ -114,7 +140,9 @@ export function MobileMenu({
         aria-label="Menu principal"
       >
         <div className="mobile-menu__top">
-          <Brand />
+          <Brand
+            onClick={(event) => closeForNavigation(event, 'inicio')}
+          />
           <button
             ref={closeButtonRef}
             className="icon-button"
@@ -135,7 +163,7 @@ export function MobileMenu({
                   aria-current={
                     activeSection === item.id ? 'location' : undefined
                   }
-                  onClick={() => closeForNavigation(item.id)}
+                  onClick={(event) => closeForNavigation(event, item.id)}
                 >
                   <span aria-hidden="true">
                     {String(index + 1).padStart(2, '0')}
@@ -152,7 +180,7 @@ export function MobileMenu({
           source="mobile-menu"
           variant="terra"
           className="mobile-menu__cta"
-          onClick={() => closeForNavigation('contato')}
+          onClick={(event) => closeForNavigation(event, 'contato')}
         >
           Falar sobre meu projeto
         </TextRollButton>
