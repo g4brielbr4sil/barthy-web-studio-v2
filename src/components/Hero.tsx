@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from 'react'
 import { Blocks, MapPin } from 'lucide-react'
+import type { SectionId } from '../data/navigation'
 import { TextRollButton } from './TextRollButton'
 import { trackEvent } from '../lib/tracking'
 
@@ -36,10 +37,18 @@ class ShaderErrorBoundary extends Component<
   }
 }
 
-export function Hero() {
+export function Hero({
+  onNavigate,
+}: {
+  onNavigate: (section: SectionId) => void
+}) {
   return (
     <section id="inicio" className="hero" aria-labelledby="hero-title">
-      <div className="hero__fallback" aria-hidden="true" />
+      <div className="hero__fallback" aria-hidden="true">
+        <span className="hero__fallback-blob hero__fallback-blob--blue" />
+        <span className="hero__fallback-blob hero__fallback-blob--terra" />
+        <span className="hero__fallback-blob hero__fallback-blob--ice" />
+      </div>
       <div className="hero-shader" aria-hidden="true">
         <ShaderErrorBoundary>
           <Suspense fallback={null}>
@@ -70,6 +79,10 @@ export function Hero() {
             source="hero-primary"
             variant="terra"
             className="hero__cta"
+            onClick={(event) => {
+              event.preventDefault()
+              onNavigate('contato')
+            }}
           >
             Começar um projeto
           </TextRollButton>
@@ -78,12 +91,14 @@ export function Hero() {
             className="hero-badge"
             href="#solucoes"
             data-cta-source="hero-badge"
-            onClick={() =>
+            onClick={(event) => {
+              event.preventDefault()
               trackEvent('cta_click', {
                 source: 'hero-badge',
                 destination: '#solucoes',
               })
-            }
+              onNavigate('solucoes')
+            }}
           >
             <span className="hero-badge__icon" aria-hidden="true">
               <Blocks size={18} />

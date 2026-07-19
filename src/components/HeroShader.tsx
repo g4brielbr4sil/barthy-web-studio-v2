@@ -132,7 +132,7 @@ export default function HeroShader() {
             momentum={32}
             radius={4.6}
             intensity={1.05}
-            opacity={theme === 'dark' ? 0.68 : 0.56}
+            opacity={theme === 'dark' ? 0.68 : 0.66}
           />
           <RadialGradient
             colorA={palette.up}
@@ -161,7 +161,7 @@ export default function HeroShader() {
               speed: 0.006,
             }}
             colorSpace="oklab"
-            opacity={theme === 'dark' ? 0.28 : 0.22}
+            opacity={theme === 'dark' ? 0.28 : 0.34}
           />
         </>
       )}

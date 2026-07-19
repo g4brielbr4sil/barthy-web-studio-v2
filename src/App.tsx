@@ -9,7 +9,7 @@ import { Solutions } from './components/Solutions'
 import { useActiveSection } from './hooks/useActiveSection'
 
 function App() {
-  const { activeSection, navigateToSection } = useActiveSection()
+  const { activeSection, isPastHero, navigateToSection } = useActiveSection()
 
   return (
     <>
@@ -18,17 +18,18 @@ function App() {
       </a>
       <Header
         activeSection={activeSection}
+        isPastHero={isPastHero}
         onNavigate={navigateToSection}
       />
       <main id="conteudo">
-        <Hero />
-        <About />
+        <Hero onNavigate={navigateToSection} />
+        <About onNavigate={navigateToSection} />
         <Projects />
-        <Solutions />
-        <Process />
+        <Solutions onNavigate={navigateToSection} />
+        <Process onNavigate={navigateToSection} />
         <Contact />
       </main>
-      <Footer />
+      <Footer onNavigate={navigateToSection} />
     </>
   )
 }

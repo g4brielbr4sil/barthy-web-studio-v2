@@ -6,6 +6,7 @@ import {
   Search,
   type LucideIcon,
 } from 'lucide-react'
+import type { SectionId } from '../data/navigation'
 import { SectionBadge } from './SectionBadge'
 import { SectionReveal } from './SectionReveal'
 import { TextRollButton } from './TextRollButton'
@@ -49,7 +50,11 @@ const steps: ProcessStep[] = [
   },
 ]
 
-export function Process() {
+export function Process({
+  onNavigate,
+}: {
+  onNavigate: (section: SectionId) => void
+}) {
   return (
     <section
       id="processo"
@@ -57,8 +62,8 @@ export function Process() {
       aria-labelledby="process-title"
     >
       <div className="stage">
-        <SectionReveal className="process__heading">
-          <SectionBadge number="03">Como trabalhamos</SectionBadge>
+        <SectionReveal className="process__heading" data-section-anchor>
+          <SectionBadge number="04">Como trabalhamos</SectionBadge>
           <h2 id="process-title">
             Um processo claro do primeiro contato à evolução do projeto.
           </h2>
@@ -89,6 +94,10 @@ export function Process() {
           source="process"
           variant="terra"
           className="process__cta"
+          onClick={(event) => {
+            event.preventDefault()
+            onNavigate('contato')
+          }}
         >
           Iniciar pelo diagnóstico
         </TextRollButton>

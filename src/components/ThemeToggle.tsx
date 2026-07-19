@@ -6,7 +6,6 @@ export function ThemeToggle({ showLabel = false }: { showLabel?: boolean }) {
   const isDark = theme === 'dark'
   const nextThemeLabel = isDark ? 'claro' : 'escuro'
   const currentThemeLabel = isDark ? 'escuro' : 'claro'
-  const Icon = isDark ? Sun : Moon
 
   return (
     <button
@@ -17,7 +16,10 @@ export function ThemeToggle({ showLabel = false }: { showLabel?: boolean }) {
       title={`Ativar tema ${nextThemeLabel}`}
       onClick={toggleTheme}
     >
-      <Icon size={18} aria-hidden="true" />
+      <span className="theme-toggle__icons" aria-hidden="true">
+        <Sun className="theme-toggle__sun" size={18} />
+        <Moon className="theme-toggle__moon" size={18} />
+      </span>
       {showLabel && <span>Tema {currentThemeLabel}</span>}
     </button>
   )

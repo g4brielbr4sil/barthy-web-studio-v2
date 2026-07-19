@@ -1,15 +1,31 @@
+import type { MouseEvent } from 'react'
 import { ArrowUp, Mail, MapPin } from 'lucide-react'
-import { navigation } from '../data/navigation'
+import { navigation, type SectionId } from '../data/navigation'
 import { CONTACT_EMAIL, getEmailHref } from '../lib/contact'
 import { trackEvent } from '../lib/tracking'
 import { Brand } from './Brand'
 
-export function Footer() {
+export function Footer({
+  onNavigate,
+}: {
+  onNavigate: (section: SectionId) => void
+}) {
+  const handleNavigation = (
+    event: MouseEvent<HTMLAnchorElement>,
+    section: SectionId,
+  ) => {
+    event.preventDefault()
+    onNavigate(section)
+  }
+
   return (
     <footer className="footer">
       <div className="stage footer__grid">
         <div className="footer__brand">
-          <Brand inverse />
+          <Brand
+            inverse
+            onClick={(event) => handleNavigation(event, 'inicio')}
+          />
           <p>
             Páginas, sistemas e operação digital para empresas e
             profissionais.
@@ -19,7 +35,11 @@ export function Footer() {
         <nav className="footer__nav" aria-label="Navegação do rodapé">
           <span>Navegação</span>
           {navigation.map((item) => (
-            <a key={item.href} href={item.href}>
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={(event) => handleNavigation(event, item.id)}
+            >
               {item.label}
             </a>
           ))}
@@ -50,7 +70,11 @@ export function Footer() {
       <div className="stage footer__bottom">
         <p>© {new Date().getFullYear()} Barthy Web Studio</p>
         <p>Versão editorial experimental</p>
-        <a href="#inicio" aria-label="Voltar ao início">
+        <a
+          href="#inicio"
+          aria-label="Voltar ao início"
+          onClick={(event) => handleNavigation(event, 'inicio')}
+        >
           Voltar ao início
           <ArrowUp size={16} aria-hidden="true" />
         </a>

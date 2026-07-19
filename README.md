@@ -127,7 +127,7 @@ Não foi instalado pacote alternativo.
 
 ## Navegação e temas
 
-A barra fixa oferece links diretos para Projetos, Estúdio, Soluções, Processo
+A barra fixa oferece links diretos para Estúdio, Projetos, Soluções, Processo
 e Contato no desktop, com indicação da seção ativa e glassmorphism adaptado ao
 tema e ao estado de rolagem. A altura real do Header alimenta o alinhamento das
 âncoras. Abaixo de 1024 px, permanecem apenas a navbar superior e o menu móvel

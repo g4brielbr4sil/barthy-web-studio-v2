@@ -15,10 +15,15 @@ import { ThemeToggle } from './ThemeToggle'
 
 interface HeaderProps {
   activeSection: SectionId
+  isPastHero: boolean
   onNavigate: (section: SectionId) => void
 }
 
-export function Header({ activeSection, onNavigate }: HeaderProps) {
+export function Header({
+  activeSection,
+  isPastHero,
+  onNavigate,
+}: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
@@ -71,9 +76,7 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
     <>
       <header
         ref={headerRef}
-        className={`site-header ${
-          activeSection === 'inicio' ? '' : 'is-scrolled'
-        }`}
+        className={`site-header ${isPastHero ? 'is-scrolled' : ''}`}
       >
         <div className="stage">
           <div className="site-header__pill">

@@ -1,6 +1,7 @@
 import {
   BarChart3,
   Blocks,
+  BriefcaseBusiness,
   ContactRound,
   Database,
   FileInput,
@@ -25,7 +26,9 @@ import {
   type CSSProperties,
   type KeyboardEvent,
 } from 'react'
+import type { SectionId } from '../data/navigation'
 import { SectionReveal } from './SectionReveal'
+import { SectionBadge } from './SectionBadge'
 import { TextRollButton } from './TextRollButton'
 
 interface SolutionNode {
@@ -177,15 +180,15 @@ const solutionGroups: SolutionGroup[] = [
 ]
 
 function SolutionNetwork({ group }: { group: SolutionGroup }) {
-  const GroupIcon = group.icon
+  const nodeSummary = group.nodes.map((node) => node.label).join(', ')
 
   return (
     <figure
       className="solution-network"
       data-density={group.id}
-      aria-label={`Representação visual conceitual de ${group.title}`}
+      aria-label={`Núcleo do negócio conectado à camada ${group.title}. ${group.summary} Elementos: ${nodeSummary}.`}
     >
-      <figcaption>Representação visual</figcaption>
+      <figcaption>Núcleo do negócio</figcaption>
 
       <svg
         className="solution-network__connections"
@@ -198,7 +201,7 @@ function SolutionNetwork({ group }: { group: SolutionGroup }) {
             key={`ring-${index + 1}`}
             className={`solution-network__ring solution-network__ring--${
               index + 1
-            }`}
+            } ${index + 1 === group.rings ? 'is-current' : 'is-previous'}`}
             cx="50"
             cy="50"
             rx={17 + index * 12}
@@ -227,10 +230,13 @@ function SolutionNetwork({ group }: { group: SolutionGroup }) {
       </svg>
 
       <div className="solution-network__core" aria-hidden="true">
-        <span>
-          <img src="/favicon.svg" width="34" height="34" alt="" />
+        <span className="solution-network__core-icon">
+          <BriefcaseBusiness size={20} />
         </span>
-        <GroupIcon size={14} />
+        <span className="solution-network__core-copy">
+          <small>Núcleo</small>
+          <strong>Negócio</strong>
+        </span>
       </div>
 
       <div className="solution-network__nodes" aria-hidden="true">
@@ -285,7 +291,11 @@ function SolutionPanel({ group }: { group: SolutionGroup }) {
   )
 }
 
-export function Solutions() {
+export function Solutions({
+  onNavigate,
+}: {
+  onNavigate: (section: SectionId) => void
+}) {
   const [activeIndex, setActiveIndex] = useState(0)
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([])
   const activeGroup = solutionGroups[activeIndex] ?? solutionGroups[0]
@@ -324,8 +334,8 @@ export function Solutions() {
       aria-labelledby="solutions-title"
     >
       <div className="stage">
-        <SectionReveal className="solutions__heading">
-          <p className="eyebrow">Capacidade conectada</p>
+        <SectionReveal className="solutions__heading" data-section-anchor>
+          <SectionBadge number="03">Capacidade conectada</SectionBadge>
           <h2 id="solutions-title">O que construímos</h2>
           <p>
             Do primeiro ponto de contato à ferramenta que organiza a operação.
@@ -383,6 +393,10 @@ export function Solutions() {
           source="solutions"
           variant="outline"
           className="solutions__cta"
+          onClick={(event) => {
+            event.preventDefault()
+            onNavigate('contato')
+          }}
         >
           Estruturar uma solução
         </TextRollButton>

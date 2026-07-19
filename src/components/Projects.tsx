@@ -11,7 +11,7 @@ export function Projects() {
       aria-labelledby="projects-title"
     >
       <div className="stage">
-        <SectionReveal className="projects__heading">
+        <SectionReveal className="projects__heading" data-section-anchor>
           <SectionBadge number="02">Experiência aplicada</SectionBadge>
           <h2 id="projects-title">Projetos em destaque</h2>
           <p>

@@ -23,11 +23,19 @@
   --section-accent: #eaf1f7;
   --hero-background: #eff3f6;
   --hero-overlay:
-    linear-gradient(180deg, rgba(246, 250, 253, 0.02) 0%, rgba(246, 250, 253, 0.08) 48%, rgba(246, 250, 253, 0.2) 100%);
+    linear-gradient(180deg, rgba(246, 250, 253, 0.01) 0%, rgba(246, 250, 253, 0.05) 48%, rgba(246, 250, 253, 0.14) 100%);
   --form-background: #0a1931;
   --footer-background: #0a1931;
   --control-background: #0a1931;
   --control-foreground: #f6fafd;
+  --brand-chip-background: rgba(255, 255, 255, 0.62);
+  --brand-chip-border: rgba(10, 25, 49, 0.12);
+  --brand-chip-highlight: rgba(255, 255, 255, 0.92);
+  --card-elevated-background: rgba(255, 255, 255, 0.88);
+  --card-elevated-border: rgba(10, 25, 49, 0.14);
+  --card-elevated-highlight: rgba(255, 255, 255, 0.96);
+  --card-elevated-shadow: rgba(10, 25, 49, 0.34);
+  --card-active-glow: rgba(205, 118, 93, 0.22);
 
   --page: var(--page-background);
   --page-muted: var(--surface-soft);
@@ -67,6 +75,14 @@
   --footer-background: #071323;
   --control-background: #f6fafd;
   --control-foreground: #0a1931;
+  --brand-chip-background: rgba(23, 37, 58, 0.78);
+  --brand-chip-border: rgba(179, 207, 229, 0.2);
+  --brand-chip-highlight: rgba(179, 207, 229, 0.2);
+  --card-elevated-background: rgba(23, 37, 58, 0.9);
+  --card-elevated-border: rgba(179, 207, 229, 0.2);
+  --card-elevated-highlight: rgba(179, 207, 229, 0.16);
+  --card-elevated-shadow: rgba(0, 0, 0, 0.72);
+  --card-active-glow: rgba(205, 118, 93, 0.18);
 
   --page: var(--page-background);
   --page-muted: var(--surface-soft);
