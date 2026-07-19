@@ -1,13 +1,18 @@
 import { Menu, X } from 'lucide-react'
 import { useCallback, useRef, useState } from 'react'
-import { navigation } from '../data/navigation'
+import { navigation, type SectionId } from '../data/navigation'
 import { useBrasiliaTime } from '../hooks/useBrasiliaTime'
 import { Brand } from './Brand'
 import { MobileMenu } from './MobileMenu'
 import { TextRollButton } from './TextRollButton'
 import { ThemeToggle } from './ThemeToggle'
 
-export function Header() {
+interface HeaderProps {
+  activeSection: SectionId
+  onNavigate: (section: SectionId) => void
+}
+
+export function Header({ activeSection, onNavigate }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const time = useBrasiliaTime()
@@ -15,14 +20,25 @@ export function Header() {
 
   return (
     <>
-      <header className="site-header">
+      <header
+        className={`site-header ${
+          activeSection === 'inicio' ? '' : 'is-scrolled'
+        }`}
+      >
         <div className="stage">
           <div className="site-header__pill">
             <Brand />
 
             <nav className="desktop-nav" aria-label="Navegação principal">
               {navigation.map((item) => (
-                <a key={item.href} href={item.href}>
+                <a
+                  key={item.href}
+                  href={item.href}
+                  aria-current={
+                    activeSection === item.id ? 'location' : undefined
+                  }
+                  onClick={() => onNavigate(item.id)}
+                >
                   {item.label}
                 </a>
               ))}
@@ -73,6 +89,8 @@ export function Header() {
         onClose={closeMenu}
         time={time}
         triggerRef={menuButtonRef}
+        activeSection={activeSection}
+        onNavigate={onNavigate}
       />
     </>
   )

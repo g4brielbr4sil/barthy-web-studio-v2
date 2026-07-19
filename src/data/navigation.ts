@@ -1,12 +1,26 @@
+export type SectionId =
+  | 'inicio'
+  | 'projetos'
+  | 'estudio'
+  | 'solucoes'
+  | 'processo'
+  | 'contato'
+
 export interface NavigationItem {
+  id: Exclude<SectionId, 'inicio'>
   label: string
   href: string
 }
 
 export const navigation: NavigationItem[] = [
-  { label: 'Projetos', href: '#projetos' },
-  { label: 'Estúdio', href: '#estudio' },
-  { label: 'Soluções', href: '#solucoes' },
-  { label: 'Processo', href: '#processo' },
-  { label: 'Contato', href: '#contato' },
+  { id: 'projetos', label: 'Projetos', href: '#projetos' },
+  { id: 'estudio', label: 'Estúdio', href: '#estudio' },
+  { id: 'solucoes', label: 'Soluções', href: '#solucoes' },
+  { id: 'processo', label: 'Processo', href: '#processo' },
+  { id: 'contato', label: 'Contato', href: '#contato' },
+]
+
+export const observedSectionIds: SectionId[] = [
+  'inicio',
+  ...navigation.map((item) => item.id),
 ]
