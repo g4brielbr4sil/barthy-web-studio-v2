@@ -13,6 +13,30 @@
       content="Versão editorial experimental da Barthy Web Studio, com projetos, soluções digitais e formas de contato."
     />
     <meta name="theme-color" content="#F6FAFD" />
+    <script>
+      ;(() => {
+        const key = 'barthy-v2-theme'
+        const colors = { light: '#F6FAFD', dark: '#0A1931' }
+        let theme = 'light'
+
+        try {
+          const savedTheme = window.localStorage.getItem(key)
+          if (savedTheme === 'light' || savedTheme === 'dark') {
+            theme = savedTheme
+          }
+        } catch {
+          theme = 'light'
+        }
+
+        const root = document.documentElement
+        root.dataset.theme = theme
+        root.style.colorScheme = theme
+        root.style.backgroundColor = colors[theme]
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute('content', colors[theme])
+      })()
+    </script>
     <title>Barthy Web Studio V2 | Experiência editorial</title>
   </head>
   <body>

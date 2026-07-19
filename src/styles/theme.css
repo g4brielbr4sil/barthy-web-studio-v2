@@ -1,4 +1,5 @@
-:root {
+:root,
+:root[data-theme='light'] {
   color-scheme: light;
   --deep-navy: #0a1931;
   --midnight-blue: #1b212c;
@@ -9,13 +10,32 @@
   --terra-orange: #cd765d;
   --terra-orange-deep: #b96049;
 
-  --page: #f6fafd;
-  --page-muted: #eef3f7;
-  --paper: #ffffff;
-  --ink: var(--deep-navy);
-  --ink-muted: #52657b;
-  --line: rgba(26, 61, 99, 0.16);
-  --line-strong: rgba(26, 61, 99, 0.28);
+  --page-background: #f6fafd;
+  --surface: #ffffff;
+  --surface-soft: #eaf1f7;
+  --foreground: #0a1931;
+  --muted-foreground: #40546b;
+  --border: rgba(10, 25, 49, 0.12);
+  --nav-background: rgba(255, 255, 255, 0.94);
+  --surface-translucent: rgba(255, 255, 255, 0.72);
+  --surface-translucent-strong: rgba(255, 255, 255, 0.88);
+  --section-muted: #f1f4f6;
+  --section-accent: #eaf1f7;
+  --hero-background: #eff3f6;
+  --hero-overlay:
+    linear-gradient(180deg, rgba(246, 250, 253, 0.02) 0%, rgba(246, 250, 253, 0.08) 48%, rgba(246, 250, 253, 0.2) 100%);
+  --form-background: #0a1931;
+  --footer-background: #0a1931;
+  --control-background: #0a1931;
+  --control-foreground: #f6fafd;
+
+  --page: var(--page-background);
+  --page-muted: var(--surface-soft);
+  --paper: var(--surface);
+  --ink: var(--foreground);
+  --ink-muted: var(--muted-foreground);
+  --line: var(--border);
+  --line-strong: rgba(10, 25, 49, 0.24);
   --focus: #1a3d63;
   --shadow-soft: 0 22px 64px -38px rgba(10, 25, 49, 0.34);
   --shadow-card: 0 32px 80px -52px rgba(10, 25, 49, 0.42);
@@ -25,4 +45,37 @@
   --ease-editorial: cubic-bezier(0.25, 0.1, 0.25, 1);
   --duration-base: 500ms;
   --stage-pad: clamp(1rem, 3vw, 3rem);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page-background: #0a1931;
+  --surface: #111c2c;
+  --surface-soft: #17253a;
+  --foreground: #f6fafd;
+  --muted-foreground: #b3cfe5;
+  --border: rgba(179, 207, 229, 0.18);
+  --nav-background: rgba(17, 28, 44, 0.94);
+  --surface-translucent: rgba(17, 28, 44, 0.78);
+  --surface-translucent-strong: rgba(23, 37, 58, 0.94);
+  --section-muted: #0e1a2b;
+  --section-accent: #132137;
+  --hero-background: #0a1931;
+  --hero-overlay:
+    linear-gradient(180deg, rgba(10, 25, 49, 0.02) 0%, rgba(10, 25, 49, 0.1) 46%, rgba(10, 25, 49, 0.34) 100%);
+  --form-background: #111c2c;
+  --footer-background: #071323;
+  --control-background: #f6fafd;
+  --control-foreground: #0a1931;
+
+  --page: var(--page-background);
+  --page-muted: var(--surface-soft);
+  --paper: var(--surface);
+  --ink: var(--foreground);
+  --ink-muted: var(--muted-foreground);
+  --line: var(--border);
+  --line-strong: rgba(179, 207, 229, 0.3);
+  --focus: #b3cfe5;
+  --shadow-soft: 0 22px 64px -38px rgba(0, 0, 0, 0.72);
+  --shadow-card: 0 32px 80px -48px rgba(0, 0, 0, 0.72);
 }
