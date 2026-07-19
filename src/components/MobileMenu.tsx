@@ -1,8 +1,10 @@
 import { Clock3, Mail, X } from 'lucide-react'
-import { useEffect, useRef, type RefObject } from 'react'
+import { useCallback, useEffect, useRef, type RefObject } from 'react'
 import { navigation } from '../data/navigation'
 import { CONTACT_EMAIL, getEmailHref } from '../lib/contact'
+import { Brand } from './Brand'
 import { TextRollButton } from './TextRollButton'
+import { ThemeToggle } from './ThemeToggle'
 
 interface MobileMenuProps {
   open: boolean
@@ -28,18 +30,28 @@ export function MobileMenu({
 }: MobileMenuProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const restoreFocusRef = useRef(true)
+  const closeAndRestoreFocus = useCallback(() => {
+    restoreFocusRef.current = false
+    triggerRef.current?.focus({ preventScroll: true })
+    onClose()
+    window.requestAnimationFrame(() => {
+      triggerRef.current?.focus({ preventScroll: true })
+    })
+  }, [onClose, triggerRef])
 
   useEffect(() => {
     if (!open) return
 
     const previousOverflow = document.body.style.overflow
+    restoreFocusRef.current = true
     document.body.style.overflow = 'hidden'
     closeButtonRef.current?.focus()
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault()
-        onClose()
+        closeAndRestoreFocus()
         return
       }
 
@@ -67,11 +79,18 @@ export function MobileMenu({
     return () => {
       document.body.style.overflow = previousOverflow
       document.removeEventListener('keydown', onKeyDown)
-      triggerRef.current?.focus()
+      if (restoreFocusRef.current) {
+        window.requestAnimationFrame(() => triggerRef.current?.focus())
+      }
     }
-  }, [onClose, open, triggerRef])
+  }, [closeAndRestoreFocus, open, triggerRef])
 
   if (!open) return null
+
+  const closeForNavigation = () => {
+    restoreFocusRef.current = false
+    onClose()
+  }
 
   return (
     <div className="mobile-menu" aria-hidden={!open}>
@@ -79,7 +98,7 @@ export function MobileMenu({
         className="mobile-menu__backdrop"
         type="button"
         aria-label="Fechar menu"
-        onClick={onClose}
+        onClick={closeAndRestoreFocus}
       />
       <div
         ref={panelRef}
@@ -90,13 +109,13 @@ export function MobileMenu({
         aria-label="Menu principal"
       >
         <div className="mobile-menu__top">
-          <span className="mobile-menu__eyebrow">Navegação</span>
+          <Brand />
           <button
             ref={closeButtonRef}
             className="icon-button"
             type="button"
             aria-label="Fechar menu"
-            onClick={onClose}
+            onClick={closeAndRestoreFocus}
           >
             <X size={20} aria-hidden="true" />
           </button>
@@ -106,7 +125,7 @@ export function MobileMenu({
           <ul className="mobile-menu__links">
             {navigation.map((item, index) => (
               <li key={item.href}>
-                <a href={item.href} onClick={onClose}>
+                <a href={item.href} onClick={closeForNavigation}>
                   <span aria-hidden="true">
                     {String(index + 1).padStart(2, '0')}
                   </span>
@@ -122,12 +141,13 @@ export function MobileMenu({
           source="mobile-menu"
           variant="terra"
           className="mobile-menu__cta"
-          onClick={onClose}
+          onClick={closeForNavigation}
         >
           Falar sobre meu projeto
         </TextRollButton>
 
         <div className="mobile-menu__meta">
+          <ThemeToggle showLabel />
           <span>
             <Clock3 size={16} aria-hidden="true" />
             {time} em Brasília

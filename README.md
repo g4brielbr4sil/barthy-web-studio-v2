@@ -111,15 +111,29 @@ O pacote utilizado é `shaders`, com os imports `Shader`, `Swirl`,
 `ChromaFlow`, `FlutedGlass` e `FilmGrain` vindos de `shaders/react`.
 
 A página mantém somente uma instância, carregada de forma assíncrona no hero.
-O canvas é removido quando a aba fica oculta e não é montado quando WebGPU não
-está disponível ou quando `prefers-reduced-motion: reduce` está ativo. O fundo
-CSS continua visível se o pacote ou o chunk falhar.
+O movimento possui paletas próprias para os temas claro e escuro. O canvas é
+removido quando a aba fica oculta e não é montado quando WebGPU não está
+disponível ou quando `prefers-reduced-motion: reduce` está ativo. O fundo CSS
+continua visível se o pacote ou o chunk falhar.
 
 Limitação conhecida: a API pública atual do componente `Shader` não expõe uma
 propriedade para fixar o DPR em `1.5` no desktop e `1` no mobile. A biblioteca
 aplica o próprio limite interno. A mitigação desta proposta é manter um único
 canvas, reduzir parâmetros, pausar fora de uso e preservar o fallback estático.
 Não foi instalado pacote alternativo.
+
+## Navegação e temas
+
+A barra fixa oferece links diretos para Projetos, Estúdio, Soluções, Processo
+e Contato no desktop. Abaixo de 1024 px, os mesmos destinos ficam em um menu
+móvel com diálogo, bloqueio de rolagem, foco contido, fechamento por Escape e
+retorno de foco quando o menu é dispensado.
+
+O tema padrão é claro. A preferência escolhida é persistida no navegador com a
+chave `barthy-v2-theme` e aplicada por um script anterior à inicialização do
+React para evitar a troca visual durante o carregamento. Os valores aceitos são
+somente `light` e `dark`; valores inválidos voltam para o tema claro. A cor da
+interface do navegador também acompanha o tema ativo.
 
 ## Conteúdo visual
 

@@ -6,7 +6,6 @@ import {
   type ReactNode,
 } from 'react'
 import { Blocks, MapPin } from 'lucide-react'
-import { Header } from './Header'
 import { TextRollButton } from './TextRollButton'
 import { trackEvent } from '../lib/tracking'
 
@@ -22,8 +21,14 @@ class ShaderErrorBoundary extends Component<
     return { failed: true }
   }
 
-  componentDidCatch(_error: Error, _info: ErrorInfo) {
-    // O fallback visual da Hero já está renderizado fora deste boundary.
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    if (import.meta.env.DEV) {
+      console.warn(
+        '[Barthy V2] Shader indisponível. O fallback visual foi preservado.',
+        error,
+        info.componentStack,
+      )
+    }
   }
 
   render() {
@@ -42,7 +47,6 @@ export function Hero() {
           </Suspense>
         </ShaderErrorBoundary>
       </div>
-      <Header />
 
       <div className="stage hero__content">
         <div className="hero__copy">

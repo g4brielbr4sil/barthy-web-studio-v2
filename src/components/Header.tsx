@@ -1,10 +1,11 @@
-import { Menu } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useCallback, useRef, useState } from 'react'
 import { navigation } from '../data/navigation'
 import { useBrasiliaTime } from '../hooks/useBrasiliaTime'
 import { Brand } from './Brand'
 import { MobileMenu } from './MobileMenu'
 import { TextRollButton } from './TextRollButton'
+import { ThemeToggle } from './ThemeToggle'
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -17,7 +18,7 @@ export function Header() {
       <header className="site-header">
         <div className="stage">
           <div className="site-header__pill">
-            <Brand compact />
+            <Brand />
 
             <nav className="desktop-nav" aria-label="Navegação principal">
               {navigation.map((item) => (
@@ -28,10 +29,16 @@ export function Header() {
             </nav>
 
             <div className="site-header__actions">
+              <ThemeToggle />
               <div className="availability" aria-label="Disponibilidade do estúdio">
                 <span className="availability__dot" aria-hidden="true" />
-                <span>Agenda aberta para novos projetos</span>
-                <time>{time} em Brasília</time>
+                <span className="availability__status">
+                  Agenda aberta para novos projetos
+                </span>
+                <time dateTime={time}>
+                  {time}
+                  <span> em Brasília</span>
+                </time>
               </div>
               <TextRollButton
                 href="#contato"
@@ -49,8 +56,12 @@ export function Header() {
                 aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
                 onClick={() => setMenuOpen((value) => !value)}
               >
-                <span>Menu</span>
-                <Menu size={18} aria-hidden="true" />
+                <span>{menuOpen ? 'Fechar' : 'Menu'}</span>
+                {menuOpen ? (
+                  <X size={18} aria-hidden="true" />
+                ) : (
+                  <Menu size={18} aria-hidden="true" />
+                )}
               </button>
             </div>
           </div>
