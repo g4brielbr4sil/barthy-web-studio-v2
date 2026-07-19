@@ -108,13 +108,16 @@ outros segredos nesses campos.
 ## Shader e fallback
 
 O pacote utilizado é `shaders`, com os imports `Shader`, `Swirl`,
-`ChromaFlow`, `FlutedGlass` e `FilmGrain` vindos de `shaders/react`.
+`ChromaFlow`, `RadialGradient`, `FlutedGlass` e `FilmGrain` vindos de
+`shaders/react`.
 
 A página mantém somente uma instância, carregada de forma assíncrona no hero.
-O movimento possui paletas próprias para os temas claro e escuro. O canvas é
-removido quando a aba fica oculta e não é montado quando WebGPU não está
-disponível ou quando `prefers-reduced-motion: reduce` está ativo. O fundo CSS
-continua visível se o pacote ou o chunk falhar.
+O movimento autônomo possui paletas próprias para os temas claro e escuro. Em
+dispositivos com ponteiro fino, o fundo reage ao cursor pela API nativa do
+pacote. Em telas de toque, o fundo permanece autônomo e não acompanha gestos.
+O canvas é removido quando a aba fica oculta e não é montado quando WebGPU não
+está disponível ou quando `prefers-reduced-motion: reduce` está ativo. O fundo
+CSS continua visível se o pacote ou o chunk falhar.
 
 Limitação conhecida: a API pública atual do componente `Shader` não expõe uma
 propriedade para fixar o DPR em `1.5` no desktop e `1` no mobile. A biblioteca
@@ -125,9 +128,11 @@ Não foi instalado pacote alternativo.
 ## Navegação e temas
 
 A barra fixa oferece links diretos para Projetos, Estúdio, Soluções, Processo
-e Contato no desktop. Abaixo de 1024 px, os mesmos destinos ficam em um menu
-móvel com diálogo, bloqueio de rolagem, foco contido, fechamento por Escape e
-retorno de foco quando o menu é dispensado.
+e Contato no desktop, com indicação da seção ativa e estado mais compacto
+durante a rolagem. Abaixo de 1024 px, uma barra inferior fixa oferece acesso
+direto a Início, Projetos, Soluções, Processo e Contato. O menu móvel completo
+continua disponível, com diálogo, bloqueio de rolagem, foco contido, fechamento
+por Escape e retorno de foco quando o menu é dispensado.
 
 O tema padrão é claro. A preferência escolhida é persistida no navegador com a
 chave `barthy-v2-theme` e aplicada por um script anterior à inicialização do
@@ -165,8 +170,10 @@ Em preferência por movimento reduzido, somente o poster é exibido.
 - Menu móvel em diálogo com foco contido, fechamento por Escape e retorno do
   foco ao botão de origem
 - Abas com setas, Home e End
+- Diagrama progressivo de soluções com três, cinco e oito pontos conectados
 - Formulário com labels, erros associados, foco no primeiro campo inválido e
   mensagens anunciadas
+- Campo de tipo de solução nativo, com contraste e foco adaptados aos temas
 - Alvos interativos com dimensão mínima de 44 px
 - Contraste e foco visível
 - Conteúdo preservado sem shader

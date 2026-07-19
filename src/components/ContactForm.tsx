@@ -1,6 +1,7 @@
 import {
   AlertCircle,
   Check,
+  ChevronDown,
   Copy,
   LoaderCircle,
   Send,
@@ -290,30 +291,37 @@ export function ContactForm() {
 
         <div className="form-field form-field--full">
           <label htmlFor="tipoSolucao">Tipo de solução</label>
-          <select
-            id="tipoSolucao"
-            name="tipoSolucao"
-            defaultValue=""
-            required
-            aria-invalid={Boolean(errors.tipoSolucao)}
-            aria-describedby={
-              errors.tipoSolucao ? 'tipoSolucao-error' : undefined
-            }
-            onChange={() => clearError('tipoSolucao')}
-          >
-            <option value="" disabled>
-              Selecione uma opção
-            </option>
-            {serviceGroups.map((group) => (
-              <optgroup key={group.label} label={group.label}>
-                {group.options.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
+          <div className="form-select">
+            <select
+              id="tipoSolucao"
+              name="tipoSolucao"
+              defaultValue=""
+              required
+              aria-invalid={Boolean(errors.tipoSolucao)}
+              aria-describedby={
+                errors.tipoSolucao ? 'tipoSolucao-error' : undefined
+              }
+              onChange={() => clearError('tipoSolucao')}
+            >
+              <option value="" disabled>
+                Selecione uma opção
+              </option>
+              {serviceGroups.map((group) => (
+                <optgroup key={group.label} label={group.label}>
+                  {group.options.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+            <ChevronDown
+              className="form-select__icon"
+              size={18}
+              aria-hidden="true"
+            />
+          </div>
           <FieldError id="tipoSolucao-error" message={errors.tipoSolucao} />
         </div>
 

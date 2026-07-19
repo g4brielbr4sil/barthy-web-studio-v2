@@ -1,6 +1,6 @@
 import { Clock3, Mail, X } from 'lucide-react'
 import { useCallback, useEffect, useRef, type RefObject } from 'react'
-import { navigation } from '../data/navigation'
+import { navigation, type SectionId } from '../data/navigation'
 import { CONTACT_EMAIL, getEmailHref } from '../lib/contact'
 import { Brand } from './Brand'
 import { TextRollButton } from './TextRollButton'
@@ -11,6 +11,8 @@ interface MobileMenuProps {
   onClose: () => void
   time: string
   triggerRef: RefObject<HTMLButtonElement | null>
+  activeSection: SectionId
+  onNavigate: (section: SectionId) => void
 }
 
 const focusableSelector = [
@@ -27,6 +29,8 @@ export function MobileMenu({
   onClose,
   time,
   triggerRef,
+  activeSection,
+  onNavigate,
 }: MobileMenuProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
@@ -87,9 +91,10 @@ export function MobileMenu({
 
   if (!open) return null
 
-  const closeForNavigation = () => {
+  const closeForNavigation = (section: SectionId) => {
     restoreFocusRef.current = false
     onClose()
+    onNavigate(section)
   }
 
   return (
@@ -125,7 +130,13 @@ export function MobileMenu({
           <ul className="mobile-menu__links">
             {navigation.map((item, index) => (
               <li key={item.href}>
-                <a href={item.href} onClick={closeForNavigation}>
+                <a
+                  href={item.href}
+                  aria-current={
+                    activeSection === item.id ? 'location' : undefined
+                  }
+                  onClick={() => closeForNavigation(item.id)}
+                >
                   <span aria-hidden="true">
                     {String(index + 1).padStart(2, '0')}
                   </span>
@@ -141,7 +152,7 @@ export function MobileMenu({
           source="mobile-menu"
           variant="terra"
           className="mobile-menu__cta"
-          onClick={closeForNavigation}
+          onClick={() => closeForNavigation('contato')}
         >
           Falar sobre meu projeto
         </TextRollButton>
