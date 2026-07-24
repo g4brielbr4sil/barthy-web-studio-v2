@@ -1,6 +1,6 @@
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
-import { Hero } from '../components/Hero'
+import { Hero } from '../components/hero/Hero'
 import { Solutions } from '../components/Solutions'
 import { AboutSection } from '../components/sections/AboutSection'
 import { ContactSection } from '../components/sections/ContactSection'
@@ -21,7 +21,7 @@ function App() {
         onNavigate={navigateToSection}
       />
       <main id="conteudo">
-        <Hero />
+        <Hero onNavigate={navigateToSection} />
         <AboutSection />
         <ProjectsSection />
         <Solutions />

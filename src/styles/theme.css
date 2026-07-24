@@ -9,6 +9,11 @@
   --ice-white: #f6fafd;
   --terra-orange: #cd765d;
   --terra-orange-deep: #b96049;
+  --terra-glow-soft: rgba(205, 118, 93, 0.14);
+  --terra-glow-medium: rgba(205, 118, 93, 0.28);
+  --terra-glow-strong: rgba(205, 118, 93, 0.48);
+  --terra-surface: rgba(205, 118, 93, 0.1);
+  --terra-border: rgba(205, 118, 93, 0.44);
 
   --page-background: #f6fafd;
   --surface: #ffffff;
@@ -23,7 +28,7 @@
   --section-accent: #eaf1f7;
   --hero-background: #eff3f6;
   --hero-overlay:
-    linear-gradient(180deg, rgba(246, 250, 253, 0.02) 0%, rgba(246, 250, 253, 0.08) 48%, rgba(246, 250, 253, 0.2) 100%);
+    linear-gradient(180deg, rgba(246, 250, 253, 0.01) 0%, rgba(246, 250, 253, 0.04) 48%, rgba(246, 250, 253, 0.12) 100%);
   --form-background: #0a1931;
   --footer-background: #0a1931;
   --control-background: #0a1931;
@@ -67,6 +72,11 @@
   --footer-background: #071323;
   --control-background: #f6fafd;
   --control-foreground: #0a1931;
+  --terra-glow-soft: rgba(205, 118, 93, 0.12);
+  --terra-glow-medium: rgba(205, 118, 93, 0.24);
+  --terra-glow-strong: rgba(205, 118, 93, 0.42);
+  --terra-surface: rgba(205, 118, 93, 0.12);
+  --terra-border: rgba(205, 118, 93, 0.38);
 
   --page: var(--page-background);
   --page-muted: var(--surface-soft);
