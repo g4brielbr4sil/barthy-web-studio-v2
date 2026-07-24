@@ -1,7 +1,7 @@
 import { ArrowUpRight, Minus, Plus } from 'lucide-react'
 import { useId, useState } from 'react'
-import type { Project } from '../data/projects'
-import { trackEvent } from '../lib/tracking'
+import type { Project } from '../../data/projects'
+import { trackEvent } from '../../lib/tracking'
 import { ProjectMedia } from './ProjectMedia'
 
 interface ProjectCardProps {

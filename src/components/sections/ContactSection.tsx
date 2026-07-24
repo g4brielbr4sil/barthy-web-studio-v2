@@ -5,12 +5,12 @@ import {
   copyContactEmail,
   getEmailHref,
   getWhatsappUrl,
-} from '../lib/contact'
-import { trackEvent } from '../lib/tracking'
-import { ContactForm } from './ContactForm'
-import { SectionReveal } from './SectionReveal'
+} from '../../lib/contact'
+import { trackEvent } from '../../lib/tracking'
+import { ContactForm } from '../contact/ContactForm'
+import { SectionReveal } from '../ui/SectionReveal'
 
-export function Contact() {
+export function ContactSection() {
   const whatsappUrl = getWhatsappUrl()
   const [whatsappMessage, setWhatsappMessage] = useState('')
   const [copied, setCopied] = useState(false)

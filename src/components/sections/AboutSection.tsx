@@ -1,9 +1,9 @@
-import { EditorialVisual } from './EditorialVisual'
-import { SectionBadge } from './SectionBadge'
-import { SectionReveal } from './SectionReveal'
-import { TextRollButton } from './TextRollButton'
+import { EditorialVisual } from '../editorial/EditorialVisual'
+import { SectionBadge } from '../ui/SectionBadge'
+import { SectionReveal } from '../ui/SectionReveal'
+import { TextRollButton } from '../ui/TextRollButton'
 
-export function About() {
+export function AboutSection() {
   return (
     <section id="estudio" className="about section-shell" aria-labelledby="about-title">
       <div className="stage">

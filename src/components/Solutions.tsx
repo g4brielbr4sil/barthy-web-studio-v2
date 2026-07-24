@@ -25,8 +25,8 @@ import {
   type CSSProperties,
   type KeyboardEvent,
 } from 'react'
-import { SectionReveal } from './SectionReveal'
-import { TextRollButton } from './TextRollButton'
+import { SectionReveal } from './ui/SectionReveal'
+import { TextRollButton } from './ui/TextRollButton'
 
 interface SolutionNode {
   id: string

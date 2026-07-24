@@ -6,9 +6,9 @@ import {
   Search,
   type LucideIcon,
 } from 'lucide-react'
-import { SectionBadge } from './SectionBadge'
-import { SectionReveal } from './SectionReveal'
-import { TextRollButton } from './TextRollButton'
+import { SectionBadge } from '../ui/SectionBadge'
+import { SectionReveal } from '../ui/SectionReveal'
+import { TextRollButton } from '../ui/TextRollButton'
 
 interface ProcessStep {
   title: string
@@ -49,7 +49,7 @@ const steps: ProcessStep[] = [
   },
 ]
 
-export function Process() {
+export function ProcessSection() {
   return (
     <section
       id="processo"

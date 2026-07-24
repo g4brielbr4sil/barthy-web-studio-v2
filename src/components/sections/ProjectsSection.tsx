@@ -1,9 +1,9 @@
-import { projects } from '../data/projects'
-import { ProjectCard } from './ProjectCard'
-import { SectionBadge } from './SectionBadge'
-import { SectionReveal } from './SectionReveal'
+import { projects } from '../../data/projects'
+import { ProjectCard } from '../projects/ProjectCard'
+import { SectionBadge } from '../ui/SectionBadge'
+import { SectionReveal } from '../ui/SectionReveal'
 
-export function Projects() {
+export function ProjectsSection() {
   return (
     <section
       id="projetos"

@@ -1,16 +1,16 @@
 import { Menu, X } from 'lucide-react'
 import {
   useCallback,
-  useLayoutEffect,
   useRef,
   useState,
   type MouseEvent,
 } from 'react'
 import { navigation, type SectionId } from '../data/navigation'
 import { useBrasiliaTime } from '../hooks/useBrasiliaTime'
+import { useHeaderHeight } from '../hooks/useHeaderHeight'
 import { Brand } from './Brand'
 import { MobileMenu } from './MobileMenu'
-import { TextRollButton } from './TextRollButton'
+import { TextRollButton } from './ui/TextRollButton'
 import { ThemeToggle } from './ThemeToggle'
 
 interface HeaderProps {
@@ -20,44 +20,10 @@ interface HeaderProps {
 
 export function Header({ activeSection, onNavigate }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const headerRef = useRef<HTMLElement>(null)
+  const headerRef = useHeaderHeight<HTMLElement>()
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const time = useBrasiliaTime()
   const closeMenu = useCallback(() => setMenuOpen(false), [])
-
-  useLayoutEffect(() => {
-    const header = headerRef.current
-    if (!header) return
-
-    const updateHeaderHeight = () => {
-      const height = Math.ceil(header.getBoundingClientRect().height)
-      document.documentElement.style.setProperty(
-        '--site-header-height',
-        `${height}px`,
-      )
-    }
-
-    updateHeaderHeight()
-
-    if (typeof ResizeObserver === 'undefined') {
-      return () => {
-        document.documentElement.style.removeProperty('--site-header-height')
-      }
-    }
-
-    let animationFrame = 0
-    const observer = new ResizeObserver(() => {
-      window.cancelAnimationFrame(animationFrame)
-      animationFrame = window.requestAnimationFrame(updateHeaderHeight)
-    })
-    observer.observe(header, { box: 'border-box' })
-
-    return () => {
-      window.cancelAnimationFrame(animationFrame)
-      observer.disconnect()
-      document.documentElement.style.removeProperty('--site-header-height')
-    }
-  }, [])
 
   const handleNavigation = (
     event: MouseEvent<HTMLAnchorElement>,

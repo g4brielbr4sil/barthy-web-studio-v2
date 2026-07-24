@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import type { MouseEventHandler, ReactNode } from 'react'
-import { trackEvent } from '../lib/tracking'
+import { trackEvent } from '../../lib/tracking'
 
 interface TextRollButtonProps {
   href: string

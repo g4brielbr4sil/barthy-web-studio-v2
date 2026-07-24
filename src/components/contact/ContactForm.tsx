@@ -11,18 +11,14 @@ import {
   CONTACT_EMAIL,
   copyContactEmail,
   getContactEndpoint,
-} from '../lib/contact'
-import { trackEvent } from '../lib/tracking'
+} from '../../lib/contact'
+import type {
+  ContactFieldErrors,
+  ContactFieldName,
+  ContactPayload,
+} from '../../lib/contact.types'
+import { trackEvent } from '../../lib/tracking'
 
-type FieldName =
-  | 'nome'
-  | 'whatsapp'
-  | 'email'
-  | 'empresaProjeto'
-  | 'tipoSolucao'
-  | 'mensagem'
-
-type FieldErrors = Partial<Record<FieldName, string>>
 type FormStatus = 'idle' | 'loading' | 'success' | 'error' | 'unconfigured'
 
 const serviceGroups = [
@@ -44,8 +40,8 @@ const serviceGroups = [
   },
 ]
 
-function validateForm(formData: FormData): FieldErrors {
-  const errors: FieldErrors = {}
+function validateForm(formData: FormData): ContactFieldErrors {
+  const errors: ContactFieldErrors = {}
   const nome = String(formData.get('nome') ?? '').trim()
   const whatsapp = String(formData.get('whatsapp') ?? '').replace(/\D/g, '')
   const email = String(formData.get('email') ?? '').trim()
@@ -105,12 +101,12 @@ function FieldError({
 
 export function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null)
-  const [errors, setErrors] = useState<FieldErrors>({})
+  const [errors, setErrors] = useState<ContactFieldErrors>({})
   const [status, setStatus] = useState<FormStatus>('idle')
   const [statusMessage, setStatusMessage] = useState('')
   const [copied, setCopied] = useState(false)
 
-  const clearError = (field: FieldName) => {
+  const clearError = (field: ContactFieldName) => {
     setErrors((current) => {
       if (!current[field]) return current
       const next = { ...current }
@@ -120,8 +116,10 @@ export function ContactForm() {
     if (status !== 'loading' && status !== 'success') setStatus('idle')
   }
 
-  const focusFirstError = (fieldErrors: FieldErrors) => {
-    const firstField = Object.keys(fieldErrors)[0] as FieldName | undefined
+  const focusFirstError = (fieldErrors: ContactFieldErrors) => {
+    const firstField = Object.keys(fieldErrors)[0] as
+      | ContactFieldName
+      | undefined
     if (!firstField) return
     formRef.current
       ?.querySelector<HTMLElement>(`[name="${firstField}"]`)
@@ -154,7 +152,7 @@ export function ContactForm() {
       return
     }
 
-    const payload = {
+    const payload: ContactPayload = {
       nome: String(formData.get('nome') ?? '').trim(),
       whatsapp: String(formData.get('whatsapp') ?? '').trim(),
       email: String(formData.get('email') ?? '').trim(),

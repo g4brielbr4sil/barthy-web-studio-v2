@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from 'react'
 import { Blocks, MapPin } from 'lucide-react'
-import { TextRollButton } from './TextRollButton'
+import { TextRollButton } from './ui/TextRollButton'
 import { trackEvent } from '../lib/tracking'
 
 const HeroShader = lazy(() => import('./HeroShader'))

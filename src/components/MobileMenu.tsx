@@ -9,7 +9,7 @@ import {
 import { navigation, type SectionId } from '../data/navigation'
 import { CONTACT_EMAIL, getEmailHref } from '../lib/contact'
 import { Brand } from './Brand'
-import { TextRollButton } from './TextRollButton'
+import { TextRollButton } from './ui/TextRollButton'
 import { ThemeToggle } from './ThemeToggle'
 
 interface MobileMenuProps {

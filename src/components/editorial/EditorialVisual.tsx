@@ -1,5 +1,5 @@
 import { LayoutTemplate, Sparkles } from 'lucide-react'
-import { editorialImages } from '../data/projects'
+import { editorialImages } from '../../data/projects'
 
 interface EditorialVisualProps {
   size: 'small' | 'large'
