@@ -13,8 +13,8 @@ export interface NavigationItem {
 }
 
 export const navigation: NavigationItem[] = [
-  { id: 'projetos', label: 'Projetos', href: '#projetos' },
   { id: 'estudio', label: 'Estúdio', href: '#estudio' },
+  { id: 'projetos', label: 'Projetos', href: '#projetos' },
   { id: 'solucoes', label: 'Soluções', href: '#solucoes' },
   { id: 'processo', label: 'Processo', href: '#processo' },
   { id: 'contato', label: 'Contato', href: '#contato' },

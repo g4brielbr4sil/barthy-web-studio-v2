@@ -1,47 +1,77 @@
 type IntersectionHandler = (entry: IntersectionObserverEntry) => void
 
-const handlers = new Map<Element, Set<IntersectionHandler>>()
-let sharedObserver: IntersectionObserver | null = null
+interface ObserverRegistry {
+  handlers: Map<Element, Set<IntersectionHandler>>
+  observer: IntersectionObserver
+}
 
-function getObserver() {
-  if (sharedObserver) return sharedObserver
+const observerRegistries = new Map<string, ObserverRegistry>()
 
-  sharedObserver = new IntersectionObserver(
+function normalizeThreshold(
+  threshold: IntersectionObserverInit['threshold'],
+): number[] {
+  if (Array.isArray(threshold)) return [...threshold]
+  return [threshold ?? 0]
+}
+
+function getObserverKey(options: IntersectionObserverInit): string {
+  return JSON.stringify({
+    rootMargin: options.rootMargin ?? '0px',
+    threshold: normalizeThreshold(options.threshold),
+  })
+}
+
+function getObserverRegistry(
+  options: IntersectionObserverInit,
+): ObserverRegistry {
+  const key = getObserverKey(options)
+  const existing = observerRegistries.get(key)
+  if (existing) return existing
+
+  const handlers = new Map<Element, Set<IntersectionHandler>>()
+  const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         handlers.get(entry.target)?.forEach((handler) => handler(entry))
       })
     },
-    {
-      rootMargin: '-18% 0px -56% 0px',
-      threshold: [0, 0.12, 0.18, 0.3, 0.55, 0.8],
-    },
+    options,
   )
+  const registry = { handlers, observer }
+  observerRegistries.set(key, registry)
+  return registry
+}
 
-  return sharedObserver
+const defaultOptions: IntersectionObserverInit = {
+  rootMargin: '-18% 0px -56% 0px',
+  threshold: [0, 0.12, 0.18, 0.3, 0.55, 0.8],
 }
 
 export function observeIntersection(
   element: Element,
   handler: IntersectionHandler,
+  options: IntersectionObserverInit = defaultOptions,
 ) {
-  const elementHandlers = handlers.get(element) ?? new Set()
+  const key = getObserverKey(options)
+  const registry = getObserverRegistry(options)
+  const elementHandlers =
+    registry.handlers.get(element) ?? new Set<IntersectionHandler>()
   elementHandlers.add(handler)
-  handlers.set(element, elementHandlers)
-  getObserver().observe(element)
+  registry.handlers.set(element, elementHandlers)
+  registry.observer.observe(element)
 
   return () => {
-    const currentHandlers = handlers.get(element)
+    const currentHandlers = registry.handlers.get(element)
     currentHandlers?.delete(handler)
 
     if (!currentHandlers?.size) {
-      handlers.delete(element)
-      sharedObserver?.unobserve(element)
+      registry.handlers.delete(element)
+      registry.observer.unobserve(element)
     }
 
-    if (!handlers.size) {
-      sharedObserver?.disconnect()
-      sharedObserver = null
+    if (!registry.handlers.size) {
+      registry.observer.disconnect()
+      observerRegistries.delete(key)
     }
   }
 }

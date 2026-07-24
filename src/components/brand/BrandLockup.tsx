@@ -1,16 +1,16 @@
 import type { MouseEventHandler } from 'react'
+import { BrandMark } from './BrandMark'
 
-interface BrandProps {
+interface BrandLockupProps {
   compact?: boolean
   inverse?: boolean
   onClick?: MouseEventHandler<HTMLAnchorElement>
 }
-
-export function Brand({
+export function BrandLockup({
   compact = false,
   inverse = false,
   onClick,
-}: BrandProps) {
+}: BrandLockupProps) {
   return (
     <a
       className={`brand ${inverse ? 'brand--inverse' : ''}`}
@@ -18,16 +18,10 @@ export function Brand({
       aria-label="Barthy Web Studio, voltar ao início"
       onClick={onClick}
     >
-      <img
-        className="brand__mark"
-        src="/favicon.svg"
-        width="36"
-        height="36"
-        alt=""
-      />
+      <BrandMark />
       <span className="brand__name">
-        Barthy
-        {!compact && <span> Web Studio</span>}
+        <strong>Barthy</strong>
+        {!compact && <span>Web Studio</span>}
       </span>
     </a>
   )

@@ -5,20 +5,25 @@ import {
   useState,
   type MouseEvent,
 } from 'react'
-import { navigation, type SectionId } from '../data/navigation'
-import { useBrasiliaTime } from '../hooks/useBrasiliaTime'
-import { useHeaderHeight } from '../hooks/useHeaderHeight'
-import { Brand } from './Brand'
+import type { SectionId } from '../../data/navigation'
+import { useBrasiliaTime } from '../../hooks/useBrasiliaTime'
+import { useHeaderHeight } from '../../hooks/useHeaderHeight'
+import { BrandLockup } from '../brand/BrandLockup'
+import { TextRollButton } from '../ui/TextRollButton'
+import { DesktopNavigation } from './DesktopNavigation'
 import { MobileMenu } from './MobileMenu'
-import { TextRollButton } from './ui/TextRollButton'
 import { ThemeToggle } from './ThemeToggle'
 
 interface HeaderProps {
   activeSection: SectionId
+  isPastHero: boolean
   onNavigate: (section: SectionId) => void
 }
-
-export function Header({ activeSection, onNavigate }: HeaderProps) {
+export function Header({
+  activeSection,
+  isPastHero,
+  onNavigate,
+}: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const headerRef = useHeaderHeight<HTMLElement>()
   const menuButtonRef = useRef<HTMLButtonElement>(null)
@@ -37,32 +42,25 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
     <>
       <header
         ref={headerRef}
-        className={`site-header ${
-          activeSection === 'inicio' ? '' : 'is-scrolled'
-        }`}
+        className={`site-header ${isPastHero ? 'is-scrolled' : ''}`}
       >
         <div className="stage">
           <div className="site-header__pill">
-            <Brand onClick={(event) => handleNavigation(event, 'inicio')} />
+            <BrandLockup
+              onClick={(event) => handleNavigation(event, 'inicio')}
+            />
 
-            <nav className="desktop-nav" aria-label="Navegação principal">
-              {navigation.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  aria-current={
-                    activeSection === item.id ? 'location' : undefined
-                  }
-                  onClick={(event) => handleNavigation(event, item.id)}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
+            <DesktopNavigation
+              activeSection={activeSection}
+              onNavigate={onNavigate}
+            />
 
             <div className="site-header__actions">
               <ThemeToggle />
-              <div className="availability" aria-label="Disponibilidade do estúdio">
+              <div
+                className="availability"
+                aria-label="Disponibilidade do estúdio"
+              >
                 <span className="availability__dot" aria-hidden="true" />
                 <span className="availability__status">
                   Agenda aberta para novos projetos

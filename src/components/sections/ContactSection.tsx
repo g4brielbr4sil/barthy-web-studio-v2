@@ -8,6 +8,7 @@ import {
 } from '../../lib/contact'
 import { trackEvent } from '../../lib/tracking'
 import { ContactForm } from '../contact/ContactForm'
+import { SectionBadge } from '../ui/SectionBadge'
 import { SectionReveal } from '../ui/SectionReveal'
 
 export function ContactSection() {
@@ -28,8 +29,8 @@ export function ContactSection() {
       aria-labelledby="contact-title"
     >
       <div className="stage">
-        <SectionReveal className="contact__heading">
-          <p className="eyebrow">Próximo passo</p>
+        <SectionReveal className="contact__heading" data-section-anchor>
+          <SectionBadge number="05">Contato</SectionBadge>
           <h2 id="contact-title">
             Seu próximo projeto pode começar com uma conversa clara.
           </h2>

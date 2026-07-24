@@ -6,10 +6,13 @@ import {
   type MouseEvent,
   type RefObject,
 } from 'react'
-import { navigation, type SectionId } from '../data/navigation'
-import { CONTACT_EMAIL, getEmailHref } from '../lib/contact'
-import { Brand } from './Brand'
-import { TextRollButton } from './ui/TextRollButton'
+import {
+  navigation,
+  type SectionId,
+} from '../../data/navigation'
+import { CONTACT_EMAIL, getEmailHref } from '../../lib/contact'
+import { BrandLockup } from '../brand/BrandLockup'
+import { TextRollButton } from '../ui/TextRollButton'
 import { ThemeToggle } from './ThemeToggle'
 
 interface MobileMenuProps {
@@ -20,7 +23,6 @@ interface MobileMenuProps {
   activeSection: SectionId
   onNavigate: (section: SectionId) => void
 }
-
 const focusableSelector = [
   'a[href]',
   'button:not([disabled])',
@@ -41,6 +43,7 @@ export function MobileMenu({
   const panelRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const restoreFocusRef = useRef(true)
+
   const closeAndRestoreFocus = useCallback(() => {
     restoreFocusRef.current = false
     triggerRef.current?.focus({ preventScroll: true })
@@ -81,10 +84,9 @@ export function MobileMenu({
       if (event.key !== 'Tab') return
 
       const focusable = Array.from(
-        panelRef.current?.querySelectorAll<HTMLElement>(focusableSelector) ?? [],
+        panelRef.current?.querySelectorAll<HTMLElement>(focusableSelector) ??
+          [],
       )
-      if (focusable.length === 0) return
-
       const first = focusable[0]
       const last = focusable.at(-1)
       if (!first || !last) return
@@ -106,7 +108,9 @@ export function MobileMenu({
       })
       document.removeEventListener('keydown', onKeyDown)
       if (restoreFocusRef.current) {
-        window.requestAnimationFrame(() => triggerRef.current?.focus())
+        window.requestAnimationFrame(() => {
+          triggerRef.current?.focus({ preventScroll: true })
+        })
       }
     }
   }, [closeAndRestoreFocus, open, triggerRef])
@@ -124,7 +128,7 @@ export function MobileMenu({
   }
 
   return (
-    <div className="mobile-menu" aria-hidden={!open}>
+    <div className="mobile-menu">
       <button
         className="mobile-menu__backdrop"
         type="button"
@@ -140,7 +144,7 @@ export function MobileMenu({
         aria-label="Menu principal"
       >
         <div className="mobile-menu__top">
-          <Brand
+          <BrandLockup
             onClick={(event) => closeForNavigation(event, 'inicio')}
           />
           <button

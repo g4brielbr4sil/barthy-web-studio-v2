@@ -1,13 +1,18 @@
 import { EditorialVisual } from '../editorial/EditorialVisual'
+import type { SectionId } from '../../data/navigation'
 import { SectionBadge } from '../ui/SectionBadge'
 import { SectionReveal } from '../ui/SectionReveal'
 import { TextRollButton } from '../ui/TextRollButton'
 
-export function AboutSection() {
+export function AboutSection({
+  onNavigate,
+}: {
+  onNavigate: (section: SectionId) => void
+}) {
   return (
     <section id="estudio" className="about section-shell" aria-labelledby="about-title">
       <div className="stage">
-        <SectionReveal className="section-heading">
+        <SectionReveal className="section-heading" data-section-anchor>
           <SectionBadge number="01">Conheça a Barthy</SectionBadge>
           <h2 id="about-title">
             Estratégia, design e tecnologia trabalhando como uma única estrutura.
@@ -30,6 +35,10 @@ export function AboutSection() {
               href="#solucoes"
               source="about"
               variant="outline"
+              onClick={(event) => {
+                event.preventDefault()
+                onNavigate('solucoes')
+              }}
             >
               Conhecer o estúdio
             </TextRollButton>
