@@ -17,14 +17,18 @@ export function useInView<T extends Element>(
       return
     }
 
-    return observeIntersection(node, (entry) => {
-      const minimumRatio = Array.isArray(threshold)
-        ? Math.min(...threshold)
-        : threshold
-      setIsInView(
-        entry.isIntersecting && entry.intersectionRatio >= minimumRatio,
-      )
-    })
+    return observeIntersection(
+      node,
+      (entry) => {
+        const minimumRatio = Array.isArray(threshold)
+          ? Math.min(...threshold)
+          : threshold
+        setIsInView(
+          entry.isIntersecting && entry.intersectionRatio >= minimumRatio,
+        )
+      },
+      { root, rootMargin, threshold },
+    )
   }, [root, rootMargin, threshold])
 
   return { ref, isInView }

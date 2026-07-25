@@ -9,6 +9,13 @@
   --ice-white: #f6fafd;
   --terra-orange: #cd765d;
   --terra-orange-deep: #b96049;
+  --terra-accent-text: #b96049;
+  --terra-accent-solid: #b96049;
+  --terra-glow-soft: rgba(205, 118, 93, 0.14);
+  --terra-glow-medium: rgba(205, 118, 93, 0.28);
+  --terra-glow-strong: rgba(205, 118, 93, 0.48);
+  --terra-surface: rgba(205, 118, 93, 0.1);
+  --terra-border: rgba(205, 118, 93, 0.44);
 
   --page-background: #f6fafd;
   --surface: #ffffff;
@@ -17,13 +24,24 @@
   --muted-foreground: #40546b;
   --border: rgba(10, 25, 49, 0.12);
   --nav-background: rgba(255, 255, 255, 0.94);
+  --nav-glass-background: rgba(255, 255, 255, 0.58);
+  --nav-glass-background-scrolled: rgba(255, 255, 255, 0.78);
+  --nav-fallback-background: rgba(246, 250, 253, 0.97);
   --surface-translucent: rgba(255, 255, 255, 0.72);
   --surface-translucent-strong: rgba(255, 255, 255, 0.88);
+  --card-background: #ffffff;
+  --card-background-muted: #f1f6fa;
+  --card-border: rgba(10, 25, 49, 0.13);
+  --card-highlight: rgba(255, 255, 255, 0.82);
+  --card-shadow: 0 30px 80px -52px rgba(10, 25, 49, 0.42);
+  --card-shadow-hover: 0 36px 88px -48px rgba(10, 25, 49, 0.5);
+  --card-active-glow: 0 0 0 1px rgba(205, 118, 93, 0.24),
+    0 22px 56px -38px rgba(205, 118, 93, 0.42);
   --section-muted: #f1f4f6;
   --section-accent: #eaf1f7;
   --hero-background: #eff3f6;
   --hero-overlay:
-    linear-gradient(180deg, rgba(246, 250, 253, 0.02) 0%, rgba(246, 250, 253, 0.08) 48%, rgba(246, 250, 253, 0.2) 100%);
+    linear-gradient(180deg, rgba(246, 250, 253, 0.01) 0%, rgba(246, 250, 253, 0.04) 48%, rgba(246, 250, 253, 0.12) 100%);
   --form-background: #0a1931;
   --footer-background: #0a1931;
   --control-background: #0a1931;
@@ -56,8 +74,19 @@
   --muted-foreground: #b3cfe5;
   --border: rgba(179, 207, 229, 0.18);
   --nav-background: rgba(17, 28, 44, 0.94);
+  --nav-glass-background: rgba(17, 28, 44, 0.62);
+  --nav-glass-background-scrolled: rgba(17, 28, 44, 0.82);
+  --nav-fallback-background: rgba(17, 28, 44, 0.97);
   --surface-translucent: rgba(17, 28, 44, 0.78);
   --surface-translucent-strong: rgba(23, 37, 58, 0.94);
+  --card-background: #111c2c;
+  --card-background-muted: #17253a;
+  --card-border: rgba(179, 207, 229, 0.18);
+  --card-highlight: rgba(179, 207, 229, 0.13);
+  --card-shadow: 0 30px 80px -46px rgba(0, 0, 0, 0.76);
+  --card-shadow-hover: 0 38px 92px -42px rgba(0, 0, 0, 0.84);
+  --card-active-glow: 0 0 0 1px rgba(205, 118, 93, 0.3),
+    0 24px 62px -38px rgba(205, 118, 93, 0.38);
   --section-muted: #0e1a2b;
   --section-accent: #132137;
   --hero-background: #0a1931;
@@ -67,6 +96,13 @@
   --footer-background: #071323;
   --control-background: #f6fafd;
   --control-foreground: #0a1931;
+  --terra-glow-soft: rgba(205, 118, 93, 0.12);
+  --terra-glow-medium: rgba(205, 118, 93, 0.24);
+  --terra-glow-strong: rgba(205, 118, 93, 0.42);
+  --terra-surface: rgba(205, 118, 93, 0.12);
+  --terra-border: rgba(205, 118, 93, 0.38);
+  --terra-accent-text: #e19a86;
+  --terra-accent-solid: #b96049;
 
   --page: var(--page-background);
   --page-muted: var(--surface-soft);

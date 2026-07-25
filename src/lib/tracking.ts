@@ -14,6 +14,7 @@ export function trackEvent(
   payload: CtaClickPayload,
 ): void {
   if (typeof window === 'undefined') return
+  if (document.documentElement.dataset.visualMode === 'static') return
 
   window.dispatchEvent(
     new CustomEvent('barthy:track', {

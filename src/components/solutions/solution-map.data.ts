@@ -1,0 +1,117 @@
+import {
+  BarChart3,
+  ContactRound,
+  Database,
+  FileInput,
+  Globe2,
+  Headset,
+  Inbox,
+  LayoutDashboard,
+  ListChecks,
+  ListTodo,
+  MessageCircle,
+  Network,
+  PanelsTopLeft,
+  Plug,
+  Route,
+  Workflow,
+  Zap,
+} from 'lucide-react'
+import type { SolutionGroup } from './solution-map.types'
+
+export const solutionGroups: SolutionGroup[] = [
+  {
+    id: 'presenca',
+    title: 'Presença digital',
+    summary: 'Apresentar com clareza, ritmo e uma direção visual própria.',
+    architectureSummary:
+      'O negócio sendo apresentado, encontrado e contatado.',
+    items: ['Landing pages', 'Portfólios', 'Páginas institucionais'],
+    icon: Globe2,
+    layer: 1,
+    nodes: [
+      { id: 'pagina', label: 'Página', icon: PanelsTopLeft, x: 50, y: 18 },
+      {
+        id: 'portfolio',
+        label: 'Portfólio',
+        icon: FileInput,
+        x: 26,
+        y: 70,
+      },
+      {
+        id: 'contato',
+        label: 'Contato',
+        icon: MessageCircle,
+        x: 74,
+        y: 70,
+      },
+    ],
+  },
+  {
+    id: 'sistemas',
+    title: 'Sistemas',
+    summary: 'Organizar dados, regras e rotinas em interfaces úteis.',
+    architectureSummary:
+      'O negócio organizado por dados, regras e interfaces.',
+    items: ['CRMs', 'Dashboards', 'Portais', 'Ferramentas internas'],
+    icon: LayoutDashboard,
+    layer: 2,
+    nodes: [
+      { id: 'crm', label: 'CRM', icon: ContactRound, x: 50, y: 16 },
+      {
+        id: 'dashboard',
+        label: 'Dashboard',
+        icon: LayoutDashboard,
+        x: 22,
+        y: 35,
+      },
+      { id: 'portal', label: 'Portal', icon: PanelsTopLeft, x: 78, y: 35 },
+      { id: 'dados', label: 'Dados', icon: Database, x: 30, y: 78 },
+      { id: 'regras', label: 'Regras', icon: ListChecks, x: 70, y: 78 },
+    ],
+  },
+  {
+    id: 'operacao',
+    title: 'Operação',
+    summary: 'Conectar entradas, ferramentas e próximas ações.',
+    architectureSummary:
+      'O negócio conectado entre entradas, atendimento e próximas ações.',
+    items: ['Automações', 'Integrações', 'Formulários', 'Organização digital'],
+    icon: Workflow,
+    layer: 3,
+    nodes: [
+      { id: 'entrada', label: 'Entrada', icon: Inbox, x: 50, y: 14 },
+      {
+        id: 'atendimento',
+        label: 'Atendimento',
+        icon: Headset,
+        x: 23,
+        y: 29,
+      },
+      { id: 'automacao', label: 'Automação', icon: Zap, x: 77, y: 29 },
+      { id: 'integracao', label: 'Integração', icon: Plug, x: 80, y: 62 },
+      { id: 'tarefas', label: 'Tarefas', icon: ListTodo, x: 68, y: 82 },
+      {
+        id: 'relatorios',
+        label: 'Relatórios',
+        icon: BarChart3,
+        x: 32,
+        y: 82,
+      },
+      {
+        id: 'proxima-acao',
+        label: 'Próxima ação',
+        icon: Route,
+        x: 20,
+        y: 62,
+      },
+      {
+        id: 'acompanhamento',
+        label: 'Acompanhamento',
+        icon: Network,
+        x: 50,
+        y: 70,
+      },
+    ],
+  },
+]
