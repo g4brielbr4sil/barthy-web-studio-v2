@@ -30,8 +30,8 @@
   opacity: 0.8;
 }
 
-:root[data-theme='dark'] .hero__organic-shape--white {
-  opacity: 0.18;
+:root[data-theme='dark'] .hero__organic-shape--navy {
+  opacity: 0.42;
 }
 
 :root[data-theme='dark'] .hero__label,

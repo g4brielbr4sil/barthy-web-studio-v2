@@ -11,6 +11,7 @@ import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { useTheme, type Theme } from '../../theme/ThemeContext'
 
 interface ShaderSurfaceProps {
+  onLoading: () => void
   onReady: () => void
   onFailure: (reason: string) => void
 }
@@ -44,10 +45,12 @@ const shaderPalettes: Record<
 }
 
 export default function ShaderSurface({
+  onLoading,
   onReady,
   onFailure,
 }: ShaderSurfaceProps) {
   const surfaceRef = useRef<HTMLDivElement>(null)
+  const readyRef = useRef(false)
   const finePointer = useMediaQuery('(hover: hover) and (pointer: fine)')
   const { theme } = useTheme()
   const [pageVisible, setPageVisible] = useState(
@@ -57,42 +60,111 @@ export default function ShaderSurface({
 
   useEffect(() => {
     const onVisibilityChange = () => {
-      setPageVisible(document.visibilityState !== 'hidden')
+      const visible = document.visibilityState !== 'hidden'
+      if (!visible) {
+        readyRef.current = false
+        onLoading()
+      }
+      setPageVisible(visible)
     }
 
     document.addEventListener('visibilitychange', onVisibilityChange)
     return () =>
       document.removeEventListener('visibilitychange', onVisibilityChange)
-  }, [])
+  }, [onLoading])
 
   useEffect(() => {
     if (!pageVisible) return
 
+    onLoading()
+    let firstFrame = 0
     let secondFrame = 0
+    let thirdFrame = 0
     let readinessTimeout = 0
-    const firstFrame = window.requestAnimationFrame(() => {
-      secondFrame = window.requestAnimationFrame(() => {
-        if (surfaceRef.current?.querySelector('canvas')) {
-          onReady()
-          return
-        }
+    let canvas: HTMLCanvasElement | null = null
 
-        readinessTimeout = window.setTimeout(() => {
-          if (surfaceRef.current?.querySelector('canvas')) {
-            onReady()
-          } else {
-            onFailure('O Canvas do shader não foi criado.')
-          }
-        }, 1200)
-      })
-    })
+    const fail = (reason: string) => {
+      if (readyRef.current) readyRef.current = false
+      onFailure(reason)
+    }
 
-    return () => {
+    const onContextLost = (event: Event) => {
+      event.preventDefault()
+      fail('O contexto gráfico do shader foi perdido.')
+    }
+
+    const verifyRenderableCanvas = () => {
+      canvas = surfaceRef.current?.querySelector('canvas') ?? null
+      if (!canvas) return false
+
+      const rect = canvas.getBoundingClientRect()
+      if (
+        canvas.width <= 0 ||
+        canvas.height <= 0 ||
+        rect.width <= 0 ||
+        rect.height <= 0
+      ) {
+        return false
+      }
+
+      if (!readyRef.current) {
+        readyRef.current = true
+        canvas.addEventListener('contextlost', onContextLost)
+        canvas.addEventListener('webglcontextlost', onContextLost)
+        onReady()
+      }
+      return true
+    }
+
+    const verifyAfterLayout = () => {
       window.cancelAnimationFrame(firstFrame)
       window.cancelAnimationFrame(secondFrame)
-      window.clearTimeout(readinessTimeout)
+      window.cancelAnimationFrame(thirdFrame)
+      firstFrame = window.requestAnimationFrame(() => {
+        secondFrame = window.requestAnimationFrame(() => {
+          thirdFrame = window.requestAnimationFrame(() => {
+            const wasReady = readyRef.current
+            if (!verifyRenderableCanvas() && wasReady) {
+              fail('O Canvas do shader não ficou renderizável.')
+            }
+          })
+        })
+      })
     }
-  }, [onFailure, onReady, pageVisible])
+
+    const canvasObserver = new MutationObserver(() => {
+      if (!verifyRenderableCanvas()) return
+      canvasObserver.disconnect()
+    })
+    if (surfaceRef.current) {
+      canvasObserver.observe(surfaceRef.current, {
+        childList: true,
+        subtree: true,
+      })
+    }
+
+    verifyAfterLayout()
+    readinessTimeout = window.setTimeout(() => {
+      if (!verifyRenderableCanvas()) {
+        fail('O Canvas do shader não foi criado a tempo.')
+      }
+    }, 2200)
+
+    window.addEventListener('orientationchange', verifyAfterLayout)
+    window.addEventListener('resize', verifyAfterLayout, { passive: true })
+
+    return () => {
+      canvasObserver.disconnect()
+      window.cancelAnimationFrame(firstFrame)
+      window.cancelAnimationFrame(secondFrame)
+      window.cancelAnimationFrame(thirdFrame)
+      window.clearTimeout(readinessTimeout)
+      window.removeEventListener('orientationchange', verifyAfterLayout)
+      window.removeEventListener('resize', verifyAfterLayout)
+      canvas?.removeEventListener('contextlost', onContextLost)
+      canvas?.removeEventListener('webglcontextlost', onContextLost)
+    }
+  }, [onFailure, onLoading, onReady, pageVisible])
 
   if (!pageVisible) return null
 

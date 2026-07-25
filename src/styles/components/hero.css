@@ -86,7 +86,7 @@
 
 .hero__organic-shape--terra {
   right: 4%;
-  bottom: -30%;
+  bottom: -18%;
   width: min(62vw, 62rem);
   aspect-ratio: 1.15;
   background:
@@ -99,7 +99,7 @@
   opacity: 0.86;
 }
 
-.hero__organic-shape--white {
+.hero__organic-shape--navy {
   top: 20%;
   left: 32%;
   width: min(42vw, 42rem);
@@ -107,11 +107,11 @@
   background:
     radial-gradient(
       circle,
-      rgba(246, 250, 253, 0.82),
-      rgba(246, 250, 253, 0.18) 58%,
+      rgba(10, 25, 49, 0.28),
+      rgba(26, 61, 99, 0.12) 58%,
       transparent 76%
     );
-  opacity: 0.68;
+  opacity: 0.56;
 }
 
 .hero-shader {
@@ -125,7 +125,7 @@
 }
 
 .hero__background[data-mode='shader'] .hero__css-background {
-  opacity: 0.56;
+  opacity: 0.62;
 }
 
 .hero__contrast-overlay {

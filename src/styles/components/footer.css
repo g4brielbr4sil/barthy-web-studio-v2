@@ -1,5 +1,6 @@
 .footer {
   padding-top: clamp(4rem, 8vw, 7rem);
+  border-top: 1px solid var(--soft-ice-13);
   background: var(--footer-background);
   color: var(--ice-white);
 }

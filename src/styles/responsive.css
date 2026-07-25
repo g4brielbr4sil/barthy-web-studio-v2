@@ -299,6 +299,18 @@
     margin-bottom: 0.8rem;
   }
 
+  .hero__organic-shape--terra {
+    right: -18%;
+    bottom: -8%;
+    width: 92vw;
+  }
+
+  .hero__organic-shape--navy {
+    top: 28%;
+    left: 22%;
+    width: 72vw;
+  }
+
   .hero-badge {
     grid-template-columns: auto 1fr;
     border-radius: 1.1rem;
@@ -525,12 +537,16 @@
     transform: none !important;
   }
 
-  .text-roll-button__text:first-child {
+  .text-roll-button__text--primary {
     transform: none !important;
   }
 
-  .text-roll-button__text + .text-roll-button__text {
+  .text-roll-button__text--secondary {
     display: none;
+  }
+
+  .theme-toggle__icons svg {
+    transform: none !important;
   }
 
   .solution-network__node,

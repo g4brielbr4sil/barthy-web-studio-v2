@@ -7,6 +7,7 @@ import { useVisualCapabilities } from '../../hooks/useVisualCapabilities'
 import { ShaderErrorBoundary } from './ShaderErrorBoundary'
 
 interface ShaderSurfaceProps {
+  onLoading: () => void
   onReady: () => void
   onFailure: (reason: string) => void
 }
@@ -60,6 +61,7 @@ export function ShaderBackground() {
     <div className="hero-shader" aria-hidden="true">
       <ShaderErrorBoundary onError={markShaderFailed}>
         <ShaderSurface
+          onLoading={markShaderLoading}
           onReady={markShaderReady}
           onFailure={markShaderFailed}
         />

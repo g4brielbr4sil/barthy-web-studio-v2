@@ -14,6 +14,7 @@ import {
   detectSaveData,
   detectWebGpu,
   getNetworkInformation,
+  verifyWebGpu,
 } from './capabilities'
 import type {
   ShaderStatus,
@@ -45,7 +46,7 @@ export function VisualCapabilitiesProvider({
   children: ReactNode
 }) {
   const reducedMotion = useReducedMotion()
-  const [webGpu] = useState(detectWebGpu)
+  const [webGpu, setWebGpu] = useState(detectWebGpu)
   const [backdrop] = useState(detectBackdropFilter)
   const [saveData, setSaveData] = useState(detectSaveData)
   const [shaderStatus, setShaderStatus] = useState<ShaderStatus>('idle')
@@ -60,7 +61,7 @@ export function VisualCapabilitiesProvider({
 
   const markShaderLoading = useCallback(() => {
     setShaderStatus((current) =>
-      current === 'idle' ? 'loading' : current,
+      current === 'failed' ? current : 'loading',
     )
   }, [])
 
@@ -71,6 +72,19 @@ export function VisualCapabilitiesProvider({
   const markShaderFailed = useCallback((_reason?: string) => {
     setShaderStatus('failed')
   }, [])
+
+  useEffect(() => {
+    if (webGpu !== 'checking') return
+
+    let active = true
+    void verifyWebGpu().then((capability) => {
+      if (active) setWebGpu(capability)
+    })
+
+    return () => {
+      active = false
+    }
+  }, [webGpu])
 
   useEffect(() => {
     const connection = getNetworkInformation()
