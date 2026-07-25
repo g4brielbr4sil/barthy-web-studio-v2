@@ -1,5 +1,3 @@
-/* About */
-
 .about {
   background: var(--paper);
 }
@@ -42,12 +40,6 @@
 
 .editorial-visual--large {
   min-height: clamp(30rem, 49vw, 46rem);
-}
-
-.editorial-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .editorial-visual--fallback {
@@ -162,9 +154,9 @@
   gap: 0.65rem;
   align-items: center;
   padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--white-72);
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--white-72);
   box-shadow: var(--shadow-soft);
   color: var(--royal-blue);
   backdrop-filter: blur(16px);

@@ -1,5 +1,3 @@
-/* Dark theme */
-
 :root[data-theme='dark'] .hero__static-background {
   background:
     radial-gradient(
@@ -14,7 +12,7 @@
     ),
     radial-gradient(
       circle at 70% 78%,
-      rgba(205, 118, 93, 0.24),
+      var(--terra-glow-medium),
       transparent 30%
     ),
     linear-gradient(128deg, #0a1931 0%, #111c2c 50%, #17253a 100%);
@@ -37,7 +35,6 @@
 }
 
 :root[data-theme='dark'] .hero__label,
-:root[data-theme='dark'] .eyebrow,
 :root[data-theme='dark'] .project-card__category,
 :root[data-theme='dark'] .solution-panel__copy > span,
 :root[data-theme='dark'] .solution-panel__copy li,
@@ -90,7 +87,7 @@
 }
 
 :root[data-theme='dark'] .solutions__tabs button[aria-selected='true'] {
-  border-color: rgba(179, 207, 229, 0.3);
+  border-color: var(--soft-ice-30);
   background: var(--surface-soft);
   color: var(--soft-ice);
 }
@@ -112,7 +109,7 @@
 }
 
 :root[data-theme='dark'] .solution-network__connections circle {
-  stroke: rgba(179, 207, 229, 0.2);
+  stroke: var(--soft-ice-20);
 }
 
 :root[data-theme='dark'] .solution-network__connections line {
@@ -143,7 +140,7 @@
 }
 
 :root[data-theme='dark'] .contact__notice {
-  background: rgba(205, 118, 93, 0.12);
+  background: var(--terra-glow-soft);
 }
 
 .form-field input:-webkit-autofill,

@@ -178,11 +178,3 @@ ol {
   opacity: 1;
   transform: none;
 }
-
-.eyebrow {
-  color: var(--royal-blue);
-  font-size: 0.76rem;
-  font-weight: 750;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}

@@ -58,11 +58,6 @@ export function SolutionsSection({
                 <p className="solution-panel__architecture-summary">
                   {activeGroup.architectureSummary}
                 </p>
-                <ul className="solution-panel__nodes-list">
-                  {activeGroup.nodes.map((node) => (
-                    <li key={node.id}>{node.label}</li>
-                  ))}
-                </ul>
                 <ul className="solution-panel__services">
                   {activeGroup.items.map((item) => (
                     <li key={item}>{item}</li>
