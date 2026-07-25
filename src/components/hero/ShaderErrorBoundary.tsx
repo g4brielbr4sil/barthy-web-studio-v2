@@ -8,7 +8,6 @@ interface ShaderErrorBoundaryProps {
   children: ReactNode
   onError: (reason: string) => void
 }
-
 interface ShaderErrorBoundaryState {
   failed: boolean
 }
@@ -34,4 +33,3 @@ export class ShaderErrorBoundary extends Component<
     return this.state.failed ? null : this.props.children
   }
 }
-

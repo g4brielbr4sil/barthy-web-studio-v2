@@ -94,6 +94,7 @@ export function useActiveSection(): NavigationState {
         finishProgrammaticNavigation()
         window.requestAnimationFrame(syncActiveSectionToViewport)
       }
+      let scrollSettleTimeout = 0
       const onPointerInterruption = () => finishInterruptedNavigation()
       const onKeyboardInterruption = (event: KeyboardEvent) => {
         if (navigationInterruptKeys.has(event.key)) {
@@ -101,6 +102,13 @@ export function useActiveSection(): NavigationState {
         }
       }
       const onScrollEnd = () => finishProgrammaticNavigation()
+      const onProgrammaticScroll = () => {
+        window.clearTimeout(scrollSettleTimeout)
+        scrollSettleTimeout = window.setTimeout(
+          finishProgrammaticNavigation,
+          180,
+        )
+      }
 
       window.addEventListener('wheel', onPointerInterruption, { passive: true })
       window.addEventListener('touchstart', onPointerInterruption, {
@@ -110,6 +118,9 @@ export function useActiveSection(): NavigationState {
         passive: true,
       })
       window.addEventListener('keydown', onKeyboardInterruption)
+      window.addEventListener('scroll', onProgrammaticScroll, {
+        passive: true,
+      })
 
       const supportsScrollEnd =
         'onscrollend' in
@@ -124,20 +135,22 @@ export function useActiveSection(): NavigationState {
         window.addEventListener('scrollend', onScrollEnd, { once: true })
         navigationTimeoutRef.current = window.setTimeout(
           finishProgrammaticNavigation,
-          1500,
+          6000,
         )
       } else {
         navigationTimeoutRef.current = window.setTimeout(
           finishProgrammaticNavigation,
-          1500,
+          6000,
         )
       }
 
       scrollEndCleanupRef.current = () => {
+        window.clearTimeout(scrollSettleTimeout)
         window.removeEventListener('wheel', onPointerInterruption)
         window.removeEventListener('touchstart', onPointerInterruption)
         window.removeEventListener('pointerdown', onPointerInterruption)
         window.removeEventListener('keydown', onKeyboardInterruption)
+        window.removeEventListener('scroll', onProgrammaticScroll)
         window.removeEventListener('scrollend', onScrollEnd)
       }
 

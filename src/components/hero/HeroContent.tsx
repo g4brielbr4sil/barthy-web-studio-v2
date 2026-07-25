@@ -7,7 +7,6 @@ import { TextRollButton } from '../ui/TextRollButton'
 interface HeroContentProps {
   onNavigate: (section: SectionId) => void
 }
-
 export function HeroContent({ onNavigate }: HeroContentProps) {
   const navigate = (
     event: MouseEvent<HTMLAnchorElement>,
@@ -70,4 +69,3 @@ export function HeroContent({ onNavigate }: HeroContentProps) {
     </div>
   )
 }
-

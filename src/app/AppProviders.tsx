@@ -9,4 +9,3 @@ export function AppProviders({ children }: { children: ReactNode }) {
     </ThemeProvider>
   )
 }
-

@@ -3,4 +3,3 @@ export type {
   VisualCapabilities,
   VisualMode,
 } from '../visual/visual-mode'
-

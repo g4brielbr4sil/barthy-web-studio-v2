@@ -14,7 +14,6 @@ interface ShaderSurfaceProps {
   onReady: () => void
   onFailure: (reason: string) => void
 }
-
 const shaderPalettes: Record<
   Theme,
   {
@@ -192,4 +191,3 @@ export default function ShaderSurface({
     </div>
   )
 }
-

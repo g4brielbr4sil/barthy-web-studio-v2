@@ -46,4 +46,3 @@ export function useHeaderHeight<T extends HTMLElement>(): RefObject<T> {
 
   return elementRef
 }
-

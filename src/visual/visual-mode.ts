@@ -14,4 +14,3 @@ export interface VisualCapabilities {
   shaderStatus: ShaderStatus
   canAttemptShader: boolean
 }
-

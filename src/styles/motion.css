@@ -1,0 +1,231 @@
+/* Progressive motion */
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion-ready='true'] .site-header {
+    animation: header-enter 420ms var(--ease-editorial) both;
+  }
+
+  [data-motion-ready='true'] .hero__label {
+    animation: hero-item-in 560ms 180ms var(--ease-editorial) both;
+  }
+
+  [data-motion-ready='true'] .hero__title > span > span {
+    animation: headline-in 680ms var(--ease-editorial) both;
+  }
+
+  [data-motion-ready='true'] .hero__cta {
+    animation: hero-item-in 500ms 620ms var(--ease-editorial) both;
+  }
+
+  [data-motion-ready='true'] .hero-badge {
+    animation: hero-item-in 500ms 760ms var(--ease-editorial) both;
+  }
+
+  [data-motion-ready='true'] .hero__organic-shape--blue {
+    animation: hero-organic-blue 34s ease-in-out infinite alternate;
+  }
+
+  [data-motion-ready='true'] .hero__organic-shape--ice {
+    animation: hero-organic-ice 41s ease-in-out infinite alternate;
+  }
+
+  [data-motion-ready='true'] .hero__organic-shape--terra {
+    animation: hero-organic-terra 29s ease-in-out infinite alternate;
+  }
+
+  [data-motion-ready='true'] .hero__organic-shape--white {
+    animation: hero-organic-white 37s ease-in-out infinite alternate;
+  }
+
+  [data-motion-ready='true'] .solution-network__connections line.is-flowing {
+    animation: network-flow 12s linear infinite;
+  }
+
+  [data-motion-ready='true'] .solution-network__ring--2 {
+    animation: network-ring-breathe 11s ease-in-out infinite alternate;
+  }
+
+  [data-motion-ready='true'] .solution-network__ring--3 {
+    animation: network-ring-breathe 15s 2s ease-in-out infinite alternate;
+  }
+
+  [data-motion-ready='true'] .solution-network__core {
+    animation: network-core-breathe 8s ease-in-out infinite;
+  }
+}
+
+/* Keyframes */
+
+@keyframes header-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes headline-in {
+  from {
+    opacity: 0;
+    transform: translateY(108%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(18%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes details-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes flow-dot {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(5000%);
+  }
+}
+
+@keyframes progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes terminal-blink {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hero-organic-blue {
+  from {
+    opacity: 0.58;
+    transform: translate3d(-2%, -2%, 0) rotate(-8deg) scale(0.96);
+  }
+  to {
+    opacity: 0.78;
+    transform: translate3d(7%, 5%, 0) rotate(7deg) scale(1.06);
+  }
+}
+
+@keyframes hero-organic-ice {
+  from {
+    opacity: 0.52;
+    transform: translate3d(-4%, 5%, 0) rotate(4deg) scale(1);
+  }
+  to {
+    opacity: 0.76;
+    transform: translate3d(8%, -5%, 0) rotate(-7deg) scale(1.08);
+  }
+}
+
+@keyframes hero-organic-terra {
+  from {
+    opacity: 0.68;
+    transform: translate3d(5%, 8%, 0) rotate(5deg) scale(0.94);
+  }
+  to {
+    opacity: 0.92;
+    transform: translate3d(-12%, -16%, 0) rotate(-9deg) scale(1.08);
+  }
+}
+
+@keyframes hero-organic-white {
+  from {
+    opacity: 0.42;
+    transform: translate3d(-5%, -2%, 0) rotate(-4deg) scale(0.9);
+  }
+  to {
+    opacity: 0.72;
+    transform: translate3d(8%, 7%, 0) rotate(8deg) scale(1.12);
+  }
+}
+
+@keyframes network-flow {
+  to {
+    stroke-dashoffset: -2;
+  }
+}
+
+@keyframes network-ring-breathe {
+  from {
+    opacity: 0.48;
+    stroke-width: 0.48;
+  }
+  to {
+    opacity: 0.92;
+    stroke-width: 0.7;
+  }
+}
+
+@keyframes network-core-breathe {
+  0%,
+  100% {
+    box-shadow:
+      0 20px 46px -24px rgba(10, 25, 49, 0.74),
+      0 0 0 0.65rem rgba(246, 250, 253, 0.42);
+  }
+  50% {
+    box-shadow:
+      0 24px 50px -22px rgba(10, 25, 49, 0.78),
+      0 0 0 0.82rem rgba(179, 207, 229, 0.24);
+  }
+}

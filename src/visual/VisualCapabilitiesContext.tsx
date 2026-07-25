@@ -27,7 +27,6 @@ interface VisualCapabilitiesContextValue extends VisualCapabilities {
   markShaderReady: () => void
   markShaderFailed: (reason?: string) => void
 }
-
 const VisualCapabilitiesContext =
   createContext<VisualCapabilitiesContextValue | null>(null)
 
@@ -173,4 +172,3 @@ export function useVisualCapabilities(): VisualCapabilitiesContextValue {
   }
   return context
 }
-

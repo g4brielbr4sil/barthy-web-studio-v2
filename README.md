@@ -107,17 +107,23 @@ outros segredos nesses campos.
 
 ## Shader e fallback
 
-O pacote utilizado é `shaders`, com os imports `Shader`, `Swirl`,
-`ChromaFlow`, `RadialGradient`, `FlutedGlass` e `FilmGrain` vindos de
-`shaders/react`.
+O pacote utilizado é `shaders`, carregado sob demanda a partir de
+`shaders/react`. A arquitetura visual escolhe explicitamente um de três modos:
+
+- `shader`: WebGPU disponível, movimento permitido, aba visível e chunk
+  carregado com sucesso
+- `css-motion`: fallback orgânico leve para WebGPU ausente, falha do shader ou
+  economia de dados, sem canvas e sem loop JavaScript
+- `static`: composição completa sem animação para movimento reduzido
 
 A página mantém somente uma instância, carregada de forma assíncrona no hero.
 O movimento autônomo possui paletas próprias para os temas claro e escuro. Em
 dispositivos com ponteiro fino, o fundo reage ao cursor pela API nativa do
 pacote. Em telas de toque, o fundo permanece autônomo e não acompanha gestos.
-O canvas é removido quando a aba fica oculta e não é montado quando WebGPU não
-está disponível ou quando `prefers-reduced-motion: reduce` está ativo. O fundo
-CSS continua visível se o pacote ou o chunk falhar.
+O canvas não é montado quando WebGPU está indisponível, quando
+`prefers-reduced-motion: reduce` está ativo ou quando o navegador sinaliza
+economia de dados. O fundo CSS e a base estática continuam visíveis se o
+pacote, o chunk ou a renderização falharem.
 
 Limitação conhecida: a API pública atual do componente `Shader` não expõe uma
 propriedade para fixar o DPR em `1.5` no desktop e `1` no mobile. A biblioteca
@@ -127,12 +133,15 @@ Não foi instalado pacote alternativo.
 
 ## Navegação e temas
 
-A barra fixa oferece links diretos para Projetos, Estúdio, Soluções, Processo
+A barra fixa oferece links diretos para Estúdio, Projetos, Soluções, Processo
 e Contato no desktop, com indicação da seção ativa e glassmorphism adaptado ao
 tema e ao estado de rolagem. A altura real do Header alimenta o alinhamento das
-âncoras. Abaixo de 1024 px, permanecem apenas a navbar superior e o menu móvel
+âncoras, inclusive em acesso direto por hash e navegação do histórico. Abaixo
+de 1024 px, permanecem apenas a navbar superior e o menu móvel
 completo, com diálogo, conteúdo externo inerte, bloqueio de rolagem, foco
 contido, fechamento por Escape e retorno de foco quando o menu é dispensado.
+Sem suporte a `backdrop-filter`, a barra usa uma superfície opaca equivalente
+em contraste e hierarquia.
 
 O tema padrão é claro. A preferência escolhida é persistida no navegador com a
 chave `barthy-v2-theme` e aplicada por um script anterior à inicialização do
@@ -184,13 +193,25 @@ Em preferência por movimento reduzido, somente o poster é exibido.
 
 ```text
 src/
-  components/    seções, controles e visuais dos projetos
+  app/           composição e provedores globais
+  components/
+    brand/       marca estável em HTML
+    header/      navegação desktop e móvel
+    hero/        camadas estática, CSS e shader
+    sections/    seções editoriais
+    solutions/   tabs, dados e mapa de arquitetura
+    projects/    cards e visuais dos cases
+    ui/          controles compartilhados
   data/          navegação, projetos e caminhos editoriais
-  hooks/         mídia, visibilidade, horário e movimento
-  lib/           contato e eventos locais
-  styles/        tokens visuais
-  App.tsx        composição da página
-  index.css      direção visual e responsividade
+  hooks/         navegação, mídia, visibilidade, horário e capacidades
+  lib/           contato, observadores e eventos locais
+  styles/
+    components/  módulos visuais por área
+    theme.css    tokens dos temas
+    motion.css   animações progressivas
+    responsive.css breakpoints por comportamento
+  visual/        detecção e estado de progressive enhancement
+  index.css      somente a ordem explícita dos módulos
 public/
   favicon.svg
 ```

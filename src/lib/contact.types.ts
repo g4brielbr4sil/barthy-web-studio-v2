@@ -19,9 +19,7 @@ export interface ContactPayload {
   mensagem: string
   source: 'barthy-web-studio-v2'
 }
-
 export interface ContactResponse {
   ok: boolean
   message?: string
 }
-

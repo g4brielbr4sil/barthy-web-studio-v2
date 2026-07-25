@@ -5,7 +5,6 @@ import { HeroContent } from './HeroContent'
 interface HeroProps {
   onNavigate: (section: SectionId) => void
 }
-
 export function Hero({ onNavigate }: HeroProps) {
   return (
     <section id="inicio" className="hero" aria-labelledby="hero-title">
@@ -14,4 +13,3 @@ export function Hero({ onNavigate }: HeroProps) {
     </section>
   )
 }
-
