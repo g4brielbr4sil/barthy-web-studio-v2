@@ -31,7 +31,7 @@ export function SolutionsSection({
           </p>
         </SectionReveal>
 
-        <div className="solutions__experience">
+        <SectionReveal className="solutions__experience">
           <SolutionTabs
             groups={solutionGroups}
             activeIndex={activeIndex}
@@ -71,7 +71,7 @@ export function SolutionsSection({
               </div>
             </div>
           </div>
-        </div>
+        </SectionReveal>
 
         <TextRollButton
           href="#contato"

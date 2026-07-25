@@ -19,12 +19,12 @@ export function AboutSection({
           </h2>
         </SectionReveal>
 
-        <div className="about__composition">
+        <SectionReveal className="about__composition">
           <div className="about__visual about__visual--small">
             <EditorialVisual size="small" />
           </div>
 
-          <SectionReveal className="about__copy">
+          <div className="about__copy">
             <p>
               Criamos páginas, sistemas e fluxos digitais para empresas e
               profissionais que precisam apresentar melhor seu trabalho,
@@ -42,12 +42,12 @@ export function AboutSection({
             >
               Conhecer o estúdio
             </TextRollButton>
-          </SectionReveal>
+          </div>
 
           <div className="about__visual about__visual--large">
             <EditorialVisual size="large" />
           </div>
-        </div>
+        </SectionReveal>
       </div>
     </section>
   )

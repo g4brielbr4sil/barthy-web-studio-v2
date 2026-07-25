@@ -69,7 +69,7 @@ export function ProcessSection({
           </h2>
         </SectionReveal>
 
-        <ol className="process__steps">
+        <SectionReveal as="ol" className="process__steps">
           {steps.map((step, index) => {
             const Icon = step.icon
             return (
@@ -87,7 +87,7 @@ export function ProcessSection({
               </li>
             )
           })}
-        </ol>
+        </SectionReveal>
 
         <TextRollButton
           href="#contato"

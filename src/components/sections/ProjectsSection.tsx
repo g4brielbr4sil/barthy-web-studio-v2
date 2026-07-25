@@ -20,11 +20,11 @@ export function ProjectsSection() {
           </p>
         </SectionReveal>
 
-        <div className="projects__grid">
+        <SectionReveal className="projects__grid">
           {projects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
-        </div>
+        </SectionReveal>
       </div>
     </section>
   )

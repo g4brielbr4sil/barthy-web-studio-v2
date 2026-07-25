@@ -40,7 +40,10 @@ export function ContactSection() {
           </p>
         </SectionReveal>
 
-        <div className="contact__channels" aria-label="Canais de contato">
+        <SectionReveal
+          className="contact__channels"
+          aria-label="Canais de contato"
+        >
           {whatsappUrl ? (
             <a
               href={whatsappUrl}
@@ -109,7 +112,7 @@ export function ContactSection() {
             </span>
             <Send size={16} aria-hidden="true" />
           </a>
-        </div>
+        </SectionReveal>
 
         {whatsappMessage && (
           <div className="contact__notice" role="status" aria-live="polite">
@@ -121,9 +124,9 @@ export function ContactSection() {
           </div>
         )}
 
-        <div id="formulario" className="contact__form">
+        <SectionReveal id="formulario" className="contact__form">
           <ContactForm />
-        </div>
+        </SectionReveal>
       </div>
     </section>
   )
