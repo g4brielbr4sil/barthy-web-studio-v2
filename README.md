@@ -9,7 +9,8 @@ componentes ou fluxo de publicação com a V1.
 - Implementação local completa
 - Repositório isolado da V1
 - Indexação desativada com `noindex, nofollow`
-- Nenhum deploy executado
+- Preview automático pode ser gerado pela integração Git existente
+- Nenhum deploy manual executado nesta rodada
 - Nenhuma configuração de DNS, Cloudflare, Hermes ou VPS alterada
 
 ## Direção da proposta
@@ -57,6 +58,7 @@ Abra o endereço local exibido pelo Vite.
 ## Validação e build
 
 ```bash
+pnpm audit:a11y
 pnpm typecheck
 pnpm build
 pnpm preview
@@ -99,8 +101,8 @@ application/json` no seguinte formato:
 ```
 
 Sem endpoint, nenhum request é disparado, os dados permanecem preenchidos e a
-interface não apresenta sucesso falso. Falhas de rede ou respostas não
-bem-sucedidas também preservam os campos.
+interface não apresenta sucesso falso. Falhas de rede, timeout, respostas não
+bem-sucedidas ou respostas sem JSON válido também preservam os campos.
 
 Variáveis `VITE_` são públicas no navegador. Não coloque tokens, chaves ou
 outros segredos nesses campos.
@@ -110,13 +112,15 @@ outros segredos nesses campos.
 O pacote utilizado é `shaders`, carregado sob demanda a partir de
 `shaders/react`. A arquitetura visual escolhe explicitamente um de três modos:
 
-- `shader`: WebGPU disponível, movimento permitido, aba visível e chunk
-  carregado com sucesso
+- `shader`: adaptador WebGPU confirmado, movimento permitido, aba visível,
+  canvas renderizável e chunk carregado com sucesso
 - `css-motion`: fallback orgânico leve para WebGPU ausente, falha do shader ou
   economia de dados, sem canvas e sem loop JavaScript
 - `static`: composição completa sem animação para movimento reduzido
 
 A página mantém somente uma instância, carregada de forma assíncrona no hero.
+O fallback CSS permanece atrás do canvas para evitar uma Hero vazia se o
+contexto gráfico for perdido depois do primeiro frame.
 O movimento autônomo possui paletas próprias para os temas claro e escuro. Em
 dispositivos com ponteiro fino, o fundo reage ao cursor pela API nativa do
 pacote. Em telas de toque, o fundo permanece autônomo e não acompanha gestos.
@@ -216,9 +220,9 @@ public/
   favicon.svg
 ```
 
-## Publicação futura no Cloudflare Pages
+## Publicação no Cloudflare Pages
 
-Nenhuma publicação foi feita por este projeto. Para uma integração Git futura:
+Para revisar ou ajustar a integração Git da V2:
 
 - Repositório: `g4brielbr4sil/barthy-web-studio-v2`
 - Branch: `main`

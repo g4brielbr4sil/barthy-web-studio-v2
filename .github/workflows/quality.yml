@@ -1,0 +1,45 @@
+name: Quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches-ignore: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Preparar pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.19
+          cache: pnpm
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Auditar texto acessível
+        run: pnpm audit:a11y
+
+      - name: Verificar TypeScript
+        run: pnpm typecheck
+
+      - name: Gerar build
+        run: pnpm build
+
+      - name: Verificar whitespace
+        run: git diff --check
+
+      - name: Auditar dependências de produção
+        continue-on-error: true
+        run: pnpm audit --prod
