@@ -132,7 +132,8 @@ export function MobileMenu({
       <button
         className="mobile-menu__backdrop"
         type="button"
-        aria-label="Fechar menu"
+        aria-hidden="true"
+        tabIndex={-1}
         onClick={closeAndRestoreFocus}
       />
       <div

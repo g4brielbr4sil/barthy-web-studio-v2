@@ -11,7 +11,7 @@ export function ThemeToggle({ showLabel = false }: { showLabel?: boolean }) {
     <button
       className={`theme-toggle ${showLabel ? 'theme-toggle--labeled' : ''}`}
       type="button"
-      aria-label={`Ativar tema ${nextThemeLabel}. Tema atual: ${currentThemeLabel}.`}
+      aria-label={`Ativar tema ${nextThemeLabel}`}
       aria-pressed={isDark}
       title={`Ativar tema ${nextThemeLabel}`}
       onClick={toggleTheme}

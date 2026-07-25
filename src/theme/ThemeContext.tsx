@@ -45,19 +45,20 @@ function applyTheme(theme: Theme) {
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
 
-  const setAndPersistTheme = useCallback((nextTheme: Theme) => {
-    applyTheme(nextTheme)
+  const toggleTheme = useCallback(() => {
+    setTheme((currentTheme) =>
+      currentTheme === 'light' ? 'dark' : 'light',
+    )
+  }, [])
+
+  useEffect(() => {
+    applyTheme(theme)
     try {
-      window.localStorage.setItem(THEME_KEY, nextTheme)
+      window.localStorage.setItem(THEME_KEY, theme)
     } catch {
       // A preferência continua aplicada na sessão quando o storage está bloqueado.
     }
-    setTheme(nextTheme)
-  }, [])
-
-  const toggleTheme = useCallback(() => {
-    setAndPersistTheme(theme === 'light' ? 'dark' : 'light')
-  }, [setAndPersistTheme, theme])
+  }, [theme])
 
   useEffect(() => {
     const onStorage = (event: StorageEvent) => {

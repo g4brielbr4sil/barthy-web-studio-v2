@@ -18,10 +18,9 @@
   height: 2rem;
   flex: 0 0 auto;
   place-items: center;
-  border-radius: 0.65rem;
-  border: 1px solid var(--terra-border);
+  border: 0;
+  border-radius: 0.55rem;
   background: var(--terra-accent-solid);
-  box-shadow: 0 10px 24px -16px var(--deep-navy);
   color: #fff;
 }
 
@@ -80,8 +79,14 @@
 
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
-  border-color: var(--line-strong);
-  box-shadow: 0 10px 24px -18px rgba(10, 25, 49, 0.62);
+  border-color: var(--terra-border);
+  background: var(--terra-surface);
+  box-shadow: 0 10px 24px -18px var(--deep-navy-74);
+  color: var(--terra-accent-text);
+}
+
+.theme-toggle:active {
+  background: var(--terra-glow-soft);
 }
 
 .theme-toggle--labeled {

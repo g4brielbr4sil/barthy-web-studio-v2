@@ -145,6 +145,15 @@
   line-height: 1.7;
 }
 
+.form-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .form-grid {
   display: grid;
   grid-column: 2;

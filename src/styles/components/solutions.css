@@ -375,6 +375,10 @@
   transform: translateX(-50%);
 }
 
+.solution-network__node-label::before {
+  content: attr(data-label);
+}
+
 .solution-network__node[data-node='pagina'] .solution-network__node-label,
 .solution-network__node[data-node='crm'] .solution-network__node-label,
 .solution-network__node[data-node='entrada'] .solution-network__node-label {

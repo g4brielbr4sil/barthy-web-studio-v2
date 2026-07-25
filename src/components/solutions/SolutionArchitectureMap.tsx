@@ -90,9 +90,10 @@ export function SolutionArchitectureMap({
                 <span className="solution-network__node-icon">
                   <Icon size={17} />
                 </span>
-                <span className="solution-network__node-label">
-                  {node.label}
-                </span>
+                <span
+                  className="solution-network__node-label"
+                  data-label={node.label}
+                />
               </span>
             )
           })}
