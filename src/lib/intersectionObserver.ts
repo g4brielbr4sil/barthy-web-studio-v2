@@ -5,12 +5,20 @@ interface ObserverRegistry {
   observer: IntersectionObserver
 }
 
-const observerRegistries = new Map<string, ObserverRegistry>()
+type ObserverRoot = Element | Document | null
+
+const viewportRegistries = new Map<string, ObserverRegistry>()
+const rootedRegistries = new WeakMap<
+  Exclude<ObserverRoot, null>,
+  Map<string, ObserverRegistry>
+>()
 
 function normalizeThreshold(
   threshold: IntersectionObserverInit['threshold'],
 ): number[] {
-  if (Array.isArray(threshold)) return [...threshold]
+  if (Array.isArray(threshold)) {
+    return [...threshold].sort((first, second) => first - second)
+  }
   return [threshold ?? 0]
 }
 
@@ -21,11 +29,23 @@ function getObserverKey(options: IntersectionObserverInit): string {
   })
 }
 
+function getRegistryStore(root: ObserverRoot): Map<string, ObserverRegistry> {
+  if (!root) return viewportRegistries
+
+  const existing = rootedRegistries.get(root)
+  if (existing) return existing
+
+  const registries = new Map<string, ObserverRegistry>()
+  rootedRegistries.set(root, registries)
+  return registries
+}
+
 function getObserverRegistry(
   options: IntersectionObserverInit,
 ): ObserverRegistry {
+  const registries = getRegistryStore(options.root ?? null)
   const key = getObserverKey(options)
-  const existing = observerRegistries.get(key)
+  const existing = registries.get(key)
   if (existing) return existing
 
   const handlers = new Map<Element, Set<IntersectionHandler>>()
@@ -38,7 +58,7 @@ function getObserverRegistry(
     options,
   )
   const registry = { handlers, observer }
-  observerRegistries.set(key, registry)
+  registries.set(key, registry)
   return registry
 }
 
@@ -52,6 +72,8 @@ export function observeIntersection(
   handler: IntersectionHandler,
   options: IntersectionObserverInit = defaultOptions,
 ) {
+  const root = options.root ?? null
+  const registries = getRegistryStore(root)
   const key = getObserverKey(options)
   const registry = getObserverRegistry(options)
   const elementHandlers =
@@ -71,7 +93,8 @@ export function observeIntersection(
 
     if (!registry.handlers.size) {
       registry.observer.disconnect()
-      observerRegistries.delete(key)
+      registries.delete(key)
+      if (root && !registries.size) rootedRegistries.delete(root)
     }
   }
 }

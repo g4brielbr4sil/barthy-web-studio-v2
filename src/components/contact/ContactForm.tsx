@@ -11,15 +11,13 @@ import {
   CONTACT_EMAIL,
   copyContactEmail,
   getContactEndpoint,
+  type ContactFieldErrors,
+  type ContactFieldName,
+  type ContactPayload,
 } from '../../lib/contact'
-import type {
-  ContactFieldErrors,
-  ContactFieldName,
-  ContactPayload,
-} from '../../lib/contact.types'
-import { trackEvent } from '../../lib/tracking'
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error' | 'unconfigured'
+type ContactFormValues = Omit<ContactPayload, 'source'>
 
 const serviceGroups = [
   {
@@ -40,19 +38,37 @@ const serviceGroups = [
   },
 ]
 
-function validateForm(formData: FormData): ContactFieldErrors {
-  const errors: ContactFieldErrors = {}
-  const nome = String(formData.get('nome') ?? '').trim()
-  const whatsapp = String(formData.get('whatsapp') ?? '').replace(/\D/g, '')
-  const email = String(formData.get('email') ?? '').trim()
-  const empresaProjeto = String(formData.get('empresaProjeto') ?? '').trim()
-  const tipoSolucao = String(formData.get('tipoSolucao') ?? '').trim()
-  const mensagem = String(formData.get('mensagem') ?? '').trim()
+const contactFieldOrder: readonly ContactFieldName[] = [
+  'nome',
+  'whatsapp',
+  'email',
+  'empresaProjeto',
+  'tipoSolucao',
+  'mensagem',
+]
 
-  if (nome.length < 2) {
+function readFormValues(formData: FormData): ContactFormValues {
+  const read = (field: ContactFieldName) =>
+    String(formData.get(field) ?? '').trim()
+
+  return {
+    nome: read('nome'),
+    whatsapp: read('whatsapp'),
+    email: read('email'),
+    empresaProjeto: read('empresaProjeto'),
+    tipoSolucao: read('tipoSolucao'),
+    mensagem: read('mensagem'),
+  }
+}
+
+function validateForm(values: ContactFormValues): ContactFieldErrors {
+  const errors: ContactFieldErrors = {}
+
+  if (values.nome.length < 2) {
     errors.nome = 'Informe seu nome com pelo menos 2 caracteres.'
   }
 
+  const whatsapp = values.whatsapp.replace(/\D/g, '')
   const phoneWithoutCountry =
     whatsapp.length === 13 && whatsapp.startsWith('55')
       ? whatsapp.slice(2)
@@ -62,19 +78,22 @@ function validateForm(formData: FormData): ContactFieldErrors {
       'Informe um WhatsApp brasileiro com DDD, como (61) 99999-9999.'
   }
 
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (
+    values.email &&
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)
+  ) {
     errors.email = 'Informe um e-mail válido ou deixe o campo vazio.'
   }
 
-  if (empresaProjeto.length < 2) {
+  if (values.empresaProjeto.length < 2) {
     errors.empresaProjeto = 'Informe a empresa ou o nome do projeto.'
   }
 
-  if (!tipoSolucao) {
+  if (!values.tipoSolucao) {
     errors.tipoSolucao = 'Selecione o tipo de solução.'
   }
 
-  if (mensagem.length < 20) {
+  if (values.mensagem.length < 20) {
     errors.mensagem =
       'Conte um pouco mais sobre o contexto, usando pelo menos 20 caracteres.'
   }
@@ -117,9 +136,9 @@ export function ContactForm() {
   }
 
   const focusFirstError = (fieldErrors: ContactFieldErrors) => {
-    const firstField = Object.keys(fieldErrors)[0] as
-      | ContactFieldName
-      | undefined
+    const firstField = contactFieldOrder.find(
+      (field) => fieldErrors[field],
+    )
     if (!firstField) return
     formRef.current
       ?.querySelector<HTMLElement>(`[name="${firstField}"]`)
@@ -132,7 +151,8 @@ export function ContactForm() {
 
     const form = event.currentTarget
     const formData = new FormData(form)
-    const fieldErrors = validateForm(formData)
+    const values = readFormValues(formData)
+    const fieldErrors = validateForm(values)
 
     if (Object.keys(fieldErrors).length > 0) {
       setErrors(fieldErrors)
@@ -153,21 +173,12 @@ export function ContactForm() {
     }
 
     const payload: ContactPayload = {
-      nome: String(formData.get('nome') ?? '').trim(),
-      whatsapp: String(formData.get('whatsapp') ?? '').trim(),
-      email: String(formData.get('email') ?? '').trim(),
-      empresaProjeto: String(formData.get('empresaProjeto') ?? '').trim(),
-      tipoSolucao: String(formData.get('tipoSolucao') ?? '').trim(),
-      mensagem: String(formData.get('mensagem') ?? '').trim(),
+      ...values,
       source: 'barthy-web-studio-v2',
     }
 
     setStatus('loading')
     setStatusMessage('')
-    trackEvent('cta_click', {
-      source: 'contact-form',
-      destination: 'configured-endpoint',
-    })
 
     try {
       const response = await fetch(endpoint, {
@@ -366,7 +377,6 @@ export function ContactForm() {
         type="submit"
         disabled={status === 'loading'}
         aria-busy={status === 'loading'}
-        data-cta-source="contact-form"
       >
         <span>
           {status === 'loading' ? 'Enviando' : 'Enviar briefing inicial'}

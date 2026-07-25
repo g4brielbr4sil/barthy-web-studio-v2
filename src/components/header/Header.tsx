@@ -72,7 +72,6 @@ export function Header({
               </div>
               <TextRollButton
                 href="#contato"
-                source="header"
                 className="header-cta"
                 onClick={(event) => handleNavigation(event, 'contato')}
               >

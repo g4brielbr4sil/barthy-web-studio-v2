@@ -1,5 +1,3 @@
-/* Contact */
-
 .contact {
   background: var(--page-background);
 }
@@ -9,10 +7,6 @@
   grid-template-columns: minmax(0, 1.3fr) minmax(16rem, 0.55fr);
   gap: 1.5rem;
   align-items: end;
-}
-
-.contact__heading .eyebrow {
-  grid-column: 1 / -1;
 }
 
 .contact__heading h2 {
@@ -127,7 +121,7 @@
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--form-background);
-  box-shadow: 0 34px 90px -58px rgba(10, 25, 49, 0.82);
+  box-shadow: 0 34px 90px -58px var(--deep-navy-82);
   color: var(--ice-white);
 }
 
@@ -185,10 +179,10 @@
 .form-field textarea {
   width: 100%;
   min-height: 48px;
-  border: 1px solid rgba(179, 207, 229, 0.2);
+  border: 1px solid var(--soft-ice-20);
   border-radius: 0.8rem;
   outline: none;
-  background: rgba(246, 250, 253, 0.07);
+  background: var(--ice-white-07);
   color: var(--ice-white);
   transition:
     border-color 180ms ease,
@@ -208,7 +202,7 @@
 .form-select select {
   appearance: none;
   padding-right: 3rem;
-  border-color: rgba(179, 207, 229, 0.3);
+  border-color: var(--soft-ice-30);
   background:
     linear-gradient(
       90deg,
@@ -276,7 +270,7 @@
 .form-field textarea:focus {
   border-color: var(--soft-ice);
   background: rgba(246, 250, 253, 0.11);
-  box-shadow: 0 0 0 3px rgba(179, 207, 229, 0.13);
+  box-shadow: 0 0 0 3px var(--soft-ice-13);
 }
 
 .form-field [aria-invalid='true'] {
@@ -304,9 +298,9 @@
   gap: 0.65rem;
   align-items: center;
   padding: 0.8rem;
-  border: 1px solid rgba(179, 207, 229, 0.2);
+  border: 1px solid var(--soft-ice-20);
   border-radius: 0.9rem;
-  background: rgba(246, 250, 253, 0.07);
+  background: var(--ice-white-07);
   color: var(--soft-ice);
   font-size: 0.85rem;
   line-height: 1.45;

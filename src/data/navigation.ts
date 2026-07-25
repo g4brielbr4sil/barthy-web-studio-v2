@@ -6,7 +6,7 @@ export type SectionId =
   | 'processo'
   | 'contato'
 
-export interface NavigationItem {
+interface NavigationItem {
   id: Exclude<SectionId, 'inicio'>
   label: string
   href: string
@@ -20,11 +20,15 @@ export const navigation: NavigationItem[] = [
   { id: 'contato', label: 'Contato', href: '#contato' },
 ]
 
-export const observedSectionIds: SectionId[] = [
+export const observedSectionIds = [
   'inicio',
   'estudio',
   'projetos',
   'solucoes',
   'processo',
   'contato',
-]
+] as const satisfies readonly SectionId[]
+
+export function isSectionId(value: string): value is SectionId {
+  return observedSectionIds.some((id) => id === value)
+}

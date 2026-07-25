@@ -5,7 +5,6 @@ import {
   useEffect,
   useLayoutEffect,
   useMemo,
-  useRef,
   useState,
   type ReactNode,
 } from 'react'
@@ -50,7 +49,6 @@ export function VisualCapabilitiesProvider({
   const [backdrop] = useState(detectBackdropFilter)
   const [saveData, setSaveData] = useState(detectSaveData)
   const [shaderStatus, setShaderStatus] = useState<ShaderStatus>('idle')
-  const reportedFailureRef = useRef(false)
 
   const canAttemptShader =
     !reducedMotion && saveData === 'inactive' && webGpu === 'available'
@@ -70,16 +68,8 @@ export function VisualCapabilitiesProvider({
     setShaderStatus('ready')
   }, [])
 
-  const markShaderFailed = useCallback((reason?: string) => {
+  const markShaderFailed = useCallback((_reason?: string) => {
     setShaderStatus('failed')
-
-    if (import.meta.env.DEV && !reportedFailureRef.current) {
-      reportedFailureRef.current = true
-      console.info(
-        '[Barthy Visual] Shader indisponível. Usando fallback CSS.',
-        reason ?? 'Falha não detalhada.',
-      )
-    }
   }, [])
 
   useEffect(() => {

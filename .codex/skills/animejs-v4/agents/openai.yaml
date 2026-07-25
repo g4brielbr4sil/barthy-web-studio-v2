@@ -1,0 +1,4 @@
+interface:
+  display_name: "Anime.js v4"
+  short_description: "Safe, accessible Anime.js v4 motion"
+  default_prompt: "Use $animejs-v4 to plan and implement accessible, performant animation in this project."

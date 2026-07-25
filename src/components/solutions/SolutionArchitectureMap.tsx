@@ -6,15 +6,24 @@ export function SolutionArchitectureMap({
 }: {
   group: SolutionGroup
 }) {
-  const nodeSummary = group.nodes.map((node) => node.label).join(', ')
+  const captionId = `solution-network-caption-${group.id}`
+  const descriptionId = `solution-network-description-${group.id}`
+  const legendTitleId = `solution-network-legend-${group.id}`
 
   return (
     <figure
       className="solution-network"
       data-density={group.id}
-      aria-label={`Núcleo do negócio conectado à camada ${group.title}. ${group.architectureSummary} Elementos: ${nodeSummary}.`}
+      aria-labelledby={captionId}
+      aria-describedby={descriptionId}
     >
-      <figcaption>Arquitetura do negócio</figcaption>
+      <figcaption id={captionId}>
+        Arquitetura do negócio · {group.title}
+      </figcaption>
+      <p id={descriptionId} className="solution-network__description">
+        {group.architectureSummary} Os elementos desta camada estão conectados
+        ao núcleo do negócio.
+      </p>
 
       <div className="solution-network__map">
         <svg
@@ -75,6 +84,7 @@ export function SolutionArchitectureMap({
               <span
                 key={node.id}
                 className="solution-network__node"
+                data-node={node.id}
                 style={{ left: `${node.x}%`, top: `${node.y}%` }}
               >
                 <span className="solution-network__node-icon">
@@ -87,6 +97,25 @@ export function SolutionArchitectureMap({
             )
           })}
         </div>
+      </div>
+
+      <div
+        className="solution-network__mobile-legend"
+        aria-labelledby={legendTitleId}
+      >
+        <p id={legendTitleId}>Elementos desta camada</p>
+        <ul>
+          {group.nodes.map((node) => {
+            const Icon = node.icon
+
+            return (
+              <li key={node.id}>
+                <Icon size={15} aria-hidden="true" />
+                <span>{node.label}</span>
+              </li>
+            )
+          })}
+        </ul>
       </div>
     </figure>
   )

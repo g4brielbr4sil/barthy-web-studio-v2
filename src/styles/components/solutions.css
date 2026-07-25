@@ -1,5 +1,3 @@
-/* Solutions */
-
 .solutions {
   background: var(--paper);
 }
@@ -181,9 +179,9 @@
   top: 1rem;
   left: 1rem;
   padding: 0.38rem 0.55rem;
-  border: 1px solid rgba(26, 61, 99, 0.12);
+  border: 1px solid var(--royal-blue-12);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--white-72);
   color: var(--royal-blue);
   font-size: 0.64rem;
   font-weight: 740;
@@ -191,6 +189,58 @@
   text-transform: uppercase;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+.solution-network__description {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.solution-network__mobile-legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.solution-network__mobile-legend > p {
+  color: var(--foreground);
+  font-size: 0.72rem;
+  font-weight: 740;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.solution-network__mobile-legend ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.solution-network__mobile-legend li {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.62rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--surface-translucent);
+  color: var(--foreground);
+  font-size: 0.72rem;
+  font-weight: 620;
+  line-height: 1.2;
+}
+
+.solution-network__mobile-legend li svg {
+  flex: 0 0 auto;
+  color: var(--royal-blue);
 }
 
 .solution-network__connections {
@@ -246,7 +296,7 @@
   border-radius: 50%;
   background: var(--deep-navy);
   box-shadow:
-    0 20px 46px -24px rgba(10, 25, 49, 0.74),
+    0 20px 46px -24px var(--deep-navy-74),
     0 0 0 0.65rem rgba(246, 250, 253, 0.42);
   color: var(--soft-ice);
   transform: translate(-50%, -50%);
@@ -290,10 +340,9 @@
 .solution-network__node {
   --node-size: 2.9rem;
   position: absolute;
-  display: grid;
+  display: block;
   width: var(--node-size);
-  justify-items: center;
-  gap: 0.35rem;
+  height: var(--node-size);
   color: var(--foreground);
   opacity: 1;
   transform: translate(-50%, -50%);
@@ -312,6 +361,9 @@
 }
 
 .solution-network__node-label {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 50%;
   width: max-content;
   max-width: 6rem;
   color: var(--foreground);
@@ -320,6 +372,34 @@
   line-height: 1.15;
   text-align: center;
   text-wrap: balance;
+  transform: translateX(-50%);
+}
+
+.solution-network__node[data-node='pagina'] .solution-network__node-label,
+.solution-network__node[data-node='crm'] .solution-network__node-label,
+.solution-network__node[data-node='entrada'] .solution-network__node-label {
+  top: auto;
+  bottom: calc(100% + 0.35rem);
+}
+
+.solution-network__node[data-node='dashboard'] .solution-network__node-label,
+.solution-network__node[data-node='atendimento'] .solution-network__node-label,
+.solution-network__node[data-node='proxima-acao']
+  .solution-network__node-label {
+  top: 50%;
+  right: calc(100% + 0.45rem);
+  left: auto;
+  text-align: right;
+  transform: translateY(-50%);
+}
+
+.solution-network__node[data-node='portal'] .solution-network__node-label,
+.solution-network__node[data-node='automacao'] .solution-network__node-label,
+.solution-network__node[data-node='integracao'] .solution-network__node-label {
+  top: 50%;
+  left: calc(100% + 0.45rem);
+  text-align: left;
+  transform: translateY(-50%);
 }
 
 .solution-network[data-density='sistemas']
@@ -331,8 +411,8 @@
 
 .solution-network[data-density='operacao'] .solution-network__core {
   box-shadow:
-    0 20px 46px -24px rgba(10, 25, 49, 0.74),
-    0 0 0 0.65rem rgba(205, 118, 93, 0.12),
+    0 20px 46px -24px var(--deep-navy-74),
+    0 0 0 0.65rem var(--terra-glow-soft),
     0 0 0 1.3rem rgba(179, 207, 229, 0.15);
 }
 
@@ -387,12 +467,6 @@
   border-radius: 999px;
   color: var(--royal-blue);
   font-size: 0.68rem;
-}
-
-.solution-panel__nodes-list li {
-  border-color: var(--terra-border);
-  background: var(--terra-surface);
-  color: var(--foreground);
 }
 
 .solution-panel__services {

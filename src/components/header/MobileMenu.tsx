@@ -181,7 +181,6 @@ export function MobileMenu({
 
         <TextRollButton
           href="#contato"
-          source="mobile-menu"
           variant="terra"
           className="mobile-menu__cta"
           onClick={(event) => closeForNavigation(event, 'contato')}
