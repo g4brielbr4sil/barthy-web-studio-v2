@@ -33,7 +33,7 @@ executada nesta rodada.
 
 - [ ] Configurar integração Git com `main` somente após aprovação.
 - [ ] Usar `pnpm build` e diretório `dist`.
-- [ ] Fixar Node.js 20.19 ou superior.
+- [ ] Fixar Node.js 22.13 ou superior.
 - [ ] Cadastrar apenas variáveis públicas confirmadas.
 - [ ] Conferir os headers publicados a partir de `public/_headers`.
 - [ ] Confirmar o fallback de SPA fornecido pelo Pages.

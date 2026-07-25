@@ -43,7 +43,7 @@ formulário, modal, analytics ou scroll artificial.
 
 ## Requisitos
 
-- Node.js 20.19 ou superior
+- Node.js 22.13 ou superior
 - pnpm 11
 
 ## Desenvolvimento
@@ -228,7 +228,7 @@ Para revisar ou ajustar a integração Git da V2:
 - Branch: `main`
 - Comando de build: `pnpm build`
 - Diretório de saída: `dist`
-- Versão do Node.js: 20.19 ou superior
+- Versão do Node.js: 22.13 ou superior
 
 Configure as variáveis públicas somente depois que URLs reais forem aprovadas.
 Mantenha o projeto separado da produção e do domínio da V1.
