@@ -12,14 +12,18 @@ export function AboutSection({
   return (
     <section id="estudio" className="about section-shell" aria-labelledby="about-title">
       <div className="stage">
-        <SectionReveal className="section-heading" data-section-anchor>
+        <SectionReveal
+          className="section-heading"
+          variant="heading"
+          data-section-anchor
+        >
           <SectionBadge number="01">Conheça a Barthy</SectionBadge>
           <h2 id="about-title">
             Estratégia, design e tecnologia trabalhando como uma única estrutura.
           </h2>
         </SectionReveal>
 
-        <SectionReveal className="about__composition">
+        <SectionReveal className="about__composition" variant="content">
           <div className="about__visual about__visual--small">
             <EditorialVisual size="small" />
           </div>

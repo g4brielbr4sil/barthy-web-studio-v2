@@ -1,5 +1,5 @@
 import { Check, Copy, Mail, MessageCircle, Send } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   CONTACT_EMAIL,
   copyContactEmail,
@@ -14,11 +14,25 @@ export function ContactSection() {
   const whatsappUrl = getWhatsappUrl()
   const [whatsappMessage, setWhatsappMessage] = useState('')
   const [copied, setCopied] = useState(false)
+  const copyTimeoutRef = useRef(0)
+
+  useEffect(
+    () => () => {
+      window.clearTimeout(copyTimeoutRef.current)
+    },
+    [],
+  )
 
   const copyEmail = async () => {
     const success = await copyContactEmail()
     setCopied(success)
-    if (success) window.setTimeout(() => setCopied(false), 2200)
+    window.clearTimeout(copyTimeoutRef.current)
+    if (success) {
+      copyTimeoutRef.current = window.setTimeout(
+        () => setCopied(false),
+        2200,
+      )
+    }
   }
 
   return (
@@ -28,7 +42,11 @@ export function ContactSection() {
       aria-labelledby="contact-title"
     >
       <div className="stage">
-        <SectionReveal className="contact__heading" data-section-anchor>
+        <SectionReveal
+          className="contact__heading"
+          variant="heading"
+          data-section-anchor
+        >
           <SectionBadge number="05">Contato</SectionBadge>
           <h2 id="contact-title">
             Seu próximo projeto pode começar com uma conversa clara.
@@ -41,6 +59,7 @@ export function ContactSection() {
 
         <SectionReveal
           className="contact__channels"
+          variant="card"
           aria-label="Canais de contato"
         >
           {whatsappUrl ? (
@@ -96,13 +115,21 @@ export function ContactSection() {
           <div className="contact__notice" role="status" aria-live="polite">
             <span>{whatsappMessage}</span>
             <button type="button" onClick={copyEmail}>
-              {copied ? <Check size={15} /> : <Copy size={15} />}
+              {copied ? (
+                <Check size={15} aria-hidden="true" />
+              ) : (
+                <Copy size={15} aria-hidden="true" />
+              )}
               {copied ? 'E-mail copiado' : 'Copiar e-mail'}
             </button>
           </div>
         )}
 
-        <SectionReveal id="formulario" className="contact__form">
+        <SectionReveal
+          id="formulario"
+          className="contact__form"
+          variant="form"
+        >
           <ContactForm />
         </SectionReveal>
       </div>

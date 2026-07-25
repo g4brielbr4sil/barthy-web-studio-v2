@@ -6,6 +6,7 @@ import {
 } from '../../data/navigation'
 import { CONTACT_EMAIL, getEmailHref } from '../../lib/contact'
 import { BrandLockup } from '../brand/BrandLockup'
+import { SectionReveal } from '../ui/SectionReveal'
 
 export function Footer({
   onNavigate,
@@ -22,7 +23,10 @@ export function Footer({
 
   return (
     <footer className="footer">
-      <div className="stage footer__grid">
+      <SectionReveal
+        className="stage footer__grid"
+        variant="footer"
+      >
         <div className="footer__brand">
           <BrandLockup
             inverse
@@ -58,9 +62,12 @@ export function Footer({
             Brasília, DF
           </p>
         </div>
-      </div>
+      </SectionReveal>
 
-      <div className="stage footer__bottom">
+      <SectionReveal
+        className="stage footer__bottom"
+        variant="footer"
+      >
         <p>© {new Date().getFullYear()} Barthy Web Studio</p>
         <p>Versão editorial experimental</p>
         <a
@@ -71,7 +78,7 @@ export function Footer({
           Voltar ao início
           <ArrowUp size={16} aria-hidden="true" />
         </a>
-      </div>
+      </SectionReveal>
     </footer>
   )
 }

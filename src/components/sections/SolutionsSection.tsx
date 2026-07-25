@@ -23,7 +23,11 @@ export function SolutionsSection({
       aria-labelledby="solutions-title"
     >
       <div className="stage">
-        <SectionReveal className="solutions__heading" data-section-anchor>
+        <SectionReveal
+          className="solutions__heading"
+          variant="heading"
+          data-section-anchor
+        >
           <SectionBadge number="03">Capacidade conectada</SectionBadge>
           <h2 id="solutions-title">O que construímos</h2>
           <p>
@@ -31,7 +35,7 @@ export function SolutionsSection({
           </p>
         </SectionReveal>
 
-        <SectionReveal className="solutions__experience">
+        <SectionReveal className="solutions__experience" variant="content">
           <SolutionTabs
             groups={solutionGroups}
             activeIndex={activeIndex}
@@ -68,17 +72,19 @@ export function SolutionsSection({
           </div>
         </SectionReveal>
 
-        <TextRollButton
-          href="#contato"
-          variant="outline"
-          className="solutions__cta"
-          onClick={(event) => {
-            event.preventDefault()
-            onNavigate('contato')
-          }}
-        >
-          Estruturar uma solução
-        </TextRollButton>
+        <SectionReveal variant="content">
+          <TextRollButton
+            href="#contato"
+            variant="outline"
+            className="solutions__cta"
+            onClick={(event) => {
+              event.preventDefault()
+              onNavigate('contato')
+            }}
+          >
+            Estruturar uma solução
+          </TextRollButton>
+        </SectionReveal>
       </div>
     </section>
   )

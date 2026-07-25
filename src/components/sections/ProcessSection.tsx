@@ -62,14 +62,18 @@ export function ProcessSection({
       aria-labelledby="process-title"
     >
       <div className="stage">
-        <SectionReveal className="process__heading" data-section-anchor>
+        <SectionReveal
+          className="process__heading"
+          variant="heading"
+          data-section-anchor
+        >
           <SectionBadge number="04">Como trabalhamos</SectionBadge>
           <h2 id="process-title">
             Um processo claro do primeiro contato à evolução do projeto.
           </h2>
         </SectionReveal>
 
-        <SectionReveal as="ol" className="process__steps">
+        <SectionReveal as="ol" className="process__steps" variant="list">
           {steps.map((step, index) => {
             const Icon = step.icon
             return (
@@ -89,17 +93,19 @@ export function ProcessSection({
           })}
         </SectionReveal>
 
-        <TextRollButton
-          href="#contato"
-          variant="terra"
-          className="process__cta"
-          onClick={(event) => {
-            event.preventDefault()
-            onNavigate('contato')
-          }}
-        >
-          Iniciar pelo diagnóstico
-        </TextRollButton>
+        <SectionReveal variant="content">
+          <TextRollButton
+            href="#contato"
+            variant="terra"
+            className="process__cta"
+            onClick={(event) => {
+              event.preventDefault()
+              onNavigate('contato')
+            }}
+          >
+            Iniciar pelo diagnóstico
+          </TextRollButton>
+        </SectionReveal>
       </div>
     </section>
   )
