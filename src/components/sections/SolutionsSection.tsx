@@ -75,7 +75,6 @@ export function SolutionsSection({
 
         <TextRollButton
           href="#contato"
-          source="solutions"
           variant="outline"
           className="solutions__cta"
           onClick={(event) => {

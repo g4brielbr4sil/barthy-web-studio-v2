@@ -1,7 +1,7 @@
 import { useEffect, useRef, type ReactNode } from 'react'
 import type { ProjectVisualKind } from '../../data/projects'
 import { useInView } from '../../hooks/useInView'
-import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { useVisualCapabilities } from '../../hooks/useVisualCapabilities'
 import { HermesVisual } from './HermesVisual'
 import { LevensVisual } from './LevensVisual'
 import { PnqcVisual } from './PnqcVisual'
@@ -30,7 +30,7 @@ export function ProjectMedia({
     rootMargin: '120px',
     threshold: 0.18,
   })
-  const reducedMotion = useReducedMotion()
+  const { reducedMotion } = useVisualCapabilities()
 
   useEffect(() => {
     const video = videoRef.current

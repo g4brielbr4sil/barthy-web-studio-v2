@@ -1,7 +1,6 @@
 import { Blocks, MapPin } from 'lucide-react'
 import type { MouseEvent } from 'react'
 import type { SectionId } from '../../data/navigation'
-import { trackEvent } from '../../lib/tracking'
 import { TextRollButton } from '../ui/TextRollButton'
 
 interface HeroContentProps {
@@ -36,7 +35,6 @@ export function HeroContent({ onNavigate }: HeroContentProps) {
       <div className="hero__bottom">
         <TextRollButton
           href="#contato"
-          source="hero-primary"
           variant="terra"
           className="hero__cta"
           onClick={(event) => navigate(event, 'contato')}
@@ -47,14 +45,7 @@ export function HeroContent({ onNavigate }: HeroContentProps) {
         <a
           className="hero-badge"
           href="#solucoes"
-          data-cta-source="hero-badge"
-          onClick={(event) => {
-            trackEvent('cta_click', {
-              source: 'hero-badge',
-              destination: '#solucoes',
-            })
-            navigate(event, 'solucoes')
-          }}
+          onClick={(event) => navigate(event, 'solucoes')}
         >
           <span className="hero-badge__icon" aria-hidden="true">
             <Blocks size={18} />

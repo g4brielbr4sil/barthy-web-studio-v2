@@ -76,16 +76,3 @@ export const projects: Project[] = [
     layout: 'split',
   },
 ]
-
-export const editorialImages = {
-  small: {
-    src: '/images/barthy-studio-small.webp',
-    alt: 'Detalhe editorial do processo criativo da Barthy Web Studio',
-    enabled: false,
-  },
-  large: {
-    src: '/images/barthy-studio-large.webp',
-    alt: 'Composição editorial do estúdio e das experiências digitais da Barthy',
-    enabled: false,
-  },
-} as const

@@ -1,7 +1,6 @@
 import { ArrowUpRight, Minus, Plus } from 'lucide-react'
 import { useId, useState } from 'react'
 import type { Project } from '../../data/projects'
-import { trackEvent } from '../../lib/tracking'
 import { ProjectMedia } from './ProjectMedia'
 
 interface ProjectCardProps {
@@ -39,14 +38,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           type="button"
           aria-expanded={expanded}
           aria-controls={detailsId}
-          data-cta-source={`project-${project.id}`}
-          onClick={() => {
-            setExpanded((value) => !value)
-            trackEvent('cta_click', {
-              source: `project-${project.id}`,
-              destination: `#${project.id}-details`,
-            })
-          }}
+          onClick={() => setExpanded((value) => !value)}
         >
           <span>{expanded ? 'Fechar detalhes' : 'Ver detalhes'}</span>
           <span className="project-card__action-icon" aria-hidden="true">

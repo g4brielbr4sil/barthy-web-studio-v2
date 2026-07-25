@@ -1,26 +1,21 @@
 import { LayoutTemplate, Sparkles } from 'lucide-react'
-import { editorialImages } from '../../data/projects'
 
 interface EditorialVisualProps {
   size: 'small' | 'large'
 }
 
+const visualDescriptions: Record<EditorialVisualProps['size'], string> = {
+  small: 'Detalhe editorial do processo criativo da Barthy Web Studio',
+  large:
+    'Composição editorial do estúdio e das experiências digitais da Barthy',
+}
+
 export function EditorialVisual({ size }: EditorialVisualProps) {
-  const image = editorialImages[size]
-
-  if (image.enabled) {
-    return (
-      <figure className={`editorial-visual editorial-visual--${size}`}>
-        <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
-      </figure>
-    )
-  }
-
   return (
     <figure
       className={`editorial-visual editorial-visual--${size} editorial-visual--fallback`}
       role="img"
-      aria-label={`${image.alt}. Imagem editorial em produção.`}
+      aria-label={`${visualDescriptions[size]}. Imagem editorial em produção.`}
     >
       <div className="editorial-visual__orb" aria-hidden="true" />
       <div className="editorial-visual__window" aria-hidden="true">

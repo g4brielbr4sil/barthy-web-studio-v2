@@ -91,7 +91,6 @@ export function ProcessSection({
 
         <TextRollButton
           href="#contato"
-          source="process"
           variant="terra"
           className="process__cta"
           onClick={(event) => {

@@ -5,7 +5,6 @@ import {
   type SectionId,
 } from '../../data/navigation'
 import { CONTACT_EMAIL, getEmailHref } from '../../lib/contact'
-import { trackEvent } from '../../lib/tracking'
 import { BrandLockup } from '../brand/BrandLockup'
 
 export function Footer({
@@ -50,16 +49,7 @@ export function Footer({
 
         <div className="footer__contact">
           <span>Contato</span>
-          <a
-            href={getEmailHref()}
-            data-cta-source="footer"
-            onClick={() =>
-              trackEvent('cta_click', {
-                source: 'footer',
-                destination: 'email',
-              })
-            }
-          >
+          <a href={getEmailHref()}>
             <Mail size={16} aria-hidden="true" />
             {CONTACT_EMAIL}
           </a>

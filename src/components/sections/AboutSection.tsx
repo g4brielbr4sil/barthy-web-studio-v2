@@ -33,7 +33,6 @@ export function AboutSection({
             </p>
             <TextRollButton
               href="#solucoes"
-              source="about"
               variant="outline"
               onClick={(event) => {
                 event.preventDefault()

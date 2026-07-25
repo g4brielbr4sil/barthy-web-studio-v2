@@ -5,6 +5,7 @@ import {
   useState,
 } from 'react'
 import {
+  isSectionId,
   observedSectionIds,
   type SectionId,
 } from '../data/navigation'
@@ -27,10 +28,15 @@ function getVisualTarget(section: SectionId): HTMLElement | null {
   )
 }
 
-export interface NavigationState {
+interface NavigationState {
   activeSection: SectionId
   isPastHero: boolean
   navigateToSection: (section: SectionId) => void
+}
+
+interface ObservedSection {
+  id: SectionId
+  element: HTMLElement
 }
 
 export function useActiveSection(): NavigationState {
@@ -122,9 +128,7 @@ export function useActiveSection(): NavigationState {
         passive: true,
       })
 
-      const supportsScrollEnd =
-        'onscrollend' in
-        (window as unknown as Record<string, unknown>)
+      const supportsScrollEnd = 'onscrollend' in window
 
       if (reducedMotion) {
         navigationTimeoutRef.current = window.setTimeout(
@@ -171,10 +175,8 @@ export function useActiveSection(): NavigationState {
 
   useEffect(() => {
     const navigateFromLocation = () => {
-      const hashSection = window.location.hash.slice(1) as SectionId
-      const section = observedSectionIds.includes(hashSection)
-        ? hashSection
-        : 'inicio'
+      const hashSection = window.location.hash.slice(1)
+      const section = isSectionId(hashSection) ? hashSection : 'inicio'
 
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => {
@@ -199,9 +201,14 @@ export function useActiveSection(): NavigationState {
   )
 
   useEffect(() => {
-    const sections = observedSectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => Boolean(section))
+    const sections = observedSectionIds.reduce<ObservedSection[]>(
+      (items, id) => {
+        const element = document.getElementById(id)
+        if (element) items.push({ id, element })
+        return items
+      },
+      [],
+    )
 
     if (typeof globalThis.IntersectionObserver === 'undefined') {
       let animationFrame = 0
@@ -217,14 +224,17 @@ export function useActiveSection(): NavigationState {
         const current =
           [...sections]
             .reverse()
-            .find((section) => section.getBoundingClientRect().top <= probe) ??
+            .find(
+              ({ element }) =>
+                element.getBoundingClientRect().top <= probe,
+            ) ??
           sections[0]
 
         if (current && !pendingSectionRef.current) {
-          setActiveSection(current.id as SectionId)
+          setActiveSection(current.id)
         }
 
-        const hero = document.getElementById('inicio')
+        const hero = sections.find(({ id }) => id === 'inicio')?.element
         if (hero) {
           setIsPastHero(hero.getBoundingClientRect().bottom <= probe)
         }
@@ -252,10 +262,8 @@ export function useActiveSection(): NavigationState {
       syncActiveSectionToViewport()
     }
 
-    const cleanups = sections.map((section) =>
-      observeIntersection(section, (entry) => {
-        const id = entry.target.id as SectionId
-
+    const cleanups = sections.map(({ id, element }) =>
+      observeIntersection(element, (entry) => {
         if (id === 'inicio') {
           setIsPastHero(
             !entry.isIntersecting &&

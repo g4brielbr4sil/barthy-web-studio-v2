@@ -6,7 +6,6 @@ import {
   getEmailHref,
   getWhatsappUrl,
 } from '../../lib/contact'
-import { trackEvent } from '../../lib/tracking'
 import { ContactForm } from '../contact/ContactForm'
 import { SectionBadge } from '../ui/SectionBadge'
 import { SectionReveal } from '../ui/SectionReveal'
@@ -49,13 +48,6 @@ export function ContactSection() {
               href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
-              data-cta-source="contact-whatsapp"
-              onClick={() =>
-                trackEvent('cta_click', {
-                  source: 'contact-whatsapp',
-                  destination: 'whatsapp',
-                })
-              }
             >
               <MessageCircle size={20} aria-hidden="true" />
               <span>
@@ -67,15 +59,10 @@ export function ContactSection() {
           ) : (
             <button
               type="button"
-              data-cta-source="contact-whatsapp"
               onClick={() => {
                 setWhatsappMessage(
                   `O WhatsApp ainda não está configurado nesta V2. Use ${CONTACT_EMAIL}.`,
                 )
-                trackEvent('cta_click', {
-                  source: 'contact-whatsapp',
-                  destination: 'unconfigured',
-                })
               }}
             >
               <MessageCircle size={20} aria-hidden="true" />
@@ -87,7 +74,7 @@ export function ContactSection() {
             </button>
           )}
 
-          <a href="#formulario" data-cta-source="contact-form">
+          <a href="#formulario">
             <Send size={20} aria-hidden="true" />
             <span>
               <small>Formulário</small>
@@ -95,16 +82,7 @@ export function ContactSection() {
             </span>
           </a>
 
-          <a
-            href={getEmailHref()}
-            data-cta-source="contact-email"
-            onClick={() =>
-              trackEvent('cta_click', {
-                source: 'contact-email',
-                destination: 'email',
-              })
-            }
-          >
+          <a href={getEmailHref()}>
             <Mail size={20} aria-hidden="true" />
             <span>
               <small>E-mail</small>
