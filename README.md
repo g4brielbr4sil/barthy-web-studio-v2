@@ -1,230 +1,236 @@
 # Barthy Web Studio V2
 
-Proposta independente de landing page editorial e cinematográfica para a
-Barthy Web Studio. O projeto foi criado do zero e não compartilha repositório,
-componentes ou fluxo de publicação com a V1.
+Site institucional e apresentação digital da **Barthy Web Studio**, uma operação própria de soluções digitais para pequenos negócios.
 
-## Estado
+A Barthy Web Studio não se resume a este site. A operação envolve estratégia, posicionamento, identidade visual, presença digital, desenvolvimento de sites e sistemas, propostas comerciais, captação de leads, CRM, automações, suporte e organização de processos.
 
-- Implementação local completa
-- Repositório isolado da V1
-- Indexação desativada com `noindex, nofollow`
-- Nenhum deploy executado
-- Nenhuma configuração de DNS, Cloudflare, Hermes ou VPS alterada
+Este repositório contém a **V2 da experiência web da marca**, construída como uma proposta editorial, cinematográfica, responsiva e acessível.
 
-## Direção da proposta
+## Status
+
+- **Aplicação:** implementada
+- **Repositório:** público
+- **Produção definitiva:** pendente de aprovação
+- **Indexação:** bloqueada com `noindex, nofollow`
+- **Formulário:** preparado, mas depende de endpoint confirmado
+- **WhatsApp:** depende de URL confirmada
+- **Licença:** proprietária
+
+## Objetivo do site
+
+Apresentar a Barthy Web Studio, suas áreas de atuação, processo de trabalho e projetos aplicados, criando uma experiência visual forte sem comprometer acessibilidade, responsividade e performance.
+
+## Direção visual
 
 | V1 | V2 |
 | --- | --- |
 | Dark-first | Light-first |
 | Técnica e modular | Editorial e cinematográfica |
-| Conteúdo aprofundado | Narrativa mais curta |
-| Muitos blocos operacionais | Poucos momentos visuais |
-| Painéis escuros | Composições claras e amplas |
+| Conteúdo aprofundado | Narrativa mais direta |
+| Muitos blocos operacionais | Momentos visuais selecionados |
 | Foco em estrutura | Foco em impacto e projetos |
 
-A V2 usa um hero de tela cheia, tipografia em grande escala, espaço negativo,
-movimentos internos controlados e três projetos reais como prova de repertório:
-Levens, PNQC e Hermes.
-
-## Stack
+## Stack confirmada
 
 - React 18
 - TypeScript
 - Vite
-- Tailwind CSS 3.4
-- CSS nativo para composição e movimento
-- `shaders`
-- `lucide-react`
+- Tailwind CSS
+- Anime.js
+- CSS nativo
+- Shaders com WebGPU
+- Lucide React
+- Cloudflare Pages como destino de publicação
+- GitHub Actions
 
-Não foram adicionados router, Three.js, Pixi, GSAP, bibliotecas de UI,
-formulário, modal, analytics ou scroll artificial.
+A V2 não utiliza Material UI, Radix UI, React Router, GSAP, Recharts ou React Hook Form.
 
-## Requisitos
+## Funcionalidades
 
-- Node.js 20.19 ou superior
-- pnpm 11
+### Experiência visual
+
+- Hero com shader carregado sob demanda
+- fallback CSS quando WebGPU não está disponível
+- modo estático para movimento reduzido
+- temas claro e escuro
+- preferência de tema persistida
+- navegação por âncoras
+- indicador de seção ativa
+- menu mobile acessível
+
+### Conteúdo
+
+- apresentação do estúdio
+- projetos e cases
+- soluções organizadas por presença, sistemas e operação
+- processo de trabalho
+- canais de contato
+- formulário de briefing inicial
+
+### Formulário
+
+- validação de campos
+- foco no primeiro erro
+- estados de carregamento, sucesso e falha
+- preservação dos dados quando o endpoint não está configurado
+- honeypot contra bots simples
+- timeout e cancelamento de requisição
+- confirmação do contrato de resposta
+- nenhuma mensagem de sucesso falsa
+
+## Arquitetura visual
+
+```mermaid
+flowchart TD
+    A[Aplicação React] --> B[Hero]
+    A --> C[Seções editoriais]
+    A --> D[Projetos]
+    A --> E[Soluções]
+    A --> F[Contato]
+
+    B --> G{Capacidades do navegador}
+    G -->|WebGPU disponível| H[Shader]
+    G -->|Sem WebGPU| I[CSS Motion]
+    G -->|Reduced Motion| J[Modo estático]
+
+    F --> K{Endpoint configurado?}
+    K -->|Sim| L[POST JSON]
+    K -->|Não| M[Contato por e-mail]
+```
+
+## Progressive enhancement
+
+A experiência visual possui três modos:
+
+- `shader`: WebGPU disponível, movimento permitido e canvas carregado
+- `css-motion`: fallback sem canvas para ausência ou falha do shader
+- `static`: conteúdo completo sem animação para movimento reduzido
+
+A página continua navegável e legível mesmo sem shader, aceleração gráfica, Anime.js ou `backdrop-filter`.
+
+## Acessibilidade
+
+- um único `h1`
+- hierarquia semântica de títulos
+- link para pular ao conteúdo
+- menu móvel com foco contido
+- fechamento por Escape
+- retorno de foco
+- alvos interativos mínimos
+- foco visível
+- navegação por teclado
+- tabs com setas, Home e End
+- labels e mensagens de erro associadas
+- nome acessível estável para CTAs animados
+- conteúdo textual sem duplicação visual
+- suporte a `prefers-reduced-motion`
+
+## Responsividade
+
+O projeto possui contratos de regressão para comportamento responsivo e foi estruturado para funcionar entre 320 px e 2560 px sem mascarar overflow horizontal.
+
+## Estrutura principal
+
+```text
+src/
+  app/
+  components/
+    brand/
+    contact/
+    header/
+    hero/
+    projects/
+    sections/
+    solutions/
+    ui/
+  data/
+  hooks/
+  lib/
+  motion/
+  styles/
+  theme/
+  visual/
+public/
+scripts/
+docs/
+```
 
 ## Desenvolvimento
+
+Requisitos:
+
+- Node.js 20.19 ou superior
+- pnpm 11.9
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Abra o endereço local exibido pelo Vite.
-
-## Validação e build
+## Validação
 
 ```bash
+pnpm audit:a11y
+pnpm test:responsive
 pnpm typecheck
 pnpm build
-pnpm preview
+pnpm audit --prod
 ```
-
-O artefato de produção é gerado em `dist/`.
 
 ## Variáveis de ambiente
 
-Copie `.env.example` para `.env.local` e preencha somente os valores
-confirmados:
+Copie `.env.example` para `.env.local`.
 
-```dotenv
+```env
 VITE_BARTHY_WHATSAPP_URL=
 VITE_BARTHY_CONTACT_ENDPOINT=
 ```
 
-### WhatsApp
+Variáveis com prefixo `VITE_` ficam públicas no navegador. Nunca coloque tokens, senhas ou segredos nesses campos.
 
-`VITE_BARTHY_WHATSAPP_URL` deve receber uma URL HTTP ou HTTPS completa e
-confirmada. Sem ela, o botão não inventa número nem cria um link inválido. A
-interface orienta o visitante a usar o e-mail oficial.
+## Publicação no Cloudflare Pages
 
-### Endpoint do formulário
-
-`VITE_BARTHY_CONTACT_ENDPOINT` deve receber uma URL HTTP ou HTTPS completa.
-Quando configurado, o formulário envia um `POST` com `Content-Type:
-application/json` no seguinte formato:
-
-```json
-{
-  "nome": "Nome da pessoa",
-  "whatsapp": "(61) 99999-9999",
-  "email": "email@exemplo.com",
-  "empresaProjeto": "Nome do projeto",
-  "tipoSolucao": "Landing page",
-  "mensagem": "Contexto informado pela pessoa.",
-  "source": "barthy-web-studio-v2"
-}
-```
-
-Sem endpoint, nenhum request é disparado, os dados permanecem preenchidos e a
-interface não apresenta sucesso falso. Falhas de rede ou respostas não
-bem-sucedidas também preservam os campos.
-
-Variáveis `VITE_` são públicas no navegador. Não coloque tokens, chaves ou
-outros segredos nesses campos.
-
-## Shader e fallback
-
-O pacote utilizado é `shaders`, carregado sob demanda a partir de
-`shaders/react`. A arquitetura visual escolhe explicitamente um de três modos:
-
-- `shader`: WebGPU disponível, movimento permitido, aba visível e chunk
-  carregado com sucesso
-- `css-motion`: fallback orgânico leve para WebGPU ausente, falha do shader ou
-  economia de dados, sem canvas e sem loop JavaScript
-- `static`: composição completa sem animação para movimento reduzido
-
-A página mantém somente uma instância, carregada de forma assíncrona no hero.
-O movimento autônomo possui paletas próprias para os temas claro e escuro. Em
-dispositivos com ponteiro fino, o fundo reage ao cursor pela API nativa do
-pacote. Em telas de toque, o fundo permanece autônomo e não acompanha gestos.
-O canvas não é montado quando WebGPU está indisponível, quando
-`prefers-reduced-motion: reduce` está ativo ou quando o navegador sinaliza
-economia de dados. O fundo CSS e a base estática continuam visíveis se o
-pacote, o chunk ou a renderização falharem.
-
-Limitação conhecida: a API pública atual do componente `Shader` não expõe uma
-propriedade para fixar o DPR em `1.5` no desktop e `1` no mobile. A biblioteca
-aplica o próprio limite interno. A mitigação desta proposta é manter um único
-canvas, reduzir parâmetros, pausar fora de uso e preservar o fallback estático.
-Não foi instalado pacote alternativo.
-
-## Navegação e temas
-
-A barra fixa oferece links diretos para Estúdio, Projetos, Soluções, Processo
-e Contato no desktop, com indicação da seção ativa e glassmorphism adaptado ao
-tema e ao estado de rolagem. A altura real do Header alimenta o alinhamento das
-âncoras, inclusive em acesso direto por hash e navegação do histórico. Abaixo
-de 1024 px, permanecem apenas a navbar superior e o menu móvel
-completo, com diálogo, conteúdo externo inerte, bloqueio de rolagem, foco
-contido, fechamento por Escape e retorno de foco quando o menu é dispensado.
-Sem suporte a `backdrop-filter`, a barra usa uma superfície opaca equivalente
-em contraste e hierarquia.
-
-O tema padrão é claro. A preferência escolhida é persistida no navegador com a
-chave `barthy-v2-theme` e aplicada por um script anterior à inicialização do
-React para evitar a troca visual durante o carregamento. Os valores aceitos são
-somente `light` e `dark`; valores inválidos voltam para o tema claro. A cor da
-interface do navegador também acompanha o tema ativo.
-
-## Conteúdo visual
-
-As composições dos projetos são HTML, CSS e ícones, portanto não dependem de
-imagens externas. Os espaços editoriais do estúdio possuem placeholders
-intencionais até existirem fotografias aprovadas.
-
-Para substituir os placeholders:
-
-1. Adicione os arquivos:
-   - `public/images/barthy-studio-small.webp`
-   - `public/images/barthy-studio-large.webp`
-2. Abra `src/data/projects.ts`.
-3. Altere `editorialImages.small.enabled` e
-   `editorialImages.large.enabled` para `true`.
-4. Revise os textos alternativos antes do build.
-
-### Vídeos futuros
-
-`src/components/ProjectMedia.tsx` já aceita `videoSrc` e `posterSrc`. Nenhum
-vídeo é solicitado na versão atual. Quando usados, devem ser curtos,
-comprimidos, sem áudio, com poster, `playsInline` e carregamento controlado.
-Em preferência por movimento reduzido, somente o poster é exibido.
-
-## Acessibilidade e responsividade
-
-- Um único `h1` e hierarquia semântica de títulos
-- Link para pular ao conteúdo
-- Menu móvel em diálogo com foco contido, fechamento por Escape e retorno do
-  foco ao botão de origem
-- Abas com setas, Home e End
-- Diagrama progressivo de soluções com três, cinco e oito pontos conectados
-- Formulário com labels, erros associados, foco no primeiro campo inválido e
-  mensagens anunciadas
-- Campo de tipo de solução nativo, com contraste e foco adaptados aos temas
-- Alvos interativos com dimensão mínima de 44 px
-- Contraste e foco visível
-- Conteúdo preservado sem shader
-- Movimento reduzido respeitado
-- Layout sem rolagem horizontal de 320 a 2560 px
-
-## Estrutura principal
+Configuração prevista:
 
 ```text
-src/
-  app/           composição e provedores globais
-  components/
-    brand/       marca estável em HTML
-    header/      navegação desktop e móvel
-    hero/        camadas estática, CSS e shader
-    sections/    seções editoriais
-    solutions/   tabs, dados e mapa de arquitetura
-    projects/    cards e visuais dos cases
-    ui/          controles compartilhados
-  data/          navegação, projetos e caminhos editoriais
-  hooks/         navegação, mídia, visibilidade, horário e capacidades
-  lib/           contato, observadores e eventos locais
-  styles/
-    components/  módulos visuais por área
-    theme.css    tokens dos temas
-    motion.css   animações progressivas
-    responsive.css breakpoints por comportamento
-  visual/        detecção e estado de progressive enhancement
-  index.css      somente a ordem explícita dos módulos
-public/
-  favicon.svg
+Repositório: g4brielbr4sil/barthy-web-studio-v2
+Branch de produção: main
+Comando de build: pnpm build
+Diretório de saída: dist
+Node.js: 20.19 ou superior
 ```
 
-## Publicação futura no Cloudflare Pages
+Consulte [`docs/PRODUCTION_CHECKLIST.md`](docs/PRODUCTION_CHECKLIST.md) antes da publicação definitiva.
 
-Nenhuma publicação foi feita por este projeto. Para uma integração Git futura:
+O bloqueio de indexação deve ser removido somente quando domínio, conteúdo, formulário, imagens e publicação estiverem aprovados.
 
-- Repositório: `g4brielbr4sil/barthy-web-studio-v2`
-- Branch: `main`
-- Comando de build: `pnpm build`
-- Diretório de saída: `dist`
-- Versão do Node.js: 20.19 ou superior
+## Screenshots
 
-Configure as variáveis públicas somente depois que URLs reais forem aprovadas.
-Mantenha o projeto separado da produção e do domínio da V1.
+As imagens serão produzidas em conjunto após a validação do preview. Serão incluídas versões desktop e mobile do Hero, soluções, projetos e formulário, sem dados pessoais ou conteúdo não aprovado.
+
+## Segurança
+
+- headers de segurança preparados para Cloudflare Pages
+- framing bloqueado
+- MIME sniffing bloqueado
+- políticas restritivas para câmera, microfone, localização, pagamentos e USB
+- formulário com timeout e honeypot
+- nenhuma chave secreta no frontend
+- nenhum dado do formulário armazenado localmente pelo projeto
+
+## Limitações atuais
+
+- não existe deploy definitivo aprovado
+- endpoint de contato ainda precisa ser confirmado
+- URL de WhatsApp ainda precisa ser confirmada
+- imagens editoriais definitivas ainda precisam ser aprovadas
+- testes em dispositivos físicos e Safari ainda devem ser concluídos
+- o chunk do shader permanece maior que o bundle inicial, mas é isolado e carregado sob demanda
+
+## V1 e V2
+
+A V1 permanece em repositório separado e representa uma direção anterior da presença digital. Nenhuma substituição da produção deve ser realizada sem comparação visual, validação do formulário e aprovação explícita.
+
+## Licença
+
+Código, design, marca, conteúdo e documentação são proprietários. Consulte [`LICENSE`](LICENSE).
