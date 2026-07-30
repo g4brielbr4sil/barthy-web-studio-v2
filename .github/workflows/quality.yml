@@ -34,6 +34,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Content, motion and configuration audit
+        run: pnpm audit:content
+
       - name: Accessibility audit
         run: pnpm audit:a11y
 
