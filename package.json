@@ -9,10 +9,12 @@
   },
   "scripts": {
     "dev": "vite",
+    "audit:content": "node scripts/audit-content-config.mjs",
     "audit:a11y": "node scripts/audit-accessibility.mjs",
     "test:responsive": "node scripts/verify-responsive-contract.mjs",
     "typecheck": "tsc -b",
     "build": "tsc -b && vite build",
+    "quality": "pnpm audit:content && pnpm audit:a11y && pnpm test:responsive && pnpm typecheck && pnpm build",
     "preview": "vite preview"
   },
   "dependencies": {
