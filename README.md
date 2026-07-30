@@ -159,7 +159,7 @@ docs/
 
 Requisitos:
 
-- Node.js 20.19 ou superior
+- Node.js 22.13 ou superior
 - pnpm 11.9
 
 ```bash
@@ -197,7 +197,7 @@ Repositório: g4brielbr4sil/barthy-web-studio-v2
 Branch de produção: main
 Comando de build: pnpm build
 Diretório de saída: dist
-Node.js: 20.19 ou superior
+Node.js: 22.13 ou superior
 ```
 
 Consulte [`docs/PRODUCTION_CHECKLIST.md`](docs/PRODUCTION_CHECKLIST.md) antes da publicação definitiva.

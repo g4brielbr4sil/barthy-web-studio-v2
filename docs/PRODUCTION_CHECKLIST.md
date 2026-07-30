@@ -41,7 +41,7 @@
 - [ ] Definir a branch de produção como `main`.
 - [ ] Usar `pnpm build`.
 - [ ] Usar `dist` como diretório de saída.
-- [ ] Configurar Node.js 20.19 ou superior.
+- [ ] Configurar Node.js 22.13 ou superior.
 - [ ] Cadastrar somente variáveis públicas confirmadas.
 - [ ] Validar os headers publicados.
 - [ ] Validar o preview antes de promover produção.
