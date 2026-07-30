@@ -1,4 +1,4 @@
-import { Menu, X } from 'lucide-react'
+import { Clock3, Menu, X } from 'lucide-react'
 import {
   useCallback,
   useRef,
@@ -56,20 +56,39 @@ export function Header({
             />
 
             <div className="site-header__actions">
-              <ThemeToggle />
               <div
                 className="availability"
-                aria-label="Disponibilidade do estúdio"
               >
                 <span className="availability__dot" aria-hidden="true" />
                 <span className="availability__status">
                   Agenda aberta para novos projetos
                 </span>
-                <time dateTime={time}>
-                  {time}
-                  <span> em Brasília</span>
+                <time
+                  className="header-time"
+                  dateTime={time}
+                  aria-label={`${time} em Brasília`}
+                >
+                  <Clock3
+                    className="header-time__icon"
+                    size={16}
+                    aria-hidden="true"
+                  />
+                  <span className="header-time__value">{time}</span>
+                  <span
+                    className="header-time__zone header-time__zone--full"
+                    aria-hidden="true"
+                  >
+                    {' '}em Brasília
+                  </span>
+                  <span
+                    className="header-time__zone header-time__zone--compact"
+                    aria-hidden="true"
+                  >
+                    BSB
+                  </span>
                 </time>
               </div>
+              <ThemeToggle />
               <TextRollButton
                 href="#contato"
                 className="header-cta"

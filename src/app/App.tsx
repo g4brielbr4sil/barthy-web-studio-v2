@@ -1,4 +1,5 @@
 import { Footer } from '../components/footer/Footer'
+import { VisualDebugPanel } from '../components/debug/VisualDebugPanel'
 import { Header } from '../components/header/Header'
 import { Hero } from '../components/hero/Hero'
 import { AboutSection } from '../components/sections/AboutSection'
@@ -31,6 +32,7 @@ function App() {
         <ContactSection />
       </main>
       <Footer onNavigate={navigateToSection} />
+      <VisualDebugPanel />
     </>
   )
 }
