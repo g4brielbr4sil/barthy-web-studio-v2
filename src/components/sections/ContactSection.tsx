@@ -61,7 +61,7 @@ export function ContactSection() {
               type="button"
               onClick={() => {
                 setWhatsappMessage(
-                  `O WhatsApp ainda não está configurado nesta V2. Use ${CONTACT_EMAIL}.`,
+                  `O atendimento pelo WhatsApp ainda não está disponível. Use ${CONTACT_EMAIL}.`,
                 )
               }}
             >
