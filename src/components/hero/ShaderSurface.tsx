@@ -14,6 +14,7 @@ interface ShaderSurfaceProps {
   onReady: () => void
   onFailure: (reason: string) => void
 }
+
 const shaderPalettes: Record<
   Theme,
   {
@@ -43,6 +44,20 @@ const shaderPalettes: Record<
   },
 }
 
+function isDrawableCanvas(surface: HTMLDivElement | null): boolean {
+  const canvas = surface?.querySelector('canvas')
+  if (!canvas) return false
+
+  const bounds = canvas.getBoundingClientRect()
+  return (
+    canvas.isConnected &&
+    canvas.width > 0 &&
+    canvas.height > 0 &&
+    bounds.width > 0 &&
+    bounds.height > 0
+  )
+}
+
 export default function ShaderSurface({
   onReady,
   onFailure,
@@ -68,28 +83,51 @@ export default function ShaderSurface({
   useEffect(() => {
     if (!pageVisible) return
 
-    let secondFrame = 0
+    let settled = false
+    let animationFrame = 0
     let readinessTimeout = 0
-    const firstFrame = window.requestAnimationFrame(() => {
-      secondFrame = window.requestAnimationFrame(() => {
-        if (surfaceRef.current?.querySelector('canvas')) {
-          onReady()
-          return
-        }
+    const startedAt = window.performance.now()
 
-        readinessTimeout = window.setTimeout(() => {
-          if (surfaceRef.current?.querySelector('canvas')) {
-            onReady()
-          } else {
-            onFailure('O Canvas do shader não foi criado.')
-          }
-        }, 1200)
-      })
-    })
+    const finishReady = () => {
+      if (settled) return
+      settled = true
+      window.cancelAnimationFrame(animationFrame)
+      window.clearTimeout(readinessTimeout)
+      onReady()
+    }
+
+    const finishFailure = () => {
+      if (settled) return
+      settled = true
+      window.cancelAnimationFrame(animationFrame)
+      window.clearTimeout(readinessTimeout)
+      onFailure('O Canvas do shader não ficou pronto para renderização.')
+    }
+
+    const verifyCanvas = () => {
+      if (settled) return
+
+      const elapsed = window.performance.now() - startedAt
+      if (elapsed >= 420 && isDrawableCanvas(surfaceRef.current)) {
+        finishReady()
+        return
+      }
+
+      animationFrame = window.requestAnimationFrame(verifyCanvas)
+    }
+
+    animationFrame = window.requestAnimationFrame(verifyCanvas)
+    readinessTimeout = window.setTimeout(() => {
+      if (isDrawableCanvas(surfaceRef.current)) {
+        finishReady()
+      } else {
+        finishFailure()
+      }
+    }, 2200)
 
     return () => {
-      window.cancelAnimationFrame(firstFrame)
-      window.cancelAnimationFrame(secondFrame)
+      settled = true
+      window.cancelAnimationFrame(animationFrame)
       window.clearTimeout(readinessTimeout)
     }
   }, [onFailure, onReady, pageVisible])
@@ -129,49 +167,55 @@ export default function ShaderSurface({
           }}
           colorSpace="oklab"
         />
+        <ChromaFlow
+          baseColor={palette.base}
+          downColor={palette.up}
+          leftColor={palette.left}
+          rightColor={palette.right}
+          upColor={palette.up}
+          momentum={finePointer ? 32 : 13}
+          radius={finePointer ? 4.6 : 3.5}
+          intensity={finePointer ? 1.05 : 0.9}
+          opacity={
+            theme === 'dark'
+              ? finePointer
+                ? 0.68
+                : 0.62
+              : finePointer
+                ? 0.72
+                : 0.68
+          }
+        />
         {finePointer && (
-          <>
-            <ChromaFlow
-              baseColor={palette.base}
-              downColor={palette.up}
-              leftColor={palette.left}
-              rightColor={palette.right}
-              upColor={palette.up}
-              momentum={32}
-              radius={4.6}
-              intensity={1.05}
-              opacity={theme === 'dark' ? 0.68 : 0.72}
-            />
-            <RadialGradient
-              colorA={palette.up}
-              colorB={palette.base}
-              center={{
-                type: 'mouse-position',
-                smoothing: 0.9,
-                momentum: 0.08,
-                reach: 0.42,
-              }}
-              radius={{
-                type: 'auto-animate',
-                mode: 'ping-pong',
-                outputMin: 0.38,
-                outputMax: 0.52,
-                speed: 0.014,
-                easing: 'sine',
-              }}
-              repeat={1}
-              aspect={0.68}
-              skewAngle={{
-                type: 'auto-animate',
-                mode: 'loop',
-                outputMin: 0,
-                outputMax: 360,
-                speed: 0.006,
-              }}
-              colorSpace="oklab"
-              opacity={theme === 'dark' ? 0.28 : 0.4}
-            />
-          </>
+          <RadialGradient
+            colorA={palette.up}
+            colorB={palette.base}
+            center={{
+              type: 'mouse-position',
+              smoothing: 0.9,
+              momentum: 0.08,
+              reach: 0.42,
+            }}
+            radius={{
+              type: 'auto-animate',
+              mode: 'ping-pong',
+              outputMin: 0.38,
+              outputMax: 0.52,
+              speed: 0.014,
+              easing: 'sine',
+            }}
+            repeat={1}
+            aspect={0.68}
+            skewAngle={{
+              type: 'auto-animate',
+              mode: 'loop',
+              outputMin: 0,
+              outputMax: 360,
+              speed: 0.006,
+            }}
+            colorSpace="oklab"
+            opacity={theme === 'dark' ? 0.28 : 0.4}
+          />
         )}
         <FlutedGlass
           aberration={0.48}
