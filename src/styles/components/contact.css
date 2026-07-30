@@ -9,6 +9,10 @@
   align-items: end;
 }
 
+.contact__heading > .section-badge {
+  grid-column: 1 / -1;
+}
+
 .contact__heading h2 {
   max-width: 16ch;
   color: var(--foreground);
