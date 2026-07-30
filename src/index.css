@@ -14,3 +14,4 @@
 @import './styles/theme-overrides.css';
 @import './styles/motion.css';
 @import './styles/responsive.css';
+@import './styles/components/header-clock.css';
