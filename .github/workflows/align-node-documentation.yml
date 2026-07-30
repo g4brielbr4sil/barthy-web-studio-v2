@@ -1,0 +1,33 @@
+name: Align Node documentation
+
+on:
+  push:
+    branches:
+      - chore/v2-portfolio-readiness
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: chore/v2-portfolio-readiness
+
+      - name: Align documented Node version
+        run: |
+          sed -i 's/20\.19/22.13/g' README.md docs/PRODUCTION_CHECKLIST.md
+          rm .github/workflows/align-node-documentation.yml
+
+      - name: Commit documentation alignment
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md docs/PRODUCTION_CHECKLIST.md .github/workflows/align-node-documentation.yml
+          git commit -m "docs: align Node runtime requirement"
+          git push origin HEAD:chore/v2-portfolio-readiness
