@@ -1,9 +1,9 @@
 import { ArrowRight } from 'lucide-react'
-import type { MouseEventHandler, ReactNode } from 'react'
+import type { MouseEventHandler } from 'react'
 
 interface TextRollButtonProps {
   href: string
-  children: ReactNode
+  children: string
   variant?: 'navy' | 'terra' | 'outline'
   className?: string
   onClick?: MouseEventHandler<HTMLAnchorElement>
@@ -20,13 +20,17 @@ export function TextRollButton({
     <a
       className={`text-roll-button text-roll-button--${variant} ${className}`}
       href={href}
+      aria-label={children}
       onClick={onClick}
     >
-      <span className="text-roll-button__clip">
-        <span className="text-roll-button__text">{children}</span>
-        <span className="text-roll-button__text" aria-hidden="true">
+      <span className="text-roll-button__clip" aria-hidden="true">
+        <span className="text-roll-button__text text-roll-button__text--primary">
           {children}
         </span>
+        <span
+          className="text-roll-button__text text-roll-button__text--secondary"
+          data-label={children}
+        />
       </span>
       <span className="text-roll-button__icon" aria-hidden="true">
         <ArrowRight size={16} strokeWidth={2} />
