@@ -50,6 +50,8 @@ export function SectionReveal({
     )
     if (targets.length === 0) return
 
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches
+
     let disposed = false
     let cleanupAnimation: (() => void) | undefined
     let stopObserving: () => void = () => undefined
@@ -70,14 +72,16 @@ export function SectionReveal({
             cleanupAnimation = module.revealEditorialGroup({
               root,
               targets,
-              coarsePointer: window.matchMedia('(pointer: coarse)').matches,
+              coarsePointer,
             })
           })
           .catch(() => undefined)
       },
       {
-        rootMargin: '0px 0px 10% 0px',
-        threshold: 0.08,
+        rootMargin: coarsePointer
+          ? '18% 0px 18% 0px'
+          : '8% 0px 8% 0px',
+        threshold: coarsePointer ? 0.01 : 0.05,
       },
     )
 

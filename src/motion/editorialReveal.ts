@@ -44,6 +44,7 @@ export function revealEditorialGroup({
 }: EditorialRevealOptions): () => void {
   const distance = coarsePointer ? 10 : 16
   const interval = coarsePointer ? 45 : 65
+  const duration = coarsePointer ? 460 : 560
   const scope = createScope({ root })
   const initialStyles = targets.map((target) => ({
     target,
@@ -61,7 +62,7 @@ export function revealEditorialGroup({
           `translate3d(0, ${distance}px, 0)`,
           'translate3d(0, 0, 0)',
         ],
-        duration: 560,
+        duration,
         delay: (_target, index) => index * interval,
         ease: 'out(3)',
         onComplete: (animation) => {
