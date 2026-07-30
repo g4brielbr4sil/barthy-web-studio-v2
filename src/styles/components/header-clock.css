@@ -1,14 +1,57 @@
+.site-header__pill {
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+}
+
+.availability {
+  display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-self: end;
+  gap: 0.5rem;
+  padding: 0.3rem 0.2rem;
+  color: var(--foreground);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.availability__dot {
+  display: block;
+  width: 0.45rem;
+  height: 0.45rem;
+  flex: 0 0 auto;
+  grid-row: auto;
+}
+
+.availability__status {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  color: var(--foreground);
+  font-weight: 580;
+}
+
+.availability__separator {
+  display: block;
+  width: 1px;
+  height: 1.1rem;
+  flex: 0 0 auto;
+  background: var(--border);
+}
+
 .header-time[data-clock-style='original'] {
   display: inline-flex;
-  min-height: 44px;
+  min-height: auto;
   align-items: center;
-  gap: 0.35rem;
-  padding-inline: 0;
+  gap: 0.32rem;
+  padding: 0;
   border: 0;
   border-radius: 0;
   background: transparent;
   color: var(--muted-foreground);
-  font-size: 0.78rem;
+  font-size: inherit;
   line-height: 1;
   white-space: nowrap;
 }
@@ -24,31 +67,174 @@
   display: inline;
 }
 
+@media (max-width: 1360px) {
+  .site-header__pill {
+    gap: clamp(0.55rem, 1.2vw, 0.95rem);
+  }
+
+  .desktop-nav {
+    gap: 0.1rem;
+  }
+
+  .desktop-nav a {
+    padding-inline: 0.52rem;
+  }
+
+  .availability {
+    gap: 0.4rem;
+    font-size: 0.68rem;
+  }
+
+  .availability__status-detail {
+    display: none;
+  }
+}
+
 @media (max-width: 1179px) {
+  .site-header__pill {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+
+  .availability {
+    display: inline-flex;
+    justify-self: end;
+    gap: 0.45rem;
+    padding: 0.2rem 0.25rem;
+    font-size: 0.72rem;
+  }
+
+  .availability__dot {
+    display: block;
+  }
+
+  .availability__status {
+    display: inline-flex;
+  }
+
+  .availability__status-detail {
+    display: inline;
+  }
+
   .header-time[data-clock-style='original'] {
-    padding-inline: 0.25rem;
+    display: inline-flex;
+    min-height: auto;
+    padding: 0;
     border: 0;
     background: transparent;
   }
 }
 
-@media (max-width: 520px) {
-  .header-time[data-clock-style='original'] {
-    gap: 0.24rem;
-    padding-inline: 0;
-    font-size: 0.68rem;
+@media (max-width: 900px) {
+  .availability__status-detail {
+    display: none;
   }
 }
 
-@media (max-width: 379px) {
+@media (max-width: 767px) {
+  .site-header__pill {
+    min-height: auto;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: 0.45rem;
+    row-gap: 0.3rem;
+    padding: 0.42rem 0.48rem;
+    border-radius: 1.55rem;
+  }
+
+  .site-header .brand {
+    min-width: 0;
+    max-width: 100%;
+    grid-column: 1;
+    grid-row: 1;
+    gap: 0.5rem;
+  }
+
+  .site-header .brand__name {
+    min-width: 0;
+    gap: 0.22rem;
+    font-size: 0.86rem;
+  }
+
+  .site-header .brand__name > .brand__web,
+  .site-header .brand__name > .brand__studio {
+    display: inline;
+  }
+
+  .site-header__actions {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 0.35rem;
+  }
+
+  .availability {
+    width: 100%;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: center;
+    justify-self: stretch;
+    gap: 0.42rem;
+    padding: 0.4rem 0.2rem 0.08rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.68rem;
+  }
+
+  .availability__status-detail {
+    display: inline;
+  }
+
+  .availability__separator {
+    height: 0.9rem;
+  }
+
   .header-time[data-clock-style='original'] {
-    gap: 0.18rem;
-    font-size: 0.62rem;
-    letter-spacing: -0.01em;
+    gap: 0.24rem;
+    font-size: inherit;
+  }
+}
+
+@media (max-width: 520px) {
+  .site-header .brand__name > .brand__web {
+    display: inline;
+  }
+
+  .site-header .brand__name > .brand__studio {
+    display: none;
+  }
+
+  .availability {
+    gap: 0.35rem;
+    font-size: 0.64rem;
   }
 
   .header-time[data-clock-style='original'] .header-time__icon--original {
     width: 13px;
     height: 13px;
+  }
+}
+
+@media (max-width: 379px) {
+  .site-header__pill {
+    column-gap: 0.28rem;
+    padding-inline: 0.42rem;
+  }
+
+  .site-header .brand {
+    gap: 0.4rem;
+  }
+
+  .site-header .brand__name {
+    font-size: 0.82rem;
+  }
+
+  .availability {
+    gap: 0.28rem;
+    font-size: 0.61rem;
+    letter-spacing: -0.01em;
+  }
+}
+
+@media (max-width: 340px) {
+  .availability__status-detail {
+    display: none;
   }
 }
