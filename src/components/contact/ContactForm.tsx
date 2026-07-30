@@ -6,7 +6,7 @@ import {
   LoaderCircle,
   Send,
 } from 'lucide-react'
-import { useRef, useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import {
   CONTACT_EMAIL,
   copyContactEmail,
@@ -120,10 +120,20 @@ function FieldError({
 
 export function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null)
+  const requestRef = useRef<AbortController | null>(null)
+  const copyTimeoutRef = useRef(0)
   const [errors, setErrors] = useState<ContactFieldErrors>({})
   const [status, setStatus] = useState<FormStatus>('idle')
   const [statusMessage, setStatusMessage] = useState('')
   const [copied, setCopied] = useState(false)
+
+  useEffect(
+    () => () => {
+      requestRef.current?.abort()
+      window.clearTimeout(copyTimeoutRef.current)
+    },
+    [],
+  )
 
   const clearError = (field: ContactFieldName) => {
     setErrors((current) => {
@@ -151,6 +161,8 @@ export function ContactForm() {
 
     const form = event.currentTarget
     const formData = new FormData(form)
+    if (String(formData.get('website') ?? '').trim()) return
+
     const values = readFormValues(formData)
     const fieldErrors = validateForm(values)
 
@@ -180,15 +192,32 @@ export function ContactForm() {
     setStatus('loading')
     setStatusMessage('')
 
+    const controller = new AbortController()
+    requestRef.current?.abort()
+    requestRef.current = controller
+    const requestTimeout = window.setTimeout(() => controller.abort(), 10_000)
+
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
+        signal: controller.signal,
       })
 
       if (!response.ok) {
         throw new Error('Contact endpoint returned a non-success response.')
+      }
+
+      if (response.status !== 204) {
+        const body: unknown = await response.json()
+        if (
+          typeof body !== 'object' ||
+          body === null ||
+          ('ok' in body && body.ok === false)
+        ) {
+          throw new Error('Contact endpoint did not confirm the request.')
+        }
       }
 
       setStatus('success')
@@ -201,13 +230,22 @@ export function ContactForm() {
       setStatusMessage(
         `Não foi possível confirmar o envio. Seus dados foram preservados. Tente novamente ou escreva para ${CONTACT_EMAIL}.`,
       )
+    } finally {
+      window.clearTimeout(requestTimeout)
+      if (requestRef.current === controller) requestRef.current = null
     }
   }
 
   const onCopyEmail = async () => {
     const success = await copyContactEmail()
     setCopied(success)
-    if (success) window.setTimeout(() => setCopied(false), 2200)
+    window.clearTimeout(copyTimeoutRef.current)
+    if (success) {
+      copyTimeoutRef.current = window.setTimeout(
+        () => setCopied(false),
+        2200,
+      )
+    }
   }
 
   return (
@@ -217,7 +255,7 @@ export function ContactForm() {
       noValidate
       onSubmit={onSubmit}
     >
-      <div className="contact-form__intro">
+      <div className="contact-form__intro" data-reveal-item>
         <span>Briefing inicial</span>
         <p>
           Preencha o essencial. Nenhum dado é enviado se o endpoint não estiver
@@ -225,7 +263,18 @@ export function ContactForm() {
         </p>
       </div>
 
-      <div className="form-grid">
+      <div className="form-honeypot" aria-hidden="true">
+        <label htmlFor="website">Não preencha este campo</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          autoComplete="off"
+          tabIndex={-1}
+        />
+      </div>
+
+      <div className="form-grid" data-reveal-item>
         <div className="form-field">
           <label htmlFor="nome">Nome</label>
           <input
@@ -365,7 +414,11 @@ export function ContactForm() {
           <span>{statusMessage}</span>
           {status !== 'success' && (
             <button type="button" onClick={onCopyEmail}>
-              {copied ? <Check size={15} /> : <Copy size={15} />}
+              {copied ? (
+                <Check size={15} aria-hidden="true" />
+              ) : (
+                <Copy size={15} aria-hidden="true" />
+              )}
               {copied ? 'E-mail copiado' : 'Copiar e-mail'}
             </button>
           )}
@@ -375,6 +428,7 @@ export function ContactForm() {
       <button
         className="form-submit"
         type="submit"
+        data-reveal-item
         disabled={status === 'loading'}
         aria-busy={status === 'loading'}
       >
