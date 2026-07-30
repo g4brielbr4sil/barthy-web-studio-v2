@@ -56,35 +56,27 @@ export function Header({
             />
 
             <div className="site-header__actions">
-              <div
-                className="availability"
-              >
+              <div className="availability">
                 <span className="availability__dot" aria-hidden="true" />
                 <span className="availability__status">
                   Agenda aberta para novos projetos
                 </span>
                 <time
                   className="header-time"
+                  data-clock-style="original"
                   dateTime={time}
                   aria-label={`${time} em Brasília`}
                 >
                   <Clock3
-                    className="header-time__icon"
-                    size={16}
+                    className="header-time__icon--original"
+                    size={14}
                     aria-hidden="true"
                   />
-                  <span className="header-time__value">{time}</span>
-                  <span
-                    className="header-time__zone header-time__zone--full"
-                    aria-hidden="true"
-                  >
-                    {' '}em Brasília
+                  <span className="header-time__value" aria-hidden="true">
+                    {time}
                   </span>
-                  <span
-                    className="header-time__zone header-time__zone--compact"
-                    aria-hidden="true"
-                  >
-                    BSB
+                  <span className="header-time__zone" aria-hidden="true">
+                    {' '}em Brasília
                   </span>
                 </time>
               </div>
