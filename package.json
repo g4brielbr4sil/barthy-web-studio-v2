@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "audit:a11y": "node scripts/audit-accessibility.mjs",
     "test:responsive": "node scripts/verify-responsive-contract.mjs",
     "typecheck": "tsc -b",
     "build": "tsc -b && vite build",
