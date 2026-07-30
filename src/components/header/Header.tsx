@@ -59,9 +59,9 @@ export function Header({
             <div className="availability">
               <span className="availability__dot" aria-hidden="true" />
               <span className="availability__status">
-                <span>Agenda aberta</span>
+                <span className="availability__status-lead">Agenda aberta</span>
                 <span className="availability__status-detail">
-                  {' '}para novos projetos
+                  para novos projetos
                 </span>
               </span>
               <span className="availability__separator" aria-hidden="true" />
@@ -80,7 +80,7 @@ export function Header({
                   {time}
                 </span>
                 <span className="header-time__zone" aria-hidden="true">
-                  {' '}em Brasília
+                  em Brasília
                 </span>
               </time>
             </div>
