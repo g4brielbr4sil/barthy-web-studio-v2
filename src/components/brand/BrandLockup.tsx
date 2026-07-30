@@ -6,6 +6,7 @@ interface BrandLockupProps {
   inverse?: boolean
   onClick?: MouseEventHandler<HTMLAnchorElement>
 }
+
 export function BrandLockup({
   compact = false,
   inverse = false,
@@ -21,7 +22,12 @@ export function BrandLockup({
       <BrandMark />
       <span className="brand__name">
         <strong>Barthy</strong>
-        {!compact && <span>Web Studio</span>}
+        {!compact && (
+          <>
+            <span className="brand__web">Web</span>
+            <span className="brand__studio">Studio</span>
+          </>
+        )}
       </span>
     </a>
   )
