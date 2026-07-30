@@ -10,6 +10,7 @@
 @import './styles/components/contact.css';
 @import './styles/components/footer.css';
 @import './styles/components/visual-debug.css';
+@import './styles/components/a11y-hardening.css';
 @import './styles/theme-overrides.css';
 @import './styles/motion.css';
 @import './styles/responsive.css';
