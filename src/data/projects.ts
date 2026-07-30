@@ -19,7 +19,7 @@ export const projects: Project[] = [
     description:
       'Portais, fluxos, integrações e governança aplicados a uma operação real de cuidado.',
     detail:
-      'Experiência profissional aplicada em desenvolvimento, validação, integrações e governança. A atuação acontece de forma colaborativa e não é apresentada como criação exclusiva da Barthy.',
+      'Experiência profissional aplicada ao desenvolvimento, à validação, às integrações e à governança. A atuação acontece de forma colaborativa e não é apresentada como criação exclusiva da Barthy.',
     features: [
       'Portais por perfil',
       'Cadastros e documentos',
@@ -64,7 +64,7 @@ export const projects: Project[] = [
     description:
       'CRM, financeiro, tarefas, estudos, relatórios e acompanhamento em uma única estrutura.',
     detail:
-      'Um command center em evolução para organizar informações, rotinas e decisões, apoiado por uma API própria e armazenamento local controlado.',
+      'Uma central de comando em evolução para organizar informações, rotinas e decisões, apoiada por uma API própria e por armazenamento local controlado.',
     features: [
       'CRM e pipeline',
       'Financeiro e tarefas',

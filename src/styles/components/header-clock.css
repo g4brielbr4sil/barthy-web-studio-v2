@@ -23,14 +23,22 @@
   height: 0.45rem;
   flex: 0 0 auto;
   grid-row: auto;
+  transform-origin: center;
 }
 
 .availability__status {
   display: inline-flex;
   min-width: 0;
   align-items: center;
+  gap: 0.24rem;
   color: var(--foreground);
   font-weight: 580;
+  white-space: nowrap;
+}
+
+.availability__status-lead,
+.availability__status-detail {
+  display: inline-block;
 }
 
 .availability__separator {
@@ -67,6 +75,25 @@
   display: inline;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .availability__dot {
+    animation: availability-dot-pulse 3.4s ease-in-out infinite;
+  }
+}
+
+@keyframes availability-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
 @media (max-width: 1360px) {
   .site-header__pill {
     gap: clamp(0.55rem, 1.2vw, 0.95rem);
@@ -83,6 +110,10 @@
   .availability {
     gap: 0.4rem;
     font-size: 0.68rem;
+  }
+
+  .availability__status {
+    gap: 0.2rem;
   }
 
   .availability__status-detail {
@@ -109,10 +140,11 @@
 
   .availability__status {
     display: inline-flex;
+    gap: 0.24rem;
   }
 
   .availability__status-detail {
-    display: inline;
+    display: inline-block;
   }
 
   .header-time[data-clock-style='original'] {
@@ -178,8 +210,12 @@
     font-size: 0.68rem;
   }
 
+  .availability__status {
+    gap: 0.22rem;
+  }
+
   .availability__status-detail {
-    display: inline;
+    display: inline-block;
   }
 
   .availability__separator {
@@ -206,6 +242,10 @@
     font-size: 0.64rem;
   }
 
+  .availability__status {
+    gap: 0.18rem;
+  }
+
   .header-time[data-clock-style='original'] .header-time__icon--original {
     width: 13px;
     height: 13px;
@@ -230,6 +270,10 @@
     gap: 0.28rem;
     font-size: 0.61rem;
     letter-spacing: -0.01em;
+  }
+
+  .availability__status {
+    gap: 0.16rem;
   }
 }
 
