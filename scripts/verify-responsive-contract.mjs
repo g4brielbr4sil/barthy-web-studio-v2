@@ -9,6 +9,7 @@ const files = {
   debug: 'src/components/debug/VisualDebugPanel.tsx',
   contact: 'src/lib/contact.ts',
   contactStyles: 'src/styles/components/contact.css',
+  shader: 'src/components/hero/ShaderSurface.tsx',
 }
 
 const sources = Object.fromEntries(
@@ -49,6 +50,9 @@ const checks = [
   ['trajetória mobile Terra', sources.motion.includes('@keyframes hero-mobile-terra')],
   ['trajetória mobile branca', sources.motion.includes('@keyframes hero-mobile-white')],
   ['especificidade mobile preservada', (sources.motion.match(/hero__background:not\(\[data-mode='static'\]\)/g) ?? []).length >= 8],
+  ['ChromaFlow preservado no touch', sources.shader.includes('momentum={finePointer ? 32 : 13}')],
+  ['raio autônomo preservado no touch', sources.shader.includes('radius={finePointer ? 4.6 : 3.5}')],
+  ['readiness exige Canvas dimensionado', sources.shader.includes('isDrawableCanvas') && sources.shader.includes('canvas.width > 0')],
   ['reveal antecipado em touch', sources.reveal.includes("'18% 0px 18% 0px'")],
   ['Footer integrado ao reveal', (sources.footer.match(/<SectionReveal/g) ?? []).length === 2],
   ['badge do Contact ocupa a linha editorial', sources.contactStyles.includes('.contact__heading > .section-badge')],
