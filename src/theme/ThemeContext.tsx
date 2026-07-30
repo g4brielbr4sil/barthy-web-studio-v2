@@ -56,7 +56,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const toggleTheme = useCallback(() => {
-    setAndPersistTheme(theme === 'light' ? 'dark' : 'light')
+    const appliedTheme = document.documentElement.dataset.theme ?? null
+    const currentTheme = isTheme(appliedTheme) ? appliedTheme : theme
+    setAndPersistTheme(currentTheme === 'light' ? 'dark' : 'light')
   }, [setAndPersistTheme, theme])
 
   useEffect(() => {
