@@ -42,8 +42,8 @@ try {
     )
     assert.equal(
       countText(visibleText(markup), label),
-      0,
-      `O CTA "${label}" não deve duplicar texto visual no conteúdo extraído.`,
+      1,
+      `O CTA "${label}" deve existir uma vez no conteúdo textual extraído.`,
     )
     assert.match(
       markup,
