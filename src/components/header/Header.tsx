@@ -19,6 +19,7 @@ interface HeaderProps {
   isPastHero: boolean
   onNavigate: (section: SectionId) => void
 }
+
 export function Header({
   activeSection,
   isPastHero,
@@ -55,31 +56,36 @@ export function Header({
               onNavigate={onNavigate}
             />
 
-            <div className="site-header__actions">
-              <div className="availability">
-                <span className="availability__dot" aria-hidden="true" />
-                <span className="availability__status">
-                  Agenda aberta para novos projetos
+            <div className="availability">
+              <span className="availability__dot" aria-hidden="true" />
+              <span className="availability__status">
+                <span>Agenda aberta</span>
+                <span className="availability__status-detail">
+                  {' '}para novos projetos
                 </span>
-                <time
-                  className="header-time"
-                  data-clock-style="original"
-                  dateTime={time}
-                  aria-label={`${time} em Brasília`}
-                >
-                  <Clock3
-                    className="header-time__icon--original"
-                    size={14}
-                    aria-hidden="true"
-                  />
-                  <span className="header-time__value" aria-hidden="true">
-                    {time}
-                  </span>
-                  <span className="header-time__zone" aria-hidden="true">
-                    {' '}em Brasília
-                  </span>
-                </time>
-              </div>
+              </span>
+              <span className="availability__separator" aria-hidden="true" />
+              <time
+                className="header-time"
+                data-clock-style="original"
+                dateTime={time}
+                aria-label={`${time} em Brasília`}
+              >
+                <Clock3
+                  className="header-time__icon--original"
+                  size={14}
+                  aria-hidden="true"
+                />
+                <span className="header-time__value" aria-hidden="true">
+                  {time}
+                </span>
+                <span className="header-time__zone" aria-hidden="true">
+                  {' '}em Brasília
+                </span>
+              </time>
+            </div>
+
+            <div className="site-header__actions">
               <ThemeToggle />
               <TextRollButton
                 href="#contato"
