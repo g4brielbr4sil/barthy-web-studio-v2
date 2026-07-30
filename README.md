@@ -1,163 +1,232 @@
 # Barthy Web Studio V2
 
-Site institucional e apresentação digital da **Barthy Web Studio**, uma operação própria de soluções digitais para pequenos negócios.
+Segunda versão do site institucional da Barthy Web Studio, operação autoral de soluções digitais para pequenos negócios.
 
-A Barthy Web Studio não se resume a este site. A operação envolve estratégia, posicionamento, identidade visual, presença digital, desenvolvimento de sites e sistemas, propostas comerciais, captação de leads, CRM, automações, suporte e organização de processos.
+A Barthy Web Studio não se resume a uma landing page. A operação reúne presença digital, desenvolvimento web, sistemas internos, captação de leads, CRM, automações, integrações, propostas comerciais, suporte e organização de processos.
 
-Este repositório contém a **V2 da experiência web da marca**, construída como uma proposta editorial, cinematográfica, responsiva e acessível.
+Este repositório contém a experiência web V2 da marca, com direção editorial, interface responsiva, progressive enhancement e apresentação de projetos aplicados.
 
-## Status
+## Visão geral
 
-- **Aplicação:** implementada
-- **Repositório:** público
-- **Produção definitiva:** pendente de aprovação
-- **Indexação:** bloqueada com `noindex, nofollow`
-- **Formulário:** preparado, mas depende de endpoint confirmado
-- **WhatsApp:** depende de URL confirmada
-- **Licença:** proprietária
-
-## Objetivo do site
-
-Apresentar a Barthy Web Studio, suas áreas de atuação, processo de trabalho e projetos aplicados, criando uma experiência visual forte sem comprometer acessibilidade, responsividade e performance.
-
-## Direção visual
-
-| V1 | V2 |
+| Item | Situação |
 | --- | --- |
-| Dark-first | Light-first |
-| Técnica e modular | Editorial e cinematográfica |
-| Conteúdo aprofundado | Narrativa mais direta |
-| Muitos blocos operacionais | Momentos visuais selecionados |
-| Foco em estrutura | Foco em impacto e projetos |
+| Tipo | Site institucional e portfólio comercial |
+| Versão | V2 |
+| Repositório | Público |
+| Produção definitiva | Ainda não aprovada |
+| Indexação | Bloqueada temporariamente com `noindex, nofollow` |
+| Formulário | Implementado, depende de endpoint configurado |
+| Licença | Proprietária |
 
-## Stack confirmada
+A V2 ainda não deve substituir a versão anterior nem ser tratada como produção definitiva antes da validação visual em dispositivos reais, configuração dos canais de contato e aprovação do conteúdo final.
+
+## Objetivo do projeto
+
+O site foi criado para apresentar de forma clara:
+
+- o posicionamento da Barthy Web Studio
+- as frentes de presença digital, sistemas e operação
+- o processo de trabalho
+- projetos e experiências aplicadas
+- canais de contato
+- um briefing inicial para novos projetos
+
+A interface busca equilibrar impacto visual, leitura, acessibilidade e desempenho sem depender de um único recurso gráfico.
+
+## Estrutura da experiência
+
+O código organiza a página em componentes independentes:
+
+```text
+Header
+Hero
+Sobre a Barthy
+Projetos
+Soluções
+Processo
+Contato
+Footer
+```
+
+Os projetos apresentados no site são:
+
+- Levens, como experiência profissional e funcional em tecnologia e governança
+- PNQC, como plataforma educacional desenvolvida diretamente
+- Hermes, como aplicação Full Stack autoral
+
+As descrições devem preservar a diferença entre experiência profissional, desenvolvimento direto e propriedade do código.
+
+## Sistema visual
+
+### Progressive enhancement
+
+O Hero escolhe o modo visual de acordo com as capacidades reais do navegador e as preferências do usuário.
+
+| Modo | Condição |
+| --- | --- |
+| `shader` | WebGPU disponível, economia de dados desativada, movimento permitido e shader carregado |
+| `css-motion` | shader indisponível, não carregado ou com falha |
+| `static` | `prefers-reduced-motion` ativado |
+
+O sistema detecta:
+
+- disponibilidade de WebGPU
+- suporte a `backdrop-filter`
+- preferência por movimento reduzido
+- modo de economia de dados
+- estado de carregamento do shader
+
+A página mantém conteúdo e navegação mesmo quando o shader não é executado.
+
+### Estado real da animação
+
+O mecanismo de fallback está implementado no código, mas a experiência visual ainda apresenta comportamento inconsistente em alguns dispositivos e resoluções.
+
+Portanto:
+
+- a animação não está declarada como totalmente validada
+- testes em dispositivos físicos ainda são necessários
+- Safari, navegadores sem WebGPU e telas com diferentes densidades precisam de revisão
+- o conteúdo deve continuar legível mesmo quando o movimento não aparecer
+- a publicação definitiva depende dessa validação
+
+## Formulário de briefing
+
+O formulário coleta:
+
+- nome
+- WhatsApp
+- e-mail opcional
+- empresa ou projeto
+- tipo de solução
+- contexto da necessidade
+
+Proteções e comportamentos implementados na branch:
+
+- validação por campo
+- foco automático no primeiro erro
+- mensagens associadas aos inputs
+- estados de carregamento, sucesso, erro e configuração ausente
+- preservação dos dados quando o envio não é confirmado
+- fallback para contato por e-mail
+- honeypot para bots simples
+- timeout de requisição
+- cancelamento por `AbortController`
+- validação do status e do corpo da resposta
+- ausência de mensagem de sucesso falsa
+
+O endpoint é obtido por variável de ambiente. Nenhum envio online ocorre quando ele não está configurado.
+
+## Acessibilidade
+
+A implementação inclui:
+
+- link para pular ao conteúdo
+- regiões semânticas
+- hierarquia de títulos
+- navegação por teclado
+- foco visível
+- menu móvel com controle de foco
+- suporte a Escape e retorno de foco
+- nomes acessíveis em controles animados
+- mensagens de erro associadas aos campos
+- `aria-live` para status do formulário
+- tratamento de movimento reduzido
+- conteúdo textual mantido fora de elementos puramente decorativos
+
+A branch também contém uma auditoria estrutural automatizada para contratos de acessibilidade específicos do projeto.
+
+## Responsividade
+
+O projeto possui verificações automatizadas de contratos responsivos e regras para evitar overflow mascarado.
+
+Essas verificações ajudam a detectar regressões no código, mas não substituem testes manuais em:
+
+- celulares reais
+- tablets
+- notebooks
+- monitores ultrawide
+- diferentes densidades de pixel
+- navegadores com e sem WebGPU
+
+## Arquitetura
+
+```mermaid
+flowchart TD
+    APP[Aplicação React] --> THEME[Theme Provider]
+    APP --> VISUAL[Visual Capabilities Provider]
+
+    APP --> HEADER[Header e navegação]
+    APP --> HERO[Hero]
+    APP --> CONTENT[Seções editoriais]
+    APP --> PROJECTS[Projetos]
+    APP --> SOLUTIONS[Soluções]
+    APP --> CONTACT[Formulário]
+
+    VISUAL --> CHECK{Capacidades do navegador}
+    CHECK -->|WebGPU disponível| SHADER[Shader carregado sob demanda]
+    CHECK -->|Sem shader| CSS[Fallback CSS]
+    CHECK -->|Reduced motion| STATIC[Modo estático]
+
+    CONTACT --> ENDPOINT{Endpoint configurado?}
+    ENDPOINT -->|Sim| POST[POST JSON com timeout]
+    ENDPOINT -->|Não| EMAIL[Fallback para e-mail]
+```
+
+## Stack técnica
+
+### Aplicação
 
 - React 18
 - TypeScript
 - Vite
 - Tailwind CSS
-- Anime.js
 - CSS nativo
-- Shaders com WebGPU
+- Anime.js
+- biblioteca `shaders`
 - Lucide React
-- Cloudflare Pages como destino de publicação
+
+### Qualidade e entrega
+
+- pnpm
+- TypeScript project references
 - GitHub Actions
+- auditoria estrutural de acessibilidade
+- teste de contratos responsivos
+- build automatizado
+- auditoria de dependências
+- Cloudflare Pages como destino de publicação
 
 A V2 não utiliza Material UI, Radix UI, React Router, GSAP, Recharts ou React Hook Form.
 
-## Funcionalidades
-
-### Experiência visual
-
-- Hero com shader carregado sob demanda
-- fallback CSS quando WebGPU não está disponível
-- modo estático para movimento reduzido
-- temas claro e escuro
-- preferência de tema persistida
-- navegação por âncoras
-- indicador de seção ativa
-- menu mobile acessível
-
-### Conteúdo
-
-- apresentação do estúdio
-- projetos e cases
-- soluções organizadas por presença, sistemas e operação
-- processo de trabalho
-- canais de contato
-- formulário de briefing inicial
-
-### Formulário
-
-- validação de campos
-- foco no primeiro erro
-- estados de carregamento, sucesso e falha
-- preservação dos dados quando o endpoint não está configurado
-- honeypot contra bots simples
-- timeout e cancelamento de requisição
-- confirmação do contrato de resposta
-- nenhuma mensagem de sucesso falsa
-
-## Arquitetura visual
-
-```mermaid
-flowchart TD
-    A[Aplicação React] --> B[Hero]
-    A --> C[Seções editoriais]
-    A --> D[Projetos]
-    A --> E[Soluções]
-    A --> F[Contato]
-
-    B --> G{Capacidades do navegador}
-    G -->|WebGPU disponível| H[Shader]
-    G -->|Sem WebGPU| I[CSS Motion]
-    G -->|Reduced Motion| J[Modo estático]
-
-    F --> K{Endpoint configurado?}
-    K -->|Sim| L[POST JSON]
-    K -->|Não| M[Contato por e-mail]
-```
-
-## Progressive enhancement
-
-A experiência visual possui três modos:
-
-- `shader`: WebGPU disponível, movimento permitido e canvas carregado
-- `css-motion`: fallback sem canvas para ausência ou falha do shader
-- `static`: conteúdo completo sem animação para movimento reduzido
-
-A página continua navegável e legível mesmo sem shader, aceleração gráfica, Anime.js ou `backdrop-filter`.
-
-## Acessibilidade
-
-- um único `h1`
-- hierarquia semântica de títulos
-- link para pular ao conteúdo
-- menu móvel com foco contido
-- fechamento por Escape
-- retorno de foco
-- alvos interativos mínimos
-- foco visível
-- navegação por teclado
-- tabs com setas, Home e End
-- labels e mensagens de erro associadas
-- nome acessível estável para CTAs animados
-- conteúdo textual sem duplicação visual
-- suporte a `prefers-reduced-motion`
-
-## Responsividade
-
-O projeto possui contratos de regressão para comportamento responsivo e foi estruturado para funcionar entre 320 px e 2560 px sem mascarar overflow horizontal.
-
-## Estrutura principal
+## Estrutura do projeto
 
 ```text
 src/
-  app/
+  app/              composição principal e providers
   components/
-    brand/
-    contact/
-    header/
-    hero/
-    projects/
-    sections/
-    solutions/
-    ui/
-  data/
-  hooks/
-  lib/
-  motion/
-  styles/
-  theme/
-  visual/
-public/
-scripts/
-docs/
+    contact/        formulário e canais de contato
+    header/         navegação desktop e mobile
+    hero/           conteúdo e fundos visuais
+    projects/       apresentação dos projetos
+    sections/       seções editoriais
+    solutions/      arquitetura de soluções
+    ui/             componentes reutilizáveis
+  data/             navegação e conteúdo dos projetos
+  hooks/            comportamento e preferências
+  lib/              contato e utilitários
+  motion/           animações progressivas
+  styles/           estilos globais
+  theme/            tema e persistência
+  visual/           detecção de capacidades e modos visuais
+scripts/            auditorias e contratos automatizados
+docs/               checklist de produção
+public/              arquivos públicos e headers
 ```
 
-## Desenvolvimento
+## Desenvolvimento local
 
-Requisitos:
+### Requisitos
 
 - Node.js 22.13 ou superior
 - pnpm 11.9
@@ -166,6 +235,21 @@ Requisitos:
 pnpm install
 pnpm dev
 ```
+
+## Variáveis de ambiente
+
+Copie o arquivo de exemplo:
+
+```bash
+cp .env.example .env.local
+```
+
+```env
+VITE_BARTHY_WHATSAPP_URL=
+VITE_BARTHY_CONTACT_ENDPOINT=
+```
+
+Variáveis `VITE_` são incluídas no código entregue ao navegador. Elas não podem conter senhas, tokens privados, chaves administrativas ou qualquer outro segredo.
 
 ## Validação
 
@@ -177,20 +261,21 @@ pnpm build
 pnpm audit --prod
 ```
 
-## Variáveis de ambiente
+Além dos comandos, a validação de publicação precisa incluir:
 
-Copie `.env.example` para `.env.local`.
+1. navegação por teclado
+2. temas claro e escuro
+3. movimento reduzido
+4. carregamento e falha do shader
+5. formulário sem endpoint
+6. formulário com endpoint de teste
+7. celulares e navegadores reais
+8. ausência de overflow horizontal
+9. leitura completa sem animação
 
-```env
-VITE_BARTHY_WHATSAPP_URL=
-VITE_BARTHY_CONTACT_ENDPOINT=
-```
+## Publicação
 
-Variáveis com prefixo `VITE_` ficam públicas no navegador. Nunca coloque tokens, senhas ou segredos nesses campos.
-
-## Publicação no Cloudflare Pages
-
-Configuração prevista:
+Configuração prevista para Cloudflare Pages:
 
 ```text
 Repositório: g4brielbr4sil/barthy-web-studio-v2
@@ -200,37 +285,53 @@ Diretório de saída: dist
 Node.js: 22.13 ou superior
 ```
 
-Consulte [`docs/PRODUCTION_CHECKLIST.md`](docs/PRODUCTION_CHECKLIST.md) antes da publicação definitiva.
+Antes da publicação definitiva devem ser confirmados:
 
-O bloqueio de indexação deve ser removido somente quando domínio, conteúdo, formulário, imagens e publicação estiverem aprovados.
+- domínio ou URL oficial
+- WhatsApp
+- endpoint do formulário
+- imagens finais
+- textos e projetos apresentados
+- comportamento visual em dispositivos reais
+- headers de segurança
+- remoção consciente do `noindex`
 
-## Screenshots
+Consulte [`docs/PRODUCTION_CHECKLIST.md`](docs/PRODUCTION_CHECKLIST.md).
 
-As imagens serão produzidas em conjunto após a validação do preview. Serão incluídas versões desktop e mobile do Hero, soluções, projetos e formulário, sem dados pessoais ou conteúdo não aprovado.
+## Segurança e privacidade
 
-## Segurança
+- nenhum segredo deve existir no frontend
+- framing e MIME sniffing são restringidos pelos headers preparados
+- permissões desnecessárias do navegador são bloqueadas
+- o formulário não armazena dados localmente
+- mensagens de sucesso dependem de confirmação do endpoint
+- screenshots não podem exibir leads, contatos ou dados pessoais
+- a marca, o design e o código são proprietários
 
-- headers de segurança preparados para Cloudflare Pages
-- framing bloqueado
-- MIME sniffing bloqueado
-- políticas restritivas para câmera, microfone, localização, pagamentos e USB
-- formulário com timeout e honeypot
-- nenhuma chave secreta no frontend
-- nenhum dado do formulário armazenado localmente pelo projeto
+## Diferença entre V1 e V2
 
-## Limitações atuais
+| V1 | V2 |
+| --- | --- |
+| dark-first | light-first |
+| maior quantidade de blocos | narrativa mais enxuta |
+| interface técnica e modular | direção editorial e cinematográfica |
+| integração direta com Hermes no formulário | endpoint genérico configurável |
+| recursos amplos de UI | stack visual mais reduzida |
 
-- não existe deploy definitivo aprovado
-- endpoint de contato ainda precisa ser confirmado
-- URL de WhatsApp ainda precisa ser confirmada
-- imagens editoriais definitivas ainda precisam ser aprovadas
-- testes em dispositivos físicos e Safari ainda devem ser concluídos
-- o chunk do shader permanece maior que o bundle inicial, mas é isolado e carregado sob demanda
+A V1 permanece como registro da evolução técnica. A V2 deve assumir o protagonismo somente depois de validada e publicada.
 
-## V1 e V2
+## Próximos passos confirmados
 
-A V1 permanece em repositório separado e representa uma direção anterior da presença digital. Nenhuma substituição da produção deve ser realizada sem comparação visual, validação do formulário e aprovação explícita.
+- estabilizar a animação entre dispositivos e resoluções
+- concluir testes físicos e em Safari
+- configurar os canais reais de contato
+- publicar um preview aprovado
+- produzir screenshots desktop e mobile
+- remover `noindex` apenas na publicação definitiva
+- documentar a URL final no repositório
 
-## Licença
+## Autoria e licença
 
-Código, design, marca, conteúdo e documentação são proprietários. Consulte [`LICENSE`](LICENSE).
+Projeto desenvolvido por Gabriel Brasil para a Barthy Web Studio.
+
+Código, marca, identidade, conteúdo e documentação são proprietários. Consulte [`LICENSE`](LICENSE).
