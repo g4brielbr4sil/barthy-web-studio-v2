@@ -1,159 +1,114 @@
+<div align="center">
+
 # Barthy Web Studio V2
 
-A V2 é a nova experiência institucional da Barthy Web Studio, projeto que criei para apresentar soluções digitais, processos e projetos de forma mais direta, visual e profissional.
+**Portfólio institucional desenvolvido com React e TypeScript para apresentar projetos reais, soluções digitais e minha atuação em desenvolvimento web.**
 
-Enquanto a V1 funciona como uma apresentação comercial mais extensa, esta versão busca uma narrativa mais enxuta, com foco em posicionamento, projetos reais e contato.
+![React](https://img.shields.io/badge/React-18-20232a?logo=react&logoColor=61dafb)
+![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06b6d4?logo=tailwindcss&logoColor=white)
+![Status](https://img.shields.io/badge/status-em_validação-f59e0b)
 
-## Visão rápida
+</div>
 
-| Item | Descrição |
+## Sobre o projeto
+
+A Barthy Web Studio V2 é a nova versão do meu portfólio profissional e institucional. O projeto foi criado para comunicar com clareza quem eu sou, quais problemas consigo resolver e como transformo necessidades de negócio em experiências digitais funcionais.
+
+Mais do que uma landing page, esta aplicação demonstra minha capacidade de planejar, desenvolver, validar e documentar uma solução front-end completa, com atenção a experiência do usuário, acessibilidade, responsividade, desempenho e manutenção.
+
+## O que este projeto demonstra
+
+- Desenvolvimento front-end com React e TypeScript
+- Estruturação de componentes reutilizáveis e responsabilidades bem separadas
+- Implementação fiel de identidade visual e experiência responsiva
+- Progressive enhancement para recursos visuais avançados
+- Acessibilidade aplicada a navegação, formulários e animações
+- Validação robusta de formulários e tratamento de falhas
+- Criação de verificações automatizadas de qualidade
+- Organização de código, documentação e preparação para deploy
+- Visão de produto aplicada a uma necessidade comercial real
+
+## Minha atuação
+
+Projeto concebido e desenvolvido por **Gabriel Brasil**, com responsabilidade sobre:
+
+- definição da proposta e da arquitetura da página
+- organização do conteúdo e da experiência de navegação
+- desenvolvimento dos componentes e comportamentos da interface
+- implementação dos temas claro e escuro
+- criação dos modos visuais e fallbacks
+- acessibilidade e navegação por teclado
+- validação do formulário de briefing
+- testes estruturais e documentação técnica
+- preparação do fluxo de publicação
+
+## Destaques técnicos
+
+### Experiência visual adaptativa
+
+O Hero utiliza progressive enhancement para entregar a melhor experiência que o navegador e o dispositivo suportam:
+
+| Modo | Comportamento |
 | --- | --- |
-| Tipo | Site institucional e portfólio comercial |
-| Versão | V2 |
-| Status | Em validação visual |
-| Repositório | Público |
-| Formulário | Implementado, depende de endpoint configurado |
-| Indexação | Temporariamente bloqueada com `noindex, nofollow` |
-| Licença | Proprietária |
+| `shader` | Renderização avançada quando WebGPU está disponível |
+| `css-motion` | Fallback animado quando o shader não pode ser utilizado |
+| `static` | Experiência sem movimento para usuários com essa preferência |
 
-## O que a V2 apresenta
+A aplicação também considera economia de dados, suporte a `backdrop-filter`, estado de carregamento e falhas do recurso visual. O conteúdo permanece acessível mesmo sem animações.
 
-A página foi organizada para mostrar:
+### Formulário preparado para cenários reais
 
-- o posicionamento da Barthy Web Studio
-- as frentes de presença digital, sistemas e operação
-- projetos e experiências aplicadas
-- o processo de trabalho
-- soluções disponíveis
-- canais de contato
-- um briefing inicial para novos projetos
+O formulário de briefing inclui:
 
-Os projetos apresentados são:
-
-- Levens, como experiência profissional em tecnologia, sistemas e processos
-- PNQC, como plataforma educacional desenvolvida diretamente
-- Hermes, como aplicação Full Stack autoral
-
-## Estrutura da página
-
-```text
-Header
-Hero
-Sobre a Barthy
-Projetos
-Soluções
-Processo
-Contato
-Footer
-```
-
-## Experiência visual
-
-O Hero utiliza progressive enhancement para escolher a melhor experiência disponível em cada navegador.
-
-| Modo | Quando é usado |
-| --- | --- |
-| `shader` | WebGPU disponível, movimento permitido e shader carregado |
-| `css-motion` | shader indisponível ou com falha |
-| `static` | preferência por movimento reduzido ativada |
-
-A aplicação verifica suporte a WebGPU, `backdrop-filter`, economia de dados, movimento reduzido e estado de carregamento do shader.
-
-O conteúdo e a navegação continuam disponíveis mesmo quando a animação principal não é executada.
-
-### Estado atual da animação
-
-A estrutura de fallback está pronta, mas ainda estou ajustando o comportamento visual em alguns dispositivos, resoluções e navegadores.
-
-Antes da publicação definitiva, ainda preciso validar:
-
-- celulares reais
-- tablets e notebooks
-- monitores ultrawide
-- Safari
-- navegadores sem WebGPU
-- diferentes densidades de pixel
-- leitura completa sem animação
-
-## Funcionalidades
-
-### Formulário de briefing
-
-O formulário coleta:
-
-- nome
-- WhatsApp
-- e-mail opcional
-- empresa ou projeto
-- tipo de solução
-- contexto da necessidade
-
-O fluxo inclui:
-
-- validação por campo
-- foco no primeiro erro
-- mensagens associadas aos inputs
+- validação individual por campo
+- mensagens de erro associadas aos inputs
+- foco automático no primeiro erro
 - estados de carregamento, sucesso e falha
-- preservação dos dados quando o envio não é confirmado
-- fallback para contato por e-mail
-- honeypot para bots simples
-- timeout da requisição
-- cancelamento com `AbortController`
+- preservação dos dados quando o envio falha
+- timeout e cancelamento com `AbortController`
 - validação do status e do corpo da resposta
-- bloqueio de mensagens de sucesso falsas
+- honeypot contra bots simples
+- fallback para contato por e-mail
 
-O envio depende da variável `VITE_BARTHY_CONTACT_ENDPOINT`. Sem endpoint configurado, nenhum dado é enviado online.
+O envio utiliza um endpoint configurável por ambiente. Nenhuma credencial privada é exposta no front-end.
 
 ### Acessibilidade
 
-A interface inclui:
+Entre os recursos implementados estão:
 
-- link para pular ao conteúdo
-- regiões semânticas
-- hierarquia de títulos
-- navegação por teclado
-- foco visível
-- menu móvel com controle de foco
-- suporte à tecla Escape
-- retorno de foco ao fechar o menu
-- nomes acessíveis em controles animados
-- mensagens de erro associadas aos campos
-- `aria-live` para o status do formulário
-- suporte a movimento reduzido
+- HTML semântico e hierarquia de títulos
+- link para pular ao conteúdo principal
+- navegação completa por teclado
+- foco visível e controle de foco no menu móvel
+- fechamento do menu com a tecla Escape
+- retorno de foco ao elemento de origem
+- mensagens de formulário com `aria-live`
+- suporte a `prefers-reduced-motion`
+- nomes acessíveis para controles interativos
 
-### Responsividade
+### Qualidade automatizada
 
-O projeto possui verificações automatizadas para contratos responsivos e regras que ajudam a detectar overflow e regressões de layout.
+O projeto possui comandos próprios para verificar conteúdo, acessibilidade estrutural, contratos responsivos, tipagem e build:
 
-Esses testes não substituem a validação manual em dispositivos reais, mas ajudam a evitar problemas durante a evolução da interface.
+```bash
+pnpm quality
+```
 
-## Arquitetura
+Esse fluxo executa:
 
-```mermaid
-flowchart TD
-    APP[Aplicação React] --> THEME[Theme Provider]
-    APP --> VISUAL[Visual Capabilities Provider]
-
-    APP --> HEADER[Header]
-    APP --> HERO[Hero]
-    APP --> CONTENT[Seções editoriais]
-    APP --> PROJECTS[Projetos]
-    APP --> SOLUTIONS[Soluções]
-    APP --> CONTACT[Formulário]
-
-    VISUAL --> CHECK{Capacidades do navegador}
-    CHECK -->|WebGPU| SHADER[Shader carregado sob demanda]
-    CHECK -->|Sem shader| CSS[Fallback CSS]
-    CHECK -->|Reduced motion| STATIC[Modo estático]
-
-    CONTACT --> ENDPOINT{Endpoint configurado?}
-    ENDPOINT -->|Sim| POST[POST JSON com timeout]
-    ENDPOINT -->|Não| EMAIL[Fallback para e-mail]
+```bash
+pnpm audit:content
+pnpm audit:a11y
+pnpm test:responsive
+pnpm typecheck
+pnpm build
 ```
 
 ## Stack
 
-### Aplicação
+### Desenvolvimento
 
 - React 18
 - TypeScript
@@ -161,48 +116,63 @@ flowchart TD
 - Tailwind CSS
 - CSS nativo
 - Anime.js
-- biblioteca `shaders`
+- Shaders com carregamento sob demanda
 - Lucide React
 
 ### Qualidade e entrega
 
 - pnpm
-- TypeScript project references
+- TypeScript Project References
+- scripts próprios de auditoria
 - GitHub Actions
-- auditoria estrutural de acessibilidade
-- testes de contratos responsivos
 - build automatizado
-- auditoria de dependências
 - Cloudflare Pages como destino de publicação
 
-A V2 não utiliza Material UI, Radix UI, React Router, GSAP, Recharts ou React Hook Form.
+## Arquitetura
 
-## Estrutura do projeto
+```mermaid
+flowchart TD
+    APP[Aplicação React] --> PROVIDERS[Providers de tema e recursos visuais]
+    APP --> UI[Componentes e seções]
+    APP --> CONTACT[Formulário de contato]
+
+    PROVIDERS --> CAPABILITIES{Capacidades do dispositivo}
+    CAPABILITIES --> SHADER[Shader WebGPU]
+    CAPABILITIES --> CSS[Fallback CSS]
+    CAPABILITIES --> STATIC[Modo estático]
+
+    CONTACT --> ENDPOINT{Endpoint configurado?}
+    ENDPOINT --> API[Envio HTTP com validação e timeout]
+    ENDPOINT --> EMAIL[Fallback para e-mail]
+```
+
+## Estrutura principal
 
 ```text
 src/
-  app/              composição principal e providers
-  components/
-    contact/        formulário e canais de contato
-    header/         navegação desktop e mobile
-    hero/           conteúdo e fundos visuais
-    projects/       projetos apresentados
-    sections/       seções editoriais
-    solutions/      arquitetura de soluções
-    ui/             componentes reutilizáveis
-  data/             navegação e conteúdo
-  hooks/            comportamento e preferências
-  lib/              contato e utilitários
+  app/              composição da aplicação e providers
+  components/       componentes organizados por domínio
+  data/             conteúdo e configurações da interface
+  hooks/            comportamentos reutilizáveis
+  lib/              utilitários e fluxo de contato
   motion/           animações progressivas
   styles/           estilos globais
   theme/            tema e persistência
-  visual/           capacidades e modos visuais
-scripts/            auditorias e contratos automatizados
-docs/               checklist de produção
+  visual/           detecção de capacidades e modos visuais
+scripts/            auditorias e verificações automatizadas
+docs/               documentação de produção
 public/              arquivos públicos e headers
 ```
 
-## Rodando localmente
+## Projetos apresentados
+
+A experiência destaca trabalhos que representam diferentes frentes da minha atuação:
+
+- **Levens:** sistemas, processos, suporte técnico e automações aplicadas a uma operação real
+- **PNQC:** plataforma educacional com autenticação, trilhas de aprendizagem, avaliações e progresso
+- **Hermes:** aplicação Full Stack autoral para organização pessoal, comercial, financeira e operacional
+
+## Como executar
 
 ### Requisitos
 
@@ -210,93 +180,45 @@ public/              arquivos públicos e headers
 - pnpm 11.9
 
 ```bash
+git clone https://github.com/g4brielbr4sil/barthy-web-studio-v2.git
+cd barthy-web-studio-v2
 pnpm install
+cp .env.example .env.local
 pnpm dev
 ```
 
-Crie o arquivo local de ambiente:
-
-```bash
-cp .env.example .env.local
-```
+Variáveis disponíveis:
 
 ```env
 VITE_BARTHY_WHATSAPP_URL=
 VITE_BARTHY_CONTACT_ENDPOINT=
 ```
 
-Variáveis `VITE_` são públicas no navegador e não devem conter senhas, tokens ou chaves administrativas.
+Variáveis com prefixo `VITE_` são públicas no navegador e não devem armazenar segredos.
 
-## Validação
+## Status
 
-```bash
-pnpm audit:a11y
-pnpm test:responsive
-pnpm typecheck
-pnpm build
-pnpm audit --prod
-```
+A aplicação está em validação final antes da publicação definitiva.
 
-Checklist principal:
+Próximas etapas:
 
-1. navegação por teclado
-2. temas claro e escuro
-3. movimento reduzido
-4. carregamento e falha do shader
-5. formulário sem endpoint
-6. formulário com endpoint de teste
-7. celulares e navegadores reais
-8. ausência de overflow horizontal
-9. leitura completa sem animação
+- concluir testes em dispositivos e navegadores reais
+- configurar os canais oficiais de contato
+- adicionar screenshots finais desktop e mobile
+- confirmar os headers de segurança
+- publicar a URL oficial
+- remover o bloqueio temporário de indexação
 
-## Publicação
+O checklist completo está em [`docs/PRODUCTION_CHECKLIST.md`](docs/PRODUCTION_CHECKLIST.md).
 
-Configuração planejada para o Cloudflare Pages:
+## Autor
 
-```text
-Repositório: g4brielbr4sil/barthy-web-studio-v2
-Branch de produção: main
-Comando de build: pnpm build
-Diretório de saída: dist
-Node.js: 22.13 ou superior
-```
+**Gabriel Brasil**
 
-Antes de liberar a versão definitiva, ainda precisam ser confirmados:
+Estudante de Análise e Desenvolvimento de Sistemas e desenvolvedor com foco em aplicações web, automações, melhoria de processos e construção de soluções digitais para necessidades reais.
 
-- URL oficial
-- WhatsApp
-- endpoint do formulário
-- imagens finais
-- textos e projetos apresentados
-- comportamento visual em dispositivos reais
-- headers de segurança
-- remoção do `noindex`
+GitHub: [@g4brielbr4sil](https://github.com/g4brielbr4sil)
 
-Consulte [`docs/PRODUCTION_CHECKLIST.md`](docs/PRODUCTION_CHECKLIST.md).
-
-## V1 e V2
-
-| V1 | V2 |
-| --- | --- |
-| dark-first | light-first |
-| apresentação comercial extensa | narrativa mais direta |
-| muitos blocos operacionais | foco em projetos e posicionamento |
-| Material UI, Radix, GSAP e Motion | Anime.js, CSS e shader |
-| integração direta com Hermes | endpoint genérico configurável |
-| mais componentes | experiência mais enxuta |
-
-A V1 continua como parte da história técnica da Barthy. A V2 assume o protagonismo depois da validação e da publicação definitiva.
-
-## Próximos passos
-
-- estabilizar a animação entre dispositivos e resoluções
-- concluir os testes físicos e no Safari
-- configurar os canais reais de contato
-- publicar um preview aprovado
-- produzir screenshots desktop e mobile
-- remover o `noindex` na publicação definitiva
-- registrar a URL final no repositório
-
-Desenvolvido por **Gabriel Brasil** para a **Barthy Web Studio**.
+## Licença
 
 Código, marca, identidade e conteúdo protegidos pela licença disponível em [`LICENSE`](LICENSE).
