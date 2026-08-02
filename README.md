@@ -2,40 +2,40 @@
 
 # Barthy Web Studio V2
 
-**Portfólio institucional desenvolvido com React e TypeScript para apresentar projetos reais, soluções digitais e minha atuação em desenvolvimento web.**
+**Site institucional e portfólio profissional desenvolvido para apresentar projetos, soluções digitais e competências em desenvolvimento web.**
 
 ![React](https://img.shields.io/badge/React-18-20232a?logo=react&logoColor=61dafb)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06b6d4?logo=tailwindcss&logoColor=white)
-![Status](https://img.shields.io/badge/status-em_validação-f59e0b)
 
 </div>
 
 ## Sobre o projeto
 
-A Barthy Web Studio V2 é a nova versão do meu portfólio profissional e institucional. O projeto foi criado para comunicar com clareza quem eu sou, quais problemas consigo resolver e como transformo necessidades de negócio em experiências digitais funcionais.
+A Barthy Web Studio V2 é a evolução do site institucional da Barthy Web Studio. O projeto apresenta minha atuação, os serviços da marca e projetos desenvolvidos para necessidades reais de operação, educação e organização pessoal.
 
-Mais do que uma landing page, esta aplicação demonstra minha capacidade de planejar, desenvolver, validar e documentar uma solução front-end completa, com atenção a experiência do usuário, acessibilidade, responsividade, desempenho e manutenção.
+A aplicação combina uma direção visual editorial com arquitetura front-end organizada, componentes reutilizáveis, responsividade, acessibilidade e progressive enhancement. O objetivo é funcionar ao mesmo tempo como presença comercial da Barthy e como demonstração técnica para clientes, parceiros e recrutadores.
 
 ## O que este projeto demonstra
 
 - Desenvolvimento front-end com React e TypeScript
-- Estruturação de componentes reutilizáveis e responsabilidades bem separadas
-- Implementação fiel de identidade visual e experiência responsiva
+- Arquitetura baseada em componentes e responsabilidades bem separadas
+- Implementação de temas claro e escuro
 - Progressive enhancement para recursos visuais avançados
-- Acessibilidade aplicada a navegação, formulários e animações
-- Validação robusta de formulários e tratamento de falhas
-- Criação de verificações automatizadas de qualidade
-- Organização de código, documentação e preparação para deploy
-- Visão de produto aplicada a uma necessidade comercial real
+- Fallbacks para diferentes capacidades do navegador e do dispositivo
+- Acessibilidade aplicada à navegação, aos formulários e às animações
+- Validação de formulários e tratamento de falhas
+- Verificações automatizadas de conteúdo, responsividade, tipagem e build
+- Organização de código, documentação e fluxo de entrega
+- Visão de produto aplicada a uma operação comercial própria
 
 ## Minha atuação
 
-Projeto concebido e desenvolvido por **Gabriel Brasil**, com responsabilidade sobre:
+Projeto concebido e desenvolvido por **Gabriel Brasil Barthy Elias**, com responsabilidade sobre:
 
 - definição da proposta e da arquitetura da página
-- organização do conteúdo e da experiência de navegação
+- organização do conteúdo e da navegação
 - desenvolvimento dos componentes e comportamentos da interface
 - implementação dos temas claro e escuro
 - criação dos modos visuais e fallbacks
@@ -44,27 +44,37 @@ Projeto concebido e desenvolvido por **Gabriel Brasil**, com responsabilidade so
 - testes estruturais e documentação técnica
 - preparação do fluxo de publicação
 
-## Destaques técnicos
+## Principais funcionalidades
 
-### Experiência visual adaptativa
+- Hero em tela cheia com composição visual adaptativa
+- Navegação por seções com indicação da seção ativa
+- Menu móvel com controle de foco, bloqueio de rolagem e fechamento por Escape
+- Seções institucionais, projetos, soluções, processo e contato
+- Alternância entre temas claro e escuro
+- Formulário de briefing com validação e endpoint configurável
+- Fallback de contato por e-mail
+- Suporte a `prefers-reduced-motion`
+- Painel de diagnóstico visual habilitado apenas para desenvolvimento
 
-O Hero utiliza progressive enhancement para entregar a melhor experiência que o navegador e o dispositivo suportam:
+## Experiência visual adaptativa
+
+O Hero utiliza progressive enhancement para selecionar o modo visual compatível com o ambiente:
 
 | Modo | Comportamento |
 | --- | --- |
 | `shader` | Renderização avançada quando WebGPU está disponível |
 | `css-motion` | Fallback animado quando o shader não pode ser utilizado |
-| `static` | Experiência sem movimento para usuários com essa preferência |
+| `static` | Composição sem movimento para usuários com essa preferência |
 
-A aplicação também considera economia de dados, suporte a `backdrop-filter`, estado de carregamento e falhas do recurso visual. O conteúdo permanece acessível mesmo sem animações.
+A aplicação também considera economia de dados, visibilidade da página, suporte a `backdrop-filter` e falhas de carregamento. O conteúdo permanece disponível mesmo sem animações ou canvas.
 
-### Formulário preparado para cenários reais
+## Formulário de briefing
 
-O formulário de briefing inclui:
+O formulário inclui:
 
 - validação individual por campo
 - mensagens de erro associadas aos inputs
-- foco automático no primeiro erro
+- foco automático no primeiro campo inválido
 - estados de carregamento, sucesso e falha
 - preservação dos dados quando o envio falha
 - timeout e cancelamento com `AbortController`
@@ -72,43 +82,25 @@ O formulário de briefing inclui:
 - honeypot contra bots simples
 - fallback para contato por e-mail
 
-O envio utiliza um endpoint configurável por ambiente. Nenhuma credencial privada é exposta no front-end.
+O envio utiliza um endpoint configurável por ambiente. Nenhuma credencial privada é armazenada no front-end.
 
-### Acessibilidade
+## Acessibilidade e experiência de uso
 
 Entre os recursos implementados estão:
 
 - HTML semântico e hierarquia de títulos
 - link para pular ao conteúdo principal
-- navegação completa por teclado
+- navegação por teclado
 - foco visível e controle de foco no menu móvel
-- fechamento do menu com a tecla Escape
 - retorno de foco ao elemento de origem
 - mensagens de formulário com `aria-live`
-- suporte a `prefers-reduced-motion`
+- suporte a movimento reduzido
 - nomes acessíveis para controles interativos
+- contratos responsivos verificados por script próprio
 
-### Qualidade automatizada
+## Tecnologias
 
-O projeto possui comandos próprios para verificar conteúdo, acessibilidade estrutural, contratos responsivos, tipagem e build:
-
-```bash
-pnpm quality
-```
-
-Esse fluxo executa:
-
-```bash
-pnpm audit:content
-pnpm audit:a11y
-pnpm test:responsive
-pnpm typecheck
-pnpm build
-```
-
-## Stack
-
-### Desenvolvimento
+### Aplicação
 
 - React 18
 - TypeScript
@@ -116,8 +108,13 @@ pnpm build
 - Tailwind CSS
 - CSS nativo
 - Anime.js
-- Shaders com carregamento sob demanda
 - Lucide React
+
+### Recursos visuais
+
+- Shader WebGPU carregado sob demanda
+- Fallback animado em CSS
+- Modo estático para movimento reduzido
 
 ### Qualidade e entrega
 
@@ -166,8 +163,6 @@ public/              arquivos públicos e headers
 
 ## Projetos apresentados
 
-A experiência destaca trabalhos que representam diferentes frentes da minha atuação:
-
 - **Levens:** sistemas, processos, suporte técnico e automações aplicadas a uma operação real
 - **PNQC:** plataforma educacional com autenticação, trilhas de aprendizagem, avaliações e progresso
 - **Hermes:** aplicação Full Stack autoral para organização pessoal, comercial, financeira e operacional
@@ -187,37 +182,42 @@ cp .env.example .env.local
 pnpm dev
 ```
 
-Variáveis disponíveis:
+### Variáveis de ambiente
 
 ```env
 VITE_BARTHY_WHATSAPP_URL=
 VITE_BARTHY_CONTACT_ENDPOINT=
 ```
 
+`VITE_BARTHY_WHATSAPP_URL` define a URL utilizada pelo botão de contato via WhatsApp.
+
+`VITE_BARTHY_CONTACT_ENDPOINT` define o endpoint responsável pelo envio do formulário de briefing.
+
 Variáveis com prefixo `VITE_` são públicas no navegador e não devem armazenar segredos.
 
-## Status
+## Validação
 
-A aplicação está em validação final antes da publicação definitiva.
+```bash
+pnpm quality
+```
 
-Próximas etapas:
+O fluxo executa:
 
-- concluir testes em dispositivos e navegadores reais
-- configurar os canais oficiais de contato
-- adicionar screenshots finais desktop e mobile
-- confirmar os headers de segurança
-- publicar a URL oficial
-- remover o bloqueio temporário de indexação
+```bash
+pnpm audit:content
+pnpm audit:a11y
+pnpm test:responsive
+pnpm typecheck
+pnpm build
+```
 
-O checklist completo está em [`docs/PRODUCTION_CHECKLIST.md`](docs/PRODUCTION_CHECKLIST.md).
+## Autor e contato
 
-## Autor
+**Gabriel Brasil Barthy Elias**  
+**Barthy Web Studio**
 
-**Gabriel Brasil**
-
-Estudante de Análise e Desenvolvimento de Sistemas e desenvolvedor com foco em aplicações web, automações, melhoria de processos e construção de soluções digitais para necessidades reais.
-
-GitHub: [@g4brielbr4sil](https://github.com/g4brielbr4sil)
+- GitHub: [@g4brielbr4sil](https://github.com/g4brielbr4sil)
+- E-mail: [contato.barthywebstudio@gmail.com](mailto:contato.barthywebstudio@gmail.com)
 
 ## Licença
 
