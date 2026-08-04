@@ -16,9 +16,18 @@ A aplicação deve transmitir uma identidade visual premium, tecnológica, notur
 - Lucide React
 - Shaders e efeitos visuais quando já existentes no projeto
 
+## Linguagem e comunicação
+
+- Responder, explicar alterações e produzir documentação em português do Brasil.
+- Escrever de forma clara, direta, natural e profissional.
+- Evitar textos genéricos, exageros, jargões desnecessários e tom que pareça produzido automaticamente.
+- Manter nomes oficiais de tecnologias, bibliotecas, APIs, comandos, arquivos e identificadores no idioma original.
+- Descrever somente funcionalidades, resultados e responsabilidades comprovados pelo projeto.
+- Diferenciar o que está concluído, em produção, em desenvolvimento ou planejado.
+- Seguir o padrão definido em `CONTRIBUTING.md`.
+
 ## Regras de desenvolvimento
 
-- Responder e explicar alterações em português do Brasil.
 - Não modificar arquivos fora do escopo solicitado.
 - Não remover funcionalidades existentes sem autorização.
 - Não alterar a identidade visual sem solicitação explícita.
@@ -54,5 +63,8 @@ A aplicação deve transmitir uma identidade visual premium, tecnológica, notur
 
 - Criar branches com nomes claros.
 - Produzir commits pequenos e objetivos.
-- Usar Conventional Commits quando solicitado.
-- Não enviar arquivos de teste temporários ao repositório.
+- Usar Conventional Commits com o prefixo técnico em inglês e a descrição em português.
+- Usar títulos de Pull Request no mesmo padrão dos commits.
+- Estruturar descrições de Pull Request com mudança, motivo, impacto, validação e escopo preservado.
+- Não reescrever o histórico publicado apenas para traduzir mensagens antigas.
+- Não enviar arquivos temporários ou dados privados ao repositório.
