@@ -482,13 +482,47 @@
 }
 
 @media (max-width: 430px) {
-  .solution-network[data-density='sistemas'] .solution-network__node-label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+  .solution-system {
+    min-height: 25rem;
+    padding-inline: 0;
+  }
+
+  .solution-system__layer strong {
+    display: none;
+  }
+
+  .solution-system__module {
+    min-height: 3.5rem;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.45rem 0.2rem;
+    font-size: 0.58rem;
+  }
+
+  .solution-system__bus {
+    height: 2.6rem;
+  }
+
+  .solution-system__engine {
+    grid-template-columns: minmax(0, 1fr) 5.4rem minmax(0, 1fr);
+    gap: 0.45rem;
+  }
+
+  .solution-system__source {
+    min-height: 3rem;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.4rem;
+    font-size: 0.58rem;
+  }
+
+  .solution-system__core {
+    min-height: 5.7rem;
+    border-radius: 1.2rem;
+  }
+
+  .solution-system__flow {
+    display: none;
   }
 
   .solution-network[data-density='sistemas']
@@ -584,7 +618,10 @@
   .solution-network__node,
   .solution-network__connections line,
   .solution-network__ring,
-  .solution-network__core {
+  .solution-network__core,
+  .responsive-system__device,
+  .visual-direction__interface {
     animation: none !important;
+    transition: none !important;
   }
 }
