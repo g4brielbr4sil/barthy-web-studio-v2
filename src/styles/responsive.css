@@ -390,14 +390,6 @@
     justify-self: center;
   }
 
-  .pnqc-visual__layout {
-    grid-template-columns: 1fr;
-  }
-
-  .pnqc-visual__certificate {
-    display: none;
-  }
-
   .form-grid {
     grid-template-columns: 1fr;
   }

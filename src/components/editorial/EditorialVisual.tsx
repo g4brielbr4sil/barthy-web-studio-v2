@@ -1,48 +1,74 @@
-import { LayoutTemplate, Sparkles } from 'lucide-react'
-
 interface EditorialVisualProps {
   size: 'small' | 'large'
 }
 
+const studioScreens = {
+  hero: '/images/studio/barthy-hero.jpg',
+  process: '/images/studio/barthy-process-mobile.jpg',
+  solutions: '/images/studio/barthy-solutions.jpg',
+} as const
+
 const visualDescriptions: Record<EditorialVisualProps['size'], string> = {
-  small: 'Detalhe editorial do processo criativo da Barthy Web Studio',
-  large:
-    'Composição editorial do estúdio e das experiências digitais da Barthy',
+  small: 'Processo responsivo da Barthy Web Studio em um mockup mobile',
+  large: 'Direção visual da Barthy Web Studio em uma composição de desktop',
+}
+
+function StudioChrome() {
+  return (
+    <div className="studio-screen__chrome" aria-hidden="true">
+      <span />
+      <span />
+      <span />
+      <i>barthy.web.studio</i>
+    </div>
+  )
 }
 
 export function EditorialVisual({ size }: EditorialVisualProps) {
   return (
     <figure
-      className={`editorial-visual editorial-visual--${size} editorial-visual--fallback`}
+      className={`editorial-visual editorial-visual--${size}`}
       role="img"
-      aria-label={`${visualDescriptions[size]}. Imagem editorial em produção.`}
+      aria-label={visualDescriptions[size]}
     >
-      <div className="editorial-visual__orb" aria-hidden="true" />
-      <div className="editorial-visual__window" aria-hidden="true">
-        <div className="editorial-visual__window-top">
-          <span />
-          <span />
-          <span />
+      <div className="editorial-visual__glow" aria-hidden="true" />
+
+      {size === 'small' ? (
+        <div className="studio-phone" aria-hidden="true">
+          <div className="studio-phone__speaker" />
+          <img
+            src={studioScreens.process}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
         </div>
-        <div className="editorial-visual__window-body">
-          <div className="editorial-visual__line editorial-visual__line--strong" />
-          <div className="editorial-visual__line" />
-          <div className="editorial-visual__blocks">
-            <span />
-            <span />
-            <span />
+      ) : (
+        <div className="studio-composition" aria-hidden="true">
+          <div className="studio-screen studio-screen--hero">
+            <StudioChrome />
+            <img
+              src={studioScreens.hero}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div className="studio-screen studio-screen--solutions">
+            <StudioChrome />
+            <img
+              src={studioScreens.solutions}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
-      </div>
-      {size === 'large' && (
-        <div className="editorial-visual__float" aria-hidden="true">
-          <Sparkles size={18} />
-          <span>Estratégia</span>
-          <LayoutTemplate size={18} />
-          <span>Experiência</span>
-        </div>
       )}
-      <figcaption>Imagem editorial em produção</figcaption>
+
+      <figcaption>
+        {size === 'small' ? 'Produto responsivo' : 'Direção visual aplicada'}
+      </figcaption>
     </figure>
   )
 }

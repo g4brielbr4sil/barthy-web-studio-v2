@@ -69,21 +69,10 @@
   color: var(--deep-navy);
 }
 
-:root[data-theme='dark'] .editorial-visual--fallback {
-  background:
-    linear-gradient(160deg, rgba(17, 28, 44, 0.92), rgba(26, 61, 99, 0.62)),
-    var(--surface-soft);
-}
-
-:root[data-theme='dark'] .editorial-visual__float,
 :root[data-theme='dark'] .editorial-visual figcaption {
   border-color: var(--border);
   background: var(--surface-translucent-strong);
   color: var(--soft-ice);
-}
-
-:root[data-theme='dark'] .editorial-visual__float span {
-  color: var(--foreground);
 }
 
 :root[data-theme='dark'] .solutions__tabs button[aria-selected='true'] {
