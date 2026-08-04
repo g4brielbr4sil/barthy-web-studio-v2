@@ -2,7 +2,7 @@
 
 # Barthy Web Studio V2
 
-**Site institucional e portfólio profissional desenvolvido para apresentar projetos, soluções digitais e competências em desenvolvimento web.**
+**Site institucional e portfólio profissional da Barthy Web Studio.**
 
 ![React](https://img.shields.io/badge/React-18-20232a?logo=react&logoColor=61dafb)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)
@@ -13,90 +13,90 @@
 
 ## Sobre o projeto
 
-A Barthy Web Studio V2 é a evolução do site institucional da Barthy Web Studio. O projeto apresenta minha atuação, os serviços da marca e projetos desenvolvidos para necessidades reais de operação, educação e organização pessoal.
+A Barthy Web Studio V2 é a versão atual do site da Barthy. Criei o projeto para apresentar meus trabalhos, explicar os serviços da marca e mostrar como penso produto, interface, acessibilidade e qualidade de código.
 
-A aplicação combina uma direção visual editorial com arquitetura front-end organizada, componentes reutilizáveis, responsividade, acessibilidade e progressive enhancement. O objetivo é funcionar ao mesmo tempo como presença comercial da Barthy e como demonstração técnica para clientes, parceiros e recrutadores.
+A aplicação usa uma direção visual mais editorial, mas sem depender dos efeitos para funcionar. O conteúdo continua acessível em dispositivos sem WebGPU, com economia de dados ou com preferência por menos movimento.
 
-## O que este projeto demonstra
+## O que eu construí
 
-- Desenvolvimento front-end com React e TypeScript
-- Arquitetura baseada em componentes e responsabilidades bem separadas
-- Implementação de temas claro e escuro
-- Progressive enhancement para recursos visuais avançados
-- Fallbacks para diferentes capacidades do navegador e do dispositivo
-- Acessibilidade aplicada à navegação, aos formulários e às animações
-- Validação de formulários e tratamento de falhas
-- Verificações automatizadas de conteúdo, responsividade, tipagem e build
-- Organização de código, documentação e fluxo de entrega
-- Visão de produto aplicada a uma operação comercial própria
+- interface em React e TypeScript
+- temas claro e escuro
+- navegação responsiva por seções
+- menu móvel com controle de foco
+- formulário de briefing com validação e tratamento de falhas
+- experiência visual com WebGPU e alternativas em CSS
+- suporte a `prefers-reduced-motion`
+- verificações automatizadas de conteúdo, acessibilidade, responsividade, tipagem e build
+- fluxo de publicação no Cloudflare Pages
 
 ## Minha atuação
 
-Projeto concebido e desenvolvido por **Gabriel Brasil Barthy Elias**, com responsabilidade sobre:
+Fui responsável por:
 
-- definição da proposta e da arquitetura da página
+- proposta e arquitetura da página
 - organização do conteúdo e da navegação
-- desenvolvimento dos componentes e comportamentos da interface
-- implementação dos temas claro e escuro
-- criação dos modos visuais e fallbacks
+- desenvolvimento dos componentes
+- implementação dos temas
+- modos visuais e fallbacks
 - acessibilidade e navegação por teclado
-- validação do formulário de briefing
-- testes estruturais e documentação técnica
-- preparação do fluxo de publicação
+- formulário de briefing
+- testes estruturais
+- documentação técnica
+- preparação da publicação
 
 ## Principais funcionalidades
 
 - Hero em tela cheia com composição visual adaptativa
-- Navegação por seções com indicação da seção ativa
-- Menu móvel com controle de foco, bloqueio de rolagem e fechamento por Escape
-- Seções institucionais, projetos, soluções, processo e contato
-- Alternância entre temas claro e escuro
-- Formulário de briefing com validação e endpoint configurável
-- Fallback de contato por e-mail
-- Suporte a `prefers-reduced-motion`
-- Painel de diagnóstico visual habilitado apenas para desenvolvimento
+- navegação com indicação da seção ativa
+- menu móvel com foco controlado, bloqueio de rolagem e fechamento por Escape
+- seções de projetos, soluções, processo e contato
+- alternância entre temas claro e escuro
+- formulário com endpoint configurável
+- alternativa de contato por e-mail
+- painel de diagnóstico visual disponível apenas em desenvolvimento
 
-## Experiência visual adaptativa
+## Modos visuais
 
-O Hero utiliza progressive enhancement para selecionar o modo visual compatível com o ambiente:
+O Hero escolhe o modo mais adequado para cada ambiente:
 
-| Modo | Comportamento |
+| Modo | Quando é usado |
 | --- | --- |
-| `shader` | Renderização avançada quando WebGPU está disponível |
-| `css-motion` | Fallback animado quando o shader não pode ser utilizado |
-| `static` | Composição sem movimento para usuários com essa preferência |
+| `shader` | quando WebGPU está disponível |
+| `css-motion` | quando o shader não pode ser usado |
+| `static` | quando o usuário prefere menos movimento |
 
-A aplicação também considera economia de dados, visibilidade da página, suporte a `backdrop-filter` e falhas de carregamento. O conteúdo permanece disponível mesmo sem animações ou canvas.
+A aplicação também considera economia de dados, visibilidade da página, suporte a `backdrop-filter` e falhas de carregamento. O site não deixa de funcionar quando um efeito visual falha.
 
 ## Formulário de briefing
 
-O formulário inclui:
+O formulário possui:
 
-- validação individual por campo
-- mensagens de erro associadas aos inputs
+- validação por campo
+- mensagens de erro ligadas aos inputs
 - foco automático no primeiro campo inválido
 - estados de carregamento, sucesso e falha
 - preservação dos dados quando o envio falha
 - timeout e cancelamento com `AbortController`
 - validação do status e do corpo da resposta
 - honeypot contra bots simples
-- fallback para contato por e-mail
+- alternativa de contato por e-mail
 
-O envio utiliza um endpoint configurável por ambiente. Nenhuma credencial privada é armazenada no front-end.
+O endpoint é configurado por ambiente. Nenhuma credencial privada fica no front-end.
 
-## Acessibilidade e experiência de uso
+## Acessibilidade
 
-Entre os recursos implementados estão:
+O projeto inclui:
 
-- HTML semântico e hierarquia de títulos
-- link para pular ao conteúdo principal
+- HTML semântico
+- hierarquia de títulos
+- link para pular ao conteúdo
 - navegação por teclado
-- foco visível e controle de foco no menu móvel
-- retorno de foco ao elemento de origem
+- foco visível
+- controle e retorno de foco no menu móvel
 - mensagens de formulário com `aria-live`
 - suporte a movimento reduzido
 - nomes acessíveis para controles interativos
-- contratos responsivos verificados por script próprio
+- testes próprios de responsividade
 
 ## Tecnologias
 
@@ -112,9 +112,9 @@ Entre os recursos implementados estão:
 
 ### Recursos visuais
 
-- Shader WebGPU carregado sob demanda
-- Fallback animado em CSS
-- Modo estático para movimento reduzido
+- shader WebGPU carregado sob demanda
+- fallback animado em CSS
+- modo estático para movimento reduzido
 
 ### Qualidade e entrega
 
@@ -123,7 +123,7 @@ Entre os recursos implementados estão:
 - scripts próprios de auditoria
 - GitHub Actions
 - build automatizado
-- Cloudflare Pages como destino de publicação
+- Cloudflare Pages
 
 ## Arquitetura
 
@@ -140,7 +140,7 @@ flowchart TD
 
     CONTACT --> ENDPOINT{Endpoint configurado?}
     ENDPOINT --> API[Envio HTTP com validação e timeout]
-    ENDPOINT --> EMAIL[Fallback para e-mail]
+    ENDPOINT --> EMAIL[Contato por e-mail]
 ```
 
 ## Estrutura principal
@@ -189,11 +189,11 @@ VITE_BARTHY_WHATSAPP_URL=
 VITE_BARTHY_CONTACT_ENDPOINT=
 ```
 
-`VITE_BARTHY_WHATSAPP_URL` define a URL utilizada pelo botão de contato via WhatsApp.
+`VITE_BARTHY_WHATSAPP_URL` define o link usado no botão de WhatsApp.
 
-`VITE_BARTHY_CONTACT_ENDPOINT` define o endpoint responsável pelo envio do formulário de briefing.
+`VITE_BARTHY_CONTACT_ENDPOINT` aponta para o endpoint que recebe o formulário.
 
-Variáveis com prefixo `VITE_` são públicas no navegador e não devem armazenar segredos.
+No Vite, tudo que começa com `VITE_` vai para o navegador. Não coloque senha, token ou segredo nessas variáveis.
 
 ## Validação
 
@@ -201,7 +201,7 @@ Variáveis com prefixo `VITE_` são públicas no navegador e não devem armazena
 pnpm quality
 ```
 
-O fluxo executa:
+Esse comando executa:
 
 ```bash
 pnpm audit:content
@@ -210,12 +210,6 @@ pnpm test:responsive
 pnpm typecheck
 pnpm build
 ```
-
-## Padrão de contribuição
-
-A documentação, os commits e as Pull Requests deste repositório usam português do Brasil, com linguagem técnica, clara e direta. Os commits seguem Conventional Commits com o prefixo técnico em inglês e a descrição em português, como `feat: adicionar nova experiência visual`.
-
-O padrão completo está disponível em [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Autor e contato
 
