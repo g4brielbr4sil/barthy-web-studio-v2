@@ -211,6 +211,12 @@ pnpm typecheck
 pnpm build
 ```
 
+## Padrão de contribuição
+
+A documentação, os commits e as Pull Requests deste repositório usam português do Brasil, com linguagem técnica, clara e direta. Os commits seguem Conventional Commits com o prefixo técnico em inglês e a descrição em português, como `feat: adicionar nova experiência visual`.
+
+O padrão completo está disponível em [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
 ## Autor e contato
 
 **Gabriel Brasil Barthy Elias**  
