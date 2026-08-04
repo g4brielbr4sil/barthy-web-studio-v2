@@ -143,12 +143,6 @@
   }
 }
 
-@keyframes terminal-blink {
-  50% {
-    opacity: 0.15;
-  }
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
