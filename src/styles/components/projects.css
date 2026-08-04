@@ -428,137 +428,173 @@
 }
 
 .pnqc-visual {
-  display: grid;
-  align-content: start;
-  gap: 0.9rem;
-  padding: clamp(1rem, 3vw, 1.8rem);
+  isolation: isolate;
   background:
-    radial-gradient(circle at 92% 4%, rgba(205, 118, 93, 0.18), transparent 28%),
-    linear-gradient(155deg, #f6fafd, #dce8f2);
+    radial-gradient(circle at 18% 78%, rgba(41, 101, 231, 0.24), transparent 31%),
+    radial-gradient(circle at 86% 14%, rgba(205, 118, 93, 0.2), transparent 30%),
+    linear-gradient(145deg, #edf4fa, #d9e6f0);
   color: var(--deep-navy);
 }
 
-.pnqc-visual__progress {
-  height: 0.45rem;
-  overflow: hidden;
-  border-radius: 999px;
-  background: rgba(26, 61, 99, 0.1);
+.pnqc-visual::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(26, 61, 99, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 61, 99, 0.08) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+  content: '';
+  opacity: 0.56;
+  mask-image: linear-gradient(to bottom, black, transparent 86%);
 }
 
-.pnqc-visual__progress span {
-  display: block;
-  width: 72%;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--royal-blue), var(--ice-blue));
-  transform-origin: left;
-}
-
-.project-media[data-active='true'] .pnqc-visual__progress span {
-  animation: progress-fill 1s 280ms var(--ease-editorial) 1 both;
-}
-
-.pnqc-visual__layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(7.5rem, 0.75fr);
-  gap: 0.8rem;
-  min-height: 19rem;
-}
-
-.pnqc-visual__modules {
-  display: grid;
-  gap: 0.6rem;
-  align-content: start;
-}
-
-.module-row {
-  display: grid;
-  min-height: 4.8rem;
-  grid-template-columns: auto 1fr auto;
-  gap: 0.65rem;
-  align-items: center;
-  padding: 0.75rem;
-  border: 1px solid var(--royal-blue-12);
-  border-radius: 0.9rem;
-  background: rgba(255, 255, 255, 0.65);
-}
-
-.module-row > span {
-  color: var(--ice-blue);
-  font-size: 0.64rem;
-  font-weight: 750;
-}
-
-.module-row div {
-  display: grid;
-  gap: 0.2rem;
-}
-
-.module-row strong {
-  font-size: 0.72rem;
-}
-
-.module-row small {
-  color: var(--ink-muted);
-  font-size: 0.6rem;
-}
-
-.module-row--complete {
-  color: var(--royal-blue);
-}
-
-.module-row--active {
-  border-color: rgba(205, 118, 93, 0.45);
-  background: var(--white-88);
-  box-shadow: 0 16px 34px -26px rgba(10, 25, 49, 0.5);
-}
-
-.pnqc-visual__certificate {
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  padding: 1rem;
-  border: 1px solid rgba(26, 61, 99, 0.16);
-  border-radius: 1rem;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
-    repeating-linear-gradient(
-      45deg,
-      transparent 0 8px,
-      rgba(74, 127, 167, 0.15) 8px 9px
-    );
-  text-align: center;
-}
-
-.certificate-seal {
-  display: grid;
-  width: 3.3rem;
-  height: 3.3rem;
-  margin-bottom: 0.7rem;
-  place-items: center;
+.pnqc-visual__glow {
+  position: absolute;
+  top: 16%;
+  left: 22%;
+  width: 58%;
+  aspect-ratio: 1;
   border-radius: 50%;
-  background: var(--terra-orange);
-  color: #fff;
-  box-shadow: 0 0 0 6px rgba(205, 118, 93, 0.13);
+  background: rgba(41, 101, 231, 0.2);
+  filter: blur(54px);
 }
 
-.pnqc-visual__certificate small {
-  color: var(--ink-muted);
-  font-size: 0.58rem;
+.pnqc-visual__caption {
+  position: absolute;
+  top: clamp(0.85rem, 2.5vw, 1.3rem);
+  left: clamp(0.9rem, 3vw, 1.6rem);
+  z-index: 5;
+  display: grid;
+  gap: 0.12rem;
+  padding-left: 0.7rem;
+  border-left: 2px solid #2965e7;
+}
+
+.pnqc-visual__caption span {
+  color: var(--royal-blue);
+  font-size: 0.55rem;
+  font-weight: 760;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.pnqc-visual__certificate strong {
-  margin-top: 0.2rem;
-  font-size: 0.85rem;
+.pnqc-visual__caption strong {
+  color: var(--deep-navy);
+  font-size: clamp(0.64rem, 1.4vw, 0.78rem);
+  font-weight: 660;
 }
 
-.certificate-code {
-  margin-top: 1.8rem;
-  color: var(--ice-blue);
-  font-size: 0.56rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+.pnqc-mockup {
+  position: absolute;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid rgba(26, 61, 99, 0.28);
+  border-radius: clamp(0.48rem, 1vw, 0.78rem);
+  background: #07111c;
+  box-shadow:
+    0 2rem 4.5rem -2.3rem rgba(10, 25, 49, 0.78),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  transform-origin: center;
+  transition:
+    transform 900ms var(--ease-editorial),
+    box-shadow 900ms var(--ease-editorial);
+}
+
+.pnqc-mockup__chrome {
+  display: flex;
+  height: clamp(0.82rem, 1.7vw, 1.08rem);
+  align-items: center;
+  gap: 0.22rem;
+  padding-inline: 0.42rem;
+  border-bottom: 1px solid rgba(179, 207, 229, 0.13);
+  background: rgba(6, 14, 27, 0.96);
+}
+
+.pnqc-mockup__chrome span {
+  width: 0.24rem;
+  height: 0.24rem;
+  border-radius: 50%;
+  background: rgba(179, 207, 229, 0.38);
+}
+
+.pnqc-mockup__chrome span:first-child {
+  background: #2965e7;
+}
+
+.pnqc-mockup__chrome i {
+  margin-left: auto;
+  color: rgba(179, 207, 229, 0.48);
+  font-size: clamp(0.28rem, 0.65vw, 0.38rem);
+  font-style: normal;
+  letter-spacing: 0.04em;
+}
+
+.pnqc-mockup img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.pnqc-mockup--dashboard {
+  top: 15%;
+  left: 7%;
+  z-index: 1;
+  width: 86%;
+  transform: rotate(1deg) translate3d(0, 0.65rem, 0);
+}
+
+.pnqc-mockup--catalog,
+.pnqc-mockup--course {
+  bottom: 5%;
+  z-index: 2;
+  width: 52%;
+}
+
+.pnqc-mockup--catalog {
+  left: 1.5%;
+  transform: rotate(-2.3deg) translate3d(-0.6rem, 0.5rem, 0);
+}
+
+.pnqc-mockup--course {
+  right: 1.5%;
+  transform: rotate(2.5deg) translate3d(0.65rem, 0.7rem, 0);
+}
+
+.project-media[data-active='true'] .pnqc-mockup--dashboard {
+  box-shadow: 0 2.4rem 5rem -2.3rem rgba(10, 25, 49, 0.84);
+  transform: rotate(0.35deg) translate3d(0, 0, 0);
+}
+
+.project-media[data-active='true'] .pnqc-mockup--catalog {
+  transform: rotate(-1.3deg) translate3d(0, 0, 0);
+}
+
+.project-media[data-active='true'] .pnqc-mockup--course {
+  transform: rotate(1.5deg) translate3d(0, 0, 0);
+}
+
+@media (max-width: 520px) {
+  .pnqc-mockup--dashboard {
+    top: 18%;
+    left: 3%;
+    width: 94%;
+  }
+
+  .pnqc-mockup--catalog,
+  .pnqc-mockup--course {
+    bottom: 8%;
+    width: 58%;
+  }
+
+  .pnqc-mockup--catalog {
+    left: -5%;
+  }
+
+  .pnqc-mockup--course {
+    right: -5%;
+  }
 }
 
 .hermes-visual {

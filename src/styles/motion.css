@@ -134,15 +134,6 @@
   }
 }
 
-@keyframes progress-fill {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
