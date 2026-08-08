@@ -39,6 +39,11 @@
     animation: hero-organic-white 37s ease-in-out infinite alternate;
   }
 
+  .hero__background:not([data-mode='static'])
+    .hero__organic-shape--signal {
+    animation: hero-signal 30s linear infinite;
+  }
+
   [data-motion-ready='true'] .solution-network__connections line.is-flowing {
     animation: network-flow 12s linear infinite;
   }
@@ -184,6 +189,21 @@
   }
 }
 
+@keyframes hero-signal {
+  from {
+    opacity: 0.58;
+    transform: rotate(0deg) scale(0.94);
+  }
+  50% {
+    opacity: 0.88;
+    transform: rotate(180deg) scale(1.06);
+  }
+  to {
+    opacity: 0.58;
+    transform: rotate(360deg) scale(0.94);
+  }
+}
+
 @keyframes hero-mobile-blue {
   from {
     opacity: 0.58;
@@ -295,6 +315,14 @@
     width: 92vw;
     animation-name: hero-mobile-white;
     animation-duration: 26s;
+  }
+
+  .hero__background:not([data-mode='static'])
+    .hero__organic-shape--signal {
+    top: 12%;
+    right: -18%;
+    width: 78vw;
+    animation-duration: 24s;
   }
 
   :root[data-save-data='active'] .hero__organic-shape--blue {

@@ -164,17 +164,13 @@
   }
 
   .hero__cta,
-  .hero-badge {
+  .hero__secondary-cta {
     width: 100%;
   }
 
-  .hero__cta {
+  .hero__cta,
+  .hero__secondary-cta {
     justify-content: space-between;
-  }
-
-  .hero-badge {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
   }
 
   .section-heading h2,
@@ -329,16 +325,6 @@
 
   .hero__label {
     margin-bottom: 0.8rem;
-  }
-
-  .hero-badge {
-    grid-template-columns: auto 1fr;
-    border-radius: 1.1rem;
-  }
-
-  .hero-badge__place {
-    grid-column: 2;
-    width: fit-content;
   }
 
   .project-card__body {
@@ -580,10 +566,8 @@
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-delay: 0ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation: none !important;
+    transition: none !important;
   }
 
   .hero-shader {

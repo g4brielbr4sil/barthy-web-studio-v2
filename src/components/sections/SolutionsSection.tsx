@@ -13,7 +13,7 @@ export function SolutionsSection({
 }: {
   onNavigate: (section: SectionId) => void
 }) {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(1)
   const activeGroup = solutionGroups[activeIndex] ?? solutionGroups[0]
 
   return (
@@ -24,10 +24,10 @@ export function SolutionsSection({
     >
       <div className="stage">
         <SectionReveal className="solutions__heading" data-section-anchor>
-          <SectionBadge number="03">Capacidade conectada</SectionBadge>
-          <h2 id="solutions-title">O que construímos</h2>
+          <SectionBadge number="02">Quatro linhas de atuação</SectionBadge>
+          <h2 id="solutions-title">Soluções conectadas ao seu negócio</h2>
           <p>
-            Do primeiro ponto de contato à ferramenta que organiza a operação.
+            Da presença online às ferramentas que organizam a operação.
           </p>
         </SectionReveal>
 
@@ -51,7 +51,7 @@ export function SolutionsSection({
               <div className="solution-panel__copy">
                 <span>
                   <Blocks size={15} aria-hidden="true" />
-                  Estrutura aplicada
+                  Linha de solução
                 </span>
                 <h3>{activeGroup.title}</h3>
                 <p>{activeGroup.summary}</p>
@@ -77,7 +77,7 @@ export function SolutionsSection({
             onNavigate('contato')
           }}
         >
-          Estruturar uma solução
+          Falar sobre meu negócio
         </TextRollButton>
       </div>
     </section>

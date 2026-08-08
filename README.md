@@ -187,11 +187,18 @@ pnpm dev
 ```env
 VITE_BARTHY_WHATSAPP_URL=
 VITE_BARTHY_CONTACT_ENDPOINT=
+VITE_BARTHY_SITE_URL=
+VITE_BARTHY_OG_IMAGE=
+VITE_BARTHY_ALLOW_INDEXING=false
 ```
 
 `VITE_BARTHY_WHATSAPP_URL` define o link usado no botão de WhatsApp.
 
 `VITE_BARTHY_CONTACT_ENDPOINT` aponta para o endpoint que recebe o formulário.
+
+`VITE_BARTHY_SITE_URL` centraliza canonical, Open Graph e sitemap. O build só
+libera indexação quando `VITE_BARTHY_ALLOW_INDEXING=true` e a URL oficial HTTPS
+está configurada. Previews devem manter essa variável como `false`.
 
 No Vite, tudo que começa com `VITE_` vai para o navegador. Não coloque senha, token ou segredo nessas variáveis.
 

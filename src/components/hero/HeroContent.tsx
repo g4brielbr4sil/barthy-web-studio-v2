@@ -1,4 +1,3 @@
-import { Blocks, MapPin } from 'lucide-react'
 import type { MouseEvent } from 'react'
 import type { SectionId } from '../../data/navigation'
 import { TextRollButton } from '../ui/TextRollButton'
@@ -21,15 +20,16 @@ export function HeroContent({ onNavigate }: HeroContentProps) {
         <p className="hero__label">Barthy Web Studio</p>
         <h1 id="hero-title" className="hero__title">
           <span>
-            <span>Criamos experiências digitais</span>
+            <span>Tecnologia para negócios</span>
           </span>
           <span>
-            <span>para marcas prontas para dominar</span>
-          </span>
-          <span>
-            <span>sua categoria online.</span>
+            <span>venderem e operarem melhor.</span>
           </span>
         </h1>
+        <p className="hero__description">
+          Sites, sistemas e automações construídos para resolver problemas
+          reais da operação.
+        </p>
       </div>
 
       <div className="hero__bottom">
@@ -39,23 +39,17 @@ export function HeroContent({ onNavigate }: HeroContentProps) {
           className="hero__cta"
           onClick={(event) => navigate(event, 'contato')}
         >
-          Começar um projeto
+          Falar sobre meu negócio
         </TextRollButton>
 
-        <a
-          className="hero-badge"
+        <TextRollButton
           href="#solucoes"
+          variant="outline"
+          className="hero__secondary-cta"
           onClick={(event) => navigate(event, 'solucoes')}
         >
-          <span className="hero-badge__icon" aria-hidden="true">
-            <Blocks size={18} />
-          </span>
-          <span>Presença, sistemas e operação digital</span>
-          <span className="hero-badge__place">
-            <MapPin size={13} aria-hidden="true" />
-            Brasília
-          </span>
-        </a>
+          Conhecer soluções
+        </TextRollButton>
       </div>
     </div>
   )

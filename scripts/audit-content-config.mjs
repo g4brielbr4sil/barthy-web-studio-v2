@@ -2,14 +2,21 @@ import { strict as assert } from 'node:assert'
 import { readFile } from 'node:fs/promises'
 
 const paths = {
-  header: 'src/components/header/Header.tsx',
-  headerClock: 'src/styles/components/header-clock.css',
-  contact: 'src/lib/contact.ts',
+  app: 'src/app/App.tsx',
+  hero: 'src/components/hero/HeroContent.tsx',
+  problems: 'src/components/sections/ProblemsSection.tsx',
+  solutions: 'src/components/sections/SolutionsSection.tsx',
+  solutionData: 'src/components/solutions/solution-map.data.ts',
+  systems: 'src/components/sections/SystemsSection.tsx',
+  projects: 'src/data/projects.ts',
+  process: 'src/components/sections/ProcessSection.tsx',
   contactSection: 'src/components/sections/ContactSection.tsx',
-  contactForm: 'src/components/contact/ContactForm.tsx',
+  contact: 'src/lib/contact.ts',
+  footer: 'src/components/footer/Footer.tsx',
+  theme: 'src/theme/ThemeContext.tsx',
   shader: 'src/components/hero/ShaderSurface.tsx',
   motion: 'src/styles/motion.css',
-  projects: 'src/data/projects.ts',
+  html: 'index.html',
 }
 
 const sources = Object.fromEntries(
@@ -21,105 +28,95 @@ const sources = Object.fromEntries(
   ),
 )
 
-const joinedTextErrors = [
-  /abertapara/i,
-  /projetosem/i,
-  /BrasíliaAgenda/i,
-  /disponível\.Use/i,
-  /projetoA Barthy/i,
-]
-
-const publicCopy = [
-  sources.header,
-  sources.contactSection,
-  sources.contactForm,
+const renderedPublicCopy = [
+  sources.hero,
+  sources.problems,
+  sources.solutions,
+  sources.solutionData,
+  sources.systems,
   sources.projects,
+  sources.process,
+  sources.contactSection,
+  sources.footer,
+  sources.html,
 ].join('\n')
 
-for (const pattern of joinedTextErrors) {
-  assert.doesNotMatch(
-    publicCopy,
-    pattern,
-    `Texto público contém palavras ou frases unidas: ${pattern}`,
+for (const phrase of [
+  'Tecnologia para negócios',
+  'venderem e operarem melhor',
+  'Onde a Barthy entra',
+  'Soluções conectadas ao seu negócio',
+  'Software feito para o trabalho real',
+  'Tem um processo no seu negócio que poderia funcionar melhor?',
+]) {
+  assert.match(
+    renderedPublicCopy,
+    new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
+    `A copy comercial obrigatória deve conter: ${phrase}`,
   )
 }
 
+for (const line of ['BWS Web', 'BWS Systems', 'BWS Automations', 'BWS Care']) {
+  assert.match(sources.solutionData, new RegExp(line))
+}
+
+for (const banned of [
+  /Experiência editorial/i,
+  /Versão editorial experimental/i,
+  /dominar sua categoria/i,
+  /Comprar Barthy Flow/i,
+]) {
+  assert.doesNotMatch(renderedPublicCopy, banned)
+}
+
 assert.match(
-  sources.header,
-  /availability__status-lead">Agenda aberta<\/span>/,
-  'A mensagem comercial da agenda deve preservar a abertura aprovada.',
-)
-assert.match(
-  sources.header,
-  /availability__status-detail">\s*para novos projetos\s*<\/span>/,
-  'O complemento da agenda deve existir como fragmento próprio.',
-)
-assert.doesNotMatch(
-  sources.header,
-  /\{' '\}/,
-  'O Header não deve depender de espaços literais frágeis entre fragmentos.',
-)
-assert.match(
-  sources.headerClock,
-  /\.availability__status\s*\{[\s\S]*?gap:\s*0\.24rem;/,
-  'O espaçamento entre a chamada e o complemento deve ser controlado por CSS.',
+  sources.systems,
+  /Não está disponível para contratação nesta fase\./,
+  'Barthy Flow deve permanecer explicitamente indisponível durante a validação.',
 )
 assert.match(
-  sources.header,
-  /aria-label=\{`\$\{time\} em Brasília`\}/,
-  'O relógio deve manter o nome acessível em português.',
+  sources.projects,
+  /Experiência profissional/,
+  'Levens deve manter o contexto de experiência profissional.',
 )
+assert.match(
+  sources.projects,
+  /Projeto próprio em desenvolvimento/,
+  'Projetos próprios não podem parecer cases de clientes.',
+)
+assert.match(sources.contact, /VITE_BARTHY_WHATSAPP_URL/)
+assert.match(sources.contact, /VITE_BARTHY_CONTACT_ENDPOINT/)
+assert.match(sources.contact, /safeHttpUrl/)
+assert.doesNotMatch(sources.contact, /https?:\/\//)
 
 assert.doesNotMatch(
-  sources.contactSection,
-  /nesta V2/i,
-  'A interface pública não deve expor linguagem interna de versão.',
+  sources.theme,
+  /localStorage|sessionStorage|prefers-color-scheme|matchMedia/,
+  'O tema inicial deve ser light em toda nova carga, sem preferência persistida ou automática.',
 )
-assert.match(
-  sources.contact,
-  /VITE_BARTHY_WHATSAPP_URL/,
-  'O WhatsApp deve continuar configurável por variável de ambiente.',
-)
-assert.match(
-  sources.contact,
-  /VITE_BARTHY_CONTACT_ENDPOINT/,
-  'O endpoint de contato deve continuar configurável por variável de ambiente.',
-)
-assert.match(
-  sources.contact,
-  /safeHttpUrl/,
-  'URLs externas precisam continuar passando pela validação central.',
-)
-assert.doesNotMatch(
-  sources.contact,
-  /https?:\/\//,
-  'A configuração de contato não deve conter endpoint ou WhatsApp hardcoded.',
-)
+assert.match(sources.theme, /return 'light'/)
 
 assert.match(
   sources.shader,
   /momentum=\{finePointer \? 32 : 13\}/,
   'O ChromaFlow autônomo deve continuar disponível em dispositivos touch.',
 )
-assert.match(
-  sources.shader,
-  /radius=\{finePointer \? 4\.6 : 3\.5\}/,
-  'O raio autônomo do ChromaFlow deve continuar configurado no touch.',
-)
 assert.doesNotMatch(
-  sources.motion,
-  /data-motion-ready[^\n]*hero__organic-shape/,
-  'O fundo ambiental não deve depender do gatilho editorial.',
+  sources.shader,
+  /if \(!pageVisible\) return null/,
+  'A composição WebGPU não deve desmontar apenas porque a aba perdeu visibilidade.',
 )
-assert.match(
-  sources.headerClock,
-  /prefers-reduced-motion:\s*no-preference/,
-  'A animação da disponibilidade deve respeitar redução de movimento.',
-)
-assert.match(
-  sources.projects,
-  /Uma central de comando em evolução/,
-  'A apresentação pública do Hermes deve permanecer em português.',
-)
+assert.match(sources.motion, /@keyframes hero-signal/)
 
-console.log('Auditoria de conteúdo, movimento e configuração concluída.')
+const appOrder = [
+  '<ProblemsSection',
+  '<SolutionsSection',
+  '<SystemsSection',
+  '<ProjectsSection',
+  '<ProcessSection',
+  '<ContactSection',
+].map((token) => sources.app.indexOf(token))
+assert.ok(appOrder.every((position) => position >= 0))
+assert.deepEqual(appOrder, [...appOrder].sort((a, b) => a - b))
+
+console.log('Auditoria de conteúdo, posicionamento e configuração concluída.')

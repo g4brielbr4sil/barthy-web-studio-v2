@@ -2,7 +2,6 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -15,7 +14,6 @@ interface ThemeContextValue {
   toggleTheme: () => void
 }
 
-const THEME_KEY = 'barthy-v2-theme'
 const themeColors: Record<Theme, string> = {
   light: '#F6FAFD',
   dark: '#0A1931',
@@ -23,13 +21,8 @@ const themeColors: Record<Theme, string> = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-function isTheme(value: string | null): value is Theme {
-  return value === 'light' || value === 'dark'
-}
-
 function getInitialTheme(): Theme {
-  const theme = document.documentElement.dataset.theme ?? null
-  return isTheme(theme) ? theme : 'light'
+  return 'light'
 }
 
 function applyTheme(theme: Theme) {
@@ -45,32 +38,14 @@ function applyTheme(theme: Theme) {
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
 
-  const setAndPersistTheme = useCallback((nextTheme: Theme) => {
+  const setThemeForPage = useCallback((nextTheme: Theme) => {
     applyTheme(nextTheme)
-    try {
-      window.localStorage.setItem(THEME_KEY, nextTheme)
-    } catch {
-      // A preferência continua aplicada na sessão quando o storage está bloqueado.
-    }
     setTheme(nextTheme)
   }, [])
 
   const toggleTheme = useCallback(() => {
-    const appliedTheme = document.documentElement.dataset.theme ?? null
-    const currentTheme = isTheme(appliedTheme) ? appliedTheme : theme
-    setAndPersistTheme(currentTheme === 'light' ? 'dark' : 'light')
-  }, [setAndPersistTheme, theme])
-
-  useEffect(() => {
-    const onStorage = (event: StorageEvent) => {
-      if (event.key !== THEME_KEY || !isTheme(event.newValue)) return
-      applyTheme(event.newValue)
-      setTheme(event.newValue)
-    }
-
-    window.addEventListener('storage', onStorage)
-    return () => window.removeEventListener('storage', onStorage)
-  }, [])
+    setThemeForPage(theme === 'light' ? 'dark' : 'light')
+  }, [setThemeForPage, theme])
 
   const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme])
 
