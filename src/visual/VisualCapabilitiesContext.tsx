@@ -8,6 +8,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import {
   detectBackdropFilter,
@@ -31,10 +32,11 @@ const VisualCapabilitiesContext =
 
 function resolveVisualMode(
   reducedMotion: boolean,
+  mobileOptimized: boolean,
   canAttemptShader: boolean,
   shaderStatus: ShaderStatus,
 ): VisualMode {
-  if (reducedMotion) return 'static'
+  if (reducedMotion || mobileOptimized) return 'static'
   if (canAttemptShader && shaderStatus === 'ready') return 'shader'
   return 'css-motion'
 }
@@ -45,15 +47,22 @@ export function VisualCapabilitiesProvider({
   children: ReactNode
 }) {
   const reducedMotion = useReducedMotion()
+  const coarsePointer = useMediaQuery('(pointer: coarse)')
+  const compactViewport = useMediaQuery('(max-width: 767px)')
+  const mobileOptimized = coarsePointer || compactViewport
   const [webGpu] = useState(detectWebGpu)
   const [backdrop] = useState(detectBackdropFilter)
   const [saveData, setSaveData] = useState(detectSaveData)
   const [shaderStatus, setShaderStatus] = useState<ShaderStatus>('idle')
 
   const canAttemptShader =
-    !reducedMotion && saveData === 'inactive' && webGpu === 'available'
+    !reducedMotion &&
+    !mobileOptimized &&
+    saveData === 'inactive' &&
+    webGpu === 'available'
   const mode = resolveVisualMode(
     reducedMotion,
+    mobileOptimized,
     canAttemptShader,
     shaderStatus,
   )
@@ -93,18 +102,20 @@ export function VisualCapabilitiesProvider({
     root.dataset.webgpu = webGpu
     root.dataset.backdrop = backdrop
     root.dataset.saveData = saveData
+    root.dataset.mobileVisual = mobileOptimized ? 'optimized' : 'full'
 
     return () => {
       delete root.dataset.visualMode
       delete root.dataset.webgpu
       delete root.dataset.backdrop
       delete root.dataset.saveData
+      delete root.dataset.mobileVisual
     }
-  }, [backdrop, mode, saveData, webGpu])
+  }, [backdrop, mobileOptimized, mode, saveData, webGpu])
 
   useEffect(() => {
     const root = document.documentElement
-    if (reducedMotion) {
+    if (reducedMotion || mobileOptimized) {
       delete root.dataset.motionReady
       return
     }
@@ -117,7 +128,7 @@ export function VisualCapabilitiesProvider({
       window.cancelAnimationFrame(animationFrame)
       delete root.dataset.motionReady
     }
-  }, [reducedMotion])
+  }, [mobileOptimized, reducedMotion])
 
   const value = useMemo<VisualCapabilitiesContextValue>(
     () => ({
