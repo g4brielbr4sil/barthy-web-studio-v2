@@ -1,0 +1,158 @@
+/* Mobile BWS: preserva a identidade da marca com composição leve e estável. */
+
+@media (max-width: 767px) {
+  .section-shell {
+    padding-block: clamp(4rem, 14vw, 5.5rem);
+  }
+
+  .hero__content {
+    min-height: 100svh;
+    padding-top: 7rem;
+    padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+
+  .hero__title {
+    max-width: 13ch;
+    font-size: clamp(2.25rem, 10.8vw, 3.55rem);
+    letter-spacing: -0.045em;
+    line-height: 1.01;
+  }
+
+  .hero__description {
+    max-width: 33rem;
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .solution-network {
+    min-height: 0;
+    padding: 1rem;
+    background:
+      radial-gradient(circle at 90% 10%, rgba(179, 207, 229, 0.34), transparent 36%),
+      linear-gradient(145deg, var(--card-background), var(--page-background));
+  }
+
+  .solution-network::before,
+  .solution-network__map,
+  .solution-system {
+    display: none;
+  }
+
+  .solution-network figcaption {
+    position: static;
+    width: fit-content;
+    margin-bottom: 1rem;
+    background: var(--surface-translucent);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .solution-network__mobile-legend,
+  .solution-network[data-density='sistemas'] .solution-network__mobile-legend,
+  .solution-network[data-density='operacao'] .solution-network__mobile-legend {
+    position: static;
+    display: grid;
+    width: auto;
+    height: auto;
+    gap: 0.55rem;
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    clip-path: none;
+    white-space: normal;
+  }
+
+  .solution-network__mobile-legend > p {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+  }
+
+  .solution-network__mobile-legend ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .solution-network__mobile-legend li {
+    min-height: 0;
+    padding: 0.75rem 0;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    background: transparent;
+    font-size: 0.78rem;
+  }
+
+  .solution-network__mobile-legend li svg {
+    color: var(--terra-accent-text);
+  }
+
+  .solution-panel__copy {
+    gap: 0.8rem;
+  }
+
+  .solution-panel__architecture-summary {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .solution-panel__services {
+    margin-top: 0.5rem;
+  }
+
+  .solution-panel__services li {
+    padding-block: 0.72rem;
+    font-size: 0.78rem;
+  }
+
+  .systems__examples {
+    margin-top: 2rem;
+  }
+
+  .systems__example {
+    gap: 0.65rem;
+    font-size: 0.86rem;
+  }
+
+  .systems-path {
+    box-shadow: none;
+  }
+
+  .systems-path p {
+    font-size: 0.92rem;
+    line-height: 1.58;
+  }
+
+  .projects__heading,
+  .solutions__heading,
+  .contact__heading {
+    gap: 1rem;
+  }
+
+  .project-card__media,
+  .project-card--split .project-card__media {
+    min-height: clamp(15rem, 68vw, 21rem);
+  }
+
+  .contact__channels {
+    gap: 0.65rem;
+    margin-top: 2rem;
+  }
+
+  .contact-form {
+    padding: 1.1rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero__title {
+    font-size: clamp(2.05rem, 10.5vw, 2.8rem);
+  }
+
+  .solution-network,
+  .solution-panel__copy,
+  .contact-form {
+    padding-inline: 0.9rem;
+  }
+}
