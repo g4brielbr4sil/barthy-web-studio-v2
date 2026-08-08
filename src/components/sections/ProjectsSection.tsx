@@ -12,11 +12,11 @@ export function ProjectsSection() {
     >
       <div className="stage">
         <SectionReveal className="projects__heading" data-section-anchor>
-          <SectionBadge number="02">Experiência aplicada</SectionBadge>
-          <h2 id="projects-title">Projetos em destaque</h2>
+          <SectionBadge number="04">Experiência aplicada</SectionBadge>
+          <h2 id="projects-title">Projetos e demonstrações</h2>
           <p>
-            Sistemas reais apresentados como prova de repertório, contexto e
-            capacidade de execução.
+            Trabalhos próprios e experiência profissional apresentados com o
+            contexto correto, sem métricas ou resultados inventados.
           </p>
         </SectionReveal>
 

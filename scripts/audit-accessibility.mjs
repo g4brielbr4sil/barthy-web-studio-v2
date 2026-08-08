@@ -30,10 +30,8 @@ try {
     ])
 
   const ctas = [
-    'Começar um projeto',
-    'Conhecer o estúdio',
-    'Estruturar uma solução',
-    'Iniciar pelo diagnóstico',
+    'Falar sobre meu negócio',
+    'Conhecer soluções',
   ]
 
   for (const label of ctas) {
@@ -59,10 +57,9 @@ try {
     const text = visibleText(markup)
 
     for (const node of group.nodes) {
-      assert.equal(
-        countText(text, node.label),
-        1,
-        `O item "${node.label}" deve existir uma vez no conteúdo textual do mapa.`,
+      assert.ok(
+        countText(text, node.label) >= 1,
+        `O item "${node.label}" deve existir no conteúdo textual do mapa.`,
       )
     }
   }

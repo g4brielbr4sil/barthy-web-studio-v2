@@ -9,7 +9,7 @@ function RadialArchitecture({ group }: { group: SolutionGroup }) {
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid meet"
       >
-        {[1, 2, 3].map((layer) => {
+        {[1, 2, 3, 4].map((layer) => {
           const state =
             layer === group.layer
               ? 'is-current'
@@ -23,7 +23,7 @@ function RadialArchitecture({ group }: { group: SolutionGroup }) {
               className={`solution-network__ring solution-network__ring--${layer} ${state}`}
               cx="50"
               cy="50"
-              r={14 + layer * 10}
+              r={10 + layer * 8}
               vectorEffect="non-scaling-stroke"
             />
           )

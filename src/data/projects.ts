@@ -15,7 +15,7 @@ export const projects: Project[] = [
   {
     id: 'levens',
     title: 'Levens',
-    category: 'Ecossistema digital e governança de TI',
+    category: 'Experiência profissional · sistemas e governança de TI',
     description:
       'Portais, fluxos, integrações e governança aplicados a uma operação real de cuidado.',
     detail:
@@ -33,7 +33,7 @@ export const projects: Project[] = [
   {
     id: 'pnqc',
     title: 'PNQC',
-    category: 'Plataforma de formação e certificação',
+    category: 'Projeto próprio em desenvolvimento · plataforma educacional',
     description:
       'Cursos, progresso sequencial, avaliações, autenticação e certificações verificáveis.',
     detail:
@@ -60,7 +60,7 @@ export const projects: Project[] = [
   {
     id: 'hermes',
     title: 'Hermes',
-    category: 'Sistema pessoal de organização e operação',
+    category: 'Projeto próprio em desenvolvimento · operação pessoal',
     description:
       'CRM, financeiro, tarefas, estudos, relatórios e acompanhamento em uma única estrutura.',
     detail:

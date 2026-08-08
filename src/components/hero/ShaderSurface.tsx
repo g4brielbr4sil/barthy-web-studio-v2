@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import {
   ChromaFlow,
   FilmGrain,
@@ -65,24 +65,9 @@ export default function ShaderSurface({
   const surfaceRef = useRef<HTMLDivElement>(null)
   const finePointer = useMediaQuery('(hover: hover) and (pointer: fine)')
   const { theme } = useTheme()
-  const [pageVisible, setPageVisible] = useState(
-    () => document.visibilityState !== 'hidden',
-  )
   const palette = shaderPalettes[theme]
 
   useEffect(() => {
-    const onVisibilityChange = () => {
-      setPageVisible(document.visibilityState !== 'hidden')
-    }
-
-    document.addEventListener('visibilitychange', onVisibilityChange)
-    return () =>
-      document.removeEventListener('visibilitychange', onVisibilityChange)
-  }, [])
-
-  useEffect(() => {
-    if (!pageVisible) return
-
     let settled = false
     let animationFrame = 0
     let readinessTimeout = 0
@@ -130,9 +115,7 @@ export default function ShaderSurface({
       window.cancelAnimationFrame(animationFrame)
       window.clearTimeout(readinessTimeout)
     }
-  }, [onFailure, onReady, pageVisible])
-
-  if (!pageVisible) return null
+  }, [onFailure, onReady])
 
   return (
     <div ref={surfaceRef} className="hero-shader__surface">
@@ -230,7 +213,12 @@ export default function ShaderSurface({
           speed={0.32}
           opacity={theme === 'dark' ? 0.28 : 0.22}
         />
-        <FilmGrain strength={0.035} bias={1} animated opacity={0.2} />
+        <FilmGrain
+          strength={finePointer ? 0.035 : 0.025}
+          bias={1}
+          animated={finePointer}
+          opacity={finePointer ? 0.2 : 0.14}
+        />
       </Shader>
     </div>
   )

@@ -34,6 +34,18 @@
   opacity: 0.18;
 }
 
+:root[data-theme='dark'] .hero__organic-shape--signal {
+  border-color: rgba(179, 207, 229, 0.2);
+  background: radial-gradient(
+    circle,
+    rgba(10, 25, 49, 0.08) 0 39%,
+    rgba(179, 207, 229, 0.16) 40% 41%,
+    transparent 42% 54%,
+    rgba(205, 118, 93, 0.2) 55% 56%,
+    transparent 57%
+  );
+}
+
 :root[data-theme='dark'] .hero__label,
 :root[data-theme='dark'] .project-card__category,
 :root[data-theme='dark'] .solution-panel__copy > span,

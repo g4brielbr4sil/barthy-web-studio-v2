@@ -10,34 +10,60 @@
     <meta name="robots" content="noindex, nofollow" />
     <meta
       name="description"
-      content="Versão editorial experimental da Barthy Web Studio, com projetos, soluções digitais e formas de contato."
+      content="A Barthy Web Studio desenvolve sites, sistemas e automações para empresas que querem vender melhor, organizar processos e reduzir trabalho manual. Brasília, DF."
     />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Barthy Web Studio | Sites, Sistemas e Automação"
+    />
+    <meta
+      property="og:description"
+      content="Sites, sistemas e automações para empresas venderem melhor, organizarem processos e reduzirem trabalho manual. Brasília, DF."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Barthy Web Studio | Sites, Sistemas e Automação"
+    />
+    <meta
+      name="twitter:description"
+      content="Tecnologia para negócios venderem e operarem melhor."
+    />
+    <meta name="seo:absolute" content="" />
     <meta name="theme-color" content="#F6FAFD" />
     <script>
       ;(() => {
-        const key = 'barthy-v2-theme'
-        const colors = { light: '#F6FAFD', dark: '#0A1931' }
-        let theme = 'light'
-
-        try {
-          const savedTheme = window.localStorage.getItem(key)
-          if (savedTheme === 'light' || savedTheme === 'dark') {
-            theme = savedTheme
-          }
-        } catch {
-          theme = 'light'
-        }
-
         const root = document.documentElement
-        root.dataset.theme = theme
-        root.style.colorScheme = theme
-        root.style.backgroundColor = colors[theme]
-        document
-          .querySelector('meta[name="theme-color"]')
-          ?.setAttribute('content', colors[theme])
+        root.dataset.theme = 'light'
+        root.style.colorScheme = 'light'
+        root.style.backgroundColor = '#F6FAFD'
       })()
     </script>
-    <title>Barthy Web Studio V2 | Experiência editorial</title>
+    <script id="business-schema" type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Barthy Web Studio",
+        "description": "Sites, sistemas, automações e suporte para pequenos e médios negócios venderem e operarem melhor.",
+        "email": "contato.barthywebstudio@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Brasília",
+          "addressRegion": "DF",
+          "addressCountry": "BR"
+        },
+        "areaServed": "Brasília, DF",
+        "serviceType": [
+          "Sites institucionais e landing pages",
+          "Sistemas sob medida",
+          "Automação de processos",
+          "Suporte e evolução técnica"
+        ]
+      }
+    </script>
+    <title>Barthy Web Studio | Sites, Sistemas e Automação</title>
   </head>
   <body>
     <div id="root"></div>
