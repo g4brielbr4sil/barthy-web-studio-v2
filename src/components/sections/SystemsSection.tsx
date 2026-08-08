@@ -40,17 +40,22 @@ export function SystemsSection({
           <h2 id="systems-title">Software feito para o trabalho real</h2>
           <div className="systems__intro">
             <p>
-              Nem todo negócio precisa de um ERP gigante. Às vezes o problema
-              está em um processo específico que ainda depende de planilha,
-              caderno, memória ou dezenas de conversas no WhatsApp.
+              Nem todo negócio precisa de um ERP enorme. Muitas vezes, o gargalo
+              está em um trecho específico da operação: orçamento que some no
+              WhatsApp, acompanhamento feito de memória, planilhas paralelas ou
+              informação espalhada.
             </p>
             <p>
-              A Barthy transforma esses processos em ferramentas simples e úteis.
+              A Barthy entende a regra, organiza o fluxo e constrói uma ferramenta
+              do tamanho do problema.
             </p>
           </div>
         </SectionReveal>
 
-        <SectionReveal className="systems__examples" aria-label="Exemplos de processos que podem ser organizados">
+        <SectionReveal
+          className="systems__examples"
+          aria-label="Exemplos de processos que podem ser organizados"
+        >
           {examples.map((example) => {
             const Icon = example.icon
             return (
@@ -64,21 +69,24 @@ export function SystemsSection({
 
         <SectionReveal className="systems__paths">
           <article className="systems-path systems-path--products">
-            <span>Produtos Barthy</span>
-            <h3>Hipóteses próprias em validação</h3>
+            <span>Soluções próprias</span>
+            <h3>Produtos que nascem de problemas recorrentes</h3>
             <p>
-              A Barthy estuda produtos para problemas recorrentes. Barthy Flow é
-              uma tese em validação para negócios que vendem por orçamento e
-              WhatsApp. Não está disponível para contratação nesta fase.
+              Além dos projetos sob medida, a Barthy desenvolve frentes próprias
+              para dores que aparecem em diferentes negócios. Essas soluções
+              evoluem internamente e só entram no portfólio comercial quando
+              estiverem prontas para uso real.
             </p>
           </article>
 
           <article className="systems-path systems-path--custom">
-            <span>Soluções desenvolvidas sob medida</span>
-            <h3>Uma ferramenta para o processo específico da sua empresa</h3>
+            <span>Desenvolvimento sob medida</span>
+            <h3>Software desenhado a partir da rotina da sua empresa</h3>
             <p>
-              O trabalho parte da rotina atual para organizar dados, regras e
-              acompanhamento sem empurrar uma plataforma maior do que o problema.
+              Mapeamos como o processo funciona hoje, o que precisa ser registrado,
+              quem acompanha cada etapa e quais decisões o sistema deve facilitar.
+              O resultado é uma ferramenta objetiva, sem transformar um problema
+              específico em um ERP desnecessário.
             </p>
             <TextRollButton
               href="#contato"
@@ -94,11 +102,11 @@ export function SystemsSection({
         </SectionReveal>
 
         <div className="systems__flow" aria-hidden="true">
-          <span>Processo atual</span>
+          <span>Rotina observada</span>
           <ArrowRight size={18} />
-          <span>Regra entendida</span>
+          <span>Regra organizada</span>
           <ArrowRight size={18} />
-          <strong>Ferramenta útil</strong>
+          <strong>Ferramenta em uso</strong>
         </div>
       </div>
     </section>
