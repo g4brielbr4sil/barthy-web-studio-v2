@@ -32,37 +32,37 @@
 }
 
 /* O fallback usa a mesma linguagem de movimento em todas as telas.
-   Mobile não recebe um conjunto paralelo de keyframes. */
+   Mobile preserva apenas escala e enquadramento próprios do viewport. */
 @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
   .hero__background:not([data-mode='static']) .hero__organic-shape--blue {
-    top: -18%;
-    right: -8%;
-    width: min(66vw, 70rem);
+    top: -10%;
+    right: -32%;
+    width: 112vw;
     animation-name: hero-organic-blue;
     animation-duration: 34s;
   }
 
   .hero__background:not([data-mode='static']) .hero__organic-shape--ice {
     top: 4%;
-    left: -20%;
-    width: min(70vw, 72rem);
+    left: -42%;
+    width: 122vw;
     animation-name: hero-organic-ice;
     animation-duration: 41s;
   }
 
   .hero__background:not([data-mode='static']) .hero__organic-shape--terra {
-    top: auto;
-    right: 4%;
-    bottom: -30%;
-    width: min(62vw, 62rem);
+    top: 32%;
+    right: -30%;
+    bottom: auto;
+    width: 108vw;
     animation-name: hero-organic-terra;
     animation-duration: 29s;
   }
 
   .hero__background:not([data-mode='static']) .hero__organic-shape--white {
-    top: 20%;
-    left: 32%;
-    width: min(42vw, 42rem);
+    top: 16%;
+    left: 12%;
+    width: 92vw;
     animation-name: hero-organic-white;
     animation-duration: 37s;
   }
