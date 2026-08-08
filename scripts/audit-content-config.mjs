@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises'
 const paths = {
   app: 'src/app/App.tsx',
   hero: 'src/components/hero/HeroContent.tsx',
+  cssMotion: 'src/components/hero/CssMotionBackground.tsx',
   problems: 'src/components/sections/ProblemsSection.tsx',
   solutions: 'src/components/sections/SolutionsSection.tsx',
   solutionData: 'src/components/solutions/solution-map.data.ts',
@@ -15,7 +16,6 @@ const paths = {
   footer: 'src/components/footer/Footer.tsx',
   theme: 'src/theme/ThemeContext.tsx',
   shader: 'src/components/hero/ShaderSurface.tsx',
-  motion: 'src/styles/motion.css',
   html: 'index.html',
 }
 
@@ -65,14 +65,17 @@ for (const banned of [
   /Versão editorial experimental/i,
   /dominar sua categoria/i,
   /Comprar Barthy Flow/i,
+  /Hipóteses próprias em validação/i,
+  /Não está disponível para contratação nesta fase/i,
+  /sem métricas ou resultados inventados/i,
 ]) {
   assert.doesNotMatch(renderedPublicCopy, banned)
 }
 
-assert.match(
+assert.doesNotMatch(
   sources.systems,
-  /Não está disponível para contratação nesta fase\./,
-  'Barthy Flow deve permanecer explicitamente indisponível durante a validação.',
+  /Barthy Flow/,
+  'Produtos ainda não ofertados não devem ser expostos como produto comercial na home.',
 )
 assert.match(
   sources.projects,
@@ -81,8 +84,8 @@ assert.match(
 )
 assert.match(
   sources.projects,
-  /Projeto próprio em desenvolvimento/,
-  'Projetos próprios não podem parecer cases de clientes.',
+  /Produto próprio/,
+  'Hermes deve permanecer identificado como produto próprio, sem parecer case de cliente.',
 )
 assert.match(sources.contact, /VITE_BARTHY_WHATSAPP_URL/)
 assert.match(sources.contact, /VITE_BARTHY_CONTACT_ENDPOINT/)
@@ -98,15 +101,21 @@ assert.match(sources.theme, /return 'light'/)
 
 assert.match(
   sources.shader,
-  /momentum=\{finePointer \? 32 : 13\}/,
-  'O ChromaFlow autônomo deve continuar disponível em dispositivos touch.',
+  /momentum=\{32\}/,
+  'A intensidade-base do ChromaFlow deve ser preservada também em touch.',
 )
+assert.match(sources.shader, /radius=\{4\.6\}/)
+assert.match(sources.shader, /intensity=\{1\.05\}/)
 assert.doesNotMatch(
   sources.shader,
   /if \(!pageVisible\) return null/,
   'A composição WebGPU não deve desmontar apenas porque a aba perdeu visibilidade.',
 )
-assert.match(sources.motion, /@keyframes hero-signal/)
+assert.doesNotMatch(
+  sources.cssMotion,
+  /hero__organic-shape--signal/,
+  'A camada signal introduzida na PR #20 não deve substituir a composição original do fallback.',
+)
 
 const appOrder = [
   '<ProblemsSection',
