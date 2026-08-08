@@ -27,7 +27,8 @@ export function SolutionsSection({
           <SectionBadge number="02">Quatro linhas de atuação</SectionBadge>
           <h2 id="solutions-title">Soluções conectadas ao seu negócio</h2>
           <p>
-            Da presença online às ferramentas que organizam a operação.
+            Da presença que apresenta sua empresa às ferramentas que organizam
+            o trabalho por trás dela.
           </p>
         </SectionReveal>
 

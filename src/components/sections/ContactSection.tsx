@@ -34,8 +34,10 @@ export function ContactSection() {
             Tem um processo no seu negócio que poderia funcionar melhor?
           </h2>
           <p>
-            Conte para a Barthy como sua empresa trabalha hoje. Podemos avaliar
-            se um site, sistema ou automação realmente faz sentido para o problema.
+            Conte como sua empresa trabalha hoje. A Barthy parte da{' '}
+            <strong>rotina real do negócio</strong> para identificar onde um site,
+            sistema ou automação pode simplificar o trabalho e melhorar o
+            acompanhamento.
           </p>
         </SectionReveal>
 

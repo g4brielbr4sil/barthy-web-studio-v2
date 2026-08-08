@@ -156,18 +156,10 @@ export default function ShaderSurface({
           leftColor={palette.left}
           rightColor={palette.right}
           upColor={palette.up}
-          momentum={finePointer ? 32 : 13}
-          radius={finePointer ? 4.6 : 3.5}
-          intensity={finePointer ? 1.05 : 0.9}
-          opacity={
-            theme === 'dark'
-              ? finePointer
-                ? 0.68
-                : 0.62
-              : finePointer
-                ? 0.72
-                : 0.68
-          }
+          momentum={32}
+          radius={4.6}
+          intensity={1.05}
+          opacity={theme === 'dark' ? 0.68 : 0.72}
         />
         {finePointer && (
           <RadialGradient
@@ -213,12 +205,7 @@ export default function ShaderSurface({
           speed={0.32}
           opacity={theme === 'dark' ? 0.28 : 0.22}
         />
-        <FilmGrain
-          strength={finePointer ? 0.035 : 0.025}
-          bias={1}
-          animated={finePointer}
-          opacity={finePointer ? 0.2 : 0.14}
-        />
+        <FilmGrain strength={0.035} bias={1} animated opacity={0.2} />
       </Shader>
     </div>
   )
