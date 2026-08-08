@@ -21,16 +21,20 @@ type ContactFormValues = Omit<ContactPayload, 'source'>
 
 const serviceGroups = [
   {
-    label: 'Presença digital',
-    options: ['Landing page', 'Portfólio profissional', 'Página institucional'],
+    label: 'BWS Web · Presença digital',
+    options: ['Site institucional', 'Landing page', 'Portfólio', 'Formulário'],
   },
   {
-    label: 'Sistemas',
-    options: ['CRM', 'Dashboard', 'Portal', 'Sistema sob medida'],
+    label: 'BWS Systems · Sistemas',
+    options: ['Gestão de clientes', 'Orçamentos', 'Dashboard', 'Sistema sob medida'],
   },
   {
-    label: 'Operação',
-    options: ['Automação', 'Integração', 'Organização digital'],
+    label: 'BWS Automations · Automação',
+    options: ['Automação operacional', 'Integração', 'Notificações'],
+  },
+  {
+    label: 'BWS Care · Suporte e evolução',
+    options: ['Manutenção', 'Suporte', 'Monitoramento', 'Evolução contínua'],
   },
   {
     label: 'Outros',
@@ -433,7 +437,7 @@ export function ContactForm() {
         aria-busy={status === 'loading'}
       >
         <span>
-          {status === 'loading' ? 'Enviando' : 'Enviar briefing inicial'}
+          {status === 'loading' ? 'Enviando' : 'Falar sobre meu negócio'}
         </span>
         {status === 'loading' ? (
           <LoaderCircle className="form-submit__loader" size={18} />

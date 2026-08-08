@@ -30,8 +30,8 @@ export function Footer({
             onClick={(event) => handleNavigation(event, 'inicio')}
           />
           <p>
-            Páginas, sistemas e operação digital para empresas e
-            profissionais.
+            Tecnologia para pequenos e médios negócios venderem e operarem
+            melhor, a partir de Brasília, DF, com atendimento remoto.
           </p>
         </div>
 
@@ -63,7 +63,7 @@ export function Footer({
 
       <SectionReveal className="stage footer__bottom">
         <p>© {new Date().getFullYear()} Barthy Web Studio</p>
-        <p>Versão editorial experimental</p>
+        <p>Sites, sistemas, automação e suporte</p>
         <a
           href="#inicio"
           aria-label="Voltar ao início"

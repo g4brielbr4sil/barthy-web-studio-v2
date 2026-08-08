@@ -29,13 +29,13 @@ export function ContactSection() {
     >
       <div className="stage">
         <SectionReveal className="contact__heading" data-section-anchor>
-          <SectionBadge number="05">Contato</SectionBadge>
+          <SectionBadge number="06">Contato</SectionBadge>
           <h2 id="contact-title">
-            Seu próximo projeto pode começar com uma conversa clara.
+            Tem um processo no seu negócio que poderia funcionar melhor?
           </h2>
           <p>
-            Conte o que você precisa construir, organizar ou melhorar. A Barthy
-            analisa o contexto e indica o próximo passo.
+            Conte para a Barthy como sua empresa trabalha hoje. Podemos avaliar
+            se um site, sistema ou automação realmente faz sentido para o problema.
           </p>
         </SectionReveal>
 
@@ -47,7 +47,7 @@ export function ContactSection() {
             <a
               href={whatsappUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <MessageCircle size={20} aria-hidden="true" />
               <span>

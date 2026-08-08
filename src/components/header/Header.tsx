@@ -92,7 +92,7 @@ export function Header({
                 className="header-cta"
                 onClick={(event) => handleNavigation(event, 'contato')}
               >
-                Falar sobre meu projeto
+                Falar sobre meu negócio
               </TextRollButton>
               <button
                 ref={menuButtonRef}

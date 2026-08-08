@@ -6,6 +6,10 @@
 - [ ] Revisar os cases apresentados e as permissões de uso de marca.
 - [ ] Confirmar `VITE_BARTHY_WHATSAPP_URL`.
 - [ ] Confirmar `VITE_BARTHY_CONTACT_ENDPOINT` e o contrato de resposta.
+- [ ] Definir `VITE_BARTHY_SITE_URL` com o domínio HTTPS definitivo.
+- [ ] Confirmar `VITE_BARTHY_OG_IMAGE` ou usar `/og-barthy.svg` no domínio.
+- [ ] Manter `VITE_BARTHY_ALLOW_INDEXING=false` em preview.
+- [ ] Usar `VITE_BARTHY_ALLOW_INDEXING=true` somente na produção definitiva.
 - [ ] Validar o formulário sem dados pessoais reais.
 - [ ] Adicionar fotografias e vídeos somente após aprovação.
 - [ ] Revisar título, descrição e imagem social.
@@ -45,7 +49,8 @@
 - [ ] Cadastrar somente variáveis públicas confirmadas.
 - [ ] Validar os headers publicados.
 - [ ] Validar o preview antes de promover produção.
-- [ ] Remover `noindex, nofollow` somente depois da publicação definitiva.
+- [ ] Confirmar que o build definitivo gerou canonical, `robots.txt` público e `sitemap.xml`.
+- [ ] Confirmar que previews continuam com meta e header `noindex, nofollow`.
 
 ## GitHub
 

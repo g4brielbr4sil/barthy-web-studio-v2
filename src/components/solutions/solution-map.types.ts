@@ -1,7 +1,7 @@
 import type { LucideIcon } from 'lucide-react'
 
-type SolutionGroupId = 'presenca' | 'sistemas' | 'operacao'
-type SolutionLayer = 1 | 2 | 3
+type SolutionGroupId = 'web' | 'sistemas' | 'automacoes' | 'care'
+type SolutionLayer = 1 | 2 | 3 | 4
 
 interface SolutionNode {
   id: string

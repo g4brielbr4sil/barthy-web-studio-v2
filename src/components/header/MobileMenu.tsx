@@ -185,7 +185,7 @@ export function MobileMenu({
           className="mobile-menu__cta"
           onClick={(event) => closeForNavigation(event, 'contato')}
         >
-          Falar sobre meu projeto
+          Falar sobre meu negócio
         </TextRollButton>
 
         <div className="mobile-menu__meta">

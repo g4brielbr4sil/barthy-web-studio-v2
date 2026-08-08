@@ -11,10 +11,11 @@
     "dev": "vite",
     "audit:content": "node scripts/audit-content-config.mjs",
     "audit:a11y": "node scripts/audit-accessibility.mjs",
+    "audit:seo": "node scripts/audit-seo-output.mjs",
     "test:responsive": "node scripts/verify-responsive-contract.mjs",
     "typecheck": "tsc -b",
-    "build": "tsc -b && vite build",
-    "quality": "pnpm audit:content && pnpm audit:a11y && pnpm test:responsive && pnpm typecheck && pnpm build",
+    "build": "tsc -b && vite build && node scripts/generate-seo-files.mjs",
+    "quality": "pnpm audit:content && pnpm audit:a11y && pnpm test:responsive && pnpm typecheck && pnpm build && pnpm audit:seo",
     "preview": "vite preview"
   },
   "dependencies": {

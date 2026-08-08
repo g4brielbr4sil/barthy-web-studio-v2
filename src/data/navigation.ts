@@ -1,8 +1,9 @@
 export type SectionId =
   | 'inicio'
+  | 'problemas'
   | 'projetos'
-  | 'estudio'
   | 'solucoes'
+  | 'sistemas'
   | 'processo'
   | 'contato'
 
@@ -13,18 +14,19 @@ interface NavigationItem {
 }
 
 export const navigation: NavigationItem[] = [
-  { id: 'estudio', label: 'Estúdio', href: '#estudio' },
-  { id: 'projetos', label: 'Projetos', href: '#projetos' },
   { id: 'solucoes', label: 'Soluções', href: '#solucoes' },
+  { id: 'sistemas', label: 'Sistemas', href: '#sistemas' },
+  { id: 'projetos', label: 'Projetos', href: '#projetos' },
   { id: 'processo', label: 'Processo', href: '#processo' },
   { id: 'contato', label: 'Contato', href: '#contato' },
 ]
 
 export const observedSectionIds = [
   'inicio',
-  'estudio',
-  'projetos',
+  'problemas',
   'solucoes',
+  'sistemas',
+  'projetos',
   'processo',
   'contato',
 ] as const satisfies readonly SectionId[]

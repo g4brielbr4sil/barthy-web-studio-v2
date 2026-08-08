@@ -1,5 +1,4 @@
 import {
-  CheckCircle2,
   DraftingCompass,
   Hammer,
   RefreshCw,
@@ -19,33 +18,27 @@ interface ProcessStep {
 
 const steps: ProcessStep[] = [
   {
-    title: 'Entender',
+    title: 'Entendemos',
     description:
-      'O contexto, as necessidades e o que realmente precisa ser resolvido.',
+      'Conversamos sobre o negócio e identificamos o problema.',
     icon: Search,
   },
   {
-    title: 'Estruturar',
+    title: 'Desenhamos',
     description:
-      'Organizamos conteúdo, fluxo, prioridades e direção visual.',
+      'Definimos a solução mais simples que realmente resolve.',
     icon: DraftingCompass,
   },
   {
-    title: 'Construir',
+    title: 'Construímos',
     description:
-      'Transformamos a estrutura em uma experiência funcional e responsiva.',
+      'Desenvolvemos, validamos e colocamos para funcionar.',
     icon: Hammer,
   },
   {
-    title: 'Validar',
+    title: 'Evoluímos',
     description:
-      'Testamos conteúdo, navegação, comportamento e regras do projeto.',
-    icon: CheckCircle2,
-  },
-  {
-    title: 'Evoluir',
-    description:
-      'Acompanhamos ajustes, aprendizados e novas necessidades.',
+      'Acompanhamos o uso e melhoramos quando necessário.',
     icon: RefreshCw,
   },
 ]
@@ -63,7 +56,7 @@ export function ProcessSection({
     >
       <div className="stage">
         <SectionReveal className="process__heading" data-section-anchor>
-          <SectionBadge number="04">Como trabalhamos</SectionBadge>
+          <SectionBadge number="05">Como trabalhamos</SectionBadge>
           <h2 id="process-title">
             Um processo claro do primeiro contato à evolução do projeto.
           </h2>
@@ -98,7 +91,7 @@ export function ProcessSection({
             onNavigate('contato')
           }}
         >
-          Iniciar pelo diagnóstico
+          Falar sobre meu negócio
         </TextRollButton>
       </div>
     </section>
