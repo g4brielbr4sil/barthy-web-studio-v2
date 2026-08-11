@@ -47,6 +47,7 @@ function escapeAttribute(value) {
 
 const siteUrl = normalizeSiteUrl(env.VITE_BARTHY_SITE_URL)
 const allowIndexing = env.VITE_BARTHY_ALLOW_INDEXING === 'true'
+const analyticsToken = env.VITE_BARTHY_CF_ANALYTICS_TOKEN?.trim()
 
 if (allowIndexing && !siteUrl) {
   throw new Error(
@@ -101,6 +102,11 @@ if (siteUrl) {
   html = html.replace(/\n\s*\n/g, '\n')
 }
 
+if (analyticsToken) {
+  const beacon = `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${escapeAttribute(analyticsToken)}"}'></script>\n  `
+  html = html.replace('</body>', `${beacon}</body>`)
+}
+
 await writeFile(indexPath, html)
 
 let headers = await readFile(headersPath, 'utf8')
@@ -133,4 +139,9 @@ console.log(
   allowIndexing
     ? `SEO de produção gerado para ${siteUrl}.`
     : 'Build protegido com noindex; configure domínio e libere indexação explicitamente para gerar canonical e sitemap.',
+)
+console.log(
+  analyticsToken
+    ? 'Cloudflare Web Analytics injetado no build.'
+    : 'Analytics não configurado (defina VITE_BARTHY_CF_ANALYTICS_TOKEN para ativar).',
 )
