@@ -8,6 +8,7 @@ import {
 } from 'lucide-react'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import {
+  buildHermesLeadPayload,
   CONTACT_EMAIL,
   copyContactEmail,
   getContactEndpoint,
@@ -188,10 +189,7 @@ export function ContactForm() {
       return
     }
 
-    const payload: ContactPayload = {
-      ...values,
-      source: 'barthy-web-studio-v2',
-    }
+    const payload = buildHermesLeadPayload(values)
 
     setStatus('loading')
     setStatusMessage('')
