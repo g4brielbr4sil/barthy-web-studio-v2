@@ -29,15 +29,14 @@ export function ContactSection() {
     >
       <div className="stage">
         <SectionReveal className="contact__heading" data-section-anchor>
-          <SectionBadge number="06">Contato</SectionBadge>
+          <SectionBadge number="05">Contato</SectionBadge>
           <h2 id="contact-title">
             Tem um processo no seu negócio que poderia funcionar melhor?
           </h2>
           <p>
-            Conte como sua empresa trabalha hoje. A Barthy parte da{' '}
-            <strong>rotina real do negócio</strong> para identificar onde um site,
-            sistema ou automação pode simplificar o trabalho e melhorar o
-            acompanhamento.
+            Descreva o processo que mais precisa de clareza. Com esse contexto,
+            identificamos onde um site, sistema ou automação pode ajudar e qual
+            é o próximo passo mais útil.
           </p>
         </SectionReveal>
 

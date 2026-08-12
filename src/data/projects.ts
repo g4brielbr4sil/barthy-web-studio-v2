@@ -1,4 +1,4 @@
-export type ProjectVisualKind = 'levens' | 'pnqc' | 'hermes'
+export type ProjectVisualKind = 'concept' | 'pnqc' | 'hermes'
 
 export interface Project {
   id: ProjectVisualKind
@@ -13,21 +13,21 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'levens',
-    title: 'Levens',
-    category: 'Experiência profissional · operação, sistemas e governança',
+    id: 'concept',
+    title: 'Interface conceitual BWS',
+    category: 'Sistema comercial · conceito BWS',
     description:
-      'Atuação em uma operação real de cuidado, conectando portais, cadastros, documentos, escalas, validações, integrações e rotinas de acompanhamento.',
+      'Uma composição autoral que conecta clientes, oportunidades, orçamentos e próximas ações em um fluxo comercial leve de acompanhar.',
     detail:
-      'Experiência aplicada à evolução e validação de fluxos digitais que apoiam diferentes etapas da operação. O trabalho foi colaborativo e é apresentado como experiência profissional, não como criação exclusiva da Barthy.',
+      'Esta interface é uma demonstração conceitual da capacidade da Barthy de traduzir uma rotina comercial em informação clara. Não representa um produto disponível ou um sistema completo.',
     features: [
-      'Portais por perfil',
-      'Cadastros e documentos',
-      'Vagas e escalas',
-      'Validações operacionais',
-      'Integrações e acompanhamento',
+      'Clientes e oportunidades',
+      'Orçamentos e status',
+      'Próximas ações',
+      'Alertas de acompanhamento',
+      'Pipeline comercial leve',
     ],
-    stack: ['React', 'TypeScript', 'Supabase', 'APIs', 'n8n', 'Iugu'],
+    stack: ['React', 'TypeScript', 'CSS', 'UI/UX', 'Fluxos operacionais'],
     layout: 'wide',
   },
   {

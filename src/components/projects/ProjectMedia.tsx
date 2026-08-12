@@ -2,8 +2,8 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import type { ProjectVisualKind } from '../../data/projects'
 import { useInView } from '../../hooks/useInView'
 import { useVisualCapabilities } from '../../hooks/useVisualCapabilities'
+import { ConceptSystemVisual } from './ConceptSystemVisual'
 import { HermesVisual } from './HermesVisual'
-import { LevensVisual } from './LevensVisual'
 import { PnqcVisual } from './PnqcVisual'
 
 interface ProjectMediaProps {
@@ -14,7 +14,7 @@ interface ProjectMediaProps {
 }
 
 const visuals: Record<ProjectVisualKind, ReactNode> = {
-  levens: <LevensVisual />,
+  concept: <ConceptSystemVisual />,
   pnqc: <PnqcVisual />,
   hermes: <HermesVisual />,
 }

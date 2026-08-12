@@ -56,10 +56,15 @@ export function ProcessSection({
     >
       <div className="stage">
         <SectionReveal className="process__heading" data-section-anchor>
-          <SectionBadge number="05">Como trabalhamos</SectionBadge>
+          <SectionBadge number="04">Como trabalhamos</SectionBadge>
           <h2 id="process-title">
             Um processo claro do primeiro contato à evolução do projeto.
           </h2>
+          <p>
+            Conte como sua empresa trabalha hoje. A Barthy parte da rotina real
+            do negócio para identificar onde um site, sistema ou automação pode
+            simplificar o trabalho e melhorar o acompanhamento.
+          </p>
         </SectionReveal>
 
         <SectionReveal as="ol" className="process__steps">

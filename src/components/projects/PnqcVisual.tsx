@@ -10,7 +10,7 @@ function PnqcChrome() {
       <span />
       <span />
       <span />
-      <i>levens.qualifica</i>
+      <i>plataforma.pnqc</i>
     </div>
   )
 }

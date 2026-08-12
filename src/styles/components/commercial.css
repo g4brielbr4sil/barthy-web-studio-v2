@@ -1,8 +1,3 @@
-.problems {
-  background: var(--page-background);
-}
-
-.problems__heading,
 .systems__heading {
   display: grid;
   grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
@@ -10,12 +5,10 @@
   align-items: start;
 }
 
-.problems__heading .section-badge,
 .systems__heading .section-badge {
   grid-column: 1 / -1;
 }
 
-.problems__heading h2,
 .systems__heading h2 {
   max-width: 15ch;
   font-size: clamp(2.6rem, 5.4vw, 5.7rem);
@@ -24,77 +17,36 @@
   line-height: 0.98;
 }
 
-.problems__heading > p,
 .systems__intro {
+  display: grid;
   max-width: 38rem;
+  gap: 1rem;
   color: var(--muted-foreground);
   font-size: clamp(1rem, 1.5vw, 1.2rem);
   line-height: 1.68;
 }
 
-.problems__list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: clamp(3rem, 7vw, 6rem);
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
-}
-
-.problem-item {
-  display: grid;
-  min-height: 16rem;
-  grid-template-columns: auto auto minmax(0, 1fr);
-  align-content: space-between;
-  gap: 1rem;
-  padding: clamp(1.4rem, 3vw, 2.4rem);
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: linear-gradient(145deg, transparent, var(--surface-translucent));
-}
-
-.problem-item__number {
-  color: var(--terra-accent-text);
-  font-size: 0.72rem;
-  font-weight: 760;
-  letter-spacing: 0.08em;
-}
-
-.problem-item > svg {
-  color: var(--royal-blue);
-}
-
-.problem-item > div {
-  display: grid;
-  grid-column: 1 / -1;
-  gap: 0.7rem;
-  align-self: end;
-}
-
-.problem-item h3 {
-  max-width: 22ch;
-  font-size: clamp(1.25rem, 2.2vw, 2rem);
-  font-weight: 570;
-  letter-spacing: -0.035em;
-}
-
-.problem-item p {
-  max-width: 34rem;
-  color: var(--muted-foreground);
-  line-height: 1.6;
+.systems__intro p:last-child {
+  max-width: 35rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--terra-orange);
+  color: var(--foreground);
+  font-weight: 560;
 }
 
 .systems {
   overflow: clip;
-  background: var(--deep-navy);
-  color: var(--ice-white);
+  border-block: 1px solid var(--line);
+  background: var(--section-accent);
+  color: var(--foreground);
 }
 
 .systems::before {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 82% 14%, rgba(74, 127, 167, 0.28), transparent 28%),
-    radial-gradient(circle at 15% 88%, rgba(205, 118, 93, 0.18), transparent 27%);
+    radial-gradient(circle at 82% 14%, rgba(74, 127, 167, 0.14), transparent 30%),
+    radial-gradient(circle at 15% 88%, rgba(205, 118, 93, 0.1), transparent 29%);
   content: '';
   pointer-events: none;
 }
@@ -105,44 +57,40 @@
 
 .systems__heading .section-badge,
 .systems__heading h2 {
-  color: var(--ice-white);
+  color: var(--foreground);
 }
 
 .systems__heading .section-badge__number {
-  background: var(--ice-white);
-  color: var(--deep-navy);
-}
-
-.systems__intro {
-  display: grid;
-  gap: 1rem;
-  color: var(--soft-ice);
+  background: var(--terra-accent-solid);
+  color: #fff;
 }
 
 .systems__examples {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.7rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
   margin-top: clamp(3rem, 6vw, 5rem);
 }
 
 .systems__example {
   display: flex;
-  min-height: 5rem;
+  min-height: 4.8rem;
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  border: 1px solid rgba(179, 207, 229, 0.18);
+  border: 1px solid var(--card-border);
   border-radius: 1rem;
-  background: rgba(246, 250, 253, 0.055);
-  color: var(--soft-ice);
+  background: var(--card-background);
+  box-shadow: 0 16px 44px -40px rgba(10, 25, 49, 0.46);
+  color: var(--foreground);
   font-size: 0.86rem;
 }
 
 .systems__example:first-child {
-  grid-column: span 2;
-  border-color: rgba(205, 118, 93, 0.42);
-  color: var(--ice-white);
+  border-color: var(--terra-border);
+  background:
+    linear-gradient(135deg, var(--terra-surface), transparent),
+    var(--card-background);
 }
 
 .systems__example svg {
@@ -159,23 +107,31 @@
 
 .systems-path {
   display: grid;
-  min-height: 25rem;
+  min-height: 22rem;
   align-content: end;
   gap: 1rem;
   padding: clamp(1.5rem, 4vw, 3rem);
-  border: 1px solid rgba(179, 207, 229, 0.18);
+  border: 1px solid var(--card-border);
   border-radius: 1.5rem;
-  background: rgba(246, 250, 253, 0.055);
+  background: var(--card-background);
+  box-shadow: var(--card-shadow);
+  color: var(--foreground);
+}
+
+.systems-path--products {
+  background:
+    radial-gradient(circle at 90% 12%, var(--terra-glow-soft), transparent 32%),
+    var(--card-background);
 }
 
 .systems-path--custom {
   background:
-    linear-gradient(145deg, rgba(74, 127, 167, 0.2), transparent),
-    rgba(246, 250, 253, 0.065);
+    radial-gradient(circle at 88% 14%, rgba(74, 127, 167, 0.16), transparent 34%),
+    var(--card-background);
 }
 
 .systems-path > span {
-  color: var(--terra-orange);
+  color: var(--terra-accent-text);
   font-size: 0.72rem;
   font-weight: 760;
   letter-spacing: 0.1em;
@@ -192,38 +148,39 @@
 
 .systems-path p {
   max-width: 42rem;
-  color: var(--soft-ice);
+  color: var(--muted-foreground);
   line-height: 1.68;
 }
 
 .systems-path .text-roll-button {
   width: fit-content;
-  border-color: rgba(179, 207, 229, 0.28);
-  color: var(--ice-white);
+  border-color: var(--line-strong);
+  color: var(--foreground);
 }
 
 .systems__flow {
   display: flex;
-  width: fit-content;
+  width: 100%;
   align-items: center;
-  gap: 0.7rem;
-  margin: 2rem 0 0 auto;
-  color: var(--soft-ice);
+  justify-content: flex-end;
+  gap: 0.85rem;
+  margin-top: 1.6rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted-foreground);
   font-size: 0.72rem;
   letter-spacing: 0.04em;
 }
 
 .systems__flow strong {
-  color: var(--ice-white);
+  color: var(--foreground);
 }
 
 @media (max-width: 900px) {
-  .problems__heading,
   .systems__heading {
     grid-template-columns: 1fr;
   }
 
-  .problems__heading h2,
   .systems__heading h2 {
     max-width: 16ch;
   }
@@ -242,22 +199,12 @@
 }
 
 @media (max-width: 600px) {
-  .problems__heading h2,
   .systems__heading h2 {
     font-size: clamp(2.35rem, 11.5vw, 4rem);
   }
 
-  .problems__list,
   .systems__examples {
     grid-template-columns: 1fr;
-  }
-
-  .problem-item {
-    min-height: 13.5rem;
-  }
-
-  .systems__example:first-child {
-    grid-column: auto;
   }
 
   .systems-path {
@@ -269,8 +216,7 @@
   }
 
   .systems__flow {
-    width: 100%;
     flex-wrap: wrap;
-    margin-left: 0;
+    justify-content: flex-start;
   }
 }

@@ -6,7 +6,6 @@ import {
   FileSpreadsheet,
   ListTodo,
   Settings2,
-  Workflow,
 } from 'lucide-react'
 import type { SectionId } from '../../data/navigation'
 import { SectionBadge } from '../ui/SectionBadge'
@@ -18,9 +17,8 @@ const examples = [
   { label: 'Acompanhamento de serviços', icon: ClipboardCheck },
   { label: 'Gestão de clientes', icon: ContactRound },
   { label: 'Pedidos e próximas ações', icon: ListTodo },
-  { label: 'Processos internos', icon: Settings2 },
+  { label: 'Processos e regras internas', icon: Settings2 },
   { label: 'Dashboards', icon: BarChart3 },
-  { label: 'Automações', icon: Workflow },
 ]
 
 export function SystemsSection({
@@ -36,7 +34,7 @@ export function SystemsSection({
     >
       <div className="stage">
         <SectionReveal className="systems__heading" data-section-anchor>
-          <SectionBadge number="03">BWS Systems</SectionBadge>
+          <SectionBadge number="02">BWS Systems</SectionBadge>
           <h2 id="systems-title">Software feito para o trabalho real</h2>
           <div className="systems__intro">
             <p>

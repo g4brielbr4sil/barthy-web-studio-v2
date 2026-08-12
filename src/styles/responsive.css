@@ -349,33 +349,6 @@
     opacity: 1;
   }
 
-  .levens-visual {
-    grid-template-columns: 3rem 1fr;
-  }
-
-  .levens-visual__rail {
-    gap: 0.75rem;
-  }
-
-  .levens-visual__metrics {
-    grid-template-columns: 1fr;
-  }
-
-  .levens-visual__metrics > div:nth-child(n + 2) {
-    display: none;
-  }
-
-  .levens-visual__flow {
-    grid-template-columns: 1fr;
-    gap: 0.45rem;
-  }
-
-  .flow-line {
-    width: 1px;
-    height: 0.8rem;
-    justify-self: center;
-  }
-
   .form-grid {
     grid-template-columns: 1fr;
   }

@@ -125,20 +125,6 @@
   }
 }
 
-@keyframes flow-dot {
-  0% {
-    opacity: 0;
-    transform: translateX(0);
-  }
-  15% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(5000%);
-  }
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -204,50 +190,6 @@
   }
 }
 
-@keyframes hero-mobile-blue {
-  from {
-    opacity: 0.58;
-    transform: translate3d(-6%, -2%, 0) rotate(-7deg) scale(0.96);
-  }
-  to {
-    opacity: 0.8;
-    transform: translate3d(8%, 9%, 0) rotate(8deg) scale(1.08);
-  }
-}
-
-@keyframes hero-mobile-ice {
-  from {
-    opacity: 0.52;
-    transform: translate3d(-8%, 7%, 0) rotate(5deg) scale(1.02);
-  }
-  to {
-    opacity: 0.78;
-    transform: translate3d(12%, -6%, 0) rotate(-8deg) scale(1.12);
-  }
-}
-
-@keyframes hero-mobile-terra {
-  from {
-    opacity: 0.66;
-    transform: translate3d(8%, -5%, 0) rotate(6deg) scale(0.96);
-  }
-  to {
-    opacity: 0.88;
-    transform: translate3d(-9%, 12%, 0) rotate(-8deg) scale(1.08);
-  }
-}
-
-@keyframes hero-mobile-white {
-  from {
-    opacity: 0.4;
-    transform: translate3d(-7%, -4%, 0) rotate(-5deg) scale(0.92);
-  }
-  to {
-    opacity: 0.7;
-    transform: translate3d(10%, 8%, 0) rotate(7deg) scale(1.1);
-  }
-}
-
 @keyframes network-flow {
   to {
     stroke-dashoffset: -2;
@@ -285,8 +227,8 @@
     top: -10%;
     right: -32%;
     width: 112vw;
-    animation-name: hero-mobile-blue;
-    animation-duration: 24s;
+    animation-name: hero-organic-blue;
+    animation-duration: 34s;
   }
 
   .hero__background:not([data-mode='static'])
@@ -294,8 +236,8 @@
     top: 4%;
     left: -42%;
     width: 122vw;
-    animation-name: hero-mobile-ice;
-    animation-duration: 27s;
+    animation-name: hero-organic-ice;
+    animation-duration: 41s;
   }
 
   .hero__background:not([data-mode='static'])
@@ -304,8 +246,8 @@
     right: -30%;
     bottom: auto;
     width: 108vw;
-    animation-name: hero-mobile-terra;
-    animation-duration: 21s;
+    animation-name: hero-organic-terra;
+    animation-duration: 29s;
   }
 
   .hero__background:not([data-mode='static'])
@@ -313,8 +255,8 @@
     top: 16%;
     left: 12%;
     width: 92vw;
-    animation-name: hero-mobile-white;
-    animation-duration: 26s;
+    animation-name: hero-organic-white;
+    animation-duration: 37s;
   }
 
   .hero__background:not([data-mode='static'])

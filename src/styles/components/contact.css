@@ -24,7 +24,11 @@
 }
 
 .contact__heading > p:last-child {
-  color: var(--ink-muted);
+  max-width: 34rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--terra-orange);
+  color: var(--foreground);
+  font-size: clamp(1rem, 1.45vw, 1.16rem);
   line-height: 1.7;
 }
 
@@ -113,8 +117,8 @@
 }
 
 .contact__form {
-  margin-top: 1.25rem;
-  scroll-margin-top: 1rem;
+  margin-top: 1.5rem;
+  scroll-margin-top: calc(var(--site-header-height, 88px) + var(--anchor-gap));
 }
 
 .contact-form {

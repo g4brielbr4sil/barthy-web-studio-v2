@@ -11,8 +11,18 @@
   grid-column: 1 / -1;
 }
 
+.process__heading > p {
+  max-width: 35rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--terra-orange);
+  color: var(--muted-foreground);
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
 .process__steps {
-  margin-top: clamp(3.5rem, 8vw, 7rem);
+  margin-top: clamp(3.5rem, 7vw, 6rem);
   border-top: 1px solid var(--line-strong);
 }
 
@@ -64,5 +74,5 @@
 }
 
 .process__cta {
-  margin-top: 2rem;
+  margin-top: 2.4rem;
 }
