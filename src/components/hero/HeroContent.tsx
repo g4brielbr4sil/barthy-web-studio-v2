@@ -41,15 +41,6 @@ export function HeroContent({ onNavigate }: HeroContentProps) {
         >
           Falar sobre meu negócio
         </TextRollButton>
-
-        <TextRollButton
-          href="#solucoes"
-          variant="outline"
-          className="hero__secondary-cta"
-          onClick={(event) => navigate(event, 'solucoes')}
-        >
-          Conhecer soluções
-        </TextRollButton>
       </div>
     </div>
   )

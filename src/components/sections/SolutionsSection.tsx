@@ -1,4 +1,3 @@
-import { Blocks } from 'lucide-react'
 import { useState } from 'react'
 import type { SectionId } from '../../data/navigation'
 import { SolutionArchitectureMap } from '../solutions/SolutionArchitectureMap'
@@ -24,7 +23,7 @@ export function SolutionsSection({
     >
       <div className="stage">
         <SectionReveal className="solutions__heading" data-section-anchor>
-          <SectionBadge number="02">Quatro linhas de atuação</SectionBadge>
+          <SectionBadge number="01">Quatro linhas de atuação</SectionBadge>
           <h2 id="solutions-title">Soluções conectadas ao seu negócio</h2>
           <p>
             Da presença que apresenta sua empresa às ferramentas que organizam
@@ -47,24 +46,25 @@ export function SolutionsSection({
             tabIndex={0}
           >
             <div className="solution-panel" data-solution={activeGroup.id}>
-              <SolutionArchitectureMap group={activeGroup} />
-
               <div className="solution-panel__copy">
-                <span>
-                  <Blocks size={15} aria-hidden="true" />
-                  Linha de solução
-                </span>
+                <span>Linha de solução</span>
                 <h3>{activeGroup.title}</h3>
-                <p>{activeGroup.summary}</p>
                 <p className="solution-panel__architecture-summary">
                   {activeGroup.architectureSummary}
                 </p>
                 <ul className="solution-panel__services">
-                  {activeGroup.items.map((item) => (
-                    <li key={item}>{item}</li>
+                  {activeGroup.items.map((item, index) => (
+                    <li key={item}>
+                      <span aria-hidden="true">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      {item}
+                    </li>
                   ))}
                 </ul>
               </div>
+
+              <SolutionArchitectureMap group={activeGroup} />
             </div>
           </div>
         </SectionReveal>

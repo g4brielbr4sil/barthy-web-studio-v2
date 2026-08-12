@@ -1,4 +1,4 @@
-export type ProjectVisualKind = 'levens' | 'pnqc' | 'hermes'
+export type ProjectVisualKind = 'bws-flow' | 'pnqc' | 'hermes'
 
 export interface Project {
   id: ProjectVisualKind
@@ -13,21 +13,20 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'levens',
-    title: 'Levens',
-    category: 'Experiência profissional · operação, sistemas e governança',
+    id: 'bws-flow',
+    title: 'BWS Flow',
+    category: 'Interface conceitual · demonstração BWS Systems',
     description:
-      'Atuação em uma operação real de cuidado, conectando portais, cadastros, documentos, escalas, validações, integrações e rotinas de acompanhamento.',
+      'Mockup conceitual de uma central leve para acompanhar clientes, orçamentos, serviços e próximos passos sem transformar a rotina em um sistema excessivo.',
     detail:
-      'Experiência aplicada à evolução e validação de fluxos digitais que apoiam diferentes etapas da operação. O trabalho foi colaborativo e é apresentado como experiência profissional, não como criação exclusiva da Barthy.',
+      'A interface é uma demonstração visual da linha BWS Systems. Ela não representa um produto oficialmente lançado ou disponível para contratação nesta fase.',
     features: [
-      'Portais por perfil',
-      'Cadastros e documentos',
-      'Vagas e escalas',
-      'Validações operacionais',
-      'Integrações e acompanhamento',
+      'Clientes e oportunidades',
+      'Orçamentos e retornos',
+      'Próximos passos',
+      'Histórico e alertas',
     ],
-    stack: ['React', 'TypeScript', 'Supabase', 'APIs', 'n8n', 'Iugu'],
+    stack: ['React', 'TypeScript', 'Interface autoral'],
     layout: 'wide',
   },
   {
@@ -43,18 +42,8 @@ export const projects: Project[] = [
       'Progresso sequencial',
       'Avaliações e aprovação',
       'Perfis e certificados',
-      'Autenticação e segurança',
     ],
-    stack: [
-      'React',
-      'TypeScript',
-      'Vite',
-      'Supabase',
-      'PostgreSQL',
-      'Auth',
-      'RLS',
-      'Cloudflare Pages',
-    ],
+    stack: ['React', 'TypeScript', 'Supabase', 'PostgreSQL'],
     layout: 'split',
   },
   {
@@ -70,7 +59,6 @@ export const projects: Project[] = [
       'Financeiro e tarefas',
       'Rotina operacional',
       'Relatórios e alertas',
-      'Automações e integrações',
     ],
     stack: ['React', 'Vite', 'FastAPI', 'SQLite', 'Docker', 'API REST'],
     layout: 'split',

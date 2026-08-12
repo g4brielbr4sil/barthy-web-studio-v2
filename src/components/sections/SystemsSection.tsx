@@ -1,26 +1,25 @@
-import {
-  ArrowRight,
-  BarChart3,
-  ClipboardCheck,
-  ContactRound,
-  FileSpreadsheet,
-  ListTodo,
-  Settings2,
-  Workflow,
-} from 'lucide-react'
 import type { SectionId } from '../../data/navigation'
 import { SectionBadge } from '../ui/SectionBadge'
 import { SectionReveal } from '../ui/SectionReveal'
 import { TextRollButton } from '../ui/TextRollButton'
 
 const examples = [
-  { label: 'Controle de orçamentos', icon: FileSpreadsheet },
-  { label: 'Acompanhamento de serviços', icon: ClipboardCheck },
-  { label: 'Gestão de clientes', icon: ContactRound },
-  { label: 'Pedidos e próximas ações', icon: ListTodo },
-  { label: 'Processos internos', icon: Settings2 },
-  { label: 'Dashboards', icon: BarChart3 },
-  { label: 'Automações', icon: Workflow },
+  {
+    title: 'Clientes e oportunidades',
+    description: 'Uma visão clara de quem precisa de retorno e do que vem depois.',
+  },
+  {
+    title: 'Orçamentos e decisões',
+    description: 'Propostas, status e histórico sem depender da memória ou do WhatsApp.',
+  },
+  {
+    title: 'Serviços em andamento',
+    description: 'Responsáveis, prazos e próximos passos reunidos no mesmo fluxo.',
+  },
+  {
+    title: 'Indicadores e automações',
+    description: 'Informação útil para acompanhar a operação e reduzir tarefas repetidas.',
+  },
 ]
 
 export function SystemsSection({
@@ -36,58 +35,52 @@ export function SystemsSection({
     >
       <div className="stage">
         <SectionReveal className="systems__heading" data-section-anchor>
-          <SectionBadge number="03">BWS Systems</SectionBadge>
+          <SectionBadge number="02">BWS Systems</SectionBadge>
           <h2 id="systems-title">Software feito para o trabalho real</h2>
           <div className="systems__intro">
             <p>
               Nem todo negócio precisa de um ERP enorme. Muitas vezes, o gargalo
-              está em um trecho específico da operação: orçamento que some no
-              WhatsApp, acompanhamento feito de memória, planilhas paralelas ou
-              informação espalhada.
+              está em um trecho específico da operação: um orçamento sem retorno,
+              uma planilha paralela ou uma etapa que ninguém consegue acompanhar.
             </p>
             <p>
               A Barthy entende a regra, organiza o fluxo e constrói uma ferramenta
-              do tamanho do problema.
+              objetiva, do tamanho do problema.
             </p>
           </div>
         </SectionReveal>
 
-        <SectionReveal
-          className="systems__examples"
-          aria-label="Exemplos de processos que podem ser organizados"
-        >
-          {examples.map((example) => {
-            const Icon = example.icon
-            return (
-              <div key={example.label} className="systems__example">
-                <Icon size={18} aria-hidden="true" />
-                <span>{example.label}</span>
-              </div>
-            )
-          })}
-        </SectionReveal>
+        <SectionReveal className="systems__body">
+          <ol
+            className="systems__examples"
+            aria-label="Processos que podem ser organizados"
+          >
+            {examples.map((example, index) => (
+              <li key={example.title} className="systems__example">
+                <span aria-hidden="true">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3>{example.title}</h3>
+                  <p>{example.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
 
-        <SectionReveal className="systems__paths">
-          <article className="systems-path systems-path--products">
-            <span>Soluções próprias</span>
-            <h3>Produtos que nascem de problemas recorrentes</h3>
+          <article className="systems__approach">
+            <span>Da rotina ao sistema</span>
+            <h3>Uma ferramenta útil começa antes da interface.</h3>
             <p>
-              Além dos projetos sob medida, a Barthy desenvolve frentes próprias
-              para dores que aparecem em diferentes negócios. Essas soluções
-              evoluem internamente e só entram no portfólio comercial quando
-              estiverem prontas para uso real.
+              Mapeamos o que precisa ser registrado, quem acompanha cada etapa e
+              quais decisões o sistema deve facilitar. Assim, a tecnologia nasce
+              com foco e pode evoluir junto com a operação.
             </p>
-          </article>
-
-          <article className="systems-path systems-path--custom">
-            <span>Desenvolvimento sob medida</span>
-            <h3>Software desenhado a partir da rotina da sua empresa</h3>
-            <p>
-              Mapeamos como o processo funciona hoje, o que precisa ser registrado,
-              quem acompanha cada etapa e quais decisões o sistema deve facilitar.
-              O resultado é uma ferramenta objetiva, sem transformar um problema
-              específico em um ERP desnecessário.
-            </p>
+            <ol className="systems__flow" aria-label="Fluxo de construção do sistema">
+              <li>Rotina observada</li>
+              <li>Regra organizada</li>
+              <li>Ferramenta útil</li>
+            </ol>
             <TextRollButton
               href="#contato"
               variant="outline"
@@ -100,14 +93,6 @@ export function SystemsSection({
             </TextRollButton>
           </article>
         </SectionReveal>
-
-        <div className="systems__flow" aria-hidden="true">
-          <span>Rotina observada</span>
-          <ArrowRight size={18} />
-          <span>Regra organizada</span>
-          <ArrowRight size={18} />
-          <strong>Ferramenta em uso</strong>
-        </div>
       </div>
     </section>
   )

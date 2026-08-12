@@ -1,6 +1,5 @@
 export type SectionId =
   | 'inicio'
-  | 'problemas'
   | 'projetos'
   | 'solucoes'
   | 'sistemas'
@@ -23,7 +22,6 @@ export const navigation: NavigationItem[] = [
 
 export const observedSectionIds = [
   'inicio',
-  'problemas',
   'solucoes',
   'sistemas',
   'projetos',

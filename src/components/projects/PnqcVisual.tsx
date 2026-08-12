@@ -10,7 +10,7 @@ function PnqcChrome() {
       <span />
       <span />
       <span />
-      <i>levens.qualifica</i>
+      <i>pnqc.local</i>
     </div>
   )
 }

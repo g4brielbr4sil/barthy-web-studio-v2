@@ -18,27 +18,27 @@ interface ProcessStep {
 
 const steps: ProcessStep[] = [
   {
-    title: 'Entendemos',
+    title: 'Entender a rotina',
     description:
-      'Conversamos sobre o negócio e identificamos o problema.',
+      'Conversamos sobre como o trabalho acontece hoje e onde está o atrito.',
     icon: Search,
   },
   {
-    title: 'Desenhamos',
+    title: 'Definir o essencial',
     description:
-      'Definimos a solução mais simples que realmente resolve.',
+      'Organizamos prioridades e escolhemos a solução mais simples que resolve.',
     icon: DraftingCompass,
   },
   {
-    title: 'Construímos',
+    title: 'Construir e validar',
     description:
-      'Desenvolvemos, validamos e colocamos para funcionar.',
+      'Desenvolvemos em etapas e validamos cada parte com o contexto real.',
     icon: Hammer,
   },
   {
-    title: 'Evoluímos',
+    title: 'Acompanhar a evolução',
     description:
-      'Acompanhamos o uso e melhoramos quando necessário.',
+      'Observamos o uso e melhoramos o que fizer sentido para a operação.',
     icon: RefreshCw,
   },
 ]
@@ -56,10 +56,15 @@ export function ProcessSection({
     >
       <div className="stage">
         <SectionReveal className="process__heading" data-section-anchor>
-          <SectionBadge number="05">Como trabalhamos</SectionBadge>
+          <SectionBadge number="04">Como trabalhamos</SectionBadge>
           <h2 id="process-title">
-            Um processo claro do primeiro contato à evolução do projeto.
+            Da rotina real a uma solução que faz sentido.
           </h2>
+          <p className="process__intro">
+            Conte como sua empresa trabalha hoje. A Barthy parte da rotina real
+            do negócio para identificar onde um site, sistema ou automação pode
+            simplificar o trabalho e melhorar o acompanhamento.
+          </p>
         </SectionReveal>
 
         <SectionReveal as="ol" className="process__steps">

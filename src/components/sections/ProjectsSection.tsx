@@ -12,12 +12,11 @@ export function ProjectsSection() {
     >
       <div className="stage">
         <SectionReveal className="projects__heading" data-section-anchor>
-          <SectionBadge number="04">Experiência aplicada</SectionBadge>
-          <h2 id="projects-title">Projetos que carregam operação de verdade</h2>
+          <SectionBadge number="03">Experiência aplicada</SectionBadge>
+          <h2 id="projects-title">Tecnologia aplicada a operações reais</h2>
           <p>
-            Experiência profissional e produtos próprios que mostram a Barthy
-            trabalhando além da interface: fluxos, regras, dados, acompanhamento
-            e evolução de sistemas.
+            Projetos e conceitos próprios que mostram a Barthy trabalhando além
+            da interface: fluxos, regras, dados e acompanhamento.
           </p>
         </SectionReveal>
 

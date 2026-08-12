@@ -44,7 +44,7 @@ export function SolutionTabs({
       className="solutions__tabs"
       role="tablist"
       aria-label="Grupos de soluções"
-      aria-orientation="vertical"
+      aria-orientation="horizontal"
     >
       {groups.map((group, index) => {
         const Icon = group.icon
@@ -67,8 +67,10 @@ export function SolutionTabs({
           >
             <span>{String(index + 1).padStart(2, '0')}</span>
             <Icon size={22} aria-hidden="true" />
-            <strong>{group.title}</strong>
-            <small>{group.summary}</small>
+            <span className="solutions__tab-copy">
+              <strong>{group.title}</strong>
+              <small>{group.summary}</small>
+            </span>
           </button>
         )
       })}

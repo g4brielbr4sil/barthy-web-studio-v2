@@ -31,7 +31,6 @@ try {
 
   const ctas = [
     'Falar sobre meu negócio',
-    'Conhecer soluções',
   ]
 
   for (const label of ctas) {

@@ -163,7 +163,7 @@ public/              arquivos públicos e headers
 
 ## Projetos apresentados
 
-- **Levens:** sistemas, processos, suporte técnico e automações aplicadas a uma operação real
+- **BWS Flow:** interface conceitual da linha Systems, sem oferta comercial anunciada
 - **PNQC:** plataforma educacional com autenticação, trilhas de aprendizagem, avaliações e progresso
 - **Hermes:** aplicação Full Stack autoral para organização pessoal, comercial, financeira e operacional
 

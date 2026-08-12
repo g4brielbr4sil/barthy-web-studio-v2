@@ -5,7 +5,6 @@ const paths = {
   app: 'src/app/App.tsx',
   hero: 'src/components/hero/HeroContent.tsx',
   cssMotion: 'src/components/hero/CssMotionBackground.tsx',
-  problems: 'src/components/sections/ProblemsSection.tsx',
   solutions: 'src/components/sections/SolutionsSection.tsx',
   solutionData: 'src/components/solutions/solution-map.data.ts',
   systems: 'src/components/sections/SystemsSection.tsx',
@@ -30,7 +29,6 @@ const sources = Object.fromEntries(
 
 const renderedPublicCopy = [
   sources.hero,
-  sources.problems,
   sources.solutions,
   sources.solutionData,
   sources.systems,
@@ -44,9 +42,9 @@ const renderedPublicCopy = [
 for (const phrase of [
   'Tecnologia para negócios',
   'venderem e operarem melhor',
-  'Onde a Barthy entra',
   'Soluções conectadas ao seu negócio',
   'Software feito para o trabalho real',
+  'Conte como sua empresa trabalha hoje',
   'Tem um processo no seu negócio que poderia funcionar melhor?',
 ]) {
   assert.match(
@@ -68,6 +66,7 @@ for (const banned of [
   /Hipóteses próprias em validação/i,
   /Não está disponível para contratação nesta fase/i,
   /sem métricas ou resultados inventados/i,
+  /Onde a Barthy entra/i,
 ]) {
   assert.doesNotMatch(renderedPublicCopy, banned)
 }
@@ -77,11 +76,9 @@ assert.doesNotMatch(
   /Barthy Flow/,
   'Produtos ainda não ofertados não devem ser expostos como produto comercial na home.',
 )
-assert.match(
-  sources.projects,
-  /Experiência profissional/,
-  'Levens deve manter o contexto de experiência profissional.',
-)
+assert.doesNotMatch(sources.projects, /Levens/i)
+assert.match(sources.projects, /Interface conceitual/)
+assert.match(sources.projects, /não representa um produto oficialmente lançado/)
 assert.match(
   sources.projects,
   /Produto próprio/,
@@ -118,7 +115,6 @@ assert.doesNotMatch(
 )
 
 const appOrder = [
-  '<ProblemsSection',
   '<SolutionsSection',
   '<SystemsSection',
   '<ProjectsSection',
