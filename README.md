@@ -2,7 +2,7 @@
 
 # Barthy Web Studio V2
 
-**Site institucional e portfólio profissional da Barthy Web Studio.**
+**Versão atual do site institucional e portfólio profissional da Barthy Web Studio.**
 
 ![React](https://img.shields.io/badge/React-18-20232a?logo=react&logoColor=61dafb)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)
@@ -163,9 +163,9 @@ public/              arquivos públicos e headers
 
 ## Projetos apresentados
 
-- **Levens:** sistemas, processos, suporte técnico e automações aplicadas a uma operação real
 - **PNQC:** plataforma educacional com autenticação, trilhas de aprendizagem, avaliações e progresso
-- **Hermes:** aplicação Full Stack autoral para organização pessoal, comercial, financeira e operacional
+- **Hermes:** aplicação Full Stack autoral para organização comercial, operacional e automações controladas
+- **RadarDF:** produto em desenvolvimento para centralizar e estruturar oportunidades de trabalho no Distrito Federal
 
 ## Como executar
 
@@ -196,9 +196,7 @@ VITE_BARTHY_ALLOW_INDEXING=false
 
 `VITE_BARTHY_CONTACT_ENDPOINT` aponta para o endpoint que recebe o formulário.
 
-`VITE_BARTHY_SITE_URL` centraliza canonical, Open Graph e sitemap. O build só
-libera indexação quando `VITE_BARTHY_ALLOW_INDEXING=true` e a URL oficial HTTPS
-está configurada. Previews devem manter essa variável como `false`.
+`VITE_BARTHY_SITE_URL` centraliza canonical, Open Graph e sitemap. O build só libera indexação quando `VITE_BARTHY_ALLOW_INDEXING=true` e a URL oficial HTTPS está configurada. Previews devem manter essa variável como `false`.
 
 No Vite, tudo que começa com `VITE_` vai para o navegador. Não coloque senha, token ou segredo nessas variáveis.
 
