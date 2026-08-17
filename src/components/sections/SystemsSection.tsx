@@ -106,7 +106,7 @@ export function SystemsSection({
     >
       <div className="stage">
         <SectionReveal className="systems__heading" data-section-anchor>
-          <SectionBadge number="03">BWS Systems</SectionBadge>
+          <SectionBadge number="02">BWS Systems</SectionBadge>
           <h2 id="systems-title">Software feito para o trabalho real</h2>
           <div className="systems__intro">
             <p>
@@ -118,6 +118,11 @@ export function SystemsSection({
             <p>
               A Barthy entende a regra, organiza o fluxo e constrói uma ferramenta
               do tamanho do problema.
+            </p>
+            <p>
+              Por isso, esta é a linha que a Barthy detalha primeiro. As outras
+              três frentes você já viu em “Quatro linhas de atuação”; aqui é onde
+              o motor da operação aparece na prática.
             </p>
           </div>
         </SectionReveal>

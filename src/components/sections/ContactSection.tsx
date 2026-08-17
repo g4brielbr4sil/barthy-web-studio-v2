@@ -29,7 +29,7 @@ export function ContactSection() {
     >
       <div className="stage">
         <SectionReveal className="contact__heading" data-section-anchor>
-          <SectionBadge number="06">Contato</SectionBadge>
+          <SectionBadge number="05">Contato</SectionBadge>
           <h2 id="contact-title">
             Tem um processo no seu negócio que poderia funcionar melhor?
           </h2>

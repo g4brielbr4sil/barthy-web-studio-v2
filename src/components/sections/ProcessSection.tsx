@@ -56,7 +56,7 @@ export function ProcessSection({
     >
       <div className="stage">
         <SectionReveal className="process__heading" data-section-anchor>
-          <SectionBadge number="05">Como trabalhamos</SectionBadge>
+          <SectionBadge number="04">Como trabalhamos</SectionBadge>
           <h2 id="process-title">
             Um processo claro do primeiro contato à evolução do projeto.
           </h2>
