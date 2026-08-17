@@ -56,10 +56,10 @@ try {
     )
     const text = visibleText(markup)
 
-    for (const node of group.nodes) {
+    for (const step of group.flow) {
       assert.ok(
-        countText(text, node.label) >= 1,
-        `O item "${node.label}" deve existir no conteúdo textual do mapa.`,
+        countText(text, step.title) >= 1,
+        `A etapa "${step.title}" deve existir no conteúdo textual do fluxo.`,
       )
     }
   }

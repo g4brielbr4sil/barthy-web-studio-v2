@@ -66,6 +66,10 @@
   background: #e5eef5;
 }
 
+.project-card--studio-concept .project-card__media {
+  background: #171a17;
+}
+
 .project-card--hermes .project-card__media {
   background: #101c2f;
 }
@@ -304,127 +308,304 @@
   content: '';
 }
 
-.levens-visual {
+.workshop-visual {
   display: grid;
-  grid-template-columns: 4.4rem 1fr;
-  padding: clamp(1rem, 3vw, 2rem);
+  min-height: inherit;
+  grid-template-rows: auto 1fr;
+  gap: 0.9rem;
+  padding: clamp(0.8rem, 2.5vw, 1.5rem);
   background:
-    radial-gradient(circle at 88% 12%, rgba(74, 127, 167, 0.28), transparent 30%),
-    linear-gradient(145deg, #102543, #0a1931);
-  color: var(--ice-white);
+    radial-gradient(circle at 88% 8%, rgba(207, 173, 105, 0.16), transparent 28%),
+    linear-gradient(145deg, #111411, #1b211d 56%, #121612);
+  color: #f5f1e8;
 }
 
-.levens-visual__rail {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding-top: 0.2rem;
-  border-right: 1px solid var(--soft-ice-13);
-}
-
-.levens-visual__rail > span:not(.visual-mark) {
-  width: 1.5rem;
-  height: 0.3rem;
-  border-radius: 999px;
-  background: rgba(179, 207, 229, 0.22);
-}
-
-.levens-visual__main {
+.workshop-visual__topbar {
   display: grid;
-  align-content: space-between;
-  gap: 1.4rem;
-  min-width: 0;
-  padding-left: clamp(1rem, 3vw, 2.2rem);
-}
-
-.levens-visual__metrics {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.7rem;
-}
-
-.levens-visual__metrics > div {
-  display: grid;
-  min-height: 6.5rem;
-  align-content: space-between;
-  padding: 1rem;
-  border: 1px solid rgba(179, 207, 229, 0.14);
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.055);
-  color: var(--soft-ice);
-  font-size: 0.72rem;
-}
-
-.levens-visual__flow {
-  display: grid;
-  grid-template-columns: minmax(5.5rem, 1fr) minmax(1.5rem, 0.5fr) minmax(
-      5.5rem,
-      1fr
-    ) minmax(1.5rem, 0.5fr) minmax(5.5rem, 1fr);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.65rem;
   align-items: center;
 }
 
-.flow-node {
+.workshop-visual__mark {
   display: grid;
-  gap: 0.35rem;
-  padding: 0.9rem;
-  border: 1px solid var(--soft-ice-18);
-  border-radius: 0.9rem;
-  background: var(--ice-white-07);
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 1px solid rgba(215, 178, 102, 0.45);
+  border-radius: 0.7rem;
+  background: #d7b266;
+  color: #171a17;
+  font-size: 0.58rem;
+  font-weight: 850;
 }
 
-.flow-node span {
-  color: var(--soft-ice);
+.workshop-visual__topbar > div {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.workshop-visual__topbar strong {
+  font-size: 0.78rem;
+}
+
+.workshop-visual__topbar small {
+  color: rgba(245, 241, 232, 0.56);
   font-size: 0.58rem;
 }
 
-.flow-node strong {
-  font-size: 0.76rem;
-}
-
-.flow-node--accent {
-  border-color: rgba(205, 118, 93, 0.52);
-  background: rgba(205, 118, 93, 0.11);
-}
-
-.flow-line {
-  position: relative;
-  height: 1px;
-  overflow: hidden;
-  background: rgba(179, 207, 229, 0.26);
-}
-
-.flow-line::after {
-  position: absolute;
-  top: -2px;
-  left: 0;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--terra-orange);
-  content: '';
-  opacity: 0;
-}
-
-.project-media[data-active='true'] .flow-line::after {
-  animation: flow-dot 2.4s 500ms var(--ease-editorial) 1 both;
-}
-
-.levens-visual__integration {
-  position: absolute;
-  right: 1.2rem;
-  bottom: 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 0.7rem;
-  border: 1px solid var(--soft-ice-18);
+.workshop-visual__concept {
+  padding: 0.38rem 0.58rem;
+  border: 1px solid rgba(155, 191, 154, 0.34);
   border-radius: 999px;
-  background: rgba(10, 25, 49, 0.72);
-  color: var(--soft-ice);
-  font-size: 0.64rem;
-  backdrop-filter: blur(10px);
+  background: rgba(155, 191, 154, 0.1);
+  color: #b7d5b6;
+  font-size: 0.56rem;
+  font-weight: 720;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.workshop-app {
+  display: grid;
+  min-height: 20rem;
+  grid-template-columns: 3.6rem minmax(0, 1fr) minmax(10rem, 0.34fr);
+  overflow: hidden;
+  border: 1px solid rgba(245, 241, 232, 0.12);
+  border-radius: 1.15rem;
+  background: #f0eee7;
+  box-shadow: 0 2.2rem 4.2rem -2.7rem rgba(0, 0, 0, 0.9);
+  color: #242a25;
+}
+
+.workshop-app__rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.8rem 0.45rem;
+  background: #202620;
+}
+
+.workshop-app__rail > span {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: 0.65rem;
+  color: rgba(245, 241, 232, 0.42);
+}
+
+.workshop-app__rail > span.is-active {
+  background: #d7b266;
+  color: #171a17;
+}
+
+.workshop-dashboard {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 0.85rem;
+  padding: 1rem;
+}
+
+.workshop-dashboard__heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.workshop-dashboard__heading > div {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.workshop-dashboard__heading small {
+  color: #747a72;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+}
+
+.workshop-dashboard__heading strong {
+  font-size: clamp(0.8rem, 1.5vw, 1.05rem);
+}
+
+.workshop-dashboard__heading > span {
+  padding: 0.34rem 0.5rem;
+  border: 1px solid #d9d6cc;
+  border-radius: 999px;
+  color: #686e67;
+  font-size: 0.55rem;
+}
+
+.workshop-dashboard__signals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.workshop-dashboard__signals > div {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem;
+  border: 1px solid #dedbd1;
+  border-radius: 0.75rem;
+  background: #faf8f2;
+  color: #555d55;
+  font-size: 0.58rem;
+}
+
+.workshop-dashboard__signals svg {
+  flex: 0 0 auto;
+  color: #9b7530;
+}
+
+.workshop-board {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.75rem;
+  border: 1px solid #ddd9ce;
+  border-radius: 0.9rem;
+  background: #faf8f2;
+}
+
+.workshop-board > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.workshop-board > header span {
+  font-size: 0.66rem;
+  font-weight: 760;
+}
+
+.workshop-board > header small {
+  color: #7a8179;
+  font-size: 0.52rem;
+}
+
+.workshop-board__columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.workshop-board__column {
+  display: grid;
+  align-content: start;
+  gap: 0.45rem;
+}
+
+.workshop-board__column > span {
+  display: flex;
+  align-items: center;
+  gap: 0.32rem;
+  color: #666d65;
+  font-size: 0.52rem;
+  font-weight: 680;
+}
+
+.workshop-board__column > span i,
+.workshop-actions li i {
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 50%;
+  background: #d7b266;
+}
+
+.workshop-board__column:nth-child(2) > span i {
+  background: #c58e72;
+}
+
+.workshop-board__column:nth-child(3) > span i {
+  background: #8fb58f;
+}
+
+.workshop-board__column article {
+  display: grid;
+  min-height: 6rem;
+  align-content: space-between;
+  gap: 0.28rem;
+  padding: 0.62rem;
+  border: 1px solid #e2ded4;
+  border-radius: 0.7rem;
+  background: #fffdf8;
+  box-shadow: 0 0.8rem 1.8rem -1.55rem rgba(32, 38, 32, 0.42);
+}
+
+.workshop-board__column article small {
+  color: #a27a33;
+  font-size: 0.48rem;
+  font-weight: 760;
+}
+
+.workshop-board__column article strong {
+  font-size: 0.58rem;
+  line-height: 1.3;
+}
+
+.workshop-board__column article p {
+  color: #7a8179;
+  font-size: 0.49rem;
+  line-height: 1.35;
+}
+
+.workshop-actions {
+  display: grid;
+  align-content: start;
+  gap: 0.7rem;
+  padding: 1rem;
+  border-left: 1px solid #d8d4c9;
+  background: #e5e1d6;
+}
+
+.workshop-actions > span {
+  color: #8a6a30;
+  font-size: 0.52rem;
+  font-weight: 780;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.workshop-actions > strong {
+  font-size: 0.76rem;
+  line-height: 1.25;
+}
+
+.workshop-actions ul {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.workshop-actions li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid #d1cdc2;
+  color: #596158;
+  font-size: 0.54rem;
+}
+
+.workshop-actions > div {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding: 0.65rem;
+  border-radius: 0.7rem;
+  background: #202620;
+  color: #f5f1e8;
+  font-size: 0.52rem;
+}
+
+.workshop-actions > div svg {
+  color: #d7b266;
 }
 
 .pnqc-visual {

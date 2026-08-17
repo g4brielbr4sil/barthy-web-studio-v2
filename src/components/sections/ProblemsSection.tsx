@@ -1,9 +1,11 @@
 import {
+  ChevronDown,
   ClipboardList,
   Files,
   MessageSquareWarning,
   Repeat2,
 } from 'lucide-react'
+import { useState } from 'react'
 import { SectionBadge } from '../ui/SectionBadge'
 import { SectionReveal } from '../ui/SectionReveal'
 
@@ -33,6 +35,8 @@ const problems = [
 ]
 
 export function ProblemsSection() {
+  const [activeProblem, setActiveProblem] = useState<number | null>(0)
+
   return (
     <section
       id="problemas"
@@ -65,6 +69,48 @@ export function ProblemsSection() {
                   <p>{problem.description}</p>
                 </div>
               </li>
+            )
+          })}
+        </SectionReveal>
+
+        <SectionReveal
+          className="problems__bubbles"
+          aria-label="Situações que a Barthy ajuda a organizar"
+        >
+          {problems.map((problem, index) => {
+            const Icon = problem.icon
+            const expanded = activeProblem === index
+            const panelId = `problem-bubble-${index}`
+
+            return (
+              <article
+                key={problem.title}
+                className="problem-bubble"
+                data-expanded={expanded}
+              >
+                <button
+                  type="button"
+                  aria-expanded={expanded}
+                  aria-controls={panelId}
+                  onClick={() => setActiveProblem(expanded ? null : index)}
+                >
+                  <span className="problem-bubble__number" aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="problem-bubble__icon" aria-hidden="true">
+                    <Icon size={19} />
+                  </span>
+                  <strong>{problem.title}</strong>
+                  <ChevronDown
+                    className="problem-bubble__chevron"
+                    size={18}
+                    aria-hidden="true"
+                  />
+                </button>
+                <div id={panelId} className="problem-bubble__content" hidden={!expanded}>
+                  <p>{problem.description}</p>
+                </div>
+              </article>
             )
           })}
         </SectionReveal>

@@ -192,20 +192,27 @@ export default function ShaderSurface({
             opacity={theme === 'dark' ? 0.28 : 0.4}
           />
         )}
-        <FlutedGlass
-          aberration={0.48}
-          angle={31}
-          frequency={7}
-          highlight={0.16}
-          highlightSoftness={0}
-          lightAngle={-90}
-          refraction={3.2}
-          shape="rounded"
-          softness={1}
-          speed={0.32}
-          opacity={theme === 'dark' ? 0.28 : 0.22}
+        {finePointer && (
+          <FlutedGlass
+            aberration={0.48}
+            angle={31}
+            frequency={7}
+            highlight={0.16}
+            highlightSoftness={0}
+            lightAngle={-90}
+            refraction={3.2}
+            shape="rounded"
+            softness={1}
+            speed={0.32}
+            opacity={theme === 'dark' ? 0.28 : 0.22}
+          />
+        )}
+        <FilmGrain
+          strength={0.035}
+          bias={1}
+          animated={finePointer}
+          opacity={finePointer ? 0.2 : 0.12}
         />
-        <FilmGrain strength={0.035} bias={1} animated opacity={0.2} />
       </Shader>
     </div>
   )

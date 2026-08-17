@@ -93,80 +93,32 @@
   color: var(--soft-ice);
 }
 
-:root[data-theme='dark'] .solution-network {
+:root[data-theme='dark'] .solution-journey {
   background:
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(74, 127, 167, 0.34),
-      transparent 36%
-    ),
+    linear-gradient(rgba(179, 207, 229, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(179, 207, 229, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 86% 12%, var(--terra-glow-soft), transparent 32%),
     linear-gradient(145deg, #111c2c, #17253a);
+  background-size: 2.5rem 2.5rem, 2.5rem 2.5rem, auto, auto;
 }
 
-:root[data-theme='dark'] .solution-network figcaption {
+:root[data-theme='dark'] .solution-journey figcaption {
   border-color: var(--border);
-  background: var(--surface-translucent-strong);
+  background: rgba(10, 25, 49, 0.72);
   color: var(--soft-ice);
 }
 
-:root[data-theme='dark'] .solution-network__connections circle {
-  stroke: var(--soft-ice-20);
+:root[data-theme='dark'] .solution-journey__summary,
+:root[data-theme='dark'] .solution-journey__step strong {
+  color: var(--ice-white);
 }
 
-:root[data-theme='dark'] .solution-network__connections line {
-  stroke: rgba(179, 207, 229, 0.36);
-}
-
-:root[data-theme='dark']
-  .solution-network__connections
-  line.is-flowing {
-  stroke: var(--soft-ice);
-}
-
-:root[data-theme='dark'] .solution-network__node-icon {
+:root[data-theme='dark'] .solution-journey__step {
   border-color: var(--border);
-  background: rgba(23, 37, 58, 0.94);
-  color: var(--soft-ice);
+  background: rgba(10, 25, 49, 0.72);
 }
 
-:root[data-theme='dark'] .solution-network__core {
-  background: var(--royal-blue);
-  box-shadow:
-    0 20px 46px -24px rgba(0, 0, 0, 0.84),
-    0 0 0 0.65rem rgba(10, 25, 49, 0.52);
-}
-
-:root[data-theme='dark'] .solution-system__layer strong,
-:root[data-theme='dark'] .solution-system__module,
-:root[data-theme='dark'] .solution-system__source {
-  color: var(--soft-ice);
-}
-
-:root[data-theme='dark'] .solution-system__module,
-:root[data-theme='dark'] .solution-system__source {
-  border-color: var(--border);
-  background: rgba(23, 37, 58, 0.88);
-}
-
-:root[data-theme='dark'] .solution-system__bus span,
-:root[data-theme='dark'] .solution-system__flow i {
-  background: rgba(179, 207, 229, 0.24);
-}
-
-:root[data-theme='dark'] .solution-system__bus i::after {
-  border-color: #17253a;
-}
-
-:root[data-theme='dark'] .solution-system__core {
-  background: var(--royal-blue);
-  box-shadow:
-    0 1.8rem 3.5rem -1.8rem rgba(0, 0, 0, 0.88),
-    0 0 0 0.45rem rgba(10, 25, 49, 0.46);
-}
-
-:root[data-theme='dark'] .solution-system__flow {
-  border-color: var(--border);
-  background: rgba(10, 25, 49, 0.42);
+:root[data-theme='dark'] .solution-journey__step p {
   color: var(--soft-ice);
 }
 

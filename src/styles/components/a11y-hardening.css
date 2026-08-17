@@ -10,7 +10,3 @@
 .text-roll-button__text--secondary::before {
   content: attr(data-label);
 }
-
-.solution-network__node-label::before {
-  content: attr(data-label);
-}
