@@ -351,35 +351,6 @@
     opacity: 1;
   }
 
-  .workshop-visual {
-    padding: 0.7rem;
-  }
-
-  .workshop-app {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .workshop-app__rail,
-  .workshop-actions {
-    display: none;
-  }
-
-  .workshop-dashboard {
-    padding: 0.75rem;
-  }
-
-  .workshop-dashboard__signals > div:nth-child(3) {
-    display: none;
-  }
-
-  .workshop-dashboard__signals {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .workshop-board__column article p {
-    display: none;
-  }
-
   .form-grid {
     grid-template-columns: 1fr;
   }

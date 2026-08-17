@@ -1,4 +1,4 @@
-export type ProjectVisualKind = 'studio-concept' | 'pnqc' | 'hermes'
+export type ProjectVisualKind = 'radardf' | 'pnqc' | 'hermes'
 
 export interface Project {
   id: ProjectVisualKind
@@ -13,21 +13,21 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'studio-concept',
-    title: 'Operação de oficina',
-    category: 'Conceito de interface · sistema para serviços e orçamentos',
+    id: 'radardf',
+    title: 'RadarDF',
+    category: 'Plataforma de vagas · Distrito Federal',
     description:
-      'Uma visão própria da Barthy para reunir pedidos, orçamentos, aprovações, serviços em andamento e próximas ações numa operação fácil de acompanhar.',
+      'Uma plataforma para reunir vagas do DF, tirar duplicidade e aproximar candidato certo de vaga certa, sem taxa para quem está buscando emprego.',
     detail:
-      'Peça demonstrativa criada para explorar como uma oficina ou empresa de serviços poderia trocar conversas soltas e controles paralelos por um fluxo operacional claro. O conceito não é apresentado como produto lançado.',
+      'Em desenvolvimento. Nasce de um problema real: agregar oportunidades hoje espalhadas, normalizar e cruzar perfil com vaga de forma direta. Empresas pagam por destaque e ferramentas de recrutamento; candidato usa de graça.',
     features: [
-      'Pedidos e clientes',
-      'Orçamentos e aprovações',
-      'Status dos serviços',
-      'Próximas ações e alertas',
-      'Histórico de acompanhamento',
+      'Agregação de vagas de múltiplas fontes',
+      'Remoção de duplicadas',
+      'Matching entre candidato e vaga',
+      'Painel de candidaturas',
+      'Portal para empresas',
     ],
-    stack: ['React', 'TypeScript', 'Interface conceitual', 'Fluxo sob medida'],
+    stack: ['React', 'TypeScript', 'FastAPI', 'Em construção'],
     layout: 'wide',
   },
   {

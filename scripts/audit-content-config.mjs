@@ -5,7 +5,6 @@ const paths = {
   app: 'src/app/App.tsx',
   hero: 'src/components/hero/HeroContent.tsx',
   cssMotion: 'src/components/hero/CssMotionBackground.tsx',
-  problems: 'src/components/sections/ProblemsSection.tsx',
   solutions: 'src/components/sections/SolutionsSection.tsx',
   solutionData: 'src/components/solutions/solution-map.data.ts',
   systems: 'src/components/sections/SystemsSection.tsx',
@@ -30,7 +29,6 @@ const sources = Object.fromEntries(
 
 const renderedPublicCopy = [
   sources.hero,
-  sources.problems,
   sources.solutions,
   sources.solutionData,
   sources.systems,
@@ -44,7 +42,6 @@ const renderedPublicCopy = [
 for (const phrase of [
   'Tecnologia para negócios',
   'venderem e operarem melhor',
-  'Onde a Barthy entra',
   'Soluções conectadas ao seu negócio',
   'Software feito para o trabalho real',
   'Tem um processo no seu negócio que poderia funcionar melhor?',
@@ -84,8 +81,13 @@ assert.doesNotMatch(
 )
 assert.match(
   sources.projects,
-  /Conceito de interface/,
-  'O mockup próprio deve permanecer identificado como conceito.',
+  /RadarDF/,
+  'RadarDF deve permanecer na área de experiência aplicada.',
+)
+assert.match(
+  sources.projects,
+  /Em desenvolvimento/,
+  'RadarDF deve permanecer identificado como projeto em desenvolvimento.',
 )
 assert.match(
   sources.projects,
@@ -123,7 +125,7 @@ assert.doesNotMatch(
 )
 
 const appOrder = [
-  '<ProblemsSection',
+  '<Hero',
   '<SolutionsSection',
   '<SystemsSection',
   '<ProjectsSection',
