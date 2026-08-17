@@ -1,4 +1,4 @@
-export type ProjectVisualKind = 'levens' | 'pnqc' | 'hermes'
+export type ProjectVisualKind = 'studio-concept' | 'pnqc' | 'hermes'
 
 export interface Project {
   id: ProjectVisualKind
@@ -13,21 +13,21 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'levens',
-    title: 'Levens',
-    category: 'Experiência profissional · operação, sistemas e governança',
+    id: 'studio-concept',
+    title: 'Operação de oficina',
+    category: 'Conceito de interface · sistema para serviços e orçamentos',
     description:
-      'Atuação em uma operação real de cuidado, conectando portais, cadastros, documentos, escalas, validações, integrações e rotinas de acompanhamento.',
+      'Uma visão própria da Barthy para reunir pedidos, orçamentos, aprovações, serviços em andamento e próximas ações numa operação fácil de acompanhar.',
     detail:
-      'Experiência aplicada à evolução e validação de fluxos digitais que apoiam diferentes etapas da operação. O trabalho foi colaborativo e é apresentado como experiência profissional, não como criação exclusiva da Barthy.',
+      'Peça demonstrativa criada para explorar como uma oficina ou empresa de serviços poderia trocar conversas soltas e controles paralelos por um fluxo operacional claro. O conceito não é apresentado como produto lançado.',
     features: [
-      'Portais por perfil',
-      'Cadastros e documentos',
-      'Vagas e escalas',
-      'Validações operacionais',
-      'Integrações e acompanhamento',
+      'Pedidos e clientes',
+      'Orçamentos e aprovações',
+      'Status dos serviços',
+      'Próximas ações e alertas',
+      'Histórico de acompanhamento',
     ],
-    stack: ['React', 'TypeScript', 'Supabase', 'APIs', 'n8n', 'Iugu'],
+    stack: ['React', 'TypeScript', 'Interface conceitual', 'Fluxo sob medida'],
     layout: 'wide',
   },
   {

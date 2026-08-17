@@ -11,7 +11,7 @@ interface ShaderSurfaceProps {
   onFailure: (reason: string) => void
 }
 
-export function ShaderBackground() {
+export function ShaderBackground({ active }: { active: boolean }) {
   const [ShaderSurface, setShaderSurface] =
     useState<ComponentType<ShaderSurfaceProps> | null>(null)
   const {
@@ -22,7 +22,7 @@ export function ShaderBackground() {
     markShaderFailed,
   } = useVisualCapabilities()
   const shouldMount =
-    canAttemptShader && shaderStatus !== 'failed'
+    active && canAttemptShader && shaderStatus !== 'failed'
 
   useEffect(() => {
     if (!shouldMount || ShaderSurface) return

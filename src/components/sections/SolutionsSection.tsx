@@ -1,4 +1,4 @@
-import { Blocks } from 'lucide-react'
+import { Blocks, ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 import type { SectionId } from '../../data/navigation'
 import { SolutionArchitectureMap } from '../solutions/SolutionArchitectureMap'
@@ -14,6 +14,7 @@ export function SolutionsSection({
   onNavigate: (section: SectionId) => void
 }) {
   const [activeIndex, setActiveIndex] = useState(1)
+  const [mobileActiveIndex, setMobileActiveIndex] = useState<number | null>(1)
   const activeGroup = solutionGroups[activeIndex] ?? solutionGroups[0]
 
   return (
@@ -67,6 +68,68 @@ export function SolutionsSection({
               </div>
             </div>
           </div>
+        </SectionReveal>
+
+        <SectionReveal className="solutions__mobile-accordion">
+          {solutionGroups.map((group, index) => {
+            const Icon = group.icon
+            const expanded = mobileActiveIndex === index
+            const panelId = `mobile-solution-${group.id}`
+
+            return (
+              <article
+                key={group.id}
+                className="mobile-solution"
+                data-expanded={expanded}
+              >
+                <button
+                  type="button"
+                  aria-expanded={expanded}
+                  aria-controls={panelId}
+                  onClick={() =>
+                    setMobileActiveIndex(expanded ? null : index)
+                  }
+                >
+                  <span className="mobile-solution__index" aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="mobile-solution__icon" aria-hidden="true">
+                    <Icon size={20} />
+                  </span>
+                  <span className="mobile-solution__label">
+                    <strong>{group.title}</strong>
+                    <small>{group.summary}</small>
+                  </span>
+                  <ChevronDown
+                    className="mobile-solution__chevron"
+                    size={18}
+                    aria-hidden="true"
+                  />
+                </button>
+
+                <div
+                  id={panelId}
+                  className="mobile-solution__panel"
+                  hidden={!expanded}
+                >
+                  <p>{group.architectureSummary}</p>
+                  <ol className="mobile-solution__flow" aria-label="Fluxo simplificado">
+                    {group.flow.map((step) => (
+                      <li key={step.title}>
+                        <span>{step.eyebrow}</span>
+                        <strong>{step.title}</strong>
+                      </li>
+                    ))}
+                  </ol>
+                  <ul className="mobile-solution__services">
+                    {group.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            )
+          })}
         </SectionReveal>
 
         <TextRollButton

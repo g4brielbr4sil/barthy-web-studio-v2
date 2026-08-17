@@ -70,14 +70,6 @@
     grid-column: auto;
   }
 
-  .solutions__experience {
-    grid-template-columns: minmax(15rem, 0.7fr) minmax(0, 1fr);
-  }
-
-  .solution-panel {
-    min-height: 31rem;
-  }
-
   .contact__heading {
     grid-template-columns: minmax(0, 1fr);
     align-items: start;
@@ -124,6 +116,24 @@
   .hero__content {
     padding-top: 7.5rem;
     padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+
+  .site-header__pill {
+    background: var(--nav-fallback-background);
+    box-shadow: 0 10px 28px rgba(10, 25, 49, 0.12);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hero__secondary-cta,
+  .hero-badge {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hero__background[data-mode='shader'] .hero__organic-shape {
+    animation: none;
+    transform: none;
   }
 
   .header-time__zone--compact {
@@ -244,22 +254,14 @@
     grid-template-columns: 1fr;
   }
 
-  .solutions__experience {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    margin-top: 3rem;
+  .pnqc-visual__glow,
+  .hermes-visual__glow {
+    display: none;
   }
 
-  .solutions__tabs button {
-    min-height: 6.5rem;
-  }
-
-  .solution-panel {
-    min-height: 0;
-  }
-
-  .solution-network {
-    min-height: clamp(18rem, 74vw, 23rem);
+  .pnqc-mockup,
+  .hermes-mockup {
+    transition: none;
   }
 
   .process-step {
@@ -349,31 +351,33 @@
     opacity: 1;
   }
 
-  .levens-visual {
-    grid-template-columns: 3rem 1fr;
+  .workshop-visual {
+    padding: 0.7rem;
   }
 
-  .levens-visual__rail {
-    gap: 0.75rem;
+  .workshop-app {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .levens-visual__metrics {
-    grid-template-columns: 1fr;
-  }
-
-  .levens-visual__metrics > div:nth-child(n + 2) {
+  .workshop-app__rail,
+  .workshop-actions {
     display: none;
   }
 
-  .levens-visual__flow {
-    grid-template-columns: 1fr;
-    gap: 0.45rem;
+  .workshop-dashboard {
+    padding: 0.75rem;
   }
 
-  .flow-line {
-    width: 1px;
-    height: 0.8rem;
-    justify-self: center;
+  .workshop-dashboard__signals > div:nth-child(3) {
+    display: none;
+  }
+
+  .workshop-dashboard__signals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .workshop-board__column article p {
+    display: none;
   }
 
   .form-grid {
@@ -439,96 +443,6 @@
     overflow: hidden;
     clip-path: inset(50%);
     white-space: nowrap;
-  }
-}
-
-@media (max-width: 820px) {
-  .solution-network[data-density='operacao'] .solution-network__node-label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  .solution-network[data-density='operacao']
-    .solution-network__mobile-legend {
-    position: static;
-    display: grid;
-    width: auto;
-    height: auto;
-    gap: 0.75rem;
-    overflow: visible;
-    padding: 1rem 0.2rem 0.15rem;
-    border-top: 1px solid var(--line);
-    clip-path: none;
-    white-space: normal;
-  }
-}
-
-@media (max-width: 430px) {
-  .solution-system {
-    min-height: 25rem;
-    padding-inline: 0;
-  }
-
-  .solution-system__layer strong {
-    display: none;
-  }
-
-  .solution-system__module {
-    min-height: 3.5rem;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 0.45rem 0.2rem;
-    font-size: 0.58rem;
-  }
-
-  .solution-system__bus {
-    height: 2.6rem;
-  }
-
-  .solution-system__engine {
-    grid-template-columns: minmax(0, 1fr) 5.4rem minmax(0, 1fr);
-    gap: 0.45rem;
-  }
-
-  .solution-system__source {
-    min-height: 3rem;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding: 0.4rem;
-    font-size: 0.58rem;
-  }
-
-  .solution-system__core {
-    min-height: 5.7rem;
-    border-radius: 1.2rem;
-  }
-
-  .solution-system__flow {
-    display: none;
-  }
-
-  .solution-network[data-density='sistemas']
-    .solution-network__mobile-legend {
-    position: static;
-    display: grid;
-    width: auto;
-    height: auto;
-    gap: 0.75rem;
-    overflow: visible;
-    padding: 1rem 0.2rem 0.15rem;
-    border-top: 1px solid var(--line);
-    clip-path: none;
-    white-space: normal;
-  }
-}
-
-@media (max-width: 340px) {
-  .solution-network__mobile-legend ul {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -599,10 +513,6 @@
     display: none;
   }
 
-  .solution-network__node,
-  .solution-network__connections line,
-  .solution-network__ring,
-  .solution-network__core,
   .responsive-system__device,
   .visual-direction__interface {
     animation: none !important;

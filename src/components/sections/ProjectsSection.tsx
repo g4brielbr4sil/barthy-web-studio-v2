@@ -15,9 +15,9 @@ export function ProjectsSection() {
           <SectionBadge number="04">Experiência aplicada</SectionBadge>
           <h2 id="projects-title">Projetos que carregam operação de verdade</h2>
           <p>
-            Experiência profissional e produtos próprios que mostram a Barthy
-            trabalhando além da interface: fluxos, regras, dados, acompanhamento
-            e evolução de sistemas.
+            Conceitos e produtos próprios que mostram a Barthy trabalhando além
+            da interface: fluxos, regras, dados, acompanhamento e evolução de
+            sistemas.
           </p>
         </SectionReveal>
 

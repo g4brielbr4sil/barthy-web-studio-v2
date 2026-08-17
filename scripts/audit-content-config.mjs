@@ -77,10 +77,15 @@ assert.doesNotMatch(
   /Barthy Flow/,
   'Produtos ainda não ofertados não devem ser expostos como produto comercial na home.',
 )
+assert.doesNotMatch(
+  sources.projects,
+  /Levens/i,
+  'Levens não deve permanecer na área de experiência aplicada.',
+)
 assert.match(
   sources.projects,
-  /Experiência profissional/,
-  'Levens deve manter o contexto de experiência profissional.',
+  /Conceito de interface/,
+  'O mockup próprio deve permanecer identificado como conceito.',
 )
 assert.match(
   sources.projects,

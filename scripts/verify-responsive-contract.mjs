@@ -11,6 +11,8 @@ const files = {
   contact: 'src/lib/contact.ts',
   contactStyles: 'src/styles/components/contact.css',
   shader: 'src/components/hero/ShaderSurface.tsx',
+  hero: 'src/components/hero/Hero.tsx',
+  shaderBackground: 'src/components/hero/ShaderBackground.tsx',
 }
 
 const sources = Object.fromEntries(
@@ -51,7 +53,8 @@ const checks = [
   ['fallback mobile usa trajetória Terra principal', sources.recovery.includes('animation-name: hero-organic-terra')],
   ['fallback mobile usa trajetória branca principal', sources.recovery.includes('animation-name: hero-organic-white')],
   ['ChromaFlow mantém intensidade entre ponteiros', sources.shader.includes('momentum={32}') && sources.shader.includes('radius={4.6}') && sources.shader.includes('intensity={1.05}')],
-  ['FilmGrain permanece animado no touch', sources.shader.includes('<FilmGrain strength={0.035} bias={1} animated opacity={0.2} />')],
+  ['FilmGrain reduz custo no touch', sources.shader.includes('animated={finePointer}')],
+  ['shader limitado à proximidade do hero', sources.hero.includes('active={isInView}') && sources.shaderBackground.includes('active && canAttemptShader')],
   ['readiness exige Canvas dimensionado', sources.shader.includes('isDrawableCanvas') && sources.shader.includes('canvas.width > 0')],
   ['reveal antecipado em touch', sources.reveal.includes("'18% 0px 18% 0px'")],
   ['Footer integrado ao reveal', (sources.footer.match(/<SectionReveal/g) ?? []).length === 2],
