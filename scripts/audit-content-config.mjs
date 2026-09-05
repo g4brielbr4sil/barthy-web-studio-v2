@@ -77,22 +77,32 @@ assert.doesNotMatch(
 assert.doesNotMatch(
   sources.projects,
   /Levens/i,
-  'Levens não deve permanecer na área de experiência aplicada.',
+  'Levens não deve aparecer na área pública de cases.',
 )
-assert.match(
+assert.doesNotMatch(
   sources.projects,
   /RadarDF/,
-  'RadarDF deve permanecer na área de experiência aplicada.',
+  'RadarDF está fora da seleção pública atual de cases.',
 )
 assert.match(
   sources.projects,
-  /Em desenvolvimento/,
-  'RadarDF deve permanecer identificado como projeto em desenvolvimento.',
+  /PNQC/,
+  'PNQC deve permanecer como case público real.',
 )
 assert.match(
   sources.projects,
-  /Produto próprio/,
-  'Hermes deve permanecer identificado como produto próprio, sem parecer case de cliente.',
+  /Hermes/,
+  'Hermes deve permanecer como produto próprio e case público.',
+)
+assert.match(
+  sources.projects,
+  /Certificados, badges e áreas administrativas seguem em evolução/,
+  'PNQC deve deixar explícito o estado ainda evolutivo desses recursos.',
+)
+assert.doesNotMatch(
+  sources.projects,
+  /certificados verificáveis/i,
+  'Recursos de certificação ainda em evolução não podem ser apresentados como concluídos.',
 )
 assert.match(sources.contact, /VITE_BARTHY_WHATSAPP_URL/)
 assert.match(sources.contact, /VITE_BARTHY_CONTACT_ENDPOINT/)
