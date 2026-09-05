@@ -1,8 +1,8 @@
 <div align="center">
 
-# Barthy Web Studio V2
+# Barthy Web Studio
 
-**Versão atual do site institucional e portfólio profissional da Barthy Web Studio.**
+**Produtos digitais, sistemas e automações para pequenos negócios.**
 
 ![React](https://img.shields.io/badge/React-18-20232a?logo=react&logoColor=61dafb)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)
@@ -13,11 +13,18 @@
 
 ## Sobre o projeto
 
-A Barthy Web Studio V2 é a versão atual do site da Barthy. Criei o projeto para apresentar meus trabalhos, explicar os serviços da marca e mostrar como penso produto, interface, acessibilidade e qualidade de código.
+A **Barthy Web Studio** é uma iniciativa autoral voltada à criação de soluções digitais para pequenos negócios, combinando presença web, sistemas, automações e organização de processos comerciais.
 
-A aplicação usa uma direção visual mais editorial, mas sem depender dos efeitos para funcionar. O conteúdo continua acessível em dispositivos sem WebGPU, com economia de dados ou com preferência por menos movimento.
+Este repositório contém a versão atual do site institucional da marca. O projeto também funciona como base prática para explorar produto, interface, acessibilidade, performance, integrações e qualidade de software.
 
-## O que eu construí
+## Linhas de atuação
+
+- **BWS Web:** sites, landing pages, portfólios e presença digital.
+- **BWS Systems:** produtos próprios e sistemas para organizar processos reais de negócio.
+- **BWS Automations:** integrações, automações, bots, notificações e IA quando houver ganho claro.
+- **BWS Care:** manutenção, hospedagem, pequenas alterações e monitoramento recorrente.
+
+## O que foi construído
 
 - interface em React e TypeScript
 - temas claro e escuro
@@ -29,35 +36,47 @@ A aplicação usa uma direção visual mais editorial, mas sem depender dos efei
 - verificações automatizadas de conteúdo, acessibilidade, responsividade, tipagem e build
 - fluxo de publicação no Cloudflare Pages
 
+## Cases apresentados
+
+### PNQC
+
+Plataforma web de formação de cuidadores com autenticação, perfis de acesso, cursos, módulos, aulas, progresso sequencial e avaliações com nota mínima de 70%.
+
+Stack principal: React, TypeScript, Vite, Supabase e PostgreSQL.
+
+Certificados, badges e áreas administrativas permanecem em evolução e não são apresentados como recursos concluídos.
+
+### Hermes
+
+Aplicação Full Stack autoral que evoluiu de um Personal OS para uma operação multiagente com CRM, pipeline, jobs, workers, policies, aprovações humanas, auditoria e infraestrutura própria.
+
+Stack principal: React, TypeScript, Python, FastAPI, SQLAlchemy, SQLite e Docker.
+
+A comunicação externa permanece bloqueada por padrão e ações sensíveis passam por regras e aprovação humana.
+
+## Decisão sobre projetos em pesquisa
+
+O **RadarDF** não faz parte da seleção pública atual de cases da home. A ideia permanece em pesquisa e desenvolvimento, sem receber o mesmo peso de produtos já implementados.
+
 ## Minha atuação
 
-Fui responsável por:
+Sou responsável por:
 
-- proposta e arquitetura da página
-- organização do conteúdo e da navegação
+- levantamento de necessidades
+- definição da solução
+- arquitetura da aplicação
+- organização do conteúdo e navegação
 - desenvolvimento dos componentes
-- implementação dos temas
-- modos visuais e fallbacks
+- temas e recursos visuais progressivos
 - acessibilidade e navegação por teclado
 - formulário de briefing
 - testes estruturais
 - documentação técnica
 - preparação da publicação
 
-## Principais funcionalidades
-
-- Hero em tela cheia com composição visual adaptativa
-- navegação com indicação da seção ativa
-- menu móvel com foco controlado, bloqueio de rolagem e fechamento por Escape
-- seções de projetos, soluções, processo e contato
-- alternância entre temas claro e escuro
-- formulário com endpoint configurável
-- alternativa de contato por e-mail
-- painel de diagnóstico visual disponível apenas em desenvolvimento
-
 ## Modos visuais
 
-O Hero escolhe o modo mais adequado para cada ambiente:
+O Hero escolhe o modo adequado para cada ambiente:
 
 | Modo | Quando é usado |
 | --- | --- |
@@ -65,7 +84,7 @@ O Hero escolhe o modo mais adequado para cada ambiente:
 | `css-motion` | quando o shader não pode ser usado |
 | `static` | quando o usuário prefere menos movimento |
 
-A aplicação também considera economia de dados, visibilidade da página, suporte a `backdrop-filter` e falhas de carregamento. O site não deixa de funcionar quando um efeito visual falha.
+A aplicação também considera economia de dados, visibilidade da página, suporte a `backdrop-filter` e falhas de carregamento. Recursos visuais não são dependência para acessar o conteúdo.
 
 ## Formulário de briefing
 
@@ -77,11 +96,11 @@ O formulário possui:
 - estados de carregamento, sucesso e falha
 - preservação dos dados quando o envio falha
 - timeout e cancelamento com `AbortController`
-- validação do status e do corpo da resposta
+- validação do status e corpo da resposta
 - honeypot contra bots simples
 - alternativa de contato por e-mail
 
-O endpoint é configurado por ambiente. Nenhuma credencial privada fica no front-end.
+O endpoint é configurado por ambiente. Credenciais privadas não ficam no frontend.
 
 ## Acessibilidade
 
@@ -89,14 +108,14 @@ O projeto inclui:
 
 - HTML semântico
 - hierarquia de títulos
-- link para pular ao conteúdo
+- skip link
 - navegação por teclado
 - foco visível
 - controle e retorno de foco no menu móvel
 - mensagens de formulário com `aria-live`
 - suporte a movimento reduzido
 - nomes acessíveis para controles interativos
-- testes próprios de responsividade
+- testes de responsividade
 
 ## Tecnologias
 
@@ -112,7 +131,7 @@ O projeto inclui:
 
 ### Recursos visuais
 
-- shader WebGPU carregado sob demanda
+- WebGPU carregado sob demanda
 - fallback animado em CSS
 - modo estático para movimento reduzido
 
@@ -134,7 +153,7 @@ flowchart TD
     APP --> CONTACT[Formulário de contato]
 
     PROVIDERS --> CAPABILITIES{Capacidades do dispositivo}
-    CAPABILITIES --> SHADER[Shader WebGPU]
+    CAPABILITIES --> SHADER[WebGPU]
     CAPABILITIES --> CSS[Fallback CSS]
     CAPABILITIES --> STATIC[Modo estático]
 
@@ -147,25 +166,19 @@ flowchart TD
 
 ```text
 src/
-  app/              composição da aplicação e providers
-  components/       componentes organizados por domínio
-  data/             conteúdo e configurações da interface
-  hooks/            comportamentos reutilizáveis
-  lib/              utilitários e fluxo de contato
-  motion/           animações progressivas
-  styles/           estilos globais
-  theme/            tema e persistência
-  visual/           detecção de capacidades e modos visuais
-scripts/            auditorias e verificações automatizadas
-docs/               documentação de produção
-public/              arquivos públicos e headers
+  app/
+  components/
+  data/
+  hooks/
+  lib/
+  motion/
+  styles/
+  theme/
+  visual/
+scripts/
+docs/
+public/
 ```
-
-## Projetos apresentados
-
-- **PNQC:** plataforma educacional com autenticação, trilhas de aprendizagem, avaliações e progresso
-- **Hermes:** aplicação Full Stack autoral para organização comercial, operacional e automações controladas
-- **RadarDF:** produto em desenvolvimento para centralizar e estruturar oportunidades de trabalho no Distrito Federal
 
 ## Como executar
 
@@ -192,13 +205,9 @@ VITE_BARTHY_OG_IMAGE=
 VITE_BARTHY_ALLOW_INDEXING=false
 ```
 
-`VITE_BARTHY_WHATSAPP_URL` define o link usado no botão de WhatsApp.
+`VITE_BARTHY_SITE_URL` centraliza canonical, Open Graph e sitemap. A indexação só deve ser liberada quando a URL oficial HTTPS estiver definida.
 
-`VITE_BARTHY_CONTACT_ENDPOINT` aponta para o endpoint que recebe o formulário.
-
-`VITE_BARTHY_SITE_URL` centraliza canonical, Open Graph e sitemap. O build só libera indexação quando `VITE_BARTHY_ALLOW_INDEXING=true` e a URL oficial HTTPS está configurada. Previews devem manter essa variável como `false`.
-
-No Vite, tudo que começa com `VITE_` vai para o navegador. Não coloque senha, token ou segredo nessas variáveis.
+Tudo que começa com `VITE_` é exposto ao navegador. Senhas, tokens e segredos não devem usar esse prefixo.
 
 ## Validação
 
@@ -206,23 +215,16 @@ No Vite, tudo que começa com `VITE_` vai para o navegador. Não coloque senha, 
 pnpm quality
 ```
 
-Esse comando executa:
+O comando executa auditorias de conteúdo, acessibilidade, responsividade, tipagem e build.
 
-```bash
-pnpm audit:content
-pnpm audit:a11y
-pnpm test:responsive
-pnpm typecheck
-pnpm build
-```
+## Autor
 
-## Autor e contato
+**Gabriel Brasil**  
+Desenvolvedor Full Stack e Analista de Sistemas
 
-**Gabriel Brasil Barthy Elias**  
-**Barthy Web Studio**
-
+- Portfólio: [gabrielbrasil.dev](https://gabrielbrasil.dev)
+- LinkedIn: [gabrielbrasildev](https://www.linkedin.com/in/gabrielbrasildev)
 - GitHub: [@g4brielbr4sil](https://github.com/g4brielbr4sil)
-- E-mail: [contato.barthywebstudio@gmail.com](mailto:contato.barthywebstudio@gmail.com)
 
 ## Licença
 
