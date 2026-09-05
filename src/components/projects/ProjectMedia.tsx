@@ -4,7 +4,6 @@ import { useInView } from '../../hooks/useInView'
 import { useVisualCapabilities } from '../../hooks/useVisualCapabilities'
 import { HermesVisual } from './HermesVisual'
 import { PnqcVisual } from './PnqcVisual'
-import { RadarDfVisual } from './RadarDfVisual'
 
 interface ProjectMediaProps {
   kind: ProjectVisualKind
@@ -14,7 +13,6 @@ interface ProjectMediaProps {
 }
 
 const visuals: Record<ProjectVisualKind, ReactNode> = {
-  radardf: <RadarDfVisual />,
   pnqc: <PnqcVisual />,
   hermes: <HermesVisual />,
 }
