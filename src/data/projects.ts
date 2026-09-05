@@ -1,4 +1,4 @@
-export type ProjectVisualKind = 'radardf' | 'pnqc' | 'hermes'
+export type ProjectVisualKind = 'pnqc' | 'hermes'
 
 export interface Project {
   id: ProjectVisualKind
@@ -13,37 +13,19 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'radardf',
-    title: 'RadarDF',
-    category: 'Plataforma de vagas · Distrito Federal',
-    description:
-      'Uma plataforma para reunir vagas do DF, tirar duplicidade e aproximar candidato certo de vaga certa, sem taxa para quem está buscando emprego.',
-    detail:
-      'Em desenvolvimento. Nasce de um problema real: agregar oportunidades hoje espalhadas, normalizar e cruzar perfil com vaga de forma direta. Empresas pagam por destaque e ferramentas de recrutamento; candidato usa de graça.',
-    features: [
-      'Agregação de vagas de múltiplas fontes',
-      'Remoção de duplicadas',
-      'Matching entre candidato e vaga',
-      'Painel de candidaturas',
-      'Portal para empresas',
-    ],
-    stack: ['React', 'TypeScript', 'FastAPI', 'Em construção'],
-    layout: 'wide',
-  },
-  {
     id: 'pnqc',
     title: 'PNQC',
-    category: 'Plataforma educacional · qualificação no ecossistema de cuidado',
+    category: 'Plataforma educacional · formação de cuidadores',
     description:
-      'Plataforma desenvolvida para estruturar formação, progresso, avaliações e certificações verificáveis para cuidadores e profissionais do ecossistema de cuidado.',
+      'Plataforma web em produção para organizar autenticação, perfis de acesso, cursos, módulos, aulas, progresso sequencial e avaliações.',
     detail:
-      'Uma jornada de qualificação organizada por perfis, módulos e regras de avanço, com critérios de aprovação, progresso sequencial e certificados verificáveis.',
+      'Desenvolvida a partir de necessidades reais da operação, com regras de progressão, avaliações com nota mínima de 70%, Supabase Auth, PostgreSQL e funções RPC. Certificados, badges e áreas administrativas seguem em evolução.',
     features: [
-      'Módulos e aulas',
+      'Autenticação e recuperação de acesso',
+      'Perfis student, agency e admin',
+      'Cursos, módulos e aulas',
       'Progresso sequencial',
-      'Avaliações e aprovação',
-      'Perfis e certificados',
-      'Autenticação e segurança',
+      'Avaliações e aprovação mínima de 70%',
     ],
     stack: [
       'React',
@@ -52,7 +34,7 @@ export const projects: Project[] = [
       'Supabase',
       'PostgreSQL',
       'Auth',
-      'RLS',
+      'RPC',
       'Cloudflare Pages',
     ],
     layout: 'split',
@@ -60,19 +42,19 @@ export const projects: Project[] = [
   {
     id: 'hermes',
     title: 'Hermes',
-    category: 'Produto próprio · central operacional da Barthy',
+    category: 'Produto próprio · operação Full Stack multiagente',
     description:
-      'Sistema próprio que reúne CRM, comercial, financeiro, tarefas, relatórios e automações para transformar informação dispersa em rotina acompanhável.',
+      'Aplicação Full Stack autoral que reúne CRM, pipeline, automações, jobs, workers, políticas, aprovações humanas e auditoria em uma operação única.',
     detail:
-      'O Hermes funciona como laboratório operacional da Barthy: uma central em evolução para organizar oportunidades, tarefas, decisões e acompanhamento com API própria e regras de segurança.',
+      'O Hermes começou como um Personal OS e evoluiu para um runtime operacional multiagente. A comunicação externa permanece bloqueada por padrão, enquanto ações internas e fluxos comerciais são coordenados com rastreabilidade e controle humano.',
     features: [
-      'CRM e pipeline',
-      'Financeiro e tarefas',
-      'Rotina operacional',
-      'Relatórios e alertas',
-      'Automações e integrações',
+      'CRM e pipeline comercial',
+      'Agentes especializados e jobs',
+      'Policies e aprovações humanas',
+      'Auditoria e idempotência',
+      'Deploy, backup e rollback documentados',
     ],
-    stack: ['React', 'Vite', 'FastAPI', 'SQLite', 'Docker', 'API REST'],
+    stack: ['React', 'TypeScript', 'Python', 'FastAPI', 'SQLite', 'SQLAlchemy', 'Docker', 'GitHub Actions'],
     layout: 'split',
   },
 ]
