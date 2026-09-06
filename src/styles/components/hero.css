@@ -25,6 +25,7 @@
 
 .hero__static-background {
   z-index: 0;
+  transition: background 420ms ease;
   background:
     radial-gradient(
       circle at 82% 18%,
@@ -54,6 +55,7 @@
   position: absolute;
   border-radius: 47% 53% 61% 39% / 42% 48% 52% 58%;
   opacity: 0.72;
+  transition: opacity 420ms ease;
 }
 
 .hero__organic-shape--blue {
@@ -148,6 +150,7 @@
 .hero__contrast-overlay {
   z-index: 3;
   background: var(--hero-overlay);
+  transition: background 420ms ease;
 }
 
 .hero-shader__surface {

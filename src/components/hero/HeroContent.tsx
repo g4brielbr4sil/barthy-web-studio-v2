@@ -27,8 +27,8 @@ export function HeroContent({ onNavigate }: HeroContentProps) {
           </span>
         </h1>
         <p className="hero__description">
-          Sites, sistemas e automações construídos para resolver problemas
-          reais da operação.
+          Sites, sistemas e automações que organizam sua operação, tiram
+          trabalho manual do caminho e ajudam seu negócio a vender mais.
         </p>
       </div>
 

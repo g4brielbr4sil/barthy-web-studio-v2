@@ -7,7 +7,7 @@ import {
   Shader,
   Swirl,
 } from 'shaders/react'
-import { useMediaQuery } from '../../hooks/useMediaQuery'
+import { useVisualCapabilities } from '../../hooks/useVisualCapabilities'
 import { useTheme, type Theme } from '../../theme/ThemeContext'
 
 interface ShaderSurfaceProps {
@@ -36,7 +36,9 @@ const shaderPalettes: Record<
   },
   dark: {
     swirlA: '#0A1931',
-    swirlB: '#1A3D63',
+    // '#1A3D63' sits too close to swirlA/base in luminance, so the swirl read
+    // as nearly static; this keeps the same internal contrast light has.
+    swirlB: '#4A7FA7',
     base: '#111C2C',
     left: '#1A3D63',
     right: '#4A7FA7',
@@ -63,7 +65,8 @@ export default function ShaderSurface({
   onFailure,
 }: ShaderSurfaceProps) {
   const surfaceRef = useRef<HTMLDivElement>(null)
-  const finePointer = useMediaQuery('(hover: hover) and (pointer: fine)')
+  const { profile } = useVisualCapabilities()
+  const isFull = profile === 'full'
   const { theme } = useTheme()
   const palette = shaderPalettes[theme]
 
@@ -121,7 +124,7 @@ export default function ShaderSurface({
     <div ref={surfaceRef} className="hero-shader__surface">
       <Shader
         className={`hero-shader__canvas ${
-          finePointer ? 'is-pointer-reactive' : 'is-autonomous'
+          isFull ? 'is-pointer-reactive' : 'is-autonomous'
         }`}
         colorSpace="srgb"
         toneMapping="neutral"
@@ -161,7 +164,7 @@ export default function ShaderSurface({
           intensity={1.05}
           opacity={theme === 'dark' ? 0.68 : 0.72}
         />
-        {finePointer && (
+        {isFull && (
           <RadialGradient
             colorA={palette.up}
             colorB={palette.base}
@@ -189,10 +192,10 @@ export default function ShaderSurface({
               speed: 0.006,
             }}
             colorSpace="oklab"
-            opacity={theme === 'dark' ? 0.28 : 0.4}
+            opacity={theme === 'dark' ? 0.36 : 0.4}
           />
         )}
-        {finePointer && (
+        {isFull && (
           <FlutedGlass
             aberration={0.48}
             angle={31}
@@ -210,8 +213,8 @@ export default function ShaderSurface({
         <FilmGrain
           strength={0.035}
           bias={1}
-          animated={finePointer}
-          opacity={finePointer ? 0.2 : 0.12}
+          animated={isFull}
+          opacity={isFull ? 0.2 : 0.12}
         />
       </Shader>
     </div>
