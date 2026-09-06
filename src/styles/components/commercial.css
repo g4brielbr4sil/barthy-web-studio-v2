@@ -507,20 +507,6 @@
   font-size: 0.68rem;
 }
 
-@media (max-width: 900px) {
-  .systems__capabilities {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .system-preview__board {
-    grid-template-columns: 1fr;
-  }
-
-  .system-preview__history {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 .systems__mobile-story {
   display: none;
 }
@@ -602,6 +588,18 @@
 
   .systems__paths {
     grid-template-columns: 1fr;
+  }
+
+  .systems__capabilities {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .system-preview__board {
+    grid-template-columns: 1fr;
+  }
+
+  .system-preview__history {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

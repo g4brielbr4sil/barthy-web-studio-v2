@@ -57,18 +57,10 @@
     align-items: start;
   }
 
-  .contact__heading h2,
-  .contact__heading > p:last-child {
-    grid-column: 1;
-  }
-
   .contact__heading h2 {
+    grid-column: 1;
     max-width: 14ch;
     font-size: clamp(2.5rem, 7vw, 5rem);
-  }
-
-  .contact__heading > p:last-child {
-    max-width: 48rem;
   }
 
   .contact__channels {
