@@ -53,7 +53,12 @@ for (const phrase of [
   )
 }
 
-for (const line of ['BWS Web', 'BWS Systems', 'BWS Automations', 'BWS Care']) {
+for (const line of [
+  'BWS Presença Digital',
+  'BWS Sistemas',
+  'BWS Automação',
+  'BWS Suporte',
+]) {
   assert.match(sources.solutionData, new RegExp(line))
 }
 

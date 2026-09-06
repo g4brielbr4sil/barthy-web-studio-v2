@@ -23,7 +23,7 @@
 }
 
 :root[data-theme='dark'] .hero__organic-shape--ice {
-  opacity: 0.38;
+  opacity: 0.58;
 }
 
 :root[data-theme='dark'] .hero__organic-shape--terra {
@@ -31,7 +31,7 @@
 }
 
 :root[data-theme='dark'] .hero__organic-shape--white {
-  opacity: 0.18;
+  opacity: 0.4;
 }
 
 :root[data-theme='dark'] .hero__organic-shape--signal {
@@ -79,12 +79,6 @@
 :root[data-theme='dark'] .section-badge__number {
   background: var(--ice-white);
   color: var(--deep-navy);
-}
-
-:root[data-theme='dark'] .editorial-visual figcaption {
-  border-color: var(--border);
-  background: var(--surface-translucent-strong);
-  color: var(--soft-ice);
 }
 
 :root[data-theme='dark'] .solutions__tabs button[aria-selected='true'] {

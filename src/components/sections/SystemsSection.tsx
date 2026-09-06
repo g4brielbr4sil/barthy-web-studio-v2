@@ -13,9 +13,17 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import type { SectionId } from '../../data/navigation'
+import { ModularSystemPreview } from '../systems/ModularSystemPreview'
 import { SectionBadge } from '../ui/SectionBadge'
 import { SectionReveal } from '../ui/SectionReveal'
 import { TextRollButton } from '../ui/TextRollButton'
+
+const systemCapabilityGroups = [
+  { label: 'Comercial', items: ['Clientes', 'Oportunidades', 'Orçamentos'] },
+  { label: 'Operação', items: ['Serviços', 'Status', 'Responsáveis'] },
+  { label: 'Relacionamento', items: ['WhatsApp', 'Histórico', 'Retorno'] },
+  { label: 'Gestão', items: ['Indicadores', 'Alertas', 'Automações'] },
+]
 
 const systemExamples = [
   {
@@ -106,7 +114,7 @@ export function SystemsSection({
     >
       <div className="stage">
         <SectionReveal className="systems__heading" data-section-anchor>
-          <SectionBadge number="02">BWS Systems</SectionBadge>
+          <SectionBadge number="02">BWS Sistemas</SectionBadge>
           <h2 id="systems-title">Software feito para o trabalho real</h2>
           <div className="systems__intro">
             <p>
@@ -120,11 +128,22 @@ export function SystemsSection({
               do tamanho do problema.
             </p>
             <p>
-              Por isso, esta é a linha que a Barthy detalha primeiro. As outras
-              três frentes você já viu em “Quatro linhas de atuação”; aqui é onde
-              o motor da operação aparece na prática.
+              É por isso que a Barthy também está construindo um sistema modular
+              para negócios como oficinas, prestadores de serviço e operações
+              locais que hoje vivem entre WhatsApp e planilhas: clientes,
+              orçamentos e serviços organizados em um só lugar, sem virar um
+              ERP que ninguém usa.
             </p>
           </div>
+        </SectionReveal>
+
+        <SectionReveal className="systems__capabilities">
+          {systemCapabilityGroups.map((group) => (
+            <div key={group.label} className="systems-capability">
+              <span>{group.label}</span>
+              <p>{group.items.join(' · ')}</p>
+            </div>
+          ))}
         </SectionReveal>
 
         <SectionReveal className="systems__showcase">
@@ -171,6 +190,10 @@ export function SystemsSection({
               {activeExample.outcome}
             </p>
           </article>
+        </SectionReveal>
+
+        <SectionReveal className="systems__preview">
+          <ModularSystemPreview />
         </SectionReveal>
 
         <SectionReveal className="systems__mobile-story">

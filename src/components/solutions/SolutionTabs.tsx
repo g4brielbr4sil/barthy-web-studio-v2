@@ -1,4 +1,5 @@
 import {
+  useLayoutEffect,
   useRef,
   type KeyboardEvent,
 } from 'react'
@@ -15,6 +16,33 @@ export function SolutionTabs({
   onSelect,
 }: SolutionTabsProps) {
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([])
+  const indicatorRef = useRef<HTMLSpanElement>(null)
+
+  useLayoutEffect(() => {
+    const moveIndicator = () => {
+      const activeTab = tabRefs.current[activeIndex]
+      const indicator = indicatorRef.current
+      if (!activeTab || !indicator) return
+
+      indicator.style.transform = `translateY(${activeTab.offsetTop}px)`
+      indicator.style.height = `${activeTab.offsetHeight}px`
+    }
+
+    moveIndicator()
+
+    // A window resize isn't the only thing that can move a tab: late web
+    // font swaps or content reflow change row heights too, and either
+    // would leave the indicator sitting on stale offsetTop/offsetHeight.
+    // Watching every tab button catches all of that, not just viewport width.
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', moveIndicator, { passive: true })
+      return () => window.removeEventListener('resize', moveIndicator)
+    }
+
+    const observer = new ResizeObserver(moveIndicator)
+    tabRefs.current.forEach((tab) => tab && observer.observe(tab))
+    return () => observer.disconnect()
+  }, [activeIndex, groups.length])
 
   const onTabKeyDown = (
     event: KeyboardEvent<HTMLButtonElement>,
@@ -46,6 +74,11 @@ export function SolutionTabs({
       aria-label="Grupos de soluções"
       aria-orientation="vertical"
     >
+      <span
+        ref={indicatorRef}
+        className="solutions__tabs-indicator"
+        aria-hidden="true"
+      />
       {groups.map((group, index) => {
         const Icon = group.icon
         const selected = index === activeIndex

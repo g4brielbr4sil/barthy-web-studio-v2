@@ -23,24 +23,13 @@
 }
 
 .solutions__heading > p:last-child {
-  position: relative;
-  max-width: 23rem;
-  padding-bottom: 0.7rem;
+  max-width: 26rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--terra-orange);
   color: var(--foreground);
-  font-size: clamp(1.02rem, 1.4vw, 1.16rem);
-  font-style: italic;
-  line-height: 1.7;
-}
-
-.solutions__heading > p:last-child::after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: min(9rem, 52%);
-  height: 2px;
-  border-radius: 999px;
-  background: var(--terra-orange);
-  content: '';
+  font-size: clamp(1.05rem, 1.45vw, 1.22rem);
+  font-weight: 540;
+  line-height: 1.6;
 }
 
 .solutions__experience {
@@ -51,12 +40,38 @@
 }
 
 .solutions__tabs {
+  position: relative;
   display: grid;
   align-content: start;
 }
 
+.solutions__tabs-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  border: 1px solid var(--terra-border);
+  border-left: 3px solid var(--terra-orange);
+  border-radius: 1.15rem;
+  background: var(--card-background-muted);
+  box-shadow: var(--card-active-glow);
+  pointer-events: none;
+  transition:
+    transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solutions__tabs-indicator {
+    transition: none;
+  }
+}
+
 .solutions__tabs button {
   position: relative;
+  z-index: 1;
   display: grid;
   min-height: 7.2rem;
   grid-template-columns: 2.4rem auto minmax(0, 1fr);
@@ -70,24 +85,7 @@
   color: var(--ink-muted);
   text-align: left;
   cursor: pointer;
-  transition:
-    color 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.solutions__tabs button::before {
-  position: absolute;
-  top: 1rem;
-  bottom: 1rem;
-  left: 0;
-  width: 3px;
-  border-radius: 999px;
-  background: var(--terra-orange);
-  content: '';
-  opacity: 0;
-  transition: opacity 180ms ease;
+  transition: color 180ms ease;
 }
 
 .solutions__tabs button > span {
@@ -133,19 +131,17 @@
 
 .solutions__tabs button:hover,
 .solutions__tabs button:focus-visible {
-  border-color: var(--border);
   background: var(--surface-translucent);
+  color: var(--foreground);
+}
+
+.solutions__tabs button[aria-selected='true']:hover,
+.solutions__tabs button[aria-selected='true']:focus-visible {
+  background: transparent;
 }
 
 .solutions__tabs button[aria-selected='true'] {
-  border-color: var(--terra-border);
-  background: var(--card-background-muted);
-  box-shadow: var(--card-active-glow);
   color: var(--muted-foreground);
-}
-
-.solutions__tabs button[aria-selected='true']::before {
-  opacity: 1;
 }
 
 .solutions__tabs button[aria-selected='true'] small::after {

@@ -12,29 +12,29 @@
 }
 
 .process__steps {
-  margin-top: clamp(3.5rem, 8vw, 7rem);
+  margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
   border-top: 1px solid var(--line-strong);
 }
 
 .process-step {
   display: grid;
-  min-height: 8.5rem;
-  grid-template-columns: 4rem 4rem minmax(0, 1fr);
-  gap: 1rem;
+  min-height: 5.5rem;
+  grid-template-columns: 3rem 2.5rem minmax(0, 1fr);
+  gap: 0.85rem;
   align-items: center;
   border-bottom: 1px solid var(--line-strong);
 }
 
 .process-step__number {
   color: var(--ice-blue);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 760;
 }
 
 .process-step__icon {
   display: grid;
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   place-items: center;
   border-radius: 50%;
   background: var(--surface-translucent);
@@ -43,23 +43,23 @@
 
 .process-step > div:last-child {
   display: grid;
-  grid-template-columns: minmax(9rem, 0.45fr) minmax(0, 1fr);
+  grid-template-columns: minmax(8rem, 0.4fr) minmax(0, 1fr);
   gap: 1.5rem;
   align-items: center;
 }
 
 .process-step h3 {
   color: var(--foreground);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  font-weight: 530;
-  letter-spacing: -0.04em;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-weight: 620;
+  letter-spacing: -0.02em;
 }
 
 .process-step p {
   max-width: 42rem;
   color: var(--ink-muted);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: 0.92rem;
+  line-height: 1.55;
   text-wrap: pretty;
 }
 

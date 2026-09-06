@@ -179,58 +179,17 @@
   }
 }
 
-@keyframes hero-mobile-blue {
-  from {
-    opacity: 0.58;
-    transform: translate3d(-6%, -2%, 0) rotate(-7deg) scale(0.96);
-  }
-  to {
-    opacity: 0.8;
-    transform: translate3d(8%, 9%, 0) rotate(8deg) scale(1.08);
-  }
-}
-
-@keyframes hero-mobile-ice {
-  from {
-    opacity: 0.52;
-    transform: translate3d(-8%, 7%, 0) rotate(5deg) scale(1.02);
-  }
-  to {
-    opacity: 0.78;
-    transform: translate3d(12%, -6%, 0) rotate(-8deg) scale(1.12);
-  }
-}
-
-@keyframes hero-mobile-terra {
-  from {
-    opacity: 0.66;
-    transform: translate3d(8%, -5%, 0) rotate(6deg) scale(0.96);
-  }
-  to {
-    opacity: 0.88;
-    transform: translate3d(-9%, 12%, 0) rotate(-8deg) scale(1.08);
-  }
-}
-
-@keyframes hero-mobile-white {
-  from {
-    opacity: 0.4;
-    transform: translate3d(-7%, -4%, 0) rotate(-5deg) scale(0.92);
-  }
-  to {
-    opacity: 0.7;
-    transform: translate3d(10%, 8%, 0) rotate(7deg) scale(1.1);
-  }
-}
-
 @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  /*
+   * Only position/size change here — animation-name/duration are inherited
+   * from the base (desktop) rule above on purpose: same choreography,
+   * adapted composition.
+   */
   .hero__background[data-mode='css-motion']
     .hero__organic-shape--blue {
     top: -10%;
     right: -32%;
     width: 112vw;
-    animation-name: hero-mobile-blue;
-    animation-duration: 24s;
   }
 
   .hero__background[data-mode='css-motion']
@@ -238,8 +197,6 @@
     top: 4%;
     left: -42%;
     width: 122vw;
-    animation-name: hero-mobile-ice;
-    animation-duration: 27s;
   }
 
   .hero__background[data-mode='css-motion']
@@ -248,8 +205,6 @@
     right: -30%;
     bottom: auto;
     width: 108vw;
-    animation-name: hero-mobile-terra;
-    animation-duration: 21s;
   }
 
   .hero__background[data-mode='css-motion']
@@ -257,8 +212,6 @@
     top: 16%;
     left: 12%;
     width: 92vw;
-    animation-name: hero-mobile-white;
-    animation-duration: 26s;
   }
 
   .hero__background[data-mode='css-motion']
@@ -266,22 +219,12 @@
     top: 12%;
     right: -18%;
     width: 78vw;
-    animation-duration: 24s;
   }
 
-  :root[data-save-data='active'] .hero__organic-shape--blue {
-    animation-duration: 28s;
-  }
-
-  :root[data-save-data='active'] .hero__organic-shape--ice {
-    animation-duration: 28s;
-  }
-
-  :root[data-save-data='active'] .hero__organic-shape--terra {
-    animation-duration: 28s;
-  }
-
+  :root[data-save-data='active'] .hero__organic-shape--blue,
+  :root[data-save-data='active'] .hero__organic-shape--ice,
+  :root[data-save-data='active'] .hero__organic-shape--terra,
   :root[data-save-data='active'] .hero__organic-shape--white {
-    animation-duration: 28s;
+    animation-duration: 46s;
   }
 }
