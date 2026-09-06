@@ -181,11 +181,39 @@
 
 @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
   /*
-   * Position/size for --blue/--ice/--terra/--white on mobile are set in
-   * recovery.css (loaded last in index.css), which pins them to the SAME
-   * keyframe + duration as desktop on purpose — same choreography, adapted
-   * composition. Only --signal (untouched by recovery.css) lives here.
+   * Only position/size change here — animation-name/duration are inherited
+   * from the base (desktop) rule above on purpose: same choreography,
+   * adapted composition.
    */
+  .hero__background[data-mode='css-motion']
+    .hero__organic-shape--blue {
+    top: -10%;
+    right: -32%;
+    width: 112vw;
+  }
+
+  .hero__background[data-mode='css-motion']
+    .hero__organic-shape--ice {
+    top: 4%;
+    left: -42%;
+    width: 122vw;
+  }
+
+  .hero__background[data-mode='css-motion']
+    .hero__organic-shape--terra {
+    top: 32%;
+    right: -30%;
+    bottom: auto;
+    width: 108vw;
+  }
+
+  .hero__background[data-mode='css-motion']
+    .hero__organic-shape--white {
+    top: 16%;
+    left: 12%;
+    width: 92vw;
+  }
+
   .hero__background[data-mode='css-motion']
     .hero__organic-shape--signal {
     top: 12%;

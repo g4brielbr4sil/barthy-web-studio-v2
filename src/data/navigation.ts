@@ -16,7 +16,7 @@ export const navigation: NavigationItem[] = [
   { id: 'solucoes', label: 'Soluções', href: '#solucoes' },
   { id: 'sistemas', label: 'Sistemas', href: '#sistemas' },
   { id: 'projetos', label: 'Projetos', href: '#projetos' },
-  { id: 'processo', label: 'Processo', href: '#processo' },
+  { id: 'processo', label: 'Como trabalhamos', href: '#processo' },
   { id: 'contato', label: 'Contato', href: '#contato' },
 ]
 

@@ -81,12 +81,6 @@
   color: var(--deep-navy);
 }
 
-:root[data-theme='dark'] .editorial-visual figcaption {
-  border-color: var(--border);
-  background: var(--surface-translucent-strong);
-  color: var(--soft-ice);
-}
-
 :root[data-theme='dark'] .solutions__tabs button[aria-selected='true'] {
   border-color: var(--soft-ice-30);
   background: var(--surface-soft);

@@ -33,12 +33,6 @@ export function ContactSection() {
           <h2 id="contact-title">
             Tem um processo no seu negócio que poderia funcionar melhor?
           </h2>
-          <p>
-            Conte como sua empresa trabalha hoje. A Barthy parte da{' '}
-            <strong>rotina real do negócio</strong> para identificar onde um site,
-            sistema ou automação pode simplificar o trabalho e melhorar o
-            acompanhamento.
-          </p>
         </SectionReveal>
 
         <SectionReveal

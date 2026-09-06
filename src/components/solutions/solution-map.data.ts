@@ -19,8 +19,8 @@ import type { SolutionGroup } from './solution-map.types'
 export const solutionGroups: SolutionGroup[] = [
   {
     id: 'web',
-    title: 'BWS Web',
-    summary: 'Presença digital',
+    title: 'BWS Presença Digital',
+    summary: 'Site e imagem online',
     architectureSummary:
       'Sites e páginas que apresentam o negócio com clareza e conduzem o visitante até o contato.',
     items: [
@@ -54,8 +54,8 @@ export const solutionGroups: SolutionGroup[] = [
   },
   {
     id: 'sistemas',
-    title: 'BWS Systems',
-    summary: 'Sistemas',
+    title: 'BWS Sistemas',
+    summary: 'Clientes e operação',
     architectureSummary:
       'Clientes, orçamentos, serviços e decisões reunidos em uma ferramenta simples de acompanhar.',
     items: [
@@ -90,8 +90,8 @@ export const solutionGroups: SolutionGroup[] = [
   },
   {
     id: 'automacoes',
-    title: 'BWS Automations',
-    summary: 'Automação',
+    title: 'BWS Automação',
+    summary: 'Menos trabalho manual',
     architectureSummary:
       'Entradas, tarefas, avisos e integrações conectados para reduzir repetição, espera e trabalho manual.',
     items: [
@@ -125,8 +125,8 @@ export const solutionGroups: SolutionGroup[] = [
   },
   {
     id: 'care',
-    title: 'BWS Care',
-    summary: 'Suporte e evolução',
+    title: 'BWS Suporte',
+    summary: 'Evolução contínua',
     architectureSummary:
       'Suporte, monitoramento e evolução para a tecnologia continuar útil depois da entrega.',
     items: [

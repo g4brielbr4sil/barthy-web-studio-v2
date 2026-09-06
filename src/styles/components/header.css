@@ -252,6 +252,19 @@
   -webkit-backdrop-filter: none;
 }
 
+/*
+ * A fixed header repaints its backdrop-filter every scroll frame (the
+ * blurred region keeps changing). That's affordable on desktop GPUs but a
+ * frequent cause of scroll jank on tablets/weaker touch laptops.
+ */
+@media (pointer: coarse) {
+  .site-header__pill {
+    background: var(--nav-fallback-background);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
 .desktop-nav {
   display: flex;
   align-items: center;
@@ -269,6 +282,7 @@
   color: var(--foreground);
   font-size: 0.82rem;
   font-weight: 580;
+  white-space: nowrap;
   transition:
     background-color 180ms ease,
     color 180ms ease,
