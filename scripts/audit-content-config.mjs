@@ -54,7 +54,7 @@ for (const phrase of [
 }
 
 for (const line of [
-  'BWS Presença Digital',
+  'BWS Digital',
   'BWS Sistemas',
   'BWS Automação',
   'BWS Suporte',
@@ -101,7 +101,7 @@ assert.match(
 )
 assert.match(
   sources.projects,
-  /Certificados, badges e áreas administrativas seguem em evolução/,
+  /certificados e os selos de qualificação seguem em evolução/,
   'PNQC deve deixar explícito o estado ainda evolutivo desses recursos.',
 )
 assert.doesNotMatch(

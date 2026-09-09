@@ -5,8 +5,6 @@ type SolutionGroupId = 'web' | 'sistemas' | 'automacoes' | 'care'
 export interface SolutionFlowStep {
   eyebrow: string
   title: string
-  detail: string
-  icon: LucideIcon
 }
 
 export interface SolutionGroup {

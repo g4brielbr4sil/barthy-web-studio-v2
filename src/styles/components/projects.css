@@ -1,8 +1,7 @@
 .projects {
   overflow: clip;
   padding-top: clamp(4rem, 7vw, 6rem);
-  background:
-    linear-gradient(180deg, var(--section-accent) 0%, var(--section-muted) 22%, var(--section-muted) 100%);
+  background: var(--page-background);
 }
 
 .projects__heading {
@@ -199,7 +198,7 @@
 
 .project-card__details {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-columns: 1fr;
   gap: clamp(1.2rem, 3vw, 2.2rem);
   padding: clamp(1.2rem, 3vw, 2.2rem);
   border-top: 1px solid var(--line);
@@ -212,7 +211,7 @@
 }
 
 .project-card__details > p {
-  grid-column: 1 / -1;
+  grid-column: 1;
   color: var(--ink-muted);
   font-size: 0.84rem;
   line-height: 1.68;
@@ -243,11 +242,6 @@
   border-radius: 999px;
   color: var(--ink-muted);
   font-size: 0.65rem;
-}
-
-.project-card__stack li {
-  background: var(--deep-navy);
-  color: var(--ice-white);
 }
 
 .project-visual {

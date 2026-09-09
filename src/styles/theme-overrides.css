@@ -88,28 +88,21 @@
 }
 
 :root[data-theme='dark'] .solution-journey {
-  background:
-    linear-gradient(rgba(179, 207, 229, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(179, 207, 229, 0.045) 1px, transparent 1px),
-    radial-gradient(circle at 86% 12%, var(--terra-glow-soft), transparent 32%),
-    linear-gradient(145deg, #111c2c, #17253a);
-  background-size: 2.5rem 2.5rem, 2.5rem 2.5rem, auto, auto;
+  background: transparent;
 }
 
 :root[data-theme='dark'] .solution-journey figcaption {
-  border-color: var(--border);
-  background: rgba(10, 25, 49, 0.72);
   color: var(--soft-ice);
 }
 
 :root[data-theme='dark'] .solution-journey__summary,
+:root[data-theme='dark'] .solution-journey__intro h3,
 :root[data-theme='dark'] .solution-journey__step strong {
   color: var(--ice-white);
 }
 
 :root[data-theme='dark'] .solution-journey__step {
-  border-color: var(--border);
-  background: rgba(10, 25, 49, 0.72);
+  background: transparent;
 }
 
 :root[data-theme='dark'] .solution-journey__step small {
@@ -117,13 +110,17 @@
 }
 
 :root[data-theme='dark'] .solution-journey__step-index {
-  border-color: var(--terra-border);
-  background: var(--terra-glow-soft);
+  color: var(--terra-accent-text);
 }
 
-:root[data-theme='dark'] .solution-journey__arrow {
-  border-color: var(--border);
-  background: #111c2c;
+:root[data-theme='dark'] .solution-journey__step-marker {
+  background: var(--surface);
+}
+
+:root[data-theme='dark'] .solution-journey__step:hover .solution-journey__step-marker {
+  border-color: var(--ice-blue);
+  background: var(--ice-blue);
+  color: var(--deep-navy);
 }
 
 :root[data-theme='dark'] .contact-form {

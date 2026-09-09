@@ -21,11 +21,14 @@ export function ShaderBackground({ active }: { active: boolean }) {
     markShaderReady,
     markShaderFailed,
   } = useVisualCapabilities()
-  const shouldMount =
-    active && canAttemptShader && shaderStatus !== 'failed'
+  const shouldLoad = active && canAttemptShader && shaderStatus !== 'failed'
+  const shouldKeepMounted =
+    canAttemptShader &&
+    shaderStatus !== 'failed' &&
+    (active || shaderStatus === 'ready')
 
   useEffect(() => {
-    if (!shouldMount || ShaderSurface) return
+    if (!shouldLoad || ShaderSurface) return
 
     let active = true
     if (shaderStatus === 'idle') markShaderLoading()
@@ -51,13 +54,16 @@ export function ShaderBackground({ active }: { active: boolean }) {
     markShaderFailed,
     markShaderLoading,
     shaderStatus,
-    shouldMount,
+    shouldLoad,
   ])
 
-  if (!shouldMount || !ShaderSurface) return null
+  if (!shouldKeepMounted || !ShaderSurface) return null
 
   return (
-    <div className="hero-shader" aria-hidden="true">
+    <div
+      className={`hero-shader ${active ? 'is-active' : 'is-paused'}`}
+      aria-hidden="true"
+    >
       <ShaderErrorBoundary onError={markShaderFailed}>
         <ShaderSurface
           onReady={markShaderReady}

@@ -22,7 +22,7 @@ type ContactFormValues = Omit<ContactPayload, 'source'>
 
 const serviceGroups = [
   {
-    label: 'BWS Presença Digital',
+    label: 'BWS Digital',
     options: ['Site institucional', 'Landing page', 'Portfólio', 'Formulário'],
   },
   {

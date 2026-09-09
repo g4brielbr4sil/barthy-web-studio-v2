@@ -64,14 +64,6 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             ))}
           </ul>
         </div>
-        <div>
-          <strong>Tecnologia</strong>
-          <ul className="project-card__stack">
-            {project.stack.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
       </div>
     </article>
   )

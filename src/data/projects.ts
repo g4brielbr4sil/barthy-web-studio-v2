@@ -7,7 +7,6 @@ export interface Project {
   description: string
   detail: string
   features: string[]
-  stack: string[]
   layout: 'wide' | 'split'
 }
 
@@ -17,25 +16,15 @@ export const projects: Project[] = [
     title: 'PNQC',
     category: 'Plataforma educacional em produção',
     description:
-      'Uma jornada de formação que organiza cursos, módulos, aulas, progresso e avaliações para alunos e diferentes perfis de acesso.',
+      'Uma plataforma de qualificação profissional para cuidadores, com cursos organizados em módulos, aulas, avaliações e progresso até a certificação.',
     detail:
-      'Desenvolvida a partir de necessidades reais da operação, com regras de progressão, avaliações com nota mínima de 70%, Supabase Auth, PostgreSQL e funções RPC. Certificados, badges e áreas administrativas seguem em evolução.',
+      'O PNQC conduz o cuidador por uma jornada de formação, acompanha o aprendizado e exige no mínimo 70% em cada avaliação para liberar o módulo seguinte. A experiência reúne áreas para alunos, agências e administração. A emissão e a validação de certificados e os selos de qualificação seguem em evolução.',
     features: [
-      'Autenticação e recuperação de acesso',
-      'Perfis student, agency e admin',
+      'Formação profissional de cuidadores',
       'Cursos, módulos e aulas',
-      'Progresso sequencial',
-      'Avaliações e aprovação mínima de 70%',
-    ],
-    stack: [
-      'React',
-      'TypeScript',
-      'Vite',
-      'Supabase',
-      'PostgreSQL',
-      'Auth',
-      'RPC',
-      'Cloudflare Pages',
+      'Progresso com regra de aprovação de 70%',
+      'Áreas para aluno, agência e administração',
+      'Certificados e selos em evolução',
     ],
     layout: 'split',
   },
@@ -44,17 +33,16 @@ export const projects: Project[] = [
     title: 'Hermes',
     category: 'Sistema operacional · automação com controle humano',
     description:
-      'Uma operação própria que conecta relacionamento, tarefas automáticas, acompanhamento e decisões que continuam sob controle humano.',
+      'Um centro de comando pessoal e operacional que reúne rotina, projetos, CRM, finanças e automações e coordena o trabalho comercial da Barthy.',
     detail:
-      'O Hermes começou como um Personal OS e evoluiu para um runtime operacional multiagente. A comunicação externa permanece bloqueada por padrão, enquanto ações internas e fluxos comerciais são coordenados com rastreabilidade e controle humano.',
+      'O Hermes nasceu como um Personal OS para centralizar rotina, estudos, finanças, projetos e relatórios. Hoje também organiza missões, agentes especializados e próximos passos do funil comercial, mantendo ações sensíveis sob políticas, aprovação humana e auditoria.',
     features: [
+      'Rotina, projetos, finanças e estudos',
       'CRM e pipeline comercial',
-      'Agentes especializados e jobs',
-      'Policies e aprovações humanas',
-      'Auditoria e idempotência',
-      'Deploy, backup e rollback documentados',
+      'Coordenação de agentes especializados',
+      'Políticas e aprovações humanas',
+      'Auditoria e próximas ações',
     ],
-    stack: ['React', 'TypeScript', 'Python', 'FastAPI', 'SQLite', 'SQLAlchemy', 'Docker', 'GitHub Actions'],
     layout: 'split',
   },
 ]

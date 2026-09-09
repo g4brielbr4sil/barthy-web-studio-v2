@@ -31,7 +31,7 @@
   --cta-terra-focus-ring: #1a3d63;
 
   --page-background: #f6fafd;
-  --surface: #ffffff;
+  --surface: #f6fafd;
   --surface-soft: #eaf1f7;
   --foreground: #0a1931;
   --muted-foreground: #40546b;
@@ -41,16 +41,16 @@
   --nav-fallback-background: rgba(246, 250, 253, 0.97);
   --surface-translucent: var(--white-72);
   --surface-translucent-strong: var(--white-88);
-  --card-background: #ffffff;
+  --card-background: #f6fafd;
   --card-background-muted: #f1f6fa;
   --card-border: rgba(10, 25, 49, 0.13);
   --card-shadow: 0 30px 80px -52px rgba(10, 25, 49, 0.42);
   --card-shadow-hover: 0 36px 88px -48px rgba(10, 25, 49, 0.5);
   --card-active-glow: 0 0 0 1px rgba(205, 118, 93, 0.24),
     0 22px 56px -38px rgba(205, 118, 93, 0.42);
-  --section-muted: #f1f4f6;
+  --section-muted: #f6fafd;
   --section-accent: #eaf1f7;
-  --hero-background: #eff3f6;
+  --hero-background: var(--page-background);
   --hero-overlay:
     linear-gradient(180deg, rgba(246, 250, 253, 0.01) 0%, rgba(246, 250, 253, 0.04) 48%, rgba(246, 250, 253, 0.12) 100%);
   --form-background: #0a1931;

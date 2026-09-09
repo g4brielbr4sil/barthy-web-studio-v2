@@ -139,6 +139,10 @@
   transition: opacity 360ms ease;
 }
 
+.hero-shader.is-paused {
+  visibility: hidden;
+}
+
 .hero__background[data-mode='shader'] .hero-shader {
   opacity: 0.92;
 }

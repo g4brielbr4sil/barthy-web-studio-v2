@@ -47,8 +47,8 @@ export function SolutionsSection({
               <SolutionArchitectureMap key={activeGroup.id} group={activeGroup} />
 
               <div className="solution-panel__copy">
-                <span>Onde podemos atuar</span>
-                <h3>Escopo que acompanha a necessidade do negócio</h3>
+                <span>Entregas possíveis</span>
+                <h3>O que podemos construir nesta frente</h3>
                 <ul className="solution-panel__services">
                   {activeGroup.items.map((item) => (
                     <li key={item}>{item}</li>

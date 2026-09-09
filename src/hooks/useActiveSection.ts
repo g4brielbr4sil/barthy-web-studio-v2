@@ -160,7 +160,7 @@ export function useActiveSection(): NavigationState {
 
       window.requestAnimationFrame(() => {
         visualTarget.scrollIntoView({
-          behavior: reducedMotion ? 'auto' : 'smooth',
+          behavior: reducedMotion || section === 'inicio' ? 'auto' : 'smooth',
           block: 'start',
         })
       })
