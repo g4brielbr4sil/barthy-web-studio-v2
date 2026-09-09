@@ -112,8 +112,18 @@
   background: rgba(10, 25, 49, 0.72);
 }
 
-:root[data-theme='dark'] .solution-journey__step p {
+:root[data-theme='dark'] .solution-journey__step small {
   color: var(--soft-ice);
+}
+
+:root[data-theme='dark'] .solution-journey__step-index {
+  border-color: var(--terra-border);
+  background: var(--terra-glow-soft);
+}
+
+:root[data-theme='dark'] .solution-journey__arrow {
+  border-color: var(--border);
+  background: #111c2c;
 }
 
 :root[data-theme='dark'] .contact-form {

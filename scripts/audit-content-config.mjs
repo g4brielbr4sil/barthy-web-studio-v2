@@ -43,7 +43,7 @@ for (const phrase of [
   'Tecnologia para negócios',
   'venderem e operarem melhor',
   'Soluções conectadas ao seu negócio',
-  'Software feito para o trabalho real',
+  'Sistemas para a rotina real do negócio',
   'Tem um processo no seu negócio que poderia funcionar melhor?',
 ]) {
   assert.match(

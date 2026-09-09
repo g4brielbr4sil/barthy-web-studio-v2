@@ -1,4 +1,4 @@
-import { ArrowUpRight, Minus, Plus } from 'lucide-react'
+import { Minus, Plus } from 'lucide-react'
 import { useId, useState } from 'react'
 import type { Project } from '../../data/projects'
 import { ProjectMedia } from './ProjectMedia'
@@ -42,7 +42,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         >
           <span>{expanded ? 'Fechar detalhes' : 'Ver detalhes'}</span>
           <span className="project-card__action-icon" aria-hidden="true">
-            {expanded ? <Minus size={18} /> : <ArrowUpRight size={18} />}
+            {expanded ? <Minus size={18} /> : <Plus size={18} />}
           </span>
         </button>
       </div>
@@ -65,7 +65,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           </ul>
         </div>
         <div>
-          <strong>Stack</strong>
+          <strong>Tecnologia</strong>
           <ul className="project-card__stack">
             {project.stack.map((item) => (
               <li key={item}>{item}</li>

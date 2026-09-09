@@ -22,19 +22,19 @@ type ContactFormValues = Omit<ContactPayload, 'source'>
 
 const serviceGroups = [
   {
-    label: 'BWS Web · Presença digital',
+    label: 'BWS Presença Digital',
     options: ['Site institucional', 'Landing page', 'Portfólio', 'Formulário'],
   },
   {
-    label: 'BWS Systems · Sistemas',
+    label: 'BWS Sistemas',
     options: ['Gestão de clientes', 'Orçamentos', 'Dashboard', 'Sistema sob medida'],
   },
   {
-    label: 'BWS Automations · Automação',
+    label: 'BWS Automação',
     options: ['Automação operacional', 'Integração', 'Notificações'],
   },
   {
-    label: 'BWS Care · Suporte e evolução',
+    label: 'BWS Suporte',
     options: ['Manutenção', 'Suporte', 'Monitoramento', 'Evolução contínua'],
   },
   {
