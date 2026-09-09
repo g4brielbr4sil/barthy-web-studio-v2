@@ -78,7 +78,16 @@ function validateForm(values: ContactFormValues): ContactFieldErrors {
     whatsapp.length === 13 && whatsapp.startsWith('55')
       ? whatsapp.slice(2)
       : whatsapp
-  if (!/^[1-9]{2}9\d{8}$/.test(phoneWithoutCountry)) {
+  const hasWhatsapp = whatsapp.length > 0
+  const hasEmail = values.email.length > 0
+
+  if (!hasWhatsapp && !hasEmail) {
+    errors.whatsapp = 'Informe um WhatsApp ou um e-mail para retorno.'
+    errors.email = 'Informe um e-mail ou um WhatsApp para retorno.'
+  } else if (
+    hasWhatsapp &&
+    !/^[1-9]{2}9\d{8}$/.test(phoneWithoutCountry)
+  ) {
     errors.whatsapp =
       'Informe um WhatsApp brasileiro com DDD, como (61) 99999-9999.'
   }
@@ -216,7 +225,8 @@ export function ContactForm() {
         if (
           typeof body !== 'object' ||
           body === null ||
-          ('ok' in body && body.ok === false)
+          !('status' in body) ||
+          body.status !== 'ok'
         ) {
           throw new Error('Contact endpoint did not confirm the request.')
         }
@@ -260,8 +270,9 @@ export function ContactForm() {
       <div className="contact-form__intro" data-reveal-item>
         <span>Briefing inicial</span>
         <p>
-          Preencha o essencial. Nenhum dado é enviado se o endpoint não estiver
-          configurado.
+          Preencha o essencial e informe WhatsApp ou e-mail para retorno. Se o
+          envio online ainda não estiver disponível, seus dados permanecerão
+          aqui para você usar o e-mail.
         </p>
       </div>
 
@@ -294,7 +305,9 @@ export function ContactForm() {
         </div>
 
         <div className="form-field">
-          <label htmlFor="whatsapp">WhatsApp</label>
+          <label htmlFor="whatsapp">
+            WhatsApp <span>opcional</span>
+          </label>
           <input
             id="whatsapp"
             name="whatsapp"
@@ -303,7 +316,6 @@ export function ContactForm() {
             autoComplete="tel"
             placeholder="(61) 99999-9999"
             maxLength={20}
-            required
             aria-invalid={Boolean(errors.whatsapp)}
             aria-describedby={errors.whatsapp ? 'whatsapp-error' : undefined}
             onInput={() => clearError('whatsapp')}

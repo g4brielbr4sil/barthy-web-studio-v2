@@ -32,6 +32,7 @@ interface NavigationState {
   activeSection: SectionId
   isPastHero: boolean
   navigateToSection: (section: SectionId) => void
+  navigateToForm: () => void
 }
 
 interface ObservedSection {
@@ -79,8 +80,15 @@ export function useActiveSection(): NavigationState {
   }, [])
 
   const scrollToSection = useCallback(
-    (section: SectionId, updateHistory: boolean) => {
-      const visualTarget = getVisualTarget(section)
+    (
+      section: SectionId,
+      updateHistory: boolean,
+      targetId: string = section,
+    ) => {
+      const visualTarget =
+        targetId === section
+          ? getVisualTarget(section)
+          : document.getElementById(targetId)
       if (!visualTarget) return
 
       const reducedMotion = window.matchMedia(
@@ -91,7 +99,7 @@ export function useActiveSection(): NavigationState {
       pendingSectionRef.current = section
       setActiveSection(section)
 
-      const hash = `#${section}`
+      const hash = `#${targetId}`
       if (updateHistory && window.location.hash !== hash) {
         window.history.pushState(null, '', hash)
       }
@@ -159,6 +167,9 @@ export function useActiveSection(): NavigationState {
       }
 
       window.requestAnimationFrame(() => {
+        if (targetId !== section) {
+          visualTarget.focus({ preventScroll: true })
+        }
         visualTarget.scrollIntoView({
           behavior: reducedMotion || section === 'inicio' ? 'auto' : 'smooth',
           block: 'start',
@@ -173,14 +184,31 @@ export function useActiveSection(): NavigationState {
     [scrollToSection],
   )
 
+  const navigateToForm = useCallback(
+    () => scrollToSection('contato', true, 'formulario'),
+    [scrollToSection],
+  )
+
   useEffect(() => {
+    let locationNavigationFrame = 0
+
     const navigateFromLocation = () => {
       const hashSection = window.location.hash.slice(1)
-      const section = isSectionId(hashSection) ? hashSection : 'inicio'
+      const isFormAnchor = hashSection === 'formulario'
+      const isContentAnchor = hashSection === 'conteudo'
+      const section = isSectionId(hashSection)
+        ? hashSection
+        : isFormAnchor
+          ? 'contato'
+          : 'inicio'
+      const targetId =
+        isFormAnchor || isContentAnchor ? hashSection : section
 
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => {
-          scrollToSection(section, false)
+      window.cancelAnimationFrame(locationNavigationFrame)
+      locationNavigationFrame = window.requestAnimationFrame(() => {
+        locationNavigationFrame = window.requestAnimationFrame(() => {
+          locationNavigationFrame = 0
+          scrollToSection(section, false, targetId)
         })
       })
     }
@@ -190,6 +218,7 @@ export function useActiveSection(): NavigationState {
     window.addEventListener('popstate', navigateFromLocation)
 
     return () => {
+      window.cancelAnimationFrame(locationNavigationFrame)
       window.removeEventListener('hashchange', navigateFromLocation)
       window.removeEventListener('popstate', navigateFromLocation)
     }
@@ -289,5 +318,10 @@ export function useActiveSection(): NavigationState {
     }
   }, [syncActiveSectionToViewport])
 
-  return { activeSection, isPastHero, navigateToSection }
+  return {
+    activeSection,
+    isPastHero,
+    navigateToSection,
+    navigateToForm,
+  }
 }

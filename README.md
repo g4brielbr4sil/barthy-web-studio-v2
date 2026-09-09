@@ -19,10 +19,10 @@ Este repositório contém a versão atual do site institucional da marca. O proj
 
 ## Linhas de atuação
 
-- **BWS Web:** sites, landing pages, portfólios e presença digital.
-- **BWS Systems:** produtos próprios e sistemas para organizar processos reais de negócio.
-- **BWS Automations:** integrações, automações, bots, notificações e IA quando houver ganho claro.
-- **BWS Care:** manutenção, hospedagem, pequenas alterações e monitoramento recorrente.
+- **BWS Digital:** sites, landing pages, portfólios e presença digital.
+- **BWS Sistemas:** produtos próprios e sistemas para organizar processos reais de negócio.
+- **BWS Automação:** integrações, automações, bots, notificações e IA quando houver ganho claro.
+- **BWS Suporte:** manutenção, hospedagem, pequenas alterações e monitoramento recorrente.
 
 ## O que foi construído
 
@@ -203,6 +203,7 @@ VITE_BARTHY_CONTACT_ENDPOINT=
 VITE_BARTHY_SITE_URL=
 VITE_BARTHY_OG_IMAGE=
 VITE_BARTHY_ALLOW_INDEXING=false
+VITE_BARTHY_CF_ANALYTICS_TOKEN=
 ```
 
 `VITE_BARTHY_SITE_URL` centraliza canonical, Open Graph e sitemap. A indexação só deve ser liberada quando a URL oficial HTTPS estiver definida.

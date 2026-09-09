@@ -17,12 +17,14 @@ o payload antigo seria rejeitado com HTTP 422.
 
 `src/lib/contact.ts` agora exporta `buildHermesLeadPayload()`, que faz essa
 tradução antes do envio. `ContactForm.tsx` usa essa função no `onSubmit`.
+O backend aceita `phone` como opcional e confirma o recebimento com JSON
+contendo `status: "ok"`; a interface exige ao menos WhatsApp ou e-mail para
+garantir um canal de retorno.
 
-**`VITE_BARTHY_CONTACT_ENDPOINT` continua vazio no `.env.example`** — apontar
-para a URL real do Hermes em produção
-(`https://44-199-249-92.sslip.io/api/public/barthy/leads`) é uma decisão que
-fica para quando você decidir ligar esse canal (ver fila de prioridades no
-handoff principal).
+**`VITE_BARTHY_CONTACT_ENDPOINT` continua vazio no `.env.example`**. A URL do
+ambiente deve ser mantida na configuração privada do deploy e apontar para
+`POST /api/public/barthy/leads` somente quando você decidir ligar esse canal
+(ver fila de prioridades no handoff principal).
 
 ## Analytics (opcional, desligado por padrão)
 

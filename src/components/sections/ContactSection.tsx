@@ -1,5 +1,5 @@
 import { Check, Copy, Mail, MessageCircle, Send } from 'lucide-react'
-import { useState } from 'react'
+import { useState, type MouseEvent } from 'react'
 import {
   CONTACT_EMAIL,
   copyContactEmail,
@@ -10,7 +10,11 @@ import { ContactForm } from '../contact/ContactForm'
 import { SectionBadge } from '../ui/SectionBadge'
 import { SectionReveal } from '../ui/SectionReveal'
 
-export function ContactSection() {
+export function ContactSection({
+  onNavigateToForm,
+}: {
+  onNavigateToForm: () => void
+}) {
   const whatsappUrl = getWhatsappUrl()
   const [whatsappMessage, setWhatsappMessage] = useState('')
   const [copied, setCopied] = useState(false)
@@ -70,7 +74,13 @@ export function ContactSection() {
             </button>
           )}
 
-          <a href="#formulario">
+          <a
+            href="#formulario"
+            onClick={(event: MouseEvent<HTMLAnchorElement>) => {
+              event.preventDefault()
+              onNavigateToForm()
+            }}
+          >
             <Send size={20} aria-hidden="true" />
             <span>
               <small>Formulário</small>
@@ -98,7 +108,12 @@ export function ContactSection() {
           </div>
         )}
 
-        <SectionReveal id="formulario" className="contact__form">
+        <SectionReveal
+          id="formulario"
+          className="contact__form"
+          tabIndex={-1}
+          aria-label="Briefing inicial"
+        >
           <ContactForm />
         </SectionReveal>
       </div>

@@ -30,7 +30,7 @@ export interface ContactPayload {
  */
 export interface HermesLeadPayload {
   name: string
-  phone: string
+  phone?: string
   email?: string
   company: string
   service: string
@@ -48,7 +48,6 @@ export function buildHermesLeadPayload(
 
   const payload: HermesLeadPayload = {
     name: values.nome,
-    phone,
     company: values.empresaProjeto,
     service: values.tipoSolucao,
     message: values.mensagem,
@@ -56,6 +55,7 @@ export function buildHermesLeadPayload(
     honeypot: '',
   }
 
+  if (phone) payload.phone = phone
   if (values.email) payload.email = values.email
 
   return payload
@@ -67,7 +67,11 @@ function safeHttpUrl(value: string | undefined): string {
 
   try {
     const parsed = new URL(candidate)
-    return parsed.protocol === 'https:' || parsed.protocol === 'http:'
+    const isLocalHttp =
+      parsed.protocol === 'http:' &&
+      ['localhost', '127.0.0.1', '[::1]'].includes(parsed.hostname)
+
+    return parsed.protocol === 'https:' || isLocalHttp
       ? parsed.toString()
       : ''
   } catch {

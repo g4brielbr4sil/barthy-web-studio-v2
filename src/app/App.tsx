@@ -10,8 +10,12 @@ import { ContactSection } from '../components/sections/ContactSection'
 import { useActiveSection } from '../hooks/useActiveSection'
 
 function App() {
-  const { activeSection, isPastHero, navigateToSection } =
-    useActiveSection()
+  const {
+    activeSection,
+    isPastHero,
+    navigateToSection,
+    navigateToForm,
+  } = useActiveSection()
 
   return (
     <>
@@ -23,13 +27,13 @@ function App() {
         isPastHero={isPastHero}
         onNavigate={navigateToSection}
       />
-      <main id="conteudo">
+      <main id="conteudo" tabIndex={-1}>
         <Hero onNavigate={navigateToSection} />
         <SolutionsSection onNavigate={navigateToSection} />
         <SystemsSection onNavigate={navigateToSection} />
         <ProjectsSection />
         <ProcessSection onNavigate={navigateToSection} />
-        <ContactSection />
+        <ContactSection onNavigateToForm={navigateToForm} />
       </main>
       <Footer onNavigate={navigateToSection} />
       <VisualDebugPanel />

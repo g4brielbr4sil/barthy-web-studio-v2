@@ -14,16 +14,16 @@ export const projects: Project[] = [
   {
     id: 'pnqc',
     title: 'PNQC',
-    category: 'Plataforma educacional em produção',
+    category: 'Plataforma educacional em evolução',
     description:
       'Uma plataforma de qualificação profissional para cuidadores, com cursos organizados em módulos, aulas, avaliações e progresso até a certificação.',
     detail:
-      'O PNQC conduz o cuidador por uma jornada de formação, acompanha o aprendizado e exige no mínimo 70% em cada avaliação para liberar o módulo seguinte. A experiência reúne áreas para alunos, agências e administração. A emissão e a validação de certificados e os selos de qualificação seguem em evolução.',
+      'O PNQC foi desenhado para conduzir o cuidador por uma jornada de formação, acompanhar o aprendizado e exigir no mínimo 70% em cada avaliação para liberar o módulo seguinte. A experiência já apresenta áreas para alunos, agências e administração, enquanto persistência, certificados e selos seguem em evolução.',
     features: [
       'Formação profissional de cuidadores',
       'Cursos, módulos e aulas',
       'Progresso com regra de aprovação de 70%',
-      'Áreas para aluno, agência e administração',
+      'Áreas de aluno, agência e administração em evolução',
       'Certificados e selos em evolução',
     ],
     layout: 'split',
