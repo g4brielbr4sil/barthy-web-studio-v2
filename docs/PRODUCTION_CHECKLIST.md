@@ -40,16 +40,16 @@
 
 ## Cloudflare Pages
 
-- [ ] Criar ou confirmar o projeto da V2 no Cloudflare Pages.
-- [ ] Vincular o repositório `g4brielbr4sil/barthy-web-studio-v2`.
-- [ ] Definir a branch de produção como `main`.
+- [x] Criar ou confirmar o projeto da V2 no Cloudflare Pages.
+- [x] Vincular o repositório `g4brielbr4sil/barthy-web-studio-v2`.
+- [x] Definir a branch de produção como `main`.
 - [ ] Usar `pnpm build`.
 - [ ] Usar `dist` como diretório de saída.
 - [ ] Configurar Node.js 22.13 ou superior.
 - [ ] Cadastrar somente variáveis públicas confirmadas (ver abaixo).
 - [ ] Validar os headers publicados.
 - [ ] Validar o preview antes de promover produção.
-- [ ] Confirmar que o build definitivo gerou canonical, `robots.txt` público e `sitemap.xml`.
+- [ ] Confirmar que o build definitivo gerou canonical, `robots.txt` público e `sitemap.xml` (aguardando a liberação de indexação; canonical/OG já corretos mesmo com noindex).
 - [ ] Confirmar que previews continuam com meta e header `noindex, nofollow`.
 
 ### Variáveis de produção no Cloudflare Pages
