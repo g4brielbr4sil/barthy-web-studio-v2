@@ -1,5 +1,5 @@
 import { Minus, Plus } from 'lucide-react'
-import { useId, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 import type { Project } from '../../data/projects'
 import { ProjectMedia } from './ProjectMedia'
 
@@ -11,6 +11,11 @@ interface ProjectCardProps {
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const [expanded, setExpanded] = useState(false)
   const detailsId = useId()
+  const ignoreNextClickRef = useRef(false)
+
+  const toggleExpanded = () => {
+    setExpanded((value) => !value)
+  }
 
   return (
     <article
@@ -38,7 +43,22 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           type="button"
           aria-expanded={expanded}
           aria-controls={detailsId}
-          onClick={() => setExpanded((value) => !value)}
+          onPointerUp={(event) => {
+            if (event.pointerType !== 'touch' && event.pointerType !== 'pen') {
+              return
+            }
+
+            ignoreNextClickRef.current = true
+            toggleExpanded()
+          }}
+          onClick={() => {
+            if (ignoreNextClickRef.current) {
+              ignoreNextClickRef.current = false
+              return
+            }
+
+            toggleExpanded()
+          }}
         >
           <span>{expanded ? 'Fechar detalhes' : 'Ver detalhes'}</span>
           <span className="project-card__action-icon" aria-hidden="true">
