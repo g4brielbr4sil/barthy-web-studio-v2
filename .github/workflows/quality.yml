@@ -40,6 +40,9 @@ jobs:
       - name: Accessibility audit
         run: pnpm audit:a11y
 
+      - name: Contact contract with Hermes
+        run: pnpm test:contact
+
       - name: Responsive contracts
         run: pnpm test:responsive
 
