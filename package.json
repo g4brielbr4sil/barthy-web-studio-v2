@@ -14,9 +14,10 @@
     "audit:seo": "node scripts/audit-seo-output.mjs",
     "test:contact": "node --experimental-strip-types scripts/verify-contact-contract.mjs",
     "test:responsive": "node scripts/verify-responsive-contract.mjs",
+    "test:touch-toggle": "node scripts/verify-touch-toggle-contract.mjs",
     "typecheck": "tsc -b",
     "build": "tsc -b && vite build && node scripts/generate-seo-files.mjs",
-    "quality": "pnpm audit:content && pnpm audit:a11y && pnpm test:contact && pnpm test:responsive && pnpm typecheck && pnpm build && pnpm audit:seo",
+    "quality": "pnpm audit:content && pnpm audit:a11y && pnpm test:contact && pnpm test:responsive && pnpm test:touch-toggle && pnpm typecheck && pnpm build && pnpm audit:seo",
     "preview": "vite preview"
   },
   "dependencies": {
