@@ -76,13 +76,10 @@ button,
 a {
   -webkit-tap-highlight-color: transparent;
   /*
-   * Without this, a tappable control that gets tapped twice in roughly the
-   * same spot (open, then close) can have its second tap consumed by the
-   * browser's double-tap-to-zoom gesture detection instead of dispatching a
-   * click — the exact "card opens but won't close" report from a real
-   * mobile device. `manipulation` tells the browser this element only
-   * needs panning/tapping, so it skips that disambiguation delay and every
-   * tap fires immediately. See ProjectCard's expand/collapse toggle.
+   * Keep native zoom available while removing the legacy double-tap delay on
+   * tappable controls. This is a useful baseline for touch responsiveness, but
+   * it is not relied on as the sole ProjectCard fix; the card also handles
+   * touch/pen pointer release explicitly in ProjectCard.tsx.
    */
   touch-action: manipulation;
 }
