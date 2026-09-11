@@ -61,7 +61,13 @@ export function buildHermesLeadPayload(
   return payload
 }
 
-function safeHttpUrl(value: string | undefined): string {
+/**
+ * Só aceita URL absoluta HTTPS. HTTP continua liberado apenas para
+ * desenvolvimento local (localhost/127.0.0.1/[::1]). Qualquer outra coisa
+ * vira string vazia, que o formulário trata como "endpoint não configurado".
+ * Exportada para o contrato verificado em scripts/verify-contact-contract.mjs.
+ */
+export function safeHttpUrl(value: string | undefined): string {
   const candidate = value?.trim()
   if (!candidate) return ''
 

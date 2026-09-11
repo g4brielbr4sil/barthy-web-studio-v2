@@ -200,13 +200,15 @@ pnpm dev
 ```env
 VITE_BARTHY_WHATSAPP_URL=
 VITE_BARTHY_CONTACT_ENDPOINT=
-VITE_BARTHY_SITE_URL=
+VITE_BARTHY_SITE_URL=https://barthywebstudio.tech
 VITE_BARTHY_OG_IMAGE=
 VITE_BARTHY_ALLOW_INDEXING=false
 VITE_BARTHY_CF_ANALYTICS_TOKEN=
 ```
 
 `VITE_BARTHY_SITE_URL` centraliza canonical, Open Graph e sitemap. A indexação só deve ser liberada quando a URL oficial HTTPS estiver definida.
+
+`VITE_BARTHY_CONTACT_ENDPOINT` é a única forma de configurar o envio do formulário para o endpoint público do Hermes (`POST /api/public/barthy/leads`). Só URL absoluta HTTPS é aceita e nenhuma URL de ambiente fica hardcoded no bundle. Vazio significa envio online desativado, com fallback por e-mail e sem falso sucesso. Detalhes em [`docs/HERMES_INTEGRATION_STATUS.md`](docs/HERMES_INTEGRATION_STATUS.md) e os valores de produção em [`docs/PRODUCTION_CHECKLIST.md`](docs/PRODUCTION_CHECKLIST.md).
 
 Tudo que começa com `VITE_` é exposto ao navegador. Senhas, tokens e segredos não devem usar esse prefixo.
 

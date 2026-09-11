@@ -1,72 +1,81 @@
-# Status da integração com o Hermes — 2026-08-11
+# Status da integração com o Hermes
 
-Contexto completo (auditoria da BWS, funil de receita, fila de próximas
-ações) está em `hermes-agent/docs/HANDOFF_2026-08-11.md`. Este arquivo cobre
-só o que mudou neste repositório, no branch local
-`p0/hermes-integration-local` (criado a partir de `origin/main` @ `ceb8d31`,
-2 commits, nada enviado ao remoto).
+Domínio oficial: `https://barthywebstudio.tech` (apex; `www` e o `pages.dev` do
+projeto redirecionam para ele).
 
-## O que foi corrigido
+Contrato do lado do Hermes: `hermes-agent/docs/BARTHY_CRM_INTAKE.md`.
 
-O formulário de contato (`src/components/contact/ContactForm.tsx`) enviava
-campos em português (`nome`, `whatsapp`, `empresaProjeto`, `tipoSolucao`,
-`mensagem`). O endpoint público do Hermes (`POST /api/public/barthy/leads`)
-usa `extra="forbid"` e espera campos em inglês
-(`name`, `phone`, `company`, `service`, `message`, `source`, `honeypot`) —
-o payload antigo seria rejeitado com HTTP 422.
+## Fluxo
 
-`src/lib/contact.ts` agora exporta `buildHermesLeadPayload()`, que faz essa
-tradução antes do envio. `ContactForm.tsx` usa essa função no `onSubmit`.
-O backend aceita `phone` como opcional e confirma o recebimento com JSON
-contendo `status: "ok"`; a interface exige ao menos WhatsApp ou e-mail para
-garantir um canal de retorno.
+```
+Formulário da BWS (https://barthywebstudio.tech)
+  → POST HTTPS público, sem token, Content-Type: application/json
+  → Hermes valida o header Origin                → 403 se não autorizada
+  → Hermes valida o payload (extra="forbid")     → 422 se houver campo extra
+  → honeypot preenchido                          → 400
+  → rate limit por IP (10 envios / 10 min)       → 429
+  → ProspectLead + CommercialActivity + ActionLog
+  → 201 {"status": "ok", "lead_id": <id>}
+```
 
-**`VITE_BARTHY_CONTACT_ENDPOINT` continua vazio no `.env.example`**. A URL do
-ambiente deve ser mantida na configuração privada do deploy e apontar para
-`POST /api/public/barthy/leads` somente quando você decidir ligar esse canal
-(ver fila de prioridades no handoff principal).
+O formulário só mostra sucesso quando a resposta é `ok` **e** o corpo confirma
+`status: "ok"`. Qualquer outro desfecho vira erro visível, preserva os campos
+preenchidos e oferece o fallback por e-mail.
+
+## Código
+
+`src/lib/contact.ts` traduz o formulário para o schema do Hermes em
+`buildHermesLeadPayload()`. O backend usa `extra="forbid"`, então os nomes
+internos em português (`nome`, `whatsapp`, `empresaProjeto`, `tipoSolucao`,
+`mensagem`) nunca saem do navegador: viram
+`name`, `phone`, `email`, `company`, `service`, `message`, mais
+`source: "barthy-web-studio-v2"` e `honeypot: ""`.
+
+`phone` e `email` são opcionais no schema e as chaves são omitidas quando o
+campo está vazio, em vez de enviadas em branco. A interface exige pelo menos um
+dos dois para garantir um canal de retorno. O WhatsApp é normalizado para E.164
+antes do envio.
+
+`safeHttpUrl()` aceita apenas URL absoluta HTTPS, com HTTP liberado só para
+`localhost`, `127.0.0.1` e `[::1]` em desenvolvimento. Nenhuma URL de ambiente é
+hardcoded no bundle.
+
+`scripts/verify-contact-contract.mjs` (`pnpm test:contact`, incluído em
+`pnpm quality`) verifica o payload, a normalização do telefone, a recusa de
+endpoint inseguro e o tratamento de falha do formulário.
+
+## Configuração pendente
+
+`VITE_BARTHY_CONTACT_ENDPOINT` continua vazio no `.env.example` e precisa ser
+cadastrado no Cloudflare Pages; o valor exato está em
+`docs/PRODUCTION_CHECKLIST.md`. Do lado do Hermes, `HERMES_PUBLIC_LEAD_ORIGINS`
+precisa conter `https://barthywebstudio.tech` antes de qualquer envio real, ou a
+resposta é `403`.
+
+Nenhum token do Hermes vai para o frontend.
+
+## SEO/indexação
+
+`scripts/generate-seo-files.mjs` falha fechado: `noindex` por padrão, só libera
+indexação com `VITE_BARTHY_ALLOW_INDEXING=true` **e** `VITE_BARTHY_SITE_URL`
+válida em HTTPS. A indexação permanece fechada por decisão atual.
 
 ## Analytics (opcional, desligado por padrão)
 
-`scripts/generate-seo-files.mjs` agora injeta o beacon do Cloudflare Web
-Analytics no `dist/index.html` **somente se** `VITE_BARTHY_CF_ANALYTICS_TOKEN`
-estiver definida. Vazio (padrão) = nenhum script de terceiro é adicionado.
-Para ativar: Cloudflare dashboard → Analytics → Web Analytics → Add site →
-copiar o token → configurar como env var no Cloudflare Pages.
-
-## SEO/noindex
-
-Revisado, nenhuma correção necessária — `generate-seo-files.mjs` já falha
-fechado corretamente (`noindex` por padrão, só libera indexação com
-`VITE_BARTHY_ALLOW_INDEXING=true` **e** `VITE_BARTHY_SITE_URL` válida em
-HTTPS). Falta só configurar essas duas env vars em produção quando o domínio
-estiver definido.
+O beacon do Cloudflare Web Analytics é injetado em `dist/index.html` somente se
+`VITE_BARTHY_CF_ANALYTICS_TOKEN` estiver definida. Vazio (padrão) = nenhum
+script de terceiro é adicionado.
 
 ## WhatsApp
 
-Sem mudança de código — já é seguro e já tem fallback (`getWhatsappUrl()` em
-`src/lib/contact.ts`). Falta só configurar `VITE_BARTHY_WHATSAPP_URL` no
-Cloudflare Pages com o link real (`https://wa.me/55DDDNUMERO`).
+Sem mudança de código, já com fallback em `getWhatsappUrl()`. Falta só
+configurar `VITE_BARTHY_WHATSAPP_URL` no Cloudflare Pages quando for a hora.
 
-## Mobile — PR #22 (`fix/lp-mobile-stability`)
-
-Esse PR foi aberto por você em 2026-08-08 e fechado sem merge, com a nota
-"Não fazer merge antes da validação visual humana". Hoje eu testei o branch
-inteiro numa worktree isolada (`pnpm install`, `typecheck`, `build`,
-`audit:content`, `audit:a11y`, `test:responsive`, `audit:seo`) — **tudo passa**
-e o branch está `MERGEABLE` contra o `main` atual. Não fiz merge porque a
-validação pendente é visual, não técnica. Está pronto para você revisar
-quando quiser.
-
-## Como validar tudo isso localmente
+## Como validar localmente
 
 ```
 corepack pnpm@11.9.0 install
-corepack pnpm@11.9.0 run typecheck
-corepack pnpm@11.9.0 run build
-corepack pnpm@11.9.0 run audit:content
-corepack pnpm@11.9.0 run audit:seo
-corepack pnpm@11.9.0 run test:responsive
+corepack pnpm@11.9.0 run quality
 ```
 
 (`pnpm` puro não está no PATH deste ambiente Windows — use `corepack
