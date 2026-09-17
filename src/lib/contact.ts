@@ -1,4 +1,6 @@
 export const CONTACT_EMAIL = 'contato.barthywebstudio@gmail.com'
+export const DEFAULT_WHATSAPP_URL =
+  'https://wa.me/5561920002364?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Barthy%20Web%20Studio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%2E'
 
 export type ContactFieldName =
   | 'nome'
@@ -86,7 +88,10 @@ export function safeHttpUrl(value: string | undefined): string {
 }
 
 export function getWhatsappUrl(): string {
-  return safeHttpUrl(import.meta.env.VITE_BARTHY_WHATSAPP_URL)
+  return (
+    safeHttpUrl(import.meta.env?.VITE_BARTHY_WHATSAPP_URL) ||
+    DEFAULT_WHATSAPP_URL
+  )
 }
 
 export function getContactEndpoint(): string {

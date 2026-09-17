@@ -198,7 +198,7 @@ pnpm dev
 ### Variáveis de ambiente
 
 ```env
-VITE_BARTHY_WHATSAPP_URL=
+VITE_BARTHY_WHATSAPP_URL=https://wa.me/5561920002364?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Barthy%20Web%20Studio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%2E
 VITE_BARTHY_CONTACT_ENDPOINT=
 VITE_BARTHY_SITE_URL=https://barthywebstudio.tech
 VITE_BARTHY_OG_IMAGE=
@@ -207,6 +207,8 @@ VITE_BARTHY_CF_ANALYTICS_TOKEN=
 ```
 
 `VITE_BARTHY_SITE_URL` centraliza canonical, Open Graph e sitemap. A indexação só deve ser liberada quando a URL oficial HTTPS estiver definida.
+
+`VITE_BARTHY_WHATSAPP_URL` permite sobrescrever o link público do WhatsApp. Se estiver vazia, ausente ou inválida, o site usa o canal oficial da BWS definido em `src/lib/contact.ts`.
 
 `VITE_BARTHY_CONTACT_ENDPOINT` é a única forma de configurar o envio do formulário para o endpoint público do Hermes (`POST /api/public/barthy/leads`). Só URL absoluta HTTPS é aceita e nenhuma URL de ambiente fica hardcoded no bundle. Vazio significa envio online desativado, com fallback por e-mail e sem falso sucesso. Detalhes em [`docs/HERMES_INTEGRATION_STATUS.md`](docs/HERMES_INTEGRATION_STATUS.md) e os valores de produção em [`docs/PRODUCTION_CHECKLIST.md`](docs/PRODUCTION_CHECKLIST.md).
 

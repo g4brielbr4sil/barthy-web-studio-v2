@@ -14,8 +14,21 @@
 import { strict as assert } from 'node:assert'
 import { readFile } from 'node:fs/promises'
 
-const { buildHermesLeadPayload, safeHttpUrl } = await import(
-  '../src/lib/contact.ts'
+const {
+  buildHermesLeadPayload,
+  DEFAULT_WHATSAPP_URL,
+  getWhatsappUrl,
+  safeHttpUrl,
+} = await import('../src/lib/contact.ts')
+
+const OFFICIAL_WHATSAPP_URL =
+  'https://wa.me/5561920002364?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Barthy%20Web%20Studio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%2E'
+
+assert.equal(DEFAULT_WHATSAPP_URL, OFFICIAL_WHATSAPP_URL)
+assert.equal(
+  getWhatsappUrl(),
+  OFFICIAL_WHATSAPP_URL,
+  'Sem env var, o card deve usar o WhatsApp oficial da BWS.',
 )
 
 const HERMES_FIELDS = [
@@ -144,6 +157,15 @@ const contactForm = await readFile(
   new URL('../src/components/contact/ContactForm.tsx', import.meta.url),
   'utf8',
 )
+const contactSection = await readFile(
+  new URL('../src/components/sections/ContactSection.tsx', import.meta.url),
+  'utf8',
+)
+
+assert.match(contactSection, /<small>WhatsApp<\/small>\s*Falar com a BWS/)
+assert.doesNotMatch(contactSection, /Consultar disponibilidade/)
+assert.match(contactSection, /target="_blank"/)
+assert.match(contactSection, /rel="noopener noreferrer"/)
 
 assert.match(
   contactForm,

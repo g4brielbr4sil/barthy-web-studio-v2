@@ -37,8 +37,9 @@ dos dois para garantir um canal de retorno. O WhatsApp é normalizado para E.164
 antes do envio.
 
 `safeHttpUrl()` aceita apenas URL absoluta HTTPS, com HTTP liberado só para
-`localhost`, `127.0.0.1` e `[::1]` em desenvolvimento. Nenhuma URL de ambiente é
-hardcoded no bundle.
+`localhost`, `127.0.0.1` e `[::1]` em desenvolvimento. O único endereço de
+contato mantido no código é o link público do WhatsApp oficial da BWS; endpoints
+operacionais e credenciais não são hardcoded no bundle.
 
 `scripts/verify-contact-contract.mjs` (`pnpm test:contact`, incluído em
 `pnpm quality`) verifica o payload, a normalização do telefone, a recusa de
@@ -68,8 +69,10 @@ script de terceiro é adicionado.
 
 ## WhatsApp
 
-Sem mudança de código, já com fallback em `getWhatsappUrl()`. Falta só
-configurar `VITE_BARTHY_WHATSAPP_URL` no Cloudflare Pages quando for a hora.
+O canal oficial está ativo. `getWhatsappUrl()` valida
+`VITE_BARTHY_WHATSAPP_URL` com `safeHttpUrl()` e usa o link público oficial da
+BWS como fallback quando a variável está ausente ou inválida. Portanto, nenhuma
+configuração adicional no Cloudflare Pages é necessária para habilitar o card.
 
 ## Como validar localmente
 

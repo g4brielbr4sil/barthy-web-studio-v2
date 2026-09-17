@@ -122,7 +122,13 @@ assert.doesNotMatch(
 assert.match(sources.contact, /VITE_BARTHY_WHATSAPP_URL/)
 assert.match(sources.contact, /VITE_BARTHY_CONTACT_ENDPOINT/)
 assert.match(sources.contact, /safeHttpUrl/)
-assert.doesNotMatch(sources.contact, /https?:\/\//)
+assert.match(
+  sources.contact,
+  /https:\/\/wa\.me\/5561920002364\?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Barthy%20Web%20Studio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%2E/,
+  'O WhatsApp oficial precisa permanecer como fallback público.',
+)
+assert.match(sources.contactSection, /Falar com a BWS/)
+assert.doesNotMatch(sources.contactSection, /Consultar disponibilidade/)
 assert.match(
   sources.contact,
   /isLocalHttp/,

@@ -4,7 +4,7 @@
 
 - [ ] Confirmar o posicionamento final da operação Barthy Web Studio.
 - [ ] Revisar os cases apresentados e as permissões de uso de marca.
-- [ ] Confirmar `VITE_BARTHY_WHATSAPP_URL`.
+- [x] Confirmar o WhatsApp oficial; `VITE_BARTHY_WHATSAPP_URL` é opcional porque o código mantém o mesmo link como fallback público.
 - [ ] Confirmar `VITE_BARTHY_CONTACT_ENDPOINT` e o contrato de resposta.
 - [x] Definir `VITE_BARTHY_SITE_URL` com o domínio HTTPS definitivo.
 - [ ] Confirmar `VITE_BARTHY_OG_IMAGE` ou usar `/og-barthy.svg` no domínio.
@@ -58,9 +58,14 @@ O domínio oficial já está ativo, com `www` e `pages.dev` redirecionando para 
 apex:
 
 ```env
+VITE_BARTHY_WHATSAPP_URL=https://wa.me/5561920002364?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Barthy%20Web%20Studio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%2E
 VITE_BARTHY_SITE_URL=https://barthywebstudio.tech
 VITE_BARTHY_ALLOW_INDEXING=false
 ```
+
+O WhatsApp já funciona sem configuração adicional no Cloudflare Pages: a env
+var documenta e permite sobrescrever o endereço, enquanto `src/lib/contact.ts`
+usa o canal oficial acima como fallback quando ela está ausente ou inválida.
 
 Para ligar o envio do formulário direto no CRM do Hermes, falta cadastrar:
 
