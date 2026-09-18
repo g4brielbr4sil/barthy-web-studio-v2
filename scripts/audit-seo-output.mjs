@@ -27,6 +27,17 @@ assert.match(generator, /rel="canonical"/)
 assert.match(generator, /sitemap\.xml/)
 assert.match(headers, /Content-Security-Policy:/)
 assert.match(headers, /script-src 'self' 'sha256-/)
+assert.match(
+  headers,
+  /script-src [^;]*https:\/\/static\.cloudflareinsights\.com/,
+)
+assert.match(
+  headers,
+  /connect-src [^;]*https:\/\/cloudflareinsights\.com/,
+)
+assert.doesNotMatch(headers, /script-src [^;]*'unsafe-inline'/)
+assert.doesNotMatch(headers, /script-src [^;]*'unsafe-eval'/)
+assert.doesNotMatch(headers, /(?:^|\s)\*(?:\s|;)/m)
 assert.match(headers, /Strict-Transport-Security: max-age=31536000(?:\r?\n|$)/)
 assert.doesNotMatch(headers, /includeSubDomains|preload/)
 assert.match(headers, /Cross-Origin-Opener-Policy: same-origin/)

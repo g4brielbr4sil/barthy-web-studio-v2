@@ -72,16 +72,19 @@ function getInlineScriptHashes(source) {
   })
 }
 
-function buildContentSecurityPolicy(source, contactEndpoint, analyticsEnabled) {
-  const scriptSources = ["'self'", ...getInlineScriptHashes(source)]
-  const connectSources = new Set(["'self'"])
+function buildContentSecurityPolicy(source, contactEndpoint) {
+  const scriptSources = [
+    "'self'",
+    ...getInlineScriptHashes(source),
+    'https://static.cloudflareinsights.com',
+  ]
+  const connectSources = new Set([
+    "'self'",
+    'https://cloudflareinsights.com',
+  ])
   const contactOrigin = normalizeHttpsOrigin(contactEndpoint)
 
   if (contactOrigin) connectSources.add(contactOrigin)
-  if (analyticsEnabled) {
-    scriptSources.push('https://static.cloudflareinsights.com')
-    connectSources.add('https://cloudflareinsights.com')
-  }
 
   return [
     "default-src 'self'",
@@ -169,7 +172,6 @@ let headers = await readFile(headersPath, 'utf8')
 const contentSecurityPolicy = buildContentSecurityPolicy(
   html,
   env.VITE_BARTHY_CONTACT_ENDPOINT,
-  Boolean(analyticsToken),
 )
 const cspHeaderPattern = /^\s*Content-Security-Policy:.*$/m
 if (!cspHeaderPattern.test(headers)) {

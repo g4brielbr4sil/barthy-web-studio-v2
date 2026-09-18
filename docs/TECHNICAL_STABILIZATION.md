@@ -17,6 +17,10 @@
 
 `require-trusted-types-for 'script'` não foi habilitado nesta rodada. A página usa React, um shader de terceiros e Cloudflare Web Analytics opcional. Sem uma execução de produção em modo report-only que cubra essas três superfícies, impor Trusted Types poderia bloquear um sink usado por dependência externa. A CSP já restringe scripts por origem e hash; Trusted Types deve ser validado separadamente antes de enforcement.
 
+### Shader e CSP
+
+O aviso `This environment does not allow eval - using default writer as fallback` permanece conhecido e não bloqueante. O shader funciona com o writer alternativo da própria biblioteca; `unsafe-eval` não deve ser adicionado à CSP para ocultar esse aviso.
+
 ### Contraste
 
 Os alertas de contraste do Lighthouse permanecem pendentes para uma rodada visual específica. Nenhum token, foreground, background, borda, opacidade, terracota, laranja ou tema foi alterado, preservando a identidade aprovada. A futura correção precisa validar conjuntamente texto secundário, badges, controles e estados nos temas claro e escuro.
