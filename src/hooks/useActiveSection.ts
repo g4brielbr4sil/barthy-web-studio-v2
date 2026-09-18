@@ -194,8 +194,14 @@ export function useActiveSection(): NavigationState {
 
     const navigateFromLocation = () => {
       const hashSection = window.location.hash.slice(1)
+      if (!hashSection) return
+
       const isFormAnchor = hashSection === 'formulario'
       const isContentAnchor = hashSection === 'conteudo'
+      const isValidLocationTarget =
+        isSectionId(hashSection) || isFormAnchor || isContentAnchor
+      if (!isValidLocationTarget) return
+
       const section = isSectionId(hashSection)
         ? hashSection
         : isFormAnchor
@@ -213,16 +219,35 @@ export function useActiveSection(): NavigationState {
       })
     }
 
+    const cancelPendingLocationNavigation = () => {
+      if (!locationNavigationFrame) return
+      window.cancelAnimationFrame(locationNavigationFrame)
+      locationNavigationFrame = 0
+      finishProgrammaticNavigation()
+    }
+
     navigateFromLocation()
     window.addEventListener('hashchange', navigateFromLocation)
     window.addEventListener('popstate', navigateFromLocation)
+    window.addEventListener('wheel', cancelPendingLocationNavigation, {
+      passive: true,
+    })
+    window.addEventListener('touchstart', cancelPendingLocationNavigation, {
+      passive: true,
+    })
+    window.addEventListener('pointerdown', cancelPendingLocationNavigation, {
+      passive: true,
+    })
 
     return () => {
       window.cancelAnimationFrame(locationNavigationFrame)
       window.removeEventListener('hashchange', navigateFromLocation)
       window.removeEventListener('popstate', navigateFromLocation)
+      window.removeEventListener('wheel', cancelPendingLocationNavigation)
+      window.removeEventListener('touchstart', cancelPendingLocationNavigation)
+      window.removeEventListener('pointerdown', cancelPendingLocationNavigation)
     }
-  }, [scrollToSection])
+  }, [finishProgrammaticNavigation, scrollToSection])
 
   useEffect(
     () => () => finishProgrammaticNavigation(),

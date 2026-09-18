@@ -1,9 +1,13 @@
+import { createHash } from 'node:crypto'
 import { readFile, rm, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { loadEnv } from 'vite'
 
 const root = process.cwd()
-const env = loadEnv(process.env.NODE_ENV ?? 'production', root, '')
+const env = {
+  ...loadEnv(process.env.NODE_ENV ?? 'production', root, ''),
+  ...process.env,
+}
 const dist = resolve(root, 'dist')
 const indexPath = resolve(dist, 'index.html')
 const headersPath = resolve(dist, '_headers')
@@ -43,6 +47,58 @@ function escapeAttribute(value) {
     .replaceAll('"', '&quot;')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
+}
+
+function normalizeHttpsOrigin(value) {
+  const candidate = value?.trim()
+  if (!candidate) return ''
+
+  try {
+    const url = new URL(candidate)
+    return url.protocol === 'https:' ? url.origin : ''
+  } catch {
+    return ''
+  }
+}
+
+function getInlineScriptHashes(source) {
+  return [
+    ...source.matchAll(
+      /<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi,
+    ),
+  ].map(([, content]) => {
+    const digest = createHash('sha256').update(content).digest('base64')
+    return `'sha256-${digest}'`
+  })
+}
+
+function buildContentSecurityPolicy(source, contactEndpoint, analyticsEnabled) {
+  const scriptSources = ["'self'", ...getInlineScriptHashes(source)]
+  const connectSources = new Set(["'self'"])
+  const contactOrigin = normalizeHttpsOrigin(contactEndpoint)
+
+  if (contactOrigin) connectSources.add(contactOrigin)
+  if (analyticsEnabled) {
+    scriptSources.push('https://static.cloudflareinsights.com')
+    connectSources.add('https://cloudflareinsights.com')
+  }
+
+  return [
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "frame-ancestors 'none'",
+    "form-action 'self'",
+    "img-src 'self' data:",
+    "font-src 'self' data:",
+    "style-src 'self' 'unsafe-inline'",
+    `script-src ${scriptSources.join(' ')}`,
+    `connect-src ${[...connectSources].join(' ')}`,
+    "media-src 'self'",
+    "worker-src 'self' blob:",
+    "manifest-src 'self'",
+    'upgrade-insecure-requests',
+  ].join('; ')
 }
 
 const siteUrl = normalizeSiteUrl(env.VITE_BARTHY_SITE_URL)
@@ -110,6 +166,19 @@ if (analyticsToken) {
 await writeFile(indexPath, html)
 
 let headers = await readFile(headersPath, 'utf8')
+const contentSecurityPolicy = buildContentSecurityPolicy(
+  html,
+  env.VITE_BARTHY_CONTACT_ENDPOINT,
+  Boolean(analyticsToken),
+)
+const cspHeaderPattern = /^\s*Content-Security-Policy:.*$/m
+if (!cspHeaderPattern.test(headers)) {
+  throw new Error('Não foi possível materializar a CSP do build.')
+}
+headers = headers.replace(
+  cspHeaderPattern,
+  `  Content-Security-Policy: ${contentSecurityPolicy}`,
+)
 headers = headers.replace(/^\s*X-Robots-Tag:.*\r?\n/gm, '')
 headers = headers.replace(
   '/*\n',

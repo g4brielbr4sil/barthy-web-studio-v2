@@ -14,6 +14,8 @@ interface NavigatorWithCapabilities extends Navigator {
   webkitConnection?: NetworkInformationLike
 }
 
+let webGpuDetection: Promise<WebGpuCapability> | null = null
+
 export function getNetworkInformation(): NetworkInformationLike | null {
   if (typeof navigator === 'undefined') return null
 
@@ -30,11 +32,28 @@ export function detectSaveData(): SaveDataPreference {
   return getNetworkInformation()?.saveData ? 'active' : 'inactive'
 }
 
-export function detectWebGpu(): WebGpuCapability {
-  if (typeof navigator === 'undefined') return 'unavailable'
-  return 'gpu' in navigator && Boolean(navigator.gpu)
-    ? 'available'
-    : 'unavailable'
+function getGpuApi(): GPU | null {
+  if (typeof navigator === 'undefined') return null
+  return 'gpu' in navigator && navigator.gpu ? navigator.gpu : null
+}
+
+export function getInitialWebGpuCapability(): WebGpuCapability {
+  return getGpuApi() ? 'checking' : 'unavailable'
+}
+
+export function detectWebGpu(): Promise<WebGpuCapability> {
+  webGpuDetection ??= (async () => {
+    const gpu = getGpuApi()
+    if (!gpu) return 'unavailable'
+
+    try {
+      return (await gpu.requestAdapter()) ? 'available' : 'unavailable'
+    } catch {
+      return 'unavailable'
+    }
+  })()
+
+  return webGpuDetection
 }
 
 export function detectBackdropFilter(): BackdropCapability {

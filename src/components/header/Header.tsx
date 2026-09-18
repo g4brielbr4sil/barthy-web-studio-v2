@@ -69,17 +69,16 @@ export function Header({
                 className="header-time"
                 data-clock-style="original"
                 dateTime={time}
-                aria-label={`${time} em Brasília`}
               >
                 <Clock3
                   className="header-time__icon--original"
                   size={14}
                   aria-hidden="true"
                 />
-                <span className="header-time__value" aria-hidden="true">
+                <span className="header-time__value">
                   {time}
                 </span>
-                <span className="header-time__zone" aria-hidden="true">
+                <span className="header-time__zone">
                   em Brasília
                 </span>
               </time>

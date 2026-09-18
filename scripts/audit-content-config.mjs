@@ -124,7 +124,7 @@ assert.match(sources.contact, /VITE_BARTHY_CONTACT_ENDPOINT/)
 assert.match(sources.contact, /safeHttpUrl/)
 assert.match(
   sources.contact,
-  /https:\/\/wa\.me\/5561920002364\?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Barthy%20Web%20Studio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%2E/,
+  /https:\/\/wa\.me\/5561920002364\?text=Ol%C3%A1!%20Conheci%20o%20trabalho%20de%20voc%C3%AAs%20pelo%20site%20da%20\*Barthy%20Web%20Studio\*%20e%20tenho%20um%20projeto%20em%20mente\.%20Poderiam%20me%20orientar%20sobre%20os%20pr%C3%B3ximos%20passos%3F/,
   'O WhatsApp oficial precisa permanecer como fallback público.',
 )
 assert.match(sources.contactSection, /Falar com a BWS/)
@@ -174,6 +174,16 @@ assert.match(
   sources.activeSection,
   /cancelAnimationFrame\(locationNavigationFrame\)/,
   'Eventos simultâneos de hash e histórico não devem duplicar a rolagem.',
+)
+assert.match(
+  sources.activeSection,
+  /if \(!hashSection\) return/,
+  'Uma carga sem hash deve preservar a posição restaurada pelo navegador.',
+)
+assert.match(
+  sources.activeSection,
+  /cancelPendingLocationNavigation/,
+  'Um gesto manual deve cancelar navegação de localização ainda pendente.',
 )
 
 assert.doesNotMatch(

@@ -12,6 +12,8 @@ const files = {
   shader: 'src/components/hero/ShaderSurface.tsx',
   hero: 'src/components/hero/Hero.tsx',
   shaderBackground: 'src/components/hero/ShaderBackground.tsx',
+  capabilities: 'src/visual/capabilities.ts',
+  visualContext: 'src/visual/VisualCapabilitiesContext.tsx',
 }
 
 const sources = Object.fromEntries(
@@ -38,7 +40,8 @@ const styleSources = await Promise.all(
 
 const checks = [
   ['horário semântico', sources.header.includes('className="header-time"')],
-  ['nome acessível de Brasília', sources.header.includes('aria-label={`${time} em Brasília`}')],
+  ['horário sem ARIA proibido', !sources.header.includes('aria-label={`${time} em Brasília`}')],
+  ['conteúdo do horário acessível', sources.header.includes('<span className="header-time__value">') && sources.header.includes('<span className="header-time__zone">')],
   ['estado tablet unificado', sources.responsive.includes('@media (max-width: 1179px)')],
   ['estado mobile unificado', sources.responsive.includes('@media (max-width: 767px)')],
   ['estado compacto unificado', sources.responsive.includes('@media (max-width: 379px)')],
@@ -58,6 +61,7 @@ const checks = [
   ['ChromaFlow mantém intensidade entre ponteiros', sources.shader.includes('momentum={32}') && sources.shader.includes('radius={4.6}') && sources.shader.includes('intensity={1.05}')],
   ['FilmGrain reduz custo no touch', sources.shader.includes('animated={isFull}')],
   ['shader limitado à proximidade do hero', sources.hero.includes('active={isInView}') && sources.shaderBackground.includes('active && canAttemptShader')],
+  ['WebGPU exige adaptador real', sources.capabilities.includes('requestAdapter') && sources.visualContext.includes("webGpu !== 'available'")],
   ['readiness exige Canvas dimensionado', sources.shader.includes('isDrawableCanvas') && sources.shader.includes('canvas.width > 0')],
   ['reveal antecipado em touch', sources.reveal.includes("'18% 0px 18% 0px'")],
   ['Footer integrado ao reveal', (sources.footer.match(/<SectionReveal/g) ?? []).length === 2],

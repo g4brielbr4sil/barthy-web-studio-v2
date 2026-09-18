@@ -14,6 +14,7 @@ import {
   detectBackdropFilter,
   detectSaveData,
   detectWebGpu,
+  getInitialWebGpuCapability,
   getNetworkInformation,
 } from './capabilities'
 import type {
@@ -48,7 +49,7 @@ function resolveVisualProfile(
   pointerFine: boolean,
 ): VisualProfile {
   if (reducedMotion) return 'static'
-  if (saveData === 'active' || webGpu === 'unavailable') return 'lite'
+  if (saveData === 'active' || webGpu !== 'available') return 'lite'
   return pointerFine ? 'full' : 'balanced'
 }
 
@@ -73,7 +74,7 @@ export function VisualCapabilitiesProvider({
 }) {
   const reducedMotion = useReducedMotion()
   const pointerFine = useMediaQuery('(hover: hover) and (pointer: fine)')
-  const [webGpu] = useState(detectWebGpu)
+  const [webGpu, setWebGpu] = useState(getInitialWebGpuCapability)
   const [backdrop] = useState(detectBackdropFilter)
   const [saveData, setSaveData] = useState(detectSaveData)
   const [shaderStatus, setShaderStatus] = useState<ShaderStatus>('idle')
@@ -101,6 +102,19 @@ export function VisualCapabilitiesProvider({
   const markShaderFailed = useCallback((_reason?: string) => {
     setShaderStatus('failed')
   }, [])
+
+  useEffect(() => {
+    if (webGpu !== 'checking') return
+
+    let active = true
+    void detectWebGpu().then((capability) => {
+      if (active) setWebGpu(capability)
+    })
+
+    return () => {
+      active = false
+    }
+  }, [webGpu])
 
   useEffect(() => {
     const connection = getNetworkInformation()

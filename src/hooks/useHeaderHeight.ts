@@ -12,28 +12,42 @@ export function useHeaderHeight<T extends HTMLElement>(): RefObject<T> {
     if (!element) return
 
     let animationFrame = 0
-    const updateHeaderHeight = () => {
+    const writeHeaderHeight = (height: number) => {
       animationFrame = 0
-      const height = Math.ceil(element.getBoundingClientRect().height)
       document.documentElement.style.setProperty(
         '--site-header-height',
-        `${height}px`,
+        `${Math.ceil(height)}px`,
       )
     }
 
-    updateHeaderHeight()
-
     if (typeof ResizeObserver === 'undefined') {
-      window.addEventListener('resize', updateHeaderHeight, { passive: true })
+      const measureHeaderHeight = () => {
+        window.cancelAnimationFrame(animationFrame)
+        animationFrame = window.requestAnimationFrame(() => {
+          writeHeaderHeight(element.getBoundingClientRect().height)
+        })
+      }
+
+      measureHeaderHeight()
+      window.addEventListener('resize', measureHeaderHeight, { passive: true })
       return () => {
-        window.removeEventListener('resize', updateHeaderHeight)
+        window.cancelAnimationFrame(animationFrame)
+        window.removeEventListener('resize', measureHeaderHeight)
         document.documentElement.style.removeProperty('--site-header-height')
       }
     }
 
-    const observer = new ResizeObserver(() => {
+    const observer = new ResizeObserver(([entry]) => {
+      const borderBox = Array.isArray(entry.borderBoxSize)
+        ? entry.borderBoxSize[0]
+        : entry.borderBoxSize
+      const height =
+        borderBox?.blockSize ?? element.getBoundingClientRect().height
+
       window.cancelAnimationFrame(animationFrame)
-      animationFrame = window.requestAnimationFrame(updateHeaderHeight)
+      animationFrame = window.requestAnimationFrame(() => {
+        writeHeaderHeight(height)
+      })
     })
     observer.observe(element, { box: 'border-box' })
 

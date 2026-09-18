@@ -43,6 +43,9 @@ jobs:
       - name: Contact contract with Hermes
         run: pnpm test:contact
 
+      - name: Runtime stability contracts
+        run: pnpm test:stability
+
       - name: Responsive contracts
         run: pnpm test:responsive
 

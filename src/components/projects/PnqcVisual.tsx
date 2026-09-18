@@ -1,8 +1,31 @@
 const pnqcScreens = {
-  catalog: '/images/projects/pnqc-catalog.jpg',
-  dashboard: '/images/projects/pnqc-dashboard.jpg',
-  course: '/images/projects/pnqc-course.jpg',
+  catalog: {
+    src: '/images/projects/pnqc-catalog.jpg',
+    srcSet:
+      '/images/projects/pnqc-catalog-480.jpg 480w, /images/projects/pnqc-catalog-960.jpg 960w, /images/projects/pnqc-catalog-1440.jpg 1440w, /images/projects/pnqc-catalog.jpg 1918w',
+    width: 1918,
+    height: 1079,
+  },
+  dashboard: {
+    src: '/images/projects/pnqc-dashboard.jpg',
+    srcSet:
+      '/images/projects/pnqc-dashboard-480.jpg 480w, /images/projects/pnqc-dashboard-960.jpg 960w, /images/projects/pnqc-dashboard-1440.jpg 1440w, /images/projects/pnqc-dashboard.jpg 1919w',
+    width: 1919,
+    height: 1079,
+  },
+  course: {
+    src: '/images/projects/pnqc-course.jpg',
+    srcSet:
+      '/images/projects/pnqc-course-480.jpg 480w, /images/projects/pnqc-course-960.jpg 960w, /images/projects/pnqc-course-1440.jpg 1440w, /images/projects/pnqc-course.jpg 1918w',
+    width: 1918,
+    height: 1079,
+  },
 } as const
+
+const dashboardSizes =
+  '(max-width: 520px) 88vw, (max-width: 1179px) 84vw, 620px'
+const secondarySizes =
+  '(max-width: 520px) 54vw, (max-width: 1179px) 49vw, 360px'
 
 function PnqcChrome() {
   return (
@@ -28,7 +51,8 @@ export function PnqcVisual() {
       <figure className="pnqc-mockup pnqc-mockup--dashboard">
         <PnqcChrome />
         <img
-          src={pnqcScreens.dashboard}
+          {...pnqcScreens.dashboard}
+          sizes={dashboardSizes}
           alt=""
           loading="lazy"
           decoding="async"
@@ -38,7 +62,8 @@ export function PnqcVisual() {
       <figure className="pnqc-mockup pnqc-mockup--catalog">
         <PnqcChrome />
         <img
-          src={pnqcScreens.catalog}
+          {...pnqcScreens.catalog}
+          sizes={secondarySizes}
           alt=""
           loading="lazy"
           decoding="async"
@@ -48,7 +73,8 @@ export function PnqcVisual() {
       <figure className="pnqc-mockup pnqc-mockup--course">
         <PnqcChrome />
         <img
-          src={pnqcScreens.course}
+          {...pnqcScreens.course}
+          sizes={secondarySizes}
           alt=""
           loading="lazy"
           decoding="async"

@@ -1,0 +1,11 @@
+# Barthy Web Studio
+
+A Barthy Web Studio cria sites, sistemas e automações para negócios venderem melhor, organizarem processos e reduzirem trabalho manual.
+
+## Links públicos
+
+- [Página inicial](https://barthywebstudio.tech/)
+- [Soluções](https://barthywebstudio.tech/#solucoes)
+- [Sistemas](https://barthywebstudio.tech/#sistemas)
+- [Projetos](https://barthywebstudio.tech/#projetos)
+- [Contato](https://barthywebstudio.tech/#contato)

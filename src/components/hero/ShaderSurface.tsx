@@ -50,13 +50,10 @@ function isDrawableCanvas(surface: HTMLDivElement | null): boolean {
   const canvas = surface?.querySelector('canvas')
   if (!canvas) return false
 
-  const bounds = canvas.getBoundingClientRect()
   return (
     canvas.isConnected &&
     canvas.width > 0 &&
-    canvas.height > 0 &&
-    bounds.width > 0 &&
-    bounds.height > 0
+    canvas.height > 0
   )
 }
 

@@ -7,7 +7,7 @@ export type VisualMode = 'shader' | 'css-motion' | 'static'
  */
 export type VisualProfile = 'full' | 'balanced' | 'lite' | 'static'
 
-export type WebGpuCapability = 'available' | 'unavailable'
+export type WebGpuCapability = 'checking' | 'available' | 'unavailable'
 export type BackdropCapability = 'available' | 'fallback'
 export type SaveDataPreference = 'active' | 'inactive'
 export type PointerCapability = 'fine' | 'coarse'

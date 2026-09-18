@@ -1,6 +1,6 @@
 export const CONTACT_EMAIL = 'contato.barthywebstudio@gmail.com'
 export const DEFAULT_WHATSAPP_URL =
-  'https://wa.me/5561920002364?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Barthy%20Web%20Studio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%2E'
+  'https://wa.me/5561920002364?text=Ol%C3%A1!%20Conheci%20o%20trabalho%20de%20voc%C3%AAs%20pelo%20site%20da%20*Barthy%20Web%20Studio*%20e%20tenho%20um%20projeto%20em%20mente.%20Poderiam%20me%20orientar%20sobre%20os%20pr%C3%B3ximos%20passos%3F'
 
 export type ContactFieldName =
   | 'nome'
