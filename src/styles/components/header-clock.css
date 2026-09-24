@@ -121,7 +121,7 @@
   }
 }
 
-@media (max-width: 1179px) {
+@media (max-width: 1239px) {
   .site-header__pill {
     grid-template-columns: minmax(0, 1fr) auto auto;
   }
