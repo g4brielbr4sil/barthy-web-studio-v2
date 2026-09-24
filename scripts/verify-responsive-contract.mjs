@@ -42,7 +42,7 @@ const checks = [
   ['horário semântico', sources.header.includes('className="header-time"')],
   ['horário sem ARIA proibido', !sources.header.includes('aria-label={`${time} em Brasília`}')],
   ['conteúdo do horário acessível', sources.header.includes('<span className="header-time__value">') && sources.header.includes('<span className="header-time__zone">')],
-  ['estado tablet unificado', sources.responsive.includes('@media (max-width: 1179px)')],
+  ['estado tablet unificado', sources.responsive.includes('@media (max-width: 1239px)')],
   ['estado mobile unificado', sources.responsive.includes('@media (max-width: 767px)')],
   ['estado compacto unificado', sources.responsive.includes('@media (max-width: 379px)')],
   ['breakpoint 1060 removido', !sources.responsive.includes('max-width: 1060px')],
