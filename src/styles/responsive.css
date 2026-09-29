@@ -85,8 +85,7 @@
     -webkit-backdrop-filter: none;
   }
 
-  .hero__secondary-cta,
-  .hero-badge {
+  .hero__secondary-cta {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
