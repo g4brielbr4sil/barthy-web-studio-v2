@@ -1,6 +1,7 @@
 import { Clock3, Menu, X } from 'lucide-react'
 import {
   useCallback,
+  useEffect,
   useRef,
   useState,
   type MouseEvent,
@@ -8,6 +9,7 @@ import {
 import type { SectionId } from '../../data/navigation'
 import { useBrasiliaTime } from '../../hooks/useBrasiliaTime'
 import { useHeaderHeight } from '../../hooks/useHeaderHeight'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 import { BrandLockup } from '../brand/BrandLockup'
 import { TextRollButton } from '../ui/TextRollButton'
 import { DesktopNavigation } from './DesktopNavigation'
@@ -30,6 +32,15 @@ export function Header({
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const time = useBrasiliaTime()
   const closeMenu = useCallback(() => setMenuOpen(false), [])
+  // Same breakpoint as responsive.css (max-width: 1239px). If the viewport
+  // grows past it with the menu open (tablet rotation, window resize), the
+  // trigger disappears but the modal would stay open with the page inert
+  // and scroll locked.
+  const isDesktopNavigation = useMediaQuery('(min-width: 1240px)')
+
+  useEffect(() => {
+    if (isDesktopNavigation) setMenuOpen(false)
+  }, [isDesktopNavigation])
 
   const handleNavigation = (
     event: MouseEvent<HTMLAnchorElement>,
