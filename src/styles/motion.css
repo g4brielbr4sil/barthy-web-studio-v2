@@ -173,27 +173,29 @@
   }
 }
 
-@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+@media (max-width: 767px) {
   /*
    * Only position/size change here — animation-name/duration are inherited
    * from the base (desktop) rule above on purpose: same choreography,
-   * adapted composition.
+   * adapted composition. Applies to the frozen reduced-motion composition
+   * (data-mode="static") too, so mobile users who asked for less motion get
+   * the same framing instead of the desktop-sized shapes.
    */
-  .hero__background[data-mode='css-motion']
+  .hero__background:is([data-mode='css-motion'], [data-mode='static'])
     .hero__organic-shape--blue {
     top: -10%;
     right: -32%;
     width: 112vw;
   }
 
-  .hero__background[data-mode='css-motion']
+  .hero__background:is([data-mode='css-motion'], [data-mode='static'])
     .hero__organic-shape--ice {
     top: 4%;
     left: -42%;
     width: 122vw;
   }
 
-  .hero__background[data-mode='css-motion']
+  .hero__background:is([data-mode='css-motion'], [data-mode='static'])
     .hero__organic-shape--terra {
     top: 32%;
     right: -30%;
@@ -201,13 +203,15 @@
     width: 108vw;
   }
 
-  .hero__background[data-mode='css-motion']
+  .hero__background:is([data-mode='css-motion'], [data-mode='static'])
     .hero__organic-shape--white {
     top: 16%;
     left: 12%;
     width: 92vw;
   }
+}
 
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
   :root[data-save-data='active'] .hero__organic-shape--blue,
   :root[data-save-data='active'] .hero__organic-shape--ice,
   :root[data-save-data='active'] .hero__organic-shape--terra,

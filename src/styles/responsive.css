@@ -310,6 +310,20 @@
   }
 }
 
+/*
+ * Reduced motion removes movement, not feedback.
+ *
+ * - Safety net: every keyframe animation stops, and transitions keep only
+ *   non-geometric properties. Colour, background, border, shadow and opacity
+ *   still fade on hover/focus/selection with each component's own short
+ *   duration; transform/size/position changes (hover lifts, the tab
+ *   indicator, the project action width, mockup poses) apply instantly.
+ * - Opacity-only fades, no displacement, no loops: the hero entrance keeps
+ *   its order in a compressed timeline, the background shapes settle in once,
+ *   and opened panels, the mobile menu and a newly selected solution fade in.
+ * - The only infinite animation left is the form's loading indicator, as a
+ *   gentle opacity pulse bounded by the 10s request timeout.
+ */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -320,7 +334,16 @@
   *::after {
     scroll-behavior: auto !important;
     animation: none !important;
-    transition: none !important;
+    transition-property:
+      color,
+      background-color,
+      border-color,
+      outline-color,
+      text-decoration-color,
+      fill,
+      stroke,
+      opacity,
+      box-shadow !important;
   }
 
   .hero-shader {
@@ -328,20 +351,55 @@
   }
 
   .hero__organic-shape {
-    animation: none !important;
     transform: none !important;
+    animation: reduced-fade-in 1400ms ease-out both !important;
   }
 
-  .hero__label,
-  .hero__title > span > span,
-  .hero__cta,
-  .hero__secondary-cta,
-  .site-header,
-  .section-reveal,
-  .process-step {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
+  .site-header {
+    animation: reduced-fade-in 320ms ease-out both !important;
+  }
+
+  .hero__label {
+    animation: reduced-fade-in 360ms 60ms ease-out both !important;
+  }
+
+  .hero__title > span > span {
+    animation: reduced-fade-in 420ms 120ms ease-out both !important;
+  }
+
+  .hero__title > span:nth-child(2) > span {
+    animation-delay: 180ms !important;
+  }
+
+  .hero__cta {
+    animation: reduced-fade-in 360ms 260ms ease-out both !important;
+  }
+
+  .hero__secondary-cta {
+    animation: reduced-fade-in 360ms 320ms ease-out both !important;
+  }
+
+  .mobile-menu__backdrop,
+  .mobile-menu__sheet,
+  .project-card__details,
+  .mobile-solution__panel {
+    animation: reduced-fade-in 200ms ease-out both !important;
+  }
+
+  .solution-journey__step {
+    animation: reduced-fade-in 320ms ease-out both !important;
+  }
+
+  .solution-journey__step:nth-child(2) {
+    animation-delay: 60ms !important;
+  }
+
+  .solution-journey__step:nth-child(3) {
+    animation-delay: 120ms !important;
+  }
+
+  .form-submit__loader {
+    animation: reduced-pulse 900ms ease-in-out infinite alternate !important;
   }
 
   .text-roll-button__text:first-child {
@@ -350,5 +408,17 @@
 
   .text-roll-button__text + .text-roll-button__text {
     display: none;
+  }
+}
+
+@keyframes reduced-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes reduced-pulse {
+  to {
+    opacity: 0.45;
   }
 }

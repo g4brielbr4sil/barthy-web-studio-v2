@@ -37,7 +37,6 @@ export function SectionReveal({
   useEffect(() => {
     const root = rootRef.current
     if (
-      reducedMotion ||
       hasRevealedRef.current ||
       !root ||
       !('IntersectionObserver' in window)
@@ -73,6 +72,7 @@ export function SectionReveal({
               root,
               targets,
               coarsePointer,
+              reducedMotion,
             })
           })
           .catch(() => undefined)

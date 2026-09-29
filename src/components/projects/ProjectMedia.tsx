@@ -45,7 +45,9 @@ export function ProjectMedia({
     <div
       ref={ref}
       className="project-media"
-      data-active={isInView && !reducedMotion}
+      // Reduced motion shows the settled pose right away; the pose change is
+      // a transform, so it applies without the 700ms travel.
+      data-active={isInView || reducedMotion}
       role="img"
       aria-label={label}
     >
