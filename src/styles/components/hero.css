@@ -228,14 +228,6 @@
   display: block;
 }
 
-.hero__title > span:nth-child(1) > span {
-  animation-delay: 260ms;
-}
-
-.hero__title > span:nth-child(2) > span {
-  animation-delay: 360ms;
-}
-
 .hero__bottom {
   display: flex;
   align-items: flex-end;

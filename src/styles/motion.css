@@ -11,11 +11,25 @@
     animation: headline-in 680ms var(--ease-editorial) both;
   }
 
+  /*
+   * The line stagger has to live after the shorthand above: `animation`
+   * resets animation-delay, and a same-specificity delay declared earlier in
+   * the cascade (hero.css) was silently zeroed, so both lines rose at 0ms,
+   * ahead of the label.
+   */
+  [data-motion-ready='true'] .hero__title > span:nth-child(1) > span {
+    animation-delay: 260ms;
+  }
+
+  [data-motion-ready='true'] .hero__title > span:nth-child(2) > span {
+    animation-delay: 360ms;
+  }
+
   [data-motion-ready='true'] .hero__cta {
     animation: hero-item-in 500ms 620ms var(--ease-editorial) both;
   }
 
-  [data-motion-ready='true'] .hero-badge {
+  [data-motion-ready='true'] .hero__secondary-cta {
     animation: hero-item-in 500ms 760ms var(--ease-editorial) both;
   }
 
