@@ -123,7 +123,6 @@
 
   .hero__title > span > span {
     display: inline;
-    animation-name: hero-item-in;
   }
 
   .hero__bottom {
