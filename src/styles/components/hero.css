@@ -223,6 +223,50 @@
   min-height: 56px;
 }
 
+/*
+ * Primary hero CTA: light surface, navy type and a navy action circle — the
+ * same logic as "Conhecer soluções", with a solid surface, heavier weight and
+ * deeper shadow so it stays the primary action. Scoped to the hero; the terra
+ * variant elsewhere is unchanged.
+ */
+.hero__cta.text-roll-button--terra {
+  border-color: rgba(10, 25, 49, 0.14);
+  background-color: #fff;
+  color: var(--deep-navy);
+  font-weight: 760;
+  box-shadow:
+    0 18px 36px -22px rgba(10, 25, 49, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.hero__cta.text-roll-button--terra:hover {
+  border-color: rgba(10, 25, 49, 0.24);
+  background-color: #fff;
+  box-shadow:
+    0 22px 40px -22px rgba(10, 25, 49, 0.62),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.hero__cta.text-roll-button--terra:active {
+  background-color: #f6fafd;
+}
+
+.hero__cta.text-roll-button--terra:focus-visible {
+  outline: 3px solid var(--royal-blue);
+  outline-offset: 4px;
+}
+
+.hero__cta.text-roll-button--terra .text-roll-button__icon,
+.hero__cta.text-roll-button--terra:hover .text-roll-button__icon,
+.hero__cta.text-roll-button--terra:active .text-roll-button__icon {
+  background: var(--deep-navy);
+  color: var(--ice-white);
+}
+
+.hero__cta.text-roll-button--terra:hover .text-roll-button__icon {
+  background: var(--royal-blue);
+}
+
 .hero__secondary-cta {
   min-height: 56px;
   background: var(--surface-translucent-strong);
