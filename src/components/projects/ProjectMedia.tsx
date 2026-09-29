@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import type { ProjectVisualKind } from '../../data/projects'
 import { useInView } from '../../hooks/useInView'
 import { useVisualCapabilities } from '../../hooks/useVisualCapabilities'
@@ -8,8 +8,6 @@ import { PnqcVisual } from './PnqcVisual'
 interface ProjectMediaProps {
   kind: ProjectVisualKind
   label: string
-  videoSrc?: string
-  posterSrc?: string
 }
 
 const visuals: Record<ProjectVisualKind, ReactNode> = {
@@ -17,54 +15,24 @@ const visuals: Record<ProjectVisualKind, ReactNode> = {
   hermes: <HermesVisual />,
 }
 
-export function ProjectMedia({
-  kind,
-  label,
-  videoSrc,
-  posterSrc,
-}: ProjectMediaProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
+export function ProjectMedia({ kind, label }: ProjectMediaProps) {
   const { ref, isInView } = useInView<HTMLDivElement>({
     rootMargin: '120px',
     threshold: 0.18,
   })
   const { reducedMotion } = useVisualCapabilities()
 
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video || reducedMotion) return
-
-    if (isInView) {
-      void video.play().catch(() => undefined)
-    } else {
-      video.pause()
-    }
-  }, [isInView, reducedMotion])
-
   return (
     <div
       ref={ref}
       className="project-media"
-      data-active={isInView && !reducedMotion}
+      // Reduced motion shows the settled pose right away; the pose change is
+      // a transform, so it applies without the 700ms travel.
+      data-active={isInView || reducedMotion}
       role="img"
       aria-label={label}
     >
-      {videoSrc && !reducedMotion ? (
-        <video
-          ref={videoRef}
-          src={videoSrc}
-          poster={posterSrc}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-        />
-      ) : posterSrc && reducedMotion ? (
-        <img src={posterSrc} alt="" loading="lazy" decoding="async" />
-      ) : (
-        visuals[kind]
-      )}
+      {visuals[kind]}
     </div>
   )
 }

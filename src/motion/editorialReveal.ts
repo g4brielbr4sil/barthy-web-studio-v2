@@ -5,6 +5,7 @@ interface EditorialRevealOptions {
   root: HTMLElement
   targets: HTMLElement[]
   coarsePointer: boolean
+  reducedMotion: boolean
 }
 
 interface InlineMotionStyle {
@@ -41,10 +42,12 @@ export function revealEditorialGroup({
   root,
   targets,
   coarsePointer,
+  reducedMotion,
 }: EditorialRevealOptions): () => void {
-  const distance = coarsePointer ? 10 : 16
-  const interval = coarsePointer ? 45 : 65
-  const duration = coarsePointer ? 460 : 560
+  // Reduced motion keeps the reveal as a short opacity-only fade: no travel.
+  const distance = reducedMotion ? 0 : coarsePointer ? 10 : 16
+  const interval = reducedMotion ? 40 : coarsePointer ? 45 : 65
+  const duration = reducedMotion ? 320 : coarsePointer ? 460 : 560
   const scope = createScope({ root })
   const initialStyles = targets.map((target) => ({
     target,
@@ -58,10 +61,12 @@ export function revealEditorialGroup({
     scope.execute(() => {
       waapi.animate(targets, {
         opacity: [0, 1],
-        transform: [
-          `translate3d(0, ${distance}px, 0)`,
-          'translate3d(0, 0, 0)',
-        ],
+        ...(distance > 0 && {
+          transform: [
+            `translate3d(0, ${distance}px, 0)`,
+            'translate3d(0, 0, 0)',
+          ],
+        }),
         duration,
         delay: (_target, index) => index * interval,
         ease: 'out(3)',

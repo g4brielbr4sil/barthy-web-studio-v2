@@ -17,6 +17,7 @@ export function SolutionTabs({
 }: SolutionTabsProps) {
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([])
   const indicatorRef = useRef<HTMLSpanElement>(null)
+  const hasPlacedIndicatorRef = useRef(false)
 
   useLayoutEffect(() => {
     const moveIndicator = () => {
@@ -24,21 +25,38 @@ export function SolutionTabs({
       const indicator = indicatorRef.current
       if (!activeTab || !indicator) return
 
+      // The first placement must not slide in from the top of the list.
+      const isFirstPlacement = !hasPlacedIndicatorRef.current
+      if (isFirstPlacement) indicator.style.transition = 'none'
+
       indicator.style.transform = `translateY(${activeTab.offsetTop}px)`
       indicator.style.height = `${activeTab.offsetHeight}px`
-    }
 
-    moveIndicator()
+      if (isFirstPlacement) {
+        hasPlacedIndicatorRef.current = true
+        // Not cancelled on cleanup: a pending restore must always land, or
+        // the indicator would keep transition: none for good.
+        window.requestAnimationFrame(() => {
+          indicator.style.removeProperty('transition')
+        })
+      }
+    }
 
     // A window resize isn't the only thing that can move a tab: late web
     // font swaps or content reflow change row heights too, and either
     // would leave the indicator sitting on stale offsetTop/offsetHeight.
     // Watching every tab button catches all of that, not just viewport width.
     if (typeof ResizeObserver === 'undefined') {
+      moveIndicator()
       window.addEventListener('resize', moveIndicator, { passive: true })
       return () => window.removeEventListener('resize', moveIndicator)
     }
 
+    // No synchronous measurement here: reading offsetTop during the commit
+    // forced a full-page layout inside React's task (~200ms on a throttled
+    // mobile CPU), even on mobile where the tabs are not rendered. The
+    // observer's initial notification runs after layout and before paint,
+    // so the indicator is still in place on the first frame.
     const observer = new ResizeObserver(moveIndicator)
     tabRefs.current.forEach((tab) => tab && observer.observe(tab))
     return () => observer.disconnect()
