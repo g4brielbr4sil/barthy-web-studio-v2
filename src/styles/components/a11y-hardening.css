@@ -10,3 +10,24 @@
 .text-roll-button__text--secondary::before {
   content: attr(data-label);
 }
+
+/*
+ * WCAG 2.2 AA 1.4.3 (4.5:1 for text). The terra accent #b96049 measured
+ * 4.14:1 on #f6fafd, 3.81:1 on #eaf1f7 and 4.35:1 behind white text, and the
+ * process step number #4a7fa7 measured 3.77:1 on #eaf1f7. Same hues, only a
+ * few points of lightness removed until every real pairing passes.
+ * Overridden here rather than in theme.css so the brand-motion reel, which
+ * imports theme.css directly, keeps its exact palette.
+ */
+:root[data-theme] {
+  --terra-accent-solid: #a85641; /* 5.16:1 behind white text */
+  --terra-orange-deep: #9a4f3b; /* submit hover, stays darker than the base */
+}
+
+:root[data-theme='light'] {
+  --terra-accent-text: #a85641; /* 4.91:1 on #f6fafd, 4.52:1 on #eaf1f7 */
+}
+
+:root[data-theme='light'] .process-step__number {
+  color: #427295; /* 4.52:1 on #eaf1f7 */
+}
