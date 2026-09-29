@@ -103,22 +103,16 @@ try {
       new RegExp(`<h3 id="project-title-${project.id}">`),
       `${project.title} precisa de um título de nível 3 identificável.`,
     )
-    if (project.visual.kind === 'pending') {
-      assert.doesNotMatch(
-        showcase,
-        new RegExp(`aria-label="${project.alt}"`),
-        `${project.title}: visual pendente não pode anunciar uma imagem que não existe.`,
-      )
-    } else {
-      assert.match(
-        showcase,
-        new RegExp(`role="img" aria-label="${project.alt}"`),
-        `${project.title}: o visual precisa de descrição acessível.`,
-      )
-    }
+    // One accessible description per composition; the layers themselves are decorative.
+    assert.equal(
+      countText(showcase, `role="img" aria-label="${project.alt}"`),
+      1,
+      `${project.title}: a composição precisa de exatamente uma descrição acessível.`,
+    )
+    assert.equal(project.visual.screens.length, 3, `${project.title}: três telas reais por projeto.`)
   }
   const images = [...showcase.matchAll(/<img [^>]*>/g)].map(([tag]) => tag)
-  assert.ok(images.length >= 3, 'A composição Digital deve renderizar as três capturas reais.')
+  assert.equal(images.length, 9, 'A vitrine deve renderizar 9 telas: 3 por projeto.')
   for (const tag of images) {
     for (const attribute of ['alt=""', 'loading="lazy"', 'decoding="async"', 'srcSet=', 'sizes=', 'width=', 'height=']) {
       assert.ok(tag.includes(attribute), `Imagem da vitrine sem ${attribute}: ${tag.slice(0, 80)}`)

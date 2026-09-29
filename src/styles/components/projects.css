@@ -34,9 +34,9 @@
 }
 
 /*
- * Showcase: 01 BWS Digital (full width, editorial composition),
- * 02 BWS Sistemas and 03 BWS Automação side by side (one product screen each,
- * light product viewport vs dark technical canvas).
+ * Showcase: 01 BWS Digital (full width, editorial website composition),
+ * 02 BWS Sistemas and 03 BWS Automação side by side (light SaaS layers vs dark
+ * technical canvas). Three real screens per project.
  */
 .projects__grid {
   display: grid;
@@ -126,7 +126,7 @@
   line-height: 1.65;
 }
 
-/* 01 · BWS Digital — editorial composition of real screenshots */
+/* Cards: 01 Digital spans the grid; 02 Sistemas and 03 Automação share a row. */
 
 .project-card--digital {
   display: grid;
@@ -149,89 +149,14 @@
   font-size: clamp(2.2rem, 4.1vw, 4rem);
 }
 
-.digital-composition {
-  aspect-ratio: 16 / 10;
-  isolation: isolate;
-}
-
-.digital-layer {
-  position: absolute;
-  overflow: hidden;
-  border: 1px solid rgba(10, 25, 49, 0.14);
-  border-radius: clamp(0.55rem, 1vw, 0.8rem);
-  background: #f5f3ee;
-  box-shadow: 0 1.8rem 3.6rem -2rem rgba(10, 25, 49, 0.55);
-  transition: transform 800ms var(--ease-editorial);
-}
-
-.digital-layer img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.digital-layer--secondary {
-  top: 3%;
-  right: 3%;
-  z-index: 1;
-  width: 56%;
-  background: #1a3f36;
-  transform: translate3d(0.6rem, -0.5rem, 0);
-}
-
-.digital-layer--primary {
-  top: 22%;
-  left: 5%;
-  z-index: 2;
-  width: 70%;
-  transform: translate3d(0, 0.8rem, 0);
-  transition-delay: 60ms;
-}
-
-.digital-layer--detail {
-  right: 5%;
-  bottom: 6%;
-  z-index: 3;
-  width: 30%;
-  background: #fbfaf6;
-  transform: translate3d(0.5rem, 0.9rem, 0);
-  transition-delay: 140ms;
-}
-
-.project-media[data-active='true'] .digital-layer {
-  transform: translate3d(0, 0, 0);
-}
-
-/* 02 · BWS Sistemas and 03 · BWS Automação — one product screen each */
-
-.project-card--system .project-card__media,
-.project-card--automation .project-card__media {
-  padding: clamp(1rem, 2.6vw, 2rem) clamp(1rem, 2.6vw, 2rem) 0;
-}
-
-.product-viewport {
-  aspect-ratio: 16 / 10;
-  border: 1px solid;
-  border-bottom: 0;
-  border-radius: clamp(0.6rem, 1.1vw, 0.9rem) clamp(0.6rem, 1.1vw, 0.9rem) 0 0;
-}
-
-.product-viewport img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-}
-
 .project-card--system .project-card__media {
-  background: var(--page-muted);
+  background:
+    radial-gradient(circle at 85% 8%, rgba(179, 207, 229, 0.36), transparent 46%),
+    var(--page-muted);
 }
 
-.project-card--system .product-viewport {
-  border-color: rgba(10, 25, 49, 0.12);
-  background: #fbfbf9;
-  box-shadow: 0 1.6rem 3.2rem -2.2rem rgba(10, 25, 49, 0.5);
+.project-card--system .project-card__body {
+  border-top: 1px solid var(--card-border);
 }
 
 .project-card--automation {
@@ -243,12 +168,6 @@
   background-color: #0b1526;
   background-image: radial-gradient(rgba(179, 207, 229, 0.12) 1px, transparent 1px);
   background-size: 18px 18px;
-}
-
-.project-card--automation .product-viewport {
-  border-color: rgba(179, 207, 229, 0.18);
-  background: #101d31;
-  box-shadow: 0 1.6rem 3.2rem -2rem rgba(0, 0, 0, 0.7);
 }
 
 .project-card--automation .project-card__body {
@@ -272,22 +191,6 @@
   color: rgba(246, 250, 253, 0.74);
 }
 
-.project-card--system .project-card__body {
-  border-top: 1px solid var(--card-border);
-}
-
-/*
- * asset pending — neutral surfaces until the final Sistemas / Automação
- * screens are integrated. Intentionally empty: no stand-in interface.
- */
-.project-card--system .product-viewport--pending {
-  background: linear-gradient(180deg, #fbfbf9, #eef3f7);
-}
-
-.project-card--automation .product-viewport--pending {
-  background: linear-gradient(180deg, #13223a, #0e1a2d);
-}
-
 :root[data-theme='dark'] .project-card--digital .project-card__media,
 :root[data-theme='dark'] .project-card--system .project-card__media {
   background: var(--page-muted);
@@ -299,6 +202,151 @@
 
 :root[data-theme='dark'] .project-card--automation .project-card__media {
   background-color: #07111f;
+}
+
+/*
+ * Layered showcase: three real screens per project, [protagonist, second,
+ * third]. Each variant composes them its own way. Layers rest a few pixels off
+ * and settle when the media enters the viewport — never from opacity 0, so
+ * reduced motion (data-active forced, geometric transitions dropped) shows the
+ * final composition immediately.
+ */
+
+.showcase {
+  isolation: isolate;
+}
+
+.showcase-layer {
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid rgba(10, 25, 49, 0.14);
+  border-radius: clamp(0.55rem, 1vw, 0.8rem);
+  box-shadow: 0 1.8rem 3.6rem -2rem rgba(10, 25, 49, 0.55);
+  transition: transform 800ms var(--ease-editorial);
+}
+
+.showcase-layer img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.project-media[data-active='true'] .showcase-layer {
+  transform: translate3d(0, 0, 0);
+}
+
+/* 01 · Digital — editorial: home in front, projects page behind, form crop in front-right. */
+
+.showcase--digital {
+  aspect-ratio: 16 / 10;
+}
+
+.showcase--digital .showcase-layer {
+  background: #f5f3ee;
+}
+
+.showcase--digital .showcase-layer--protagonist {
+  top: 22%;
+  left: 5%;
+  z-index: 2;
+  width: 70%;
+  transform: translate3d(0, 0.8rem, 0);
+  transition-delay: 60ms;
+}
+
+.showcase--digital .showcase-layer--second {
+  top: 3%;
+  right: 3%;
+  z-index: 1;
+  width: 56%;
+  background: #1a3f36;
+  transform: translate3d(0.6rem, -0.5rem, 0);
+}
+
+.showcase--digital .showcase-layer--third {
+  right: 5%;
+  bottom: 6%;
+  z-index: 3;
+  width: 30%;
+  background: #fbfaf6;
+  transform: translate3d(0.5rem, 0.9rem, 0);
+  transition-delay: 140ms;
+}
+
+/* 02 · Sistemas — light SaaS in a diagonal cascade: inbox in front, CRM and finance stepping back. */
+
+.showcase--system {
+  aspect-ratio: 16 / 11;
+}
+
+.showcase--system .showcase-layer {
+  border-color: rgba(10, 25, 49, 0.12);
+  background: #f6f5f2;
+  box-shadow: 0 1.6rem 3.2rem -2rem rgba(10, 25, 49, 0.5);
+}
+
+.showcase--system .showcase-layer--protagonist {
+  top: 27%;
+  left: 3%;
+  z-index: 3;
+  width: 78%;
+  transform: translate3d(0, 0.6rem, 0);
+  transition-delay: 120ms;
+}
+
+.showcase--system .showcase-layer--second {
+  top: 15%;
+  left: 11.5%;
+  z-index: 2;
+  width: 76%;
+  transform: translate3d(0.4rem, -0.3rem, 0);
+  transition-delay: 60ms;
+}
+
+.showcase--system .showcase-layer--third {
+  top: 3%;
+  left: 21%;
+  z-index: 1;
+  width: 76%;
+  transform: translate3d(0.7rem, -0.5rem, 0);
+}
+
+/* 03 · Automação — dark technical depth: live run in front, builder behind, monitoring entering from below. */
+
+.showcase--automation {
+  aspect-ratio: 16 / 11;
+}
+
+.showcase--automation .showcase-layer {
+  border-color: rgba(179, 207, 229, 0.16);
+  background: #141414;
+  box-shadow: 0 1.6rem 3.4rem -1.8rem rgba(0, 0, 0, 0.78);
+}
+
+.showcase--automation .showcase-layer--protagonist {
+  top: 10%;
+  left: 6%;
+  z-index: 2;
+  width: 74%;
+  transform: translate3d(0, 0.6rem, 0);
+}
+
+.showcase--automation .showcase-layer--second {
+  top: 1.5%;
+  right: 1.5%;
+  z-index: 1;
+  width: 56%;
+  transform: translate3d(0.6rem, -0.4rem, 0);
+  transition-delay: 90ms;
+}
+
+.showcase--automation .showcase-layer--third {
+  bottom: -8%;
+  left: 2%;
+  z-index: 3;
+  width: 50%;
+  transform: translate3d(0, 1.2rem, 0);
+  transition-delay: 160ms;
 }
 
 /* Sistemas and Automação stay side by side down to 900px; Digital stacks first. */
@@ -339,36 +387,101 @@
     border-left: 0;
   }
 
-  /* Digital: recompose the three surfaces vertically instead of shrinking. */
-  .digital-composition {
+  /*
+   * Mobile: recompose instead of shrinking. Cropped layers show one region of
+   * the real screen (fractions from the data, see ScreenCrop); the layer's
+   * aspect ratio sets how much of it is visible.
+   */
+  .showcase-layer[data-cropped='true'] {
+    aspect-ratio: var(--layer-ratio, 16 / 10);
+  }
+
+  .showcase-layer[data-cropped='true'] img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% / var(--crop-w, 1));
+    max-width: none;
+    transform: translate(
+      calc(var(--crop-x, 0) * -100%),
+      calc(var(--crop-y, 0) * -100%)
+    );
+  }
+
+  .showcase--digital {
     aspect-ratio: 10 / 11;
   }
 
-  .digital-layer--secondary {
-    top: 4%;
-    right: 4%;
-    width: 78%;
-  }
-
-  .digital-layer--primary {
+  .showcase--digital .showcase-layer--protagonist {
     top: 20%;
     left: 4%;
     width: 88%;
   }
 
-  .digital-layer--detail {
+  .showcase--digital .showcase-layer--second {
+    top: 4%;
+    right: 4%;
+    width: 78%;
+  }
+
+  .showcase--digital .showcase-layer--third {
     right: 4%;
     bottom: 5%;
     width: 56%;
   }
 
-  /* Sistemas / Automação: crop to the most representative region. */
-  .product-viewport {
-    aspect-ratio: 4 / 3;
+  .showcase--system {
+    aspect-ratio: 10 / 12;
   }
 
-  .product-viewport img {
-    object-position: var(--project-focus, top left);
+  .showcase--system .showcase-layer--protagonist {
+    --layer-ratio: 1.38;
+    top: auto;
+    bottom: 3%;
+    left: 5%;
+    width: 90%;
+  }
+
+  .showcase--system .showcase-layer--second {
+    --layer-ratio: 16 / 9;
+    top: 14%;
+    left: 3%;
+    width: 78%;
+  }
+
+  .showcase--system .showcase-layer--third {
+    --layer-ratio: 16 / 9;
+    top: 2%;
+    right: 3%;
+    left: auto;
+    width: 78%;
+  }
+
+  .showcase--automation {
+    aspect-ratio: 10 / 10.5;
+  }
+
+  .showcase--automation .showcase-layer--protagonist {
+    --layer-ratio: 1.7;
+    top: 4%;
+    left: 4%;
+    width: 92%;
+  }
+
+  .showcase--automation .showcase-layer--second {
+    --layer-ratio: 4 / 3;
+    top: 44%;
+    right: auto;
+    left: 3%;
+    width: 62%;
+  }
+
+  .showcase--automation .showcase-layer--third {
+    --layer-ratio: 4 / 3;
+    right: 2%;
+    bottom: -6%;
+    left: auto;
+    width: 60%;
   }
 }
 

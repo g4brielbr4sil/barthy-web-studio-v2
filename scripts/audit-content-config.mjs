@@ -133,12 +133,11 @@ assert.doesNotMatch(
   /contratou|\d+\s?%|clientes atendidos/i,
   'A vitrine não inventa cliente, contrato ou métrica.',
 )
-const pendingVisuals = (sources.projects.match(/visual: ASSET_PENDING/g) ?? []).length
-if (pendingVisuals > 0) {
-  console.warn(
-    `Aviso: ${pendingVisuals} visual(is) da vitrine de Projetos ainda aguardam o asset final (ASSET_PENDING).`,
-  )
-}
+assert.doesNotMatch(
+  sources.projects,
+  /ASSET_PENDING|kind: 'pending'/,
+  'A vitrine publicada não pode ter visual pendente: cada projeto usa suas telas finais.',
+)
 assert.match(sources.contact, /VITE_BARTHY_WHATSAPP_URL/)
 assert.match(sources.contact, /VITE_BARTHY_CONTACT_ENDPOINT/)
 assert.match(sources.contact, /safeHttpUrl/)
