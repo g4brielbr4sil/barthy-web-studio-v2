@@ -1,16 +1,14 @@
 /**
- * Contrato de regressão para o bug relatado em produção: "o card abre, mas
- * depois não fecha" (seção Projetos, celular real).
+ * Contrato de regressão para toque em mobile.
  *
- * A primeira tentativa usou apenas `touch-action: manipulation`. Ela foi
- * publicada, mas o problema continuou acontecendo no aparelho real. Portanto,
- * este contrato não trata mais essa propriedade como causa/solução suficiente.
+ * Origem: o bug relatado em produção "o card abre, mas depois não fecha" na
+ * seção Projetos. A vitrine atual não tem mais toggle nos cards (cada projeto
+ * mostra categoria, título e descrição curta, sem conteúdo escondido atrás de
+ * interação), então o contrato agora garante que ela continue assim e que os
+ * toggles restantes da página sigam sendo botões nativos acessíveis.
  *
- * O ProjectCard agora trata `pointerup` de touch/pen diretamente para que abrir
- * e fechar não dependam do `click` sintético do navegador móvel. O `click`
- * continua sendo o caminho normal para mouse e teclado/acessibilidade. Um ref
- * suprime somente o click sintético que pode vir logo depois do pointerup, para
- * evitar alternância dupla.
+ * `touch-action: manipulation` continua como baseline global de resposta ao
+ * toque; ele não é tratado como solução suficiente para toggles.
  *
  * Este script continua sendo um teste estático de contrato (o projeto não tem
  * Playwright/jsdom). A validação final do comportamento continua exigindo um
@@ -23,6 +21,7 @@ import { readFile } from 'node:fs/promises'
 const paths = {
   reset: 'src/styles/reset.css',
   projectCard: 'src/components/projects/ProjectCard.tsx',
+  projectMedia: 'src/components/projects/ProjectMedia.tsx',
   header: 'src/components/header/Header.tsx',
   solutions: 'src/components/sections/SolutionsSection.tsx',
   html: 'index.html',
@@ -57,29 +56,19 @@ assert.doesNotMatch(
   'Não desabilite zoom na viewport para corrigir toque; isso piora acessibilidade.',
 )
 
-// O ProjectCard precisa tratar touch/pen sem depender do click sintético.
-assert.match(
-  sources.projectCard,
-  /const\s+ignoreNextClickRef\s*=\s*useRef\(false\)/,
-  'ProjectCard precisa manter um guard para suprimir somente o click sintético após pointerup.',
-)
-assert.match(
-  sources.projectCard,
-  /onPointerUp=\{\(event\)\s*=>\s*\{[\s\S]*?event\.pointerType\s*!==\s*'touch'[\s\S]*?event\.pointerType\s*!==\s*'pen'[\s\S]*?ignoreNextClickRef\.current\s*=\s*true[\s\S]*?toggleExpanded\(\)/,
-  'ProjectCard deve alternar no pointerup de touch/pen para não depender do click móvel.',
-)
-assert.match(
-  sources.projectCard,
-  /onClick=\{\(\)\s*=>\s*\{[\s\S]*?if\s*\(ignoreNextClickRef\.current\)[\s\S]*?ignoreNextClickRef\.current\s*=\s*false[\s\S]*?return[\s\S]*?toggleExpanded\(\)/,
-  'ProjectCard deve preservar click para mouse/teclado e ignorar somente o click sintético pós-touch.',
-)
+// A vitrine de Projetos não esconde conteúdo atrás de hover/clique.
+for (const [name, source] of [
+  ['ProjectCard', sources.projectCard],
+  ['ProjectMedia', sources.projectMedia],
+]) {
+  assert.doesNotMatch(
+    source,
+    /onMouseEnter|onMouseOver|onPointerEnter|aria-expanded/,
+    `${name} não deve depender de hover nem esconder conteúdo atrás de toggle.`,
+  )
+}
 
 // Os toggles auditados precisam continuar sendo botões nativos acessíveis.
-assert.match(
-  sources.projectCard,
-  /<button\s+className="project-card__action"[\s\S]*?aria-expanded=\{expanded\}/,
-  'O toggle do ProjectCard precisa continuar sendo <button> nativo com aria-expanded.',
-)
 assert.match(
   sources.header,
   /<button[\s\S]*?aria-expanded=\{menuOpen\}/,
@@ -92,5 +81,5 @@ assert.match(
 )
 
 console.log(
-  'Contrato mobile verificado: ProjectCard trata pointerup touch/pen e preserva click acessível.',
+  'Contrato mobile verificado: vitrine sem toggle/hover e toggles restantes nativos.',
 )

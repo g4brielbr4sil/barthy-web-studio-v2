@@ -316,7 +316,7 @@
  *   non-geometric properties. Colour, background, border, shadow and opacity
  *   still fade on hover/focus/selection with each component's own short
  *   duration; transform/size/position changes (hover lifts, the tab
- *   indicator, the project action width, mockup poses) apply instantly.
+ *   indicator, the project screenshot poses) apply instantly.
  * - Opacity-only fades, no displacement, no loops: the hero entrance keeps
  *   its order in a compressed timeline, the background shapes settle in once,
  *   and opened panels, the mobile menu and a newly selected solution fade in.
@@ -380,7 +380,6 @@
 
   .mobile-menu__backdrop,
   .mobile-menu__sheet,
-  .project-card__details,
   .mobile-solution__panel {
     animation: reduced-fade-in 200ms ease-out both !important;
   }
