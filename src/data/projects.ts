@@ -94,7 +94,7 @@ export const projects: Project[] = [
     category: 'BWS Digital',
     title: 'Solidariedade em Ação',
     description:
-      'Uma experiência web criada para apresentar propósito e iniciativas, conduzindo visitantes até a participação.',
+      'Presença digital construída para apresentar propósito, organizar iniciativas e conduzir visitantes da descoberta até a participação.',
     alt: 'Interface do site Solidariedade em Ação: página inicial, página de projetos e formulário de voluntariado.',
     visual: {
       kind: 'layered',
@@ -111,26 +111,26 @@ export const projects: Project[] = [
     category: 'BWS Sistemas',
     title: 'Elo',
     description:
-      'Atendimento, contexto e próxima ação reunidos em uma única operação.',
+      'Atendimento, CRM, pipeline e financeiro conectados em uma única operação, mantendo contexto, responsáveis e próximas ações no mesmo fluxo.',
     alt: 'Interface de atendimento, CRM e gestão financeira do Elo.',
     visual: {
       kind: 'layered',
       screens: [
         {
           image: elo.atendimento,
-          sizes: '(max-width: 767px) 150vw, (max-width: 899px) 72vw, (max-width: 1179px) 36vw, 480px',
+          sizes: '(max-width: 767px) 150vw, (max-width: 1179px) 72vw, 480px',
           // Conversation, client context and the next action.
           mobileCrop: { x: 0.44, y: 0, w: 0.56 },
         },
         {
           image: elo.negocios,
-          sizes: '(max-width: 767px) 110vw, (max-width: 899px) 68vw, (max-width: 1179px) 34vw, 450px',
+          sizes: '(max-width: 767px) 110vw, (max-width: 1179px) 68vw, 450px',
           // Pipeline columns and deal cards.
           mobileCrop: { x: 0.14, y: 0, w: 0.56 },
         },
         {
           image: elo.financeiro,
-          sizes: '(max-width: 767px) 110vw, (max-width: 899px) 68vw, (max-width: 1179px) 34vw, 450px',
+          sizes: '(max-width: 767px) 110vw, (max-width: 1179px) 68vw, 450px',
           // Revenue summary cards and the receivables table.
           mobileCrop: { x: 0.14, y: 0, w: 0.64 },
         },
@@ -143,26 +143,26 @@ export const projects: Project[] = [
     category: 'BWS Automação',
     title: 'Fluxo operacional',
     description:
-      'Eventos, regras e ações conectados para transformar cada entrada em uma próxima ação acompanhável.',
+      'Eventos, condições e ações trabalhando em sequência para criar tarefas, atualizar contextos, executar follow-ups e manter cada processo rastreável.',
     alt: 'Interfaces de execução, construção e monitoramento de fluxos automatizados.',
     visual: {
       kind: 'layered',
       screens: [
         {
           image: automacao.execucao,
-          sizes: '(max-width: 767px) 135vw, (max-width: 899px) 68vw, (max-width: 1179px) 34vw, 460px',
+          sizes: '(max-width: 767px) 135vw, (max-width: 1179px) 68vw, 460px',
           // Node chain and the live execution trace.
           mobileCrop: { x: 0.31, y: 0, w: 0.69 },
         },
         {
           image: automacao.builder,
-          sizes: '(max-width: 767px) 110vw, (max-width: 899px) 58vw, (max-width: 1179px) 30vw, 400px',
+          sizes: '(max-width: 767px) 110vw, (max-width: 1179px) 58vw, 400px',
           // Builder canvas with the flow being edited.
           mobileCrop: { x: 0.3, y: 0.03, w: 0.5 },
         },
         {
           image: automacao.monitoramento,
-          sizes: '(max-width: 767px) 110vw, (max-width: 899px) 54vw, (max-width: 1179px) 28vw, 380px',
+          sizes: '(max-width: 767px) 110vw, (max-width: 1179px) 54vw, 380px',
           // Execution counters, automations and their status.
           mobileCrop: { x: 0, y: 0, w: 0.62 },
         },
