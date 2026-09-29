@@ -1,5 +1,5 @@
 import { strict as assert } from 'node:assert'
-import { readFile, stat } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises'
 
 const originalNavigator = Object.getOwnPropertyDescriptor(
   globalThis,
@@ -36,7 +36,7 @@ const paths = {
   shaderSurface: '../src/components/hero/ShaderSurface.tsx',
   header: '../src/components/header/Header.tsx',
   headerHeight: '../src/hooks/useHeaderHeight.ts',
-  pnqc: '../src/components/projects/PnqcVisual.tsx',
+  projectsData: '../src/data/projects.ts',
   headers: '../public/_headers',
   llms: '../public/llms.txt',
   generator: './generate-seo-files.mjs',
@@ -74,26 +74,40 @@ assert.match(sources.header, /<span className="header-time__zone">/)
 assert.match(sources.headerHeight, /entry\.borderBoxSize/)
 assert.match(sources.headerHeight, /borderBox\?\.blockSize/)
 
-assert.match(sources.pnqc, /srcSet:/)
-assert.match(sources.pnqc, /sizes=\{dashboardSizes\}/)
-assert.match(sources.pnqc, /sizes=\{secondarySizes\}/)
+// Vitrine de Projetos: derivados reais (WebP), dimensões coerentes com o
+// srcset e peso contido. O cabeçalho de cada arquivo é lido de verdade.
+function webpSize(buffer) {
+  assert.equal(buffer.toString('ascii', 0, 4), 'RIFF', 'arquivo não é RIFF')
+  assert.equal(buffer.toString('ascii', 8, 12), 'WEBP', 'arquivo não é WebP')
+  const chunk = buffer.toString('ascii', 12, 16)
+  if (chunk === 'VP8X') {
+    return { width: 1 + buffer.readUIntLE(24, 3), height: 1 + buffer.readUIntLE(27, 3) }
+  }
+  if (chunk === 'VP8 ') {
+    return { width: buffer.readUInt16LE(26) & 0x3fff, height: buffer.readUInt16LE(28) & 0x3fff }
+  }
+  if (chunk === 'VP8L') {
+    const bits = buffer.readUInt32LE(21)
+    return { width: (bits & 0x3fff) + 1, height: ((bits >> 14) & 0x3fff) + 1 }
+  }
+  throw new Error(`chunk WebP desconhecido: ${chunk}`)
+}
 
-for (const image of ['catalog', 'course', 'dashboard']) {
-  const original = await stat(
-    new URL(`../public/images/projects/pnqc-${image}.jpg`, import.meta.url),
-  )
-
-  for (const width of [480, 960, 1440]) {
-    const variant = await stat(
-      new URL(
-        `../public/images/projects/pnqc-${image}-${width}.jpg`,
-        import.meta.url,
-      ),
-    )
-    assert.ok(
-      variant.size < original.size,
-      `pnqc-${image}-${width}.jpg deve ser menor que o original.`,
-    )
+const srcSets = [
+  ...sources.projectsData.matchAll(/webpVariants\('([^']+)', \[([\d, ]+)\]/g),
+]
+assert.ok(srcSets.length >= 3, 'A composição Digital precisa de três imagens com variantes.')
+for (const [, name, list] of srcSets) {
+  const widths = list.split(',').map((width) => Number(width.trim()))
+  let previousHeight = 0
+  for (const width of widths) {
+    const file = new URL(`../public/images/projects/${name}-${width}.webp`, import.meta.url)
+    const buffer = await readFile(file)
+    const size = webpSize(buffer)
+    assert.equal(size.width, width, `${name}-${width}.webp deve ter ${width}px de largura real.`)
+    assert.ok(size.height > previousHeight, `${name}: variantes devem crescer em altura.`)
+    previousHeight = size.height
+    assert.ok(buffer.length <= 64 * 1024, `${name}-${width}.webp passou de 64 KB.`)
   }
 }
 

@@ -94,30 +94,49 @@ assert.doesNotMatch(
   /RadarDF/,
   'RadarDF está fora da seleção pública atual de cases.',
 )
-assert.match(
-  sources.projects,
-  /PNQC/,
-  'PNQC deve permanecer como case público real.',
+// Vitrine: presença → operação → automação, nesta ordem, sem projeto de Suporte.
+const showcaseOrder = [
+  "category: 'BWS Digital'",
+  "title: 'Solidariedade em Ação'",
+  "category: 'BWS Sistemas'",
+  "title: 'Elo'",
+  "category: 'BWS Automação'",
+].map((token) => sources.projects.indexOf(token))
+assert.ok(
+  showcaseOrder.every((position) => position >= 0),
+  'A vitrine deve ter BWS Digital (Solidariedade em Ação), BWS Sistemas (Elo) e BWS Automação.',
 )
-assert.match(
-  sources.projects,
-  /Hermes/,
-  'Hermes deve permanecer como produto próprio e case público.',
-)
-assert.match(
-  sources.projects,
-  /persistência, certificados e selos seguem em evolução/,
-  'PNQC deve deixar explícito o estado ainda evolutivo desses recursos.',
-)
-assert.doesNotMatch(
-  sources.projects,
-  /Plataforma educacional em produção/,
-  'PNQC não deve ser apresentado como produção enquanto a persistência segue em evolução.',
+assert.deepEqual(
+  showcaseOrder,
+  [...showcaseOrder].sort((a, b) => a - b),
+  'A ordem da vitrine é Digital → Sistemas → Automação.',
 )
 assert.doesNotMatch(
   sources.projects,
-  /certificados verificáveis/i,
-  'Recursos de certificação ainda em evolução não podem ser apresentados como concluídos.',
+  /category: 'BWS Suporte'/,
+  'BWS Suporte não tem projeto próprio na vitrine.',
+)
+for (const retired of [/PNQC/, /Hermes/]) {
+  assert.doesNotMatch(
+    sources.projects,
+    retired,
+    `${retired.source} não faz mais parte da vitrine de Projetos.`,
+  )
+}
+assert.doesNotMatch(
+  sources.projects,
+  /acadêmic|Ambiente demonstrativo/i,
+  'A apresentação comercial não usa o contexto acadêmico como copy.',
+)
+assert.doesNotMatch(
+  sources.projects,
+  /contratou|\d+\s?%|clientes atendidos/i,
+  'A vitrine não inventa cliente, contrato ou métrica.',
+)
+assert.doesNotMatch(
+  sources.projects,
+  /ASSET_PENDING|kind: 'pending'/,
+  'A vitrine publicada não pode ter visual pendente: cada projeto usa suas telas finais.',
 )
 assert.match(sources.contact, /VITE_BARTHY_WHATSAPP_URL/)
 assert.match(sources.contact, /VITE_BARTHY_CONTACT_ENDPOINT/)
