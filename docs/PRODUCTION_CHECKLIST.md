@@ -67,10 +67,10 @@ O WhatsApp já funciona sem configuração adicional no Cloudflare Pages: a env
 var documenta e permite sobrescrever o endereço, enquanto `src/lib/contact.ts`
 usa o canal oficial acima como fallback quando ela está ausente ou inválida.
 
-Para ligar o envio do formulário direto no CRM do Hermes, falta cadastrar:
+Para ligar o envio do formulário direto no CRM do Hermes, cadastrar no Cloudflare Pages a URL HTTPS do endpoint público de entrada, obtida na configuração privada da operação:
 
 ```env
-VITE_BARTHY_CONTACT_ENDPOINT=https://44-199-249-92.sslip.io/api/public/barthy/leads
+VITE_BARTHY_CONTACT_ENDPOINT=<URL_HTTPS_CONFIGURADA_NO_AMBIENTE_DE_PRODUCAO>
 ```
 
 Essa URL nunca é hardcoded no bundle: `src/lib/contact.ts` lê a env var e só
