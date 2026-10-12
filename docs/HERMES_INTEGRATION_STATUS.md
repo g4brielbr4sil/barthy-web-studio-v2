@@ -48,8 +48,8 @@ endpoint inseguro e o tratamento de falha do formulário.
 ## Configuração pendente
 
 `VITE_BARTHY_CONTACT_ENDPOINT` continua vazio no `.env.example` e precisa ser
-cadastrado no Cloudflare Pages; o valor exato está em
-`docs/PRODUCTION_CHECKLIST.md`. Do lado do Hermes, `HERMES_PUBLIC_LEAD_ORIGINS`
+cadastrado no Cloudflare Pages usando a URL HTTPS definida na configuração
+privada da operação. Não registrar o endereço de produção no repositório. Do lado do Hermes, `HERMES_PUBLIC_LEAD_ORIGINS`
 precisa conter `https://barthywebstudio.tech` antes de qualquer envio real, ou a
 resposta é `403`.
 
